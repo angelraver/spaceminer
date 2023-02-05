@@ -10,7 +10,8 @@ class SPRITE {
     this.sheet = props.sheet;
     this.updateImage = () => {
       var img = new Image();
-      img.src = SPRITES_FOLDER + this.sheet;
+      img.crossOrigin = "Anonymous";
+      img.src = SPRITES_FOLDER + this.sheet + '?' + new Date().getTime();;      
       this.image = img;
     }
     if (this.sheet) {
@@ -77,12 +78,12 @@ class SPRITE {
       ctx.translate(this.x, this.y);
       // ctx.rotate(270 * (Math.PI / 180));
       ctx.rotate(-this.r);
-      
       ctx.fillStyle = "green";
       ctx.fillRect(0, 0, this.w, this.h);
       ctx.scale(this.scaleX, this.scaleY);
       ctx.drawImage(this.image, 0, this.sheetY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h);
       ctx.restore();
+      pixelate(this);
     }
     this.flipVertically = function (direction) {
       if (Math.sign(direction) == 1) {

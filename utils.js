@@ -63,3 +63,31 @@ const pathLinear = function (origin, target, speed) {
   }
   return positions;
 }
+
+var pixelation = 40;
+
+function pixelate({ w, h, x: _x, y: _y }) {
+  var imageData = ctx.getImageData(_x, _y, w, h),
+  data = imageData.data;
+  for (var y = 0; y < h; y += pixelation) {
+    for (var x = 0; x < w; x += pixelation) {
+      var red = data[((w * y) + x) * 4],
+      green = data[((w * y) + x) * 4 + 1],
+      blue = data[((w * y) + x) * 4 + 2];
+      for (var n = 0; n < pixelation; n++) {
+        for (var m = 0; m < pixelation; m++) {
+          if (x + m < w) {
+            data[((w * (y + n)) + (x + m)) * 4] = red;
+            data[((w * (y + n)) + (x + m)) * 4 + 1] = green;
+            data[((w * (y + n)) + (x + m)) * 4 + 2] = blue;
+          }
+        }
+      }
+    }
+  }
+
+  ctx.putImageData(imageData, _x, _y);
+  // if (pixelation > 6) {
+  //   pixelation -= 1;
+  // }
+}
