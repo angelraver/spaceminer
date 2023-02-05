@@ -1,8 +1,8 @@
-function levelStartScreen () {
+function levelStartScreen() {
   if (SetNewGame) {
     ShootCount = 0;
     Shoots = [];
-    GameOver =  false;
+    GameOver = false;
     SetNewGame = false;
     getAsteroids();
 
@@ -24,7 +24,9 @@ function levelStartScreen () {
       w: 50,
       sheet: 'ship.png',
       totalFrames: 1,
-      r: 0
+      r: 0,
+      scaleX: 1,
+      scaleY: 1,
     });
     Hero.target = { x: Hero.x, y: Hero.y };
   }
