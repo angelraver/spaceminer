@@ -9,14 +9,13 @@ const colision = (a, b) => {
     a.y < b.y + b.h;
 }
 
-const radiants = (origin, target, degrees) => {
-  const toDegrees = (degrees) => degrees * (Math.PI / 180);
+const toDegrees = (degrees) => degrees * (Math.PI / 180);
 
+const radiants = (origin, target, degrees) => {
   if (target) {
     const distanceX = origin.x - target.x;
     const distanceY = origin.y - target.y;
     const angle = Math.atan2(distanceX, distanceY);
-
     return angle;
   }
   if (degrees) {

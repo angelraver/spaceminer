@@ -10,6 +10,10 @@ function stop() {
   clearInterval(start);
 }
 
+function clearGameFrame() {
+  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+}
+
 function rolling() {
   clearGameFrame();
   switch(CurrentScreen) {

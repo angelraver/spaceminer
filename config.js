@@ -24,3 +24,9 @@ canvas.width = GAME_WIDTH;
 canvas.height = GAME_HEIGHT;
 const ctx = canvas.getContext("2d");
 
+const asteroidsModels = [
+  { w: 121, h: 105, sheet: 'a1.png' },
+  { w: 107, h: 106, sheet: 'a2.png' },
+  { w: 112, h: 89, sheet: 'a3.png' }
+];
+

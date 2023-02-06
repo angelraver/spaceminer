@@ -1,10 +1,8 @@
 function levelStartScreen() {
   if (SetNewGame) {
-    ShootCount = 0;
-    Shoots = [];
     GameOver = false;
     SetNewGame = false;
-    getAsteroids();
+    Asteroid.createGroup(Asteroids_Number);
 
     Background = new SPRITE({
       id: 'background',
@@ -14,6 +12,19 @@ function levelStartScreen() {
       w: GAME_WIDTH,
       sheet: 'background.png',
       totalFrames: 1,
+    });
+
+    Central = new SPRITE({
+      id: 'central',
+      x: GAME_HEIGHT / 2,
+      y: GAME_WIDTH / 2,
+      w: 91,
+      h: 90,
+      sheet: 'central.png',
+      totalFrames: 1,
+      r: 20,
+      scaleX: 2,
+      scaleY: 2,
     });
 
     Hero = new SPRITE({

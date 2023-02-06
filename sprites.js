@@ -10,8 +10,8 @@ class SPRITE {
     this.sheet = props.sheet;
     this.updateImage = () => {
       var img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.src = SPRITES_FOLDER + this.sheet + '?' + new Date().getTime();;      
+      // img.crossOrigin = "Anonymous";
+      img.src = SPRITES_FOLDER + this.sheet;
       this.image = img;
     }
     if (this.sheet) {
@@ -30,22 +30,12 @@ class SPRITE {
     }
     this.path = [];
     this.currentPathPosition = 0;
-
     this.setPath = function (target) {
-      const toDegrees = (degrees) => (degrees * (180 / Math.PI) + 360) % 360;
-      const numberInRange = (number, low, high) => {
-        if (number > low && number < high) return true;
-        return false;
-      }
-
       this.currentPathPosition = 0;
       const origin = { x: this.x, y: this.y }
       let targetFit = { x: target.x, y: target.y }
       this.path = pathLinear(origin, targetFit, Speed);
       this.r = radiants(origin, targetFit);
-      // this.r = radiants(null, null, 45);
-      console.log('grados: ', toDegrees(this.r));
-      console.log('-----------------');
     }
     this.going = function () {
       if (this.path[this.currentPathPosition]) {
@@ -66,11 +56,12 @@ class SPRITE {
     this.spawnedAt = props.spawnedAt;
     this.shootAt = props.shootAt;
     this.shooted = false;
-    this.scaleX = props.scaleX;
-    this.scaleY = -props.scaleY;
+    this.scaleX = props.scaleX || 1;
+    this.scaleY = -props.scaleY || 1;
     this.text = props.text;
     this.type = props.type;
     this.draw = function () {
+      // ctx.scale(this.scaleX, this.scaleY);
       ctx.drawImage(this.image, 0, this.sheetY, this.w, this.h, this.x, this.y, this.w, this.h);
     }
     this.drawing = function () {
@@ -78,12 +69,10 @@ class SPRITE {
       ctx.translate(this.x, this.y);
       // ctx.rotate(270 * (Math.PI / 180));
       ctx.rotate(-this.r);
-      ctx.fillStyle = "green";
-      ctx.fillRect(0, 0, this.w, this.h);
       ctx.scale(this.scaleX, this.scaleY);
       ctx.drawImage(this.image, 0, this.sheetY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h);
       ctx.restore();
-      pixelate(this);
+      // pixelate(this);
     }
     this.flipVertically = function (direction) {
       if (Math.sign(direction) == 1) {

@@ -1,11 +1,9 @@
 function actionScreen () {  
-  // Background.draw();
-
-  ctx.fillStyle = "red";
-  ctx.fillRect(CENTER_VOID.x, CENTER_VOID.y, CENTER_VOID.w, CENTER_VOID.h);
+  Background.draw();
+  Central.drawing();
 
   Asteroids.forEach((asteroid) => {
-    // asteroid.drawing();
+    asteroid.drawing();
   });
 
   Hero.framing();
@@ -14,4 +12,5 @@ function actionScreen () {
 
   CurrentAsteroid = Hero.colision(Asteroids);
 
+  console.log('Cargo:', Cargo, ' | ', 'Total: ', CargoTotal, ' | ', 'Goal: ', CargoGoal);
 }
