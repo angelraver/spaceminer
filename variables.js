@@ -12,5 +12,6 @@ Asteroids = [],
 CurrentAsteroid = undefined,
 Cargo = 0,
 CargoTotal = 0,
-CargoGoal = 0
+CargoGoal = 0,
+InCentral = false
 ;
