@@ -34,8 +34,8 @@ class SPRITE {
       this.currentPathPosition = 0;
       const origin = { x: this.x, y: this.y }
       let targetFit = { x: target.x, y: target.y }
-      this.path = pathLinear(origin, targetFit, Speed);
-      this.r = radiants(origin, targetFit);
+      this.path = Utils.pathLinear(origin, targetFit, Speed);
+      this.r = Utils.radiants(origin, targetFit);
     }
     this.going = function () {
       if (this.path[this.currentPathPosition]) {
@@ -90,7 +90,7 @@ class SPRITE {
     }
     this.colision = function (elements) {
       const that = this;
-      return elements.find((e) => colision(e, that));
+      return elements.find((e) => Utils.colision(e, that));
     }
   };
 }

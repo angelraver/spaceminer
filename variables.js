@@ -10,8 +10,6 @@ Background,
 Asteroids_Number = 20,
 Asteroids = [],
 CurrentAsteroid = undefined,
-// CurrentAsteroidModel,
-// NewAsteroidModel,
 Cargo = 0,
 CargoTotal = 0,
 CargoGoal = 0

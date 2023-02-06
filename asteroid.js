@@ -11,15 +11,15 @@ class Asteroid {
       totalFrames: 1,
       scaleX: Math.random() < 0.5 ? -1 : 1,
       scaleY: Math.random() < 0.5 ? -1 : 1,
-      r: radiants(undefined, undefined, Math.random() * 180),
+      r: Utils.radiants(undefined, undefined, Math.random() * 180),
       hitsLimit: 9
     });
   
-    asteroid.x = random(asteroid.w / 2, GAME_WIDTH - asteroid.w / 2);
-    asteroid.y = random(asteroid.h / 2, GAME_HEIGHT - asteroid.h / 2);
+    asteroid.x = Utils.random(asteroid.w / 2, GAME_WIDTH - asteroid.w / 2);
+    asteroid.y = Utils.random(asteroid.h / 2, GAME_HEIGHT - asteroid.h / 2);
   
-    const insideCenter = colision(asteroid, CENTER_VOID);
-    const overlaping = Asteroids.some((a) => colision(a, asteroid));
+    const insideCenter = Utils.colision(asteroid, CENTER_VOID);
+    const overlaping = Asteroids.some((a) => Utils.colision(a, asteroid));
   
     if (insideCenter || overlaping) {
       return this.create(id);
