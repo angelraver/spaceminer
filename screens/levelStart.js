@@ -16,8 +16,8 @@ function levelStartScreen() {
 
     Central = new SPRITE({
       id: 'central',
-      x: GAME_HEIGHT / 2,
-      y: GAME_WIDTH / 2,
+      x: GAME_WIDTH / 2,
+      y: GAME_HEIGHT / 2,
       w: 91,
       h: 90,
       sheet: 'central.png',
