@@ -13,10 +13,22 @@ function actionScreen () {
   CurrentAsteroid = Hero.colision(Asteroids);
   InCentral = Hero.colision([Central]);
 
-  if (InCentral) {
+  if (InCentral && Cargo) {
+    Asteroid.hiting('hit_central', Cargo, Hero.x, Hero.y);
     CargoTotal += Cargo;
     Cargo = 0;
   }
 
-  console.log('Cargo:', Cargo, ' | ', 'Total: ', CargoTotal, ' | ', 'Goal: ', CargoGoal);
+  Hits.forEach((hit) => {
+    hit.fadeOut();
+    hit.draw();
+  });
+
+  cleanSprites();
+
+  // console.log('Cargo:', Cargo, ' | ', 'Total: ', CargoTotal, ' | ', 'Goal: ', CargoGoal);
+}
+
+function cleanSprites() {
+  Hits = Hits.filter((s) => s.currentLoop < s.loops);
 }

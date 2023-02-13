@@ -91,10 +91,10 @@ class SPRITE {
   hit() {
     this.hits++;
   }
-  canLoop() {
-    this.currentLoop < this.loops;
-  }
   looping() {
     this.currentLoop++;
+  }
+  fadeOut() {
+    if (this.currentLoop < this.loops) this.y = this.y - 2;
   }
 }

@@ -46,9 +46,11 @@ class Asteroid {
       case 3:
         this.newAsteroidModel = 1;
         Cargo += 3;
+        this.hiting('hit_' + CurrentAsteroid.id, 1, CurrentAsteroid.x, CurrentAsteroid.y);
         break
       case 6:
         this.newAsteroidModel = 2;
+        this.hiting('hit_' + CurrentAsteroid.id, 4, CurrentAsteroid.x, CurrentAsteroid.y);
         Cargo += 5;
         break
     }
@@ -71,5 +73,16 @@ class Asteroid {
       this.destroy(CurrentAsteroid.id);
       Cargo += 8;
     }
+  }
+
+  static hiting(id, number, x, y) {
+    const hit = new TEXT({
+      id: id,
+      text: '+' + number,
+      x: x,
+      y: y,
+      loops: 30
+    });
+    Hits.push(hit);
   }
 }
