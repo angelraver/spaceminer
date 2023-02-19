@@ -10,7 +10,7 @@ export default function screenLevelStart() {
   if (gt.SetNewGame) {
     gt.GameOver = false;
     gt.SetNewGame = false;
-    gt.Asteroids = Asteroid.createGroup(gt.AsteroidsNumber)
+    Asteroid.createGroup(gt.AsteroidsNumber)
 
     gt.Background = new SPRITE({
       id: 'background',

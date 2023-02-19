@@ -31,7 +31,7 @@ export default class Asteroid {
   
     const insideCenter = Utils.colision(asteroid, CONFIG.CENTER_VOID) 
     const overlaping = Asteroids.some((a) => Utils.colision(a, asteroid)) 
-  
+  console.log(Asteroids)
     if (insideCenter || overlaping) {
       return this.create(id) 
     }
@@ -40,16 +40,14 @@ export default class Asteroid {
   }
 
   /**
-   * Returns an array of SPRITES
+   * Updates the global Asteroids with an array of SPRITEs
    * @param n amount of SPRITES
    * @returns SPRITE[]
    */
-  static createGroup(n: number): SPRITE[] {
-    const asteroidGroup = []
+  static createGroup(n: number): void {
     for(let i = 0;  i < n;  i++) {
-      asteroidGroup.push(this.create(i.toString())) 
+      gt.Asteroids.push(this.create(i.toString())) 
     }
-    return asteroidGroup
   }
   /**
    * Refesh the Asteroids array excluding the given id
