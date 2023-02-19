@@ -3,6 +3,9 @@ import SPRITE from './sprite'
 import Asteroid from './asteroid'
 const gt = globalThis
 
+/**
+ * Prepare the game stats before the action screen
+ */
 export default function screenLevelStart() {
   if (gt.SetNewGame) {
     gt.GameOver = false;

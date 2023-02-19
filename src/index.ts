@@ -56,22 +56,27 @@ gt.CargoGoal = 0
 gt.InCentral = false
 gt.HitsLabels = []
 
+// Increase the internal game time counter
 function timing() {
   gt.GlobalTime = globalThis.GlobalTime + .5;
 }
 
+// Restart the game loop
 function go() {
   start = setInterval(rolling, CONFIG.GAME_SPEED);
 }
 
+// Stop the game loop
 function stop() {
   clearInterval(start);
 }
 
+// Empty the canvas (before drawing again)
 function clearGameFrame() {
   gt.ctx.clearRect(0, 0, CONFIG.GAME_WIDTH, CONFIG.GAME_HEIGHT);
 }
 
+// Executes the correspondent screen
 function rolling() {
   clearGameFrame();
   switch(gt.CurrentScreen) {
@@ -93,6 +98,7 @@ function rolling() {
   }
 }
 
+// Catch all mouse click events
 function click(e: any) {
   if (!gt.CurrentAsteroid) {
     gt.Hero.setPath({ x: e.x, y: e.y });
@@ -100,8 +106,10 @@ function click(e: any) {
 
   Asteroid.click();
 }
-
 document.body.addEventListener('click', click);
 
+// Internal game time counter
 setInterval(timing, 500);
+
+// Running the game at the given speed
 var start = setInterval(rolling, CONFIG.GAME_SPEED);

@@ -1,6 +1,9 @@
 import Asteroid from './asteroid'
 const gt = globalThis
 
+/**
+ * Executes all the actions on each frame
+ */
 export default function screenAction () {
   gt.Background.draw()
   gt.Central.drawing()

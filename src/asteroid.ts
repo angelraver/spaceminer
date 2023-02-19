@@ -4,7 +4,15 @@ import Utils from "./utils"
 import { CONFIG } from "./config"
 const gt = globalThis
 
+/**
+ * Static class to manage the SPRITES asteroids
+ */
 export default class Asteroid {
+  /**
+   * Returns an SPRITE with random position
+   * @param id string
+   * @returns SPRITE
+   */
   static create( id: string): SPRITE {
     const asteroid = new SPRITE({
       id: 'asteroid_' + id,
@@ -31,6 +39,11 @@ export default class Asteroid {
     return asteroid 
   }
 
+  /**
+   * Returns an array of SPRITES
+   * @param n amount of SPRITES
+   * @returns SPRITE[]
+   */
   static createGroup(n: number): SPRITE[] {
     const asteroidGroup = []
     for(let i = 0;  i < n;  i++) {
@@ -38,11 +51,20 @@ export default class Asteroid {
     }
     return asteroidGroup
   }
-
+  /**
+   * Refesh the Asteroids array excluding the given id
+   * @param id 
+   */
   static destroy(id: string) {
     Asteroids = Asteroids.filter((a) => a.id !== id) 
   }
 
+  /**
+   * Manage the click on the asteroids
+   * - Update the cargo
+   * - Update the asteroid sprites
+   * @returns nothing
+   */
   static click() {
     if (!CurrentAsteroid) return false 
 
@@ -80,6 +102,13 @@ export default class Asteroid {
     }
   }
 
+  /**
+   * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
+   * @param id 
+   * @param number 
+   * @param x 
+   * @param y 
+   */
   static hiting(id: string, number: number, x: number, y: number) {
     const hitLabel: TEXT = new TEXT({
       id: id,

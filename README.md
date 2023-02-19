@@ -1,6 +1,6 @@
-# empty-project
+# Space miner
 
-Empty project.
+Web videogame.
 
 ## Building and running on localhost
 
@@ -10,8 +10,15 @@ First install dependencies:
 npm install
 ```
 
-## Running
+## Running local
 
 ```sh
-node dist/bundle.js
+npm run develop
 ```
+
+## Build
+
+```sh
+npm run build
+```
+

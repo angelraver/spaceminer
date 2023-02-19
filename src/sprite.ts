@@ -3,6 +3,9 @@ import Utils from './utils'
 
 const gt = globalThis
 
+/**
+ * Sprite class
+ */
 export default class SPRITE {
   id: string
   h: number
@@ -50,6 +53,9 @@ export default class SPRITE {
       this.updateImage();
     }
   }
+  /**
+   * Set the spritesheet
+   */
   updateImage(): void {
     var img = new Image();
     // img.crossOrigin = "Anonymous";
@@ -68,6 +74,10 @@ export default class SPRITE {
       this.currentFrame = 0;
     }
   }
+  /**
+   * flip vertically through the canvas scale prop
+   * @param direction 
+   */
   flipVertically(direction: number): void {
     if (Math.sign(direction) == 1) {
       this.scaleY = -Math.abs(this.scaleY);
@@ -75,6 +85,10 @@ export default class SPRITE {
       this.scaleY = Math.abs(this.scaleY);
     }
   }
+  /**
+   * flip horizontally through the canvas scale prop
+   * @param direction 
+   */
   flipHorizontally(direction: number): void {
     if (Math.sign(direction) == 1) {
       this.scaleX = -Math.abs(this.scaleX);
@@ -82,14 +96,24 @@ export default class SPRITE {
       this.scaleX = Math.abs(this.scaleX);
     }
   }
+  /**
+   * Given an sprite array it returs the fist with collision
+   * @param elements list of SPRITEs to check
+   * @returns SPRITE collisioning with
+   */
   colisionWith(elements: SPRITE[]): SPRITE {
     const that = this;
     return elements.find((e) => Utils.colision(e, that));
-  }
+  }/**
+   * Simple draw the SPRITE on the canvas
+   */
   draw(): void {
     // ctx.scale(this.scaleX, this.scaleY);
     gt.ctx.drawImage(this.image, 0, this.sheetY, this.w, this.h, this.x, this.y, this.w, this.h);
   }
+  /**
+   * Complex draw on the canvas with rotation and scaling
+   */
   drawing(): void {
     gt.ctx.save()
     gt.ctx.translate(this.x, this.y);
@@ -100,6 +124,11 @@ export default class SPRITE {
     gt.ctx.restore();
     // pixelate(this);
   }
+  /**
+   * Set the SPRITE.path property with the list of positions between the current position and the given target
+   * Set the SPRITE.r (rotation) to follow the generated path
+   * @param target 
+   */
   setPath(target: any): void {
     this.currentPathPosition = 0;
     const origin = { x: this.x, y: this.y }
@@ -107,6 +136,10 @@ export default class SPRITE {
     this.path = Utils.pathLinear(origin, targetFit, gt.Speed);
     this.r = Utils.radiants(origin, targetFit);
   }
+  /**
+   * Set the x and y SPRITE props following the current position inside the phat prop
+   * Move forward inside the path prop elements
+   */
   going(): void {
     if (this.path[this.currentPathPosition]) {
       this.x = this.path[this.currentPathPosition].x;
@@ -114,12 +147,21 @@ export default class SPRITE {
       this.currentPathPosition++;
     }
   }
+  /**
+   * Increase the hits prop
+   */
   hit(): void {
     this.hits++;
   }
+  /**
+   * Increase the currentLoop prop
+   */
   looping(): void {
     this.currentLoop++;
   }
+  /**
+   * Move the SPRITE up during the loop
+   */
   fadeOut(): void {
     if (this.currentLoop < this.loops) this.y = this.y - 2;
   }
