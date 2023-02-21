@@ -1,20 +1,23 @@
 import Asteroid from './asteroid'
+import { CONFIG } from './config'
 const gt = globalThis
 
 /**
  * Executes all the actions on each frame
  */
 export default function screenAction () {
+  checkDirection()
+
   gt.Background.draw()
-  gt.Central.drawing()
+  gt.Central.draw()
 
   gt.Asteroids.forEach((asteroid) => {
-    asteroid.drawing()
+    asteroid.draw()
   })
 
   gt.Hero.framing()
   gt.Hero.going()
-  gt.Hero.drawing()
+  gt.Hero.draw()
 
   gt.CurrentAsteroid = gt.Hero.colisionWith(gt.Asteroids)
   gt.InCentral = typeof gt.Hero.colisionWith([gt.Central]) === 'object'
@@ -33,4 +36,11 @@ export default function screenAction () {
   gt.HitsLabels = gt.HitsLabels.filter((s) => s.currentLoop < s.loops)
 
   // console.log('Cargo:', Cargo, ' | ', 'Total: ', CargoTotal, ' | ', 'Goal: ', CargoGoal)
+}
+
+function checkDirection() {
+  GoingLeft = Hero.x < OffSetHorizontal
+  GoingRight = Hero.x > CONFIG.GAME_WIDTH - OffSetHorizontal
+  GoingTop = Hero.y < OffSetVertical
+  GoingBottom = Hero.y > CONFIG.GAME_HEIGHT - OffSetVertical
 }

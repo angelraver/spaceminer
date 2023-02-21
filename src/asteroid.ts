@@ -31,7 +31,7 @@ export default class Asteroid {
   
     const insideCenter = Utils.colision(asteroid, CONFIG.CENTER_VOID) 
     const overlaping = Asteroids.some((a) => Utils.colision(a, asteroid)) 
-  console.log(Asteroids)
+
     if (insideCenter || overlaping) {
       return this.create(id) 
     }

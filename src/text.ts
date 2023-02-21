@@ -4,6 +4,7 @@ const gt = globalThis
  * Extends SPRITE to add text features
  */
 export default class TEXT extends SPRITE {
+  text: string
   constructor(props: any) {
     super(props);
     this.text = props.text;

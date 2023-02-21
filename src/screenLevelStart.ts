@@ -1,31 +1,35 @@
-import { CONFIG } from './config';
+import { CONFIG as C } from './config';
 import SPRITE from './sprite'
+import SCENARIO from './scenario';
 import Asteroid from './asteroid'
-const gt = globalThis
 
 /**
  * Prepare the game stats before the action screen
  */
 export default function screenLevelStart() {
-  if (gt.SetNewGame) {
-    gt.GameOver = false;
-    gt.SetNewGame = false;
-    Asteroid.createGroup(gt.AsteroidsNumber)
+  if (SetNewGame) {
+    GameOver = false;
+    SetNewGame = false;
+    Asteroid.createGroup(AsteroidsNumber)
 
-    gt.Background = new SPRITE({
+    Background = new SCENARIO({
       id: 'background',
       x: 0,
       y: 0,
-      h: CONFIG.GAME_HEIGHT,
-      w: CONFIG.GAME_WIDTH,
+      h: 1080,
+      w: 3920,
+      xd: -OffSetHorizontal,
+      yd: -OffSetVertical,
+      hd: C.GAME_HEIGHT * 2,
+      wd: C.GAME_WIDTH * 4,
       sheet: 'background.png',
       totalFrames: 1,
     });
 
-    gt.Central = new SPRITE({
+    Central = new SPRITE({
       id: 'central',
-      x: CONFIG.GAME_WIDTH / 2,
-      y: CONFIG.GAME_HEIGHT / 2,
+      x: C.GAME_WIDTH / 2,
+      y: C.GAME_HEIGHT / 2,
       w: 91,
       h: 90,
       sheet: 'central.png',
@@ -35,10 +39,10 @@ export default function screenLevelStart() {
       scaleY: 2,
     });
 
-    gt.Hero = new SPRITE({
+    Hero = new SPRITE({
       id: 'hero',
-      x: CONFIG.GAME_MID_H - CONFIG.BLOCK_UNITY / 2,
-      y: CONFIG.GAME_HEIGHT - CONFIG.GAME_HEIGHT / 2,
+      x: C.GAME_MID_H - C.BLOCK_UNITY / 2,
+      y: C.GAME_HEIGHT - C.GAME_HEIGHT / 2,
       h: 74,
       w: 50,
       sheet: 'ship.png',
@@ -47,10 +51,10 @@ export default function screenLevelStart() {
       scaleX: 1,
       scaleY: 1,
     });
-    gt.Hero.target = { x: gt.Hero.x, y: gt.Hero.y };
+    Hero.target = { x: Hero.x, y: Hero.y };
   }
 
-  gt.CurrentScreen = 'action';
-  gt.MarkTime = 0;
-  gt.GlobalTime = 0;
+  CurrentScreen = 'action';
+  MarkTime = 0;
+  GlobalTime = 0;
 }
