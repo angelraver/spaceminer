@@ -1,5 +1,4 @@
 import SPRITE from "./sprite";
-const gt = globalThis
 /**
  * Extends SPRITE to add text features
  */
@@ -14,9 +13,9 @@ export default class TEXT extends SPRITE {
    * - Apply looping
    */
   draw() {
-    gt.ctx.fillStyle = "white";
-    gt.ctx.font = "30px Arial";
-    gt.ctx.fillText(this.text, this.x, this.y);
+    ctx.font = "42px ArcadeClassic";
+    ctx.fillStyle = "white";
+    ctx.fillText(this.text, this.x, this.y);
     this.looping();
   }
 }
