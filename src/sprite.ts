@@ -1,4 +1,4 @@
-import { CONFIG } from './config'
+import { CONFIG, Ordinal } from './config'
 import Utils from './utils'
 
 /**
@@ -105,6 +105,8 @@ export default class SPRITE {
    * Complex draw on the canvas with rotation and scaling
    */
   draw(): void {
+    this.framing()
+
     if (CanGoTop) {
       this.y = this.y + Speed
     }
@@ -139,7 +141,7 @@ export default class SPRITE {
     this.r = Utils.radiants(origin, targetFit)
   }
   /**
-   * Set the x and y SPRITE props following the current position inside the phat prop
+   * Set the x and y SPRITE props following the current position inside the phat prop.
    * Move forward inside the path prop elements
    */
   going(): void {
@@ -166,5 +168,15 @@ export default class SPRITE {
    */
   fadeOut(): void {
     if (this.currentLoop < this.loops) this.y = this.y - 2
+  }
+  /**
+   * Manage click event
+   * @param e 
+   */
+  click (e: Ordinal) {
+    const hittingAsteroid = Utils.hit(e, this)
+    if (!hittingAsteroid) {
+      Hero.setPath({ x: e.x, y: e.y })
+    }
   }
 }

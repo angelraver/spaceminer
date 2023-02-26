@@ -28,6 +28,11 @@ const ASTEROIDS_MODEL = [
   { w: 112, h: 89, sheet: 'a3.png' }
 ];
 
+export type Ordinal = { 
+  x: number, 
+  y: number
+}
+
 /**
  * Global constants setting the game sources and values
  */

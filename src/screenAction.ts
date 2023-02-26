@@ -1,6 +1,5 @@
 import Asteroid from './asteroid'
 import { CONFIG } from './config'
-const gt = globalThis
 
 /**
  * Executes all the actions on each frame
@@ -8,39 +7,45 @@ const gt = globalThis
 export default function screenAction () {
   checkDirection()
 
-  gt.Background.draw()
-  gt.Central.draw()
+  Background.draw()
+  Central.draw()
 
-  gt.Asteroids.forEach((asteroid) => {
-    asteroid.draw()
-  })
+  Asteroids.forEach((a) => a.draw())
 
-  gt.Hero.framing()
-  gt.Hero.going()
-  gt.Hero.draw()
+  Hero.going()
+  Hero.draw()
 
-  gt.CurrentAsteroid = gt.Hero.colisionWith(gt.Asteroids)
-  gt.InCentral = typeof gt.Hero.colisionWith([gt.Central]) === 'object'
+  CurrentAsteroid = Hero.colisionWith(Asteroids)
+  InCentral = typeof Hero.colisionWith([Central]) === 'object'
 
-  if (InCentral && gt.Cargo > 0) {
-    Asteroid.hiting('hit_central', gt.Cargo, gt.Hero.x, gt.Hero.y)
-    gt.CargoTotal += gt.Cargo
-    gt.Cargo = 0
+  if (CurrentAsteroid) {
+    Crosshair.x = CurrentAsteroid.x
+    Crosshair.y = CurrentAsteroid.y
+    Crosshair.draw()
   }
 
-  gt.HitsLabels.forEach((hit) => {
+  if (InCentral && Cargo > 0) {
+    Asteroid.hiting('hit_central', Cargo, Hero.x, Hero.y)
+    CargoTotal += Cargo
+    Cargo = 0
+  }
+
+  HitsLabels.forEach((hit) => {
     hit.fadeOut()
     hit.draw()
   })
 
-  gt.HitsLabels = gt.HitsLabels.filter((s) => s.currentLoop < s.loops)
+  HitsLabels = HitsLabels.filter((s) => s.currentLoop < s.loops)
 
   // console.log('Cargo:', Cargo, ' | ', 'Total: ', CargoTotal, ' | ', 'Goal: ', CargoGoal)
 }
 
+/**
+ * Update the global Going family top, right, bottom ,left to know where the hero is going
+ */
 function checkDirection() {
-  GoingLeft = Hero.x < OffSetHorizontal
-  GoingRight = Hero.x > CONFIG.GAME_WIDTH - OffSetHorizontal
   GoingTop = Hero.y < OffSetVertical
+  GoingRight = Hero.x > CONFIG.GAME_WIDTH - OffSetHorizontal
   GoingBottom = Hero.y > CONFIG.GAME_HEIGHT - OffSetVertical
+  GoingLeft = Hero.x < OffSetHorizontal
 }

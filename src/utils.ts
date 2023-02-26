@@ -1,3 +1,5 @@
+import SPRITE from './sprite'
+import { Ordinal } from './config'
 /**
  * Simple functions to return values
  * - Does not update globals
@@ -12,11 +14,18 @@ export default class Utils {
  * @param b 
  * @returns 
  */
-  static colision(a: any, b: any): boolean {
+  static colision(a: SPRITE, b: any): boolean {
     return a.x + a.w > b.x &&
       a.y + a.h > b.y &&
       a.x < b.x + b.w &&
       a.y < b.y + b.h
+  }
+
+  /**
+   * Returns if the given point is in colision with the given SPRITE
+   */
+  static hit(a: Ordinal, b: SPRITE): boolean {
+    return a.x > b.x && a.x < b.x + b.w && a.y > b.y && a.y < b.y + b.w
   }
 /**
  * Translate degrees to radiants
@@ -34,7 +43,7 @@ export default class Utils {
  * @param degrees 
  * @returns 
  */
-  static radiants(origin: any, target: any, degrees?: number) {
+  static radiants(origin: Ordinal, target: Ordinal, degrees?: number) {
     if (target) {
       const distanceX = origin.x - target.x
       const distanceY = origin.y - target.y
@@ -52,7 +61,7 @@ export default class Utils {
  * @param speed 
  * @returns 
  */
-  static pathLinear(origin: any, target: any, speed: number) {
+  static pathLinear(origin: Ordinal, target: Ordinal, speed: number) {
     const distanceX = target.x - origin.x
     const distanceY = target.y - origin.y
     const ySteps = Math.floor(Math.abs(distanceY / speed))

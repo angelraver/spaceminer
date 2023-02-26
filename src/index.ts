@@ -4,6 +4,7 @@ import TEXT from './text'
 import Asteroid from './asteroid'
 import screenLevelStart from './screenLevelStart'
 import screenAction from './screenAction'
+import CROSSHAIR from './crosshair'
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')
 canvas.width = C.GAME_WIDTH
@@ -23,6 +24,7 @@ declare global {
   Central: SPRITE,
   AsteroidsNumber: number,
   Asteroids: SPRITE[],
+  Crosshair: CROSSHAIR,
   AsteroidModelCurrent: number,
   AsteroidModelNew: number,
   CurrentAsteroid: SPRITE,
@@ -56,6 +58,8 @@ gt.SetNewGame = true
 gt.Background = undefined
 gt.Hero = undefined
 gt.Central = undefined
+gt.Crosshair = undefined
+gt. CurrentAsteroid = undefined
 gt.Asteroids = []
 gt.AsteroidsNumber = 20
 gt.AsteroidModelCurrent = undefined
@@ -98,11 +102,11 @@ function clearGameFrame() {
 
 // Catch all mouse click events
 function click(e: any) {
-  if (!CurrentAsteroid && clickValid(e)) {
-    Hero.setPath({ x: e.x, y: e.y })
-  }
+  // if (!CurrentAsteroid && clickValid(e)) {
+    Hero.click(e)
+  // }
 
-  Asteroid.click()
+  Asteroid.click(e)
 }
 
 function clickValid(e: any) {

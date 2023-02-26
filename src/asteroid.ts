@@ -26,8 +26,8 @@ export default class Asteroid {
       hitsLimit: 9
     }) 
   
-    asteroid.x = Utils.random(asteroid.w / 2, CONFIG.GAME_WIDTH - asteroid.w / 2) 
-    asteroid.y = Utils.random(asteroid.h / 2, CONFIG.GAME_HEIGHT - asteroid.h / 2) 
+    asteroid.x = Utils.random(-OffSetHorizontal + asteroid.w / 2, CONFIG.GAME_WIDTH + OffSetHorizontal - asteroid.w / 2) 
+    asteroid.y = Utils.random(-OffSetVertical + asteroid.h / 2, OffSetVertical + CONFIG.GAME_HEIGHT - asteroid.h / 2) 
   
     const insideCenter = Utils.colision(asteroid, CONFIG.CENTER_VOID) 
     const overlaping = Asteroids.some((a) => Utils.colision(a, asteroid)) 
@@ -63,9 +63,11 @@ export default class Asteroid {
    * - Update the asteroid sprites
    * @returns nothing
    */
-  static click() {
+  static click(e: any) {
+    if (CurrentAsteroid) {
+      console.log(Utils.hit(e, CurrentAsteroid))
+    }
     if (!CurrentAsteroid) return false 
-
     CurrentAsteroid.hit() 
     switch(CurrentAsteroid.hits) {
       case 3:

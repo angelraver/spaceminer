@@ -2,6 +2,7 @@ import { CONFIG as C } from './config';
 import SPRITE from './sprite'
 import SCENARIO from './scenario';
 import Asteroid from './asteroid'
+import CROSSHAIR from './crosshair';
 
 /**
  * Prepare the game stats before the action screen
@@ -52,6 +53,16 @@ export default function screenLevelStart() {
       scaleY: 1,
     });
     Hero.target = { x: Hero.x, y: Hero.y };
+
+    Crosshair = new CROSSHAIR({
+      id: 'crosshair',
+      h: 64,
+      w: 64, 
+      sheet: 'crosshair158.png',
+      totalFrames: 1,
+      r: 0
+    })
+
   }
 
   CurrentScreen = 'action';
