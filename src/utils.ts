@@ -61,7 +61,7 @@ export default class Utils {
  * @param speed 
  * @returns 
  */
-  static pathLinear(origin: Ordinal, target: Ordinal, speed: number) {
+  static pathLinear(origin: Ordinal, target: Ordinal, speed: number): Ordinal[] {
     const distanceX = target.x - origin.x
     const distanceY = target.y - origin.y
     const ySteps = Math.floor(Math.abs(distanceY / speed))

@@ -16,8 +16,10 @@ export default class SPRITE {
   totalFrames: number
   currentFrame: number
   sheetY: number
-  path: Array<any>
+  path: Array<Ordinal>
   currentPathPosition: number
+  currenPosition: Ordinal
+  previousPosition: Ordinal
   hits: number
   hitsLimit: number
   loops: number
@@ -25,6 +27,7 @@ export default class SPRITE {
   scaleX: number
   scaleY: number
   image: HTMLImageElement
+  moving: boolean
   constructor(props: any) {
     this.id = props.id
     this.h = props.h
@@ -39,12 +42,15 @@ export default class SPRITE {
     this.sheetY = 0
     this.path = []
     this.currentPathPosition = 0
+    this.currenPosition = undefined
+    this.previousPosition = undefined
     this.hits = 0
     this.hitsLimit = props.hitsLimit ? props.hitsLimit : 1
     this.loops = props.loops
     this.currentLoop = 0
     this.scaleX = props.scaleX || 1
     this.scaleY = -props.scaleY || 1
+    this.moving = false
     if (this.sheet) {
       this.updateImage()
     }
@@ -106,19 +112,7 @@ export default class SPRITE {
    */
   draw(): void {
     this.framing()
-
-    if (CanGoTop) {
-      this.y = this.y + Speed
-    }
-    if (CanGoRight) {
-      this.x = this.x - Speed
-    }
-    if (CanGoBottom) {
-      this.y = this.y - Speed
-    }
-    if (CanGoLeft) {
-      this.x = this.x + Speed
-    }
+    this.positionByHero()
 
     ctx.save()
     ctx.translate(this.x, this.y)
@@ -145,11 +139,18 @@ export default class SPRITE {
    * Move forward inside the path prop elements
    */
   going(): void {
-    if (this.path[this.currentPathPosition]) {
-      this.x = this.path[this.currentPathPosition].x
-      this.y = this.path[this.currentPathPosition].y
+    const pathPos = this.currentPathPosition
+    if (this.path[pathPos]) {
+      this.currenPosition = this.path[pathPos]
+      this.previousPosition = this.path[pathPos > 0 ? pathPos - 1 : pathPos]
+      this.moving = true
+      this.x = this.path[pathPos].x
+      this.y = this.path[pathPos].y
       this.currentPathPosition++
+    } else {
+      this.moving = false
     }
+
   }
   /**
    * Increase the hits prop
@@ -170,13 +171,24 @@ export default class SPRITE {
     if (this.currentLoop < this.loops) this.y = this.y - 2
   }
   /**
-   * Manage click event
-   * @param e 
+   * Updates the x and y relative to the movement of the Hero
    */
-  click (e: Ordinal) {
-    const hittingAsteroid = Utils.hit(e, this)
-    if (!hittingAsteroid) {
-      Hero.setPath({ x: e.x, y: e.y })
+  positionByHero(): void {
+    if (Hero.goingTop) {
+      console.log('goingTop')
+      this.y = this.y + Speed
+    }
+    if (Hero.goingRight) {
+      console.log('goingRight')
+      this.x = this.x - Speed
+    }
+    if (Hero.goingBottom) {
+      console.log('goingBottom')
+      this.y = this.y - Speed
+    }
+    if (Hero.goingLeft) {
+      console.log('goingLeft')
+      this.x = this.x + Speed
     }
   }
 }

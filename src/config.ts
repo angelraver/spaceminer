@@ -37,12 +37,12 @@ export type Ordinal = {
  * Global constants setting the game sources and values
  */
 export const CONFIG = {
+  SPRITES_FOLDER: './assets/sprites/',
+  SOUND_FOLDER: './assets/sounds/',
   BLOCK_UNITY: 10,
   GAME_SPEED: 45,
   GAME_WIDTH: GAME_WIDTH,
   GAME_HEIGHT: GAME_HEIGHT,
-  SPRITES_FOLDER: './assets/sprites/',
-  SOUND_FOLDER: './assets/sounds/',
   GAME_MID_H: GAME_WIDTH / 2,
   GAME_MID_V: GAME_HEIGHT / 2,
   CENTER_LIMITS: CENTER_LIMITS,

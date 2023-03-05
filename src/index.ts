@@ -5,6 +5,9 @@ import Asteroid from './asteroid'
 import screenLevelStart from './screenLevelStart'
 import screenAction from './screenAction'
 import CROSSHAIR from './crosshair'
+import HERO from './hero'
+import BACKGROUND from './background'
+import PLAIN from './plain'
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')
 canvas.width = C.GAME_WIDTH
@@ -19,8 +22,8 @@ declare global {
   GameOver: boolean,
   Pause: boolean,
   SetNewGame: boolean,
-  Background: SPRITE,
-  Hero: SPRITE,
+  Background: PLAIN,
+  Hero: HERO,
   Central: SPRITE,
   AsteroidsNumber: number,
   Asteroids: SPRITE[],
@@ -33,16 +36,12 @@ declare global {
   CargoGoal: number,
   InCentral: boolean,
   HitsLabels: TEXT[],
-  GoingLeft: boolean,
-  GoingRight: boolean,
-  GoingTop: boolean,
-  GoingBottom: boolean,
-  CanGoLeft: boolean,
-  CanGoRight: boolean,
-  CanGoTop: boolean,
-  CanGoBottom: boolean,
   OffSetHorizontal: number,
-  OffSetVertical: number
+  OffSetVertical: number,
+  bkgProportion: number,
+  Stars: BACKGROUND[],
+  Margin: number,
+  Anchor: PLAIN
 }
 
 const gt = globalThis
@@ -59,7 +58,7 @@ gt.Background = undefined
 gt.Hero = undefined
 gt.Central = undefined
 gt.Crosshair = undefined
-gt. CurrentAsteroid = undefined
+gt.CurrentAsteroid = undefined
 gt.Asteroids = []
 gt.AsteroidsNumber = 20
 gt.AsteroidModelCurrent = undefined
@@ -69,16 +68,12 @@ gt.CargoTotal = 0
 gt.CargoGoal = 0
 gt.InCentral = false
 gt.HitsLabels = []
-gt.GoingLeft = false
-gt.GoingRight = false
-gt.GoingTop = false
-gt.GoingBottom = false
-gt.OffSetHorizontal = C.GAME_WIDTH / 4
-gt.OffSetVertical = C.GAME_HEIGHT / 4
-gt.CanGoLeft = false
-gt.CanGoRight = false
-gt.CanGoTop = false
-gt.CanGoBottom = false
+gt.bkgProportion = 4
+gt.OffSetHorizontal = C.GAME_WIDTH
+gt.OffSetVertical = C.GAME_HEIGHT
+gt.Stars = []
+gt.Margin = 100
+gt.Anchor = undefined
 
 // Increase the internal game time counter
 function timing() {
@@ -102,10 +97,7 @@ function clearGameFrame() {
 
 // Catch all mouse click events
 function click(e: any) {
-  // if (!CurrentAsteroid && clickValid(e)) {
-    Hero.click(e)
-  // }
-
+  Hero.click(e)
   Asteroid.click(e)
 }
 
@@ -116,9 +108,7 @@ function clickValid(e: any) {
     && e.y < CONFIG.GAME_HEIGHT - CONFIG.BLOCK_UNITY * 4
 }
 
-
 document.body.addEventListener('click', click)
-
 
 // Executes the correspondent screen
 function rolling() {

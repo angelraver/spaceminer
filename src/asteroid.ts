@@ -40,14 +40,15 @@ export default class Asteroid {
   }
 
   /**
-   * Updates the global Asteroids with an array of SPRITEs
+   * Returns an array of SPRITES Asteroids
    * @param n amount of SPRITES
    * @returns SPRITE[]
    */
-  static createGroup(n: number): void {
-    for(let i = 0;  i < n;  i++) {
-      gt.Asteroids.push(this.create(i.toString())) 
-    }
+  static createGroup(n: number): SPRITE[] {
+    const that = this
+    return Array.from({ length: n }, function(v, i) {
+      return that.create(i.toString())
+    })
   }
   /**
    * Refesh the Asteroids array excluding the given id
@@ -64,9 +65,6 @@ export default class Asteroid {
    * @returns nothing
    */
   static click(e: any) {
-    if (CurrentAsteroid) {
-      console.log(Utils.hit(e, CurrentAsteroid))
-    }
     if (!CurrentAsteroid) return false 
     CurrentAsteroid.hit() 
     switch(CurrentAsteroid.hits) {

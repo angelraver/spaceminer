@@ -13,6 +13,7 @@ export default class TEXT extends SPRITE {
    * - Apply looping
    */
   draw() {
+    this.fadeOut()
     ctx.font = "42px ArcadeClassic";
     ctx.fillStyle = "white";
     ctx.fillText(this.text, this.x, this.y);
