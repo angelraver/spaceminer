@@ -7,8 +7,8 @@ export default class SPRITE {
     target: any;
     r: number;
     sheet: string;
-    totalFrames: number;
-    currentFrame: number;
+    frameTotal: number;
+    frameCurrent: number;
     sheetY: number;
     path: Array<any>;
     currentPathPosition: number;

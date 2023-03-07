@@ -19,7 +19,7 @@ export default class Asteroid {
       h: 105,
       w: 121,
       sheet: 'a1.png',
-      totalFrames: 1,
+      frameTotal: 1,
       scaleX: Math.random() < 0.5 ? -1 : 1,
       scaleY: Math.random() < 0.5 ? -1 : 1,
       r: Utils.radiants(undefined, undefined, Math.random() * 180),

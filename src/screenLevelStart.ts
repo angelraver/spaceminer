@@ -11,43 +11,59 @@ import PLAIN from './plain';
  * Prepare the game stats before the action screen
  */
 export default function screenLevelStart() {
+  LevelLimits = {
+    t: -OffSetVertical,
+    r: CONFIG.GAME_WIDTH + OffSetHorizontal,
+    b: CONFIG.GAME_HEIGHT + OffSetVertical,
+    l: -OffSetHorizontal
+  }
+
   if (SetNewGame) {
-    GameOver = false;
-    SetNewGame = false;
+    GameOver = false
+    SetNewGame = false
+
     Background = new PLAIN({
       x: 0,
       y: 0,
       w: CONFIG.GAME_WIDTH,
       h: CONFIG.GAME_HEIGHT,
-      static: true,
       color: '#2c2137',
       alpha: 1
     })
-    Anchor = new PLAIN({
+
+    Anchor = new SPRITE({
+      id: 'anchor',
+      x: 0,
+      y: 0,
+      w: CONFIG.GAME_WIDTH,
+      h: CONFIG.GAME_HEIGHT
+    })
+
+    VisibleArea = new PLAIN({
+      id: 'visiblArea',
       x: 0,
       y: 0,
       w: CONFIG.GAME_WIDTH,
       h: CONFIG.GAME_HEIGHT,
-      static: false,
-      color: 'black',
-      alpha: 0.01
     })
+
     Stars = Array.from({ length: 1000 }, function (v, i) {
       return new BACKGROUND({
         id: 'star_' + i,
-        x: Utils.random(1, 4) * 25,
-        y: 0,
+        x: Utils.random(LevelLimits.l, LevelLimits.r),
+        y: Utils.random(LevelLimits.t, LevelLimits.b),
         w: 30,
         h: 30,
-        xt: Utils.random(-CONFIG.GAME_WIDTH, CONFIG.GAME_WIDTH * 2),
-        yt: Utils.random(-CONFIG.GAME_HEIGHT, CONFIG.GAME_HEIGHT * 2),
-        wt: 30,
-        ht: 30,
+        frameX: Utils.random(0, 4) * 50,
+        frameY: Utils.random(0, 4) * 50,
+        frameW: 50,
+        frameH: 50,
         totaFrames: 1,
         sheet: 'stars.png'
       })
     })
 
+    AsteroidsNumber = 50
     Asteroids = Asteroid.createGroup(AsteroidsNumber)
 
     Central = new SPRITE({
@@ -57,7 +73,7 @@ export default function screenLevelStart() {
       w: 91,
       h: 90,
       sheet: 'central.png',
-      totalFrames: 1,
+      frameTotal: 1,
       r: 20,
       scaleX: 2,
       scaleY: 2,
@@ -70,24 +86,24 @@ export default function screenLevelStart() {
       h: 74,
       w: 50,
       sheet: 'ship.png',
-      totalFrames: 1,
+      frameTotal: 1,
       r: 0,
       scaleX: 1,
       scaleY: 1,
-    });
-    Hero.target = { x: Hero.x, y: Hero.y };
+    })
+    Hero.target = { x: Hero.x, y: Hero.y }
 
     Crosshair = new CROSSHAIR({
       id: 'crosshair',
       h: 64,
       w: 64, 
       sheet: 'crosshair158.png',
-      totalFrames: 1,
+      frameTotal: 1,
       r: 0
     })
   }
 
-  CurrentScreen = 'action';
-  MarkTime = 0;
-  GlobalTime = 0;
+  CurrentScreen = 'action'
+  MarkTime = 0
+  GlobalTime = 0
 }

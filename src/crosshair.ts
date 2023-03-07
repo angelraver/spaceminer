@@ -30,7 +30,7 @@ export default class CROSSHAIR extends SPRITE {
     ctx.translate(this.x, this.y)
     ctx.rotate(this.r)
     // ctx.scale(this.scaleX, this.scaleY)
-    ctx.drawImage(this.image, 0, this.sheetY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
+    ctx.drawImage(this.image, this.frameX, this.frameY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
 
     // ctx.beginPath()
     // ctx.lineWidth = 6

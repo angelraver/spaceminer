@@ -1,4 +1,4 @@
-import { CONFIG as C, CONFIG } from './config'
+import { CONFIG as C, CONFIG, Limits } from './config'
 import SPRITE from './sprite'
 import TEXT from './text'
 import Asteroid from './asteroid'
@@ -41,7 +41,9 @@ declare global {
   bkgProportion: number,
   Stars: BACKGROUND[],
   Margin: number,
-  Anchor: PLAIN
+  Anchor: SPRITE,
+  VisibleArea: PLAIN,
+  LevelLimits: Limits
 }
 
 const gt = globalThis
@@ -60,7 +62,7 @@ gt.Central = undefined
 gt.Crosshair = undefined
 gt.CurrentAsteroid = undefined
 gt.Asteroids = []
-gt.AsteroidsNumber = 20
+gt.AsteroidsNumber = 0
 gt.AsteroidModelCurrent = undefined
 gt.AsteroidModelNew = undefined
 gt.Cargo = 0
@@ -73,7 +75,9 @@ gt.OffSetHorizontal = C.GAME_WIDTH
 gt.OffSetVertical = C.GAME_HEIGHT
 gt.Stars = []
 gt.Margin = 100
+gt.VisibleArea = undefined
 gt.Anchor = undefined
+gt.LevelLimits = undefined
 
 // Increase the internal game time counter
 function timing() {
@@ -109,6 +113,7 @@ function clickValid(e: any) {
 }
 
 document.body.addEventListener('click', click)
+
 
 // Executes the correspondent screen
 function rolling() {

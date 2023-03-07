@@ -12,7 +12,8 @@ export default function screenAction () {
     CargoTotal += Cargo
     Cargo = 0
   }
-  Anchor.draw()
+
+  Anchor.positionByHero()
   Background.draw()
   Stars.map(s => s.draw())
   Central.draw()
@@ -22,7 +23,6 @@ export default function screenAction () {
   HitsLabels.map(h => h.draw())
 
   HitsLabels = HitsLabels.filter((s) => s.currentLoop < s.loops)
-  console.log(Anchor.x, Anchor.y)
 }
 
 

@@ -6,16 +6,19 @@ import Utils from './utils'
  */
 export default class SPRITE {
   id: string
-  h: number
-  w: number
   y: number
   x: number
+  h: number
+  w: number
+  frameX: number
+  frameY: number
+  frameW: number
+  frameH: number
   target: any
   r: number
   sheet: string
-  totalFrames: number
-  currentFrame: number
-  sheetY: number
+  frameTotal: number
+  frameCurrent: number
   path: Array<Ordinal>
   currentPathPosition: number
   currenPosition: Ordinal
@@ -30,16 +33,19 @@ export default class SPRITE {
   moving: boolean
   constructor(props: any) {
     this.id = props.id
-    this.h = props.h
-    this.w = props.w
     this.y = props.y
     this.x = props.x
+    this.h = props.h
+    this.w = props.w
+    this.frameX = props.frameX || 0
+    this.frameY = props.frameY || 0
+    this.frameW = props.frameW || this.w
+    this.frameH = props.frameH || this.h
     this.target = props.target
     this.r = props.r
     this.sheet = props.sheet
-    this.totalFrames = props.totalFrames
-    this.currentFrame = 0
-    this.sheetY = 0
+    this.frameTotal = props.frameTotal
+    this.frameCurrent = 0
     this.path = []
     this.currentPathPosition = 0
     this.currenPosition = undefined
@@ -69,11 +75,11 @@ export default class SPRITE {
    * Move the spritesheet to show the next frame in animation 
    */
   framing(): void {
-    this.sheetY = this.currentFrame * this.h
-    if (this.currentFrame < this.totalFrames - 1) {
-      this.currentFrame++
+    this.frameY = this.frameCurrent * this.h
+    if (this.frameCurrent < this.frameTotal - 1) {
+      this.frameCurrent++
     } else {
-      this.currentFrame = 0
+      this.frameCurrent = 0
     }
   }
   /**
@@ -111,16 +117,19 @@ export default class SPRITE {
    * Complex draw on the canvas with rotation and scaling
    */
   draw(): void {
-    this.framing()
     this.positionByHero()
 
-    ctx.save()
-    ctx.translate(this.x, this.y)
-    ctx.rotate(-this.r)
-    ctx.scale(this.scaleX, this.scaleY)
-    ctx.drawImage(this.image, 0, this.sheetY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-    ctx.restore()
-    // pixelate(this)
+    // if this is in colision with the VisibleArea, then is visible, then draw it
+    if (this.isVisible()) {
+      this.framing()
+      ctx.save()
+      ctx.translate(this.x, this.y)
+      ctx.rotate(-this.r)
+      ctx.scale(this.scaleX, this.scaleY)
+      ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
+      ctx.restore()
+      // pixelate(this)
+    }
   }
   /**
    * Set the SPRITE.path property with the list of positions between the current position and the given target
@@ -175,20 +184,29 @@ export default class SPRITE {
    */
   positionByHero(): void {
     if (Hero.goingTop) {
-      console.log('goingTop')
       this.y = this.y + Speed
     }
     if (Hero.goingRight) {
-      console.log('goingRight')
       this.x = this.x - Speed
     }
     if (Hero.goingBottom) {
-      console.log('goingBottom')
       this.y = this.y - Speed
     }
     if (Hero.goingLeft) {
-      console.log('goingLeft')
       this.x = this.x + Speed
     }
+  }
+/**
+ * returns if the curren sprite is on the visible game area
+ * it has tolerance of the same this size in every direction
+   * @returns boolean
+ */
+  isVisible(): boolean {
+    return Utils.colision(VisibleArea, {
+      x: this.x - this.w,
+      y: this.y - this.h,
+      w: this.w + this.w,
+      h: this.h + this.h
+    })
   }
 }

@@ -33,6 +33,13 @@ export type Ordinal = {
   y: number
 }
 
+export type Limits = {
+  t: number,
+  r: number,
+  b: number,
+  l: number
+}
+
 /**
  * Global constants setting the game sources and values
  */
