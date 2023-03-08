@@ -1,3 +1,4 @@
+const TWEEN = require('@tweenjs/tween.js')
 import { CONFIG, Ordinal } from './config'
 import Utils from './utils'
 
@@ -31,6 +32,9 @@ export default class SPRITE {
   scaleY: number
   image: HTMLImageElement
   moving: boolean
+  internalState: {
+    rotationInterval: any
+  }
   constructor(props: any) {
     this.id = props.id
     this.y = props.y
@@ -57,6 +61,7 @@ export default class SPRITE {
     this.scaleX = props.scaleX || 1
     this.scaleY = -props.scaleY || 1
     this.moving = false
+    this.internalState = { rotationInterval: undefined }
     if (this.sheet) {
       this.updateImage()
     }
@@ -130,6 +135,8 @@ export default class SPRITE {
       ctx.restore()
       // pixelate(this)
     }
+
+    TWEEN.update()
   }
   /**
    * Set the SPRITE.path property with the list of positions between the current position and the given target
@@ -141,7 +148,12 @@ export default class SPRITE {
     const origin = { x: this.x, y: this.y }
     let targetFit = { x: target.x, y: target.y }
     this.path = Utils.pathLinear(origin, targetFit, Speed)
-    this.r = Utils.radiants(origin, targetFit)
+    // this.r = Utils.radiants(origin, targetFit)
+    this.internalState.rotationInterval = new TWEEN.Tween({r: this.r})
+      .to({r: Utils.radiants(origin, targetFit)}, 550)
+      .easing(TWEEN.Easing.Cubic.Out)
+      .onUpdate((object: any) => this.r = object.r)
+      .start()
   }
   /**
    * Set the x and y SPRITE props following the current position inside the phat prop.

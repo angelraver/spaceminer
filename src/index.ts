@@ -15,6 +15,8 @@ canvas.height = C.GAME_HEIGHT
 
 declare global {
   var GlobalTime: number,
+  lastUpdate: number,
+  delta: number,
   ctx: CanvasRenderingContext2D,
   MarkTime: number,
   Speed: number,
@@ -50,6 +52,8 @@ const gt = globalThis
 
 gt.ctx = canvas.getContext('2d')
 gt.GlobalTime = 0
+gt.lastUpdate = Date.now()
+gt.delta = 0
 gt.MarkTime = 0
 gt.Speed = 10
 gt.CurrentScreen = 'levelStart'
@@ -117,7 +121,17 @@ document.body.addEventListener('click', click)
 
 // Executes the correspondent screen
 function rolling() {
+  const now = Date.now()
+  const dt = now - lastUpdate
+
+  const currTime = new Date().getTime()
+	const timeToCall = Math.max(0, 16 - (currTime - lastUpdate))
+
   clearGameFrame()
+
+  lastUpdate = currTime
+  delta = dt
+
   switch(CurrentScreen) {
     // case 'title' :
     //   titleScreen()
