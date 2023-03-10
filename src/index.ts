@@ -43,7 +43,8 @@ declare global {
   Margin: number,
   Anchor: SPRITE,
   VisibleArea: PLAIN,
-  LevelLimits: Limits
+  LevelLimits: Limits,
+  engineSound: HTMLAudioElement
 }
 
 const gt = globalThis
@@ -78,6 +79,7 @@ gt.Margin = 100
 gt.VisibleArea = undefined
 gt.Anchor = undefined
 gt.LevelLimits = undefined
+gt.engineSound = undefined
 
 // Increase the internal game time counter
 function timing() {

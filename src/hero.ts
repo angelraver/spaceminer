@@ -35,9 +35,10 @@ export default class HERO extends SPRITE {
    * Manage click event
    * @param e 
    */
-  click (e: Ordinal) {
-    const hittingAsteroid = Utils.hit(e, this)
+  click(e: Ordinal) {
+    const hittingAsteroid = Utils.hit(e, CurrentAsteroid)
     if (!hittingAsteroid) {
+      engineSound.play()
       Hero.setPath({ x: e.x, y: e.y })
     }
   }

@@ -11,6 +11,8 @@ import PLAIN from './plain'
  * Prepare the game stats before the action screen
  */
 export default function screenLevelStart() {
+  engineSound = new Audio(CONFIG.SOUND_FOLDER + 'engines.wav')
+
   LevelLimits = {
     t: -OffSetVertical,
     r: CONFIG.GAME_WIDTH + OffSetHorizontal,
