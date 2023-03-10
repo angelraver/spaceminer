@@ -77,6 +77,8 @@ export default class Asteroid {
    */
   static click(e: any) {
     if (!CurrentAsteroid) return false 
+    if (!Utils.hit(e, CurrentAsteroid)) return false
+
     CurrentAsteroid.hit() 
     switch(CurrentAsteroid.hits) {
       case 3:

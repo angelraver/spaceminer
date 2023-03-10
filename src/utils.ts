@@ -25,7 +25,13 @@ export default class Utils {
    * Returns if the given point is in colision with the given SPRITE
    */
   static hit(a: Ordinal, b: SPRITE): boolean {
-    return a.x > b.x && a.x < b.x + b.w && a.y > b.y && a.y < b.y + b.w
+    if (b) {
+      return a.x >= b.x - b.w / 2
+      && a.x <= b.x + b.w + b.w / 2
+      && a.y >= b.y - b.h / 2
+      && a.y <= b.y + b.w + b.h / 2
+    }
+    return false
   }
 /**
  * Translate degrees to radiants
