@@ -29,9 +29,14 @@ export default class Asteroid {
     asteroid.x = Utils.random(-OffSetHorizontal + asteroid.w / 2, CONFIG.GAME_WIDTH + OffSetHorizontal - asteroid.w / 2) 
     asteroid.y = Utils.random(-OffSetVertical + asteroid.h / 2, OffSetVertical + CONFIG.GAME_HEIGHT - asteroid.h / 2) 
   
-    const insideCenter = Utils.colision(asteroid, CONFIG.CENTER_VOID) 
+    const insideCenter = Utils.colision(asteroid, CONFIG.CENTER_VOID)
+    const asteroidMarginArea = {
+      x: asteroid.x + asteroid.w / 2,
+      y: asteroid.y + asteroid.h / 2,
+      w: asteroid.w + asteroid.w / 2,
+      h: asteroid.h + asteroid.h / 2
+    }
     const overlaping = Asteroids.some((a) => Utils.colision(a, asteroid)) 
-
     if (insideCenter || overlaping) {
       return this.create(id) 
     }
@@ -44,18 +49,24 @@ export default class Asteroid {
    * @param n amount of SPRITES
    * @returns SPRITE[]
    */
-  static createGroup(n: number): SPRITE[] {
+  static createGroup(n: number): void {
     const that = this
-    return Array.from({ length: n }, function(v, i) {
-      return that.create(i.toString())
-    })
+    for (let i = 0; i < n; i++) {
+      Asteroids.push(that.create(i.toString()))
+    }
   }
   /**
    * Refesh the Asteroids array excluding the given id
    * @param id 
    */
   static destroy(id: string) {
-    Asteroids = Asteroids.filter((a) => a.id !== id) 
+    Asteroids = Asteroids.map((a) => {
+      if (a.id === id) {
+        a.sheet = 'a-empty.png'
+      }
+      a.updateImage()
+      return a
+    })
   }
 
   /**

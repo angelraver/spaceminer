@@ -1,11 +1,11 @@
-import { CONFIG as C, CONFIG } from './config';
+import { CONFIG as C, CONFIG } from './config'
 import HERO from './hero'
 import SPRITE from './sprite'
-import BACKGROUND from './background';
+import BACKGROUND from './background'
 import Asteroid from './asteroid'
-import CROSSHAIR from './crosshair';
+import CROSSHAIR from './crosshair'
 import Utils from './utils'
-import PLAIN from './plain';
+import PLAIN from './plain'
 
 /**
  * Prepare the game stats before the action screen
@@ -63,8 +63,8 @@ export default function screenLevelStart() {
       })
     })
 
-    AsteroidsNumber = 50
-    Asteroids = Asteroid.createGroup(AsteroidsNumber)
+    AsteroidsNumber = 100
+    Asteroid.createGroup(AsteroidsNumber)
 
     Central = new SPRITE({
       id: 'central',
