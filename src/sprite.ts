@@ -32,6 +32,7 @@ export default class SPRITE {
   scaleY: number
   image: HTMLImageElement
   moving: boolean
+  mini: boolean
   constructor(props: any) {
     this.id = props.id
     this.y = props.y
@@ -58,6 +59,7 @@ export default class SPRITE {
     this.scaleX = props.scaleX || 1
     this.scaleY = -props.scaleY || 1
     this.moving = false
+    this.mini = props.mini || false
     if (this.sheet) {
       this.updateImage()
     }
@@ -114,12 +116,12 @@ export default class SPRITE {
     const that = this
     return elements.find((e) => Utils.colision(e, that))
   }
+
   /**
    * Complex draw on the canvas with rotation and scaling
    */
   draw(): void {
     this.positionByHero()
-
     // if this is in colision with the VisibleArea, then is visible, then draw it
     if (this.isVisible()) {
       this.framing()
@@ -130,8 +132,29 @@ export default class SPRITE {
       ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
       ctx.restore()
       // pixelate(this)
+    } else {
+      if (this.mini) {
+        this.drawMini()
+      }
     }
   }
+
+  /**
+ * Draw the mini version of the sprite a the border of the screen in the direcction
+ * of the original sprite, when is not visible
+ */
+  drawMini(): void {
+    const position: Ordinal = { x: 0, y: 0 }
+    if (this.x + this.w < 0) position.x = 0
+    if (this.x > g.VisibleArea.w) position.x = g.VisibleArea.w - this.w / 4
+    if (this.x >= 0 && this.x <= g.VisibleArea.w) position.x = this.x
+    if (this.y + this.y < 0) position.y = 0
+    if (this.y > g.VisibleArea.h) position.y = g.VisibleArea.h - this.w / 4
+    if (this.y >= 0 && this.y <= g.VisibleArea.h) position.y = this.y
+
+    ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  position.x,   position.y,     this.w / 4,    this.h / 4)
+  }
+  
   /**
    * Set the SPRITE.path property with the list of positions between the current position and the given target
    * Set the SPRITE.r (rotation) to follow the generated path

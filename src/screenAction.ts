@@ -17,12 +17,11 @@ export default function screenAction () {
   g.Anchor.positionByHero()
   g.Background.draw()
   g.Stars.map(s => s.draw())
-  g.Central.draw()
   g.Asteroids.map(a => a.draw())
+  g.Central.draw()
   g.Hero.draw()
   g.Crosshair.draw()
   g.HitsLabels.map(h => h.draw())
-
   g.HitsLabels = g.HitsLabels.filter((s) => s.currentLoop < s.loops)
 }
 

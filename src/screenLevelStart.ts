@@ -79,6 +79,7 @@ export default function screenLevelStart() {
       r: 20,
       scaleX: 2,
       scaleY: 2,
+      mini: true
     })
 
     g.Hero = new HERO({

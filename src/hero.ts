@@ -61,7 +61,6 @@ export default class HERO extends SPRITE {
    */
   addCargoMineral(): void {
     const position = this.getCargoMineralsPosition()
-    console.log(g.CurrentAsteroid.mineral)
     const mineralCargo = new SPRITE({
       id: 'cargo-' + g.CurrentAsteroid.id,
       frameX: g.CurrentAsteroid.mineral.sheet.x,
