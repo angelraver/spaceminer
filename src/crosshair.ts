@@ -15,6 +15,7 @@ export default class CROSSHAIR extends SPRITE {
   draw(): void {
     CurrentAsteroid = Hero.colisionWith(Asteroids)
     if (!CurrentAsteroid) return
+    if (CurrentAsteroid.empty) return
 
     this.x = CurrentAsteroid.x
     this.y = CurrentAsteroid.y
@@ -29,18 +30,8 @@ export default class CROSSHAIR extends SPRITE {
     ctx.save()
     ctx.translate(this.x, this.y)
     ctx.rotate(this.r)
-    // ctx.scale(this.scaleX, this.scaleY)
     ctx.drawImage(this.image, this.frameX, this.frameY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-
-    // ctx.beginPath()
-    // ctx.lineWidth = 6
-    // ctx.strokeStyle = 'blue'
-    // ctx.rect(0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-    // ctx.stroke()
-    
-
     ctx.restore()
-    // pixelate(this)
   }
  
 }
