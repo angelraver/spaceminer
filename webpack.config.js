@@ -41,10 +41,11 @@ const config = {
         template: 'src/index.html' }),
     new CopyPlugin({
       patterns: [
-        { from: "src/assets", to: "assets" }
+        { from: "src/assets", to: "assets" },
+        { from: "favicon.ico", to: "favicon.ico" }
       ]
     }),
-   ],
+  ],
   optimization: {
     minimizer: [
       new TerserPlugin()
