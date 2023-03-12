@@ -1,4 +1,5 @@
 import AsteroidManager from './asteroidManager'
+import TEXT from './text'
 
 /**
  * Executes all the actions on each frame
@@ -8,7 +9,7 @@ export default function screenAction () {
   g.InCentral = typeof g.Hero.colisionWith([g.Central]) === 'object'
 
   if (g.InCentral && g.Hero.cargo > 0) {
-    AsteroidManager.hiting('hit_central', g.Hero.cargo, g.Hero.x, g.Hero.y)
+    TEXT.hiting('hit_central', g.Hero.cargo, g.Hero.x, g.Hero.y)
     g.CargoTotal += g.Hero.cargo
     g.Hero.resetCargo()
   }

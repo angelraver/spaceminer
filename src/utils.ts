@@ -24,7 +24,7 @@ export default class Utils {
   /**
    * Returns if the given point is in colision with the given SPRITE
    */
-  static hit(a: Ordinal, b: SPRITE): boolean {
+  static isHiting(a: Ordinal, b: SPRITE): boolean {
     if (b) {
       return a.x >= b.x - b.w / 2
       && a.x <= b.x + b.w + b.w / 2

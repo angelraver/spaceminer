@@ -21,4 +21,18 @@ export default class TEXT extends SPRITE {
     ctx.strokeText(this.text, this.x, this.y);
     this.looping();
   }
+
+  /**
+ * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
+ */
+  static hiting(id: string, number: number, x: number, y: number) {
+    const hitLabel: TEXT = new TEXT({
+      id: id,
+      text: '+' + number,
+      x: x,
+      y: y,
+      loops: 30
+    }) 
+    g.HitsLabels.push(hitLabel) 
+  } 
 }

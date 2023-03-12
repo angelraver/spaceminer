@@ -39,7 +39,10 @@ function clearGameFrame() {
 // Catch all mouse click events
 function click(e: any): void {
   g.Hero.click(e)
-  AsteroidManager.click(e)
+
+  if (g.CurrentAsteroid && g.CurrentAsteroid.isClickIn(e)) {
+    g.CurrentAsteroid.click(e)
+  }
 }
 
 document.body.addEventListener('click', click)

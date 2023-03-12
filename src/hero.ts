@@ -48,7 +48,7 @@ export default class HERO extends SPRITE {
    * @param e 
    */
   click(e: Ordinal) {
-    const hittingAsteroid = Utils.hit(e, g.CurrentAsteroid)
+    const hittingAsteroid = Utils.isHiting(e, g.CurrentAsteroid)
     if (!hittingAsteroid) {
       g.engineSound.play()
       this.setPath({ x: e.x, y: e.y })
@@ -61,6 +61,7 @@ export default class HERO extends SPRITE {
    */
   addCargoMineral(): void {
     const position = this.getCargoMineralsPosition()
+    console.log(g.CurrentAsteroid.mineral)
     const mineralCargo = new SPRITE({
       id: 'cargo-' + g.CurrentAsteroid.id,
       frameX: g.CurrentAsteroid.mineral.sheet.x,
