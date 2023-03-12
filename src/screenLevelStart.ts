@@ -2,7 +2,7 @@ import { CONFIG as C, CONFIG } from './config'
 import HERO from './hero'
 import SPRITE from './sprite'
 import BACKGROUND from './background'
-import Asteroid from './asteroid'
+import AsteroidManager from './asteroidManager'
 import CROSSHAIR from './crosshair'
 import Utils from './utils'
 import PLAIN from './plain'
@@ -66,7 +66,7 @@ export default function screenLevelStart() {
     })
 
     AsteroidsNumber = 100
-    Asteroid.createGroup(AsteroidsNumber)
+    AsteroidManager.createGroup(AsteroidsNumber)
 
     Central = new SPRITE({
       id: 'central',

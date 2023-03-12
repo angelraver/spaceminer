@@ -1,4 +1,5 @@
-import { CONFIG, Ordinal } from './config'
+import { Ordinal } from './types'
+import { CONFIG } from './config'
 import Utils from './utils'
 
 /**
@@ -109,7 +110,7 @@ export default class SPRITE {
    * @param elements list of SPRITEs to check
    * @returns SPRITE collisioning with
    */
-  colisionWith(elements: SPRITE[]): SPRITE {
+  colisionWith(elements: any[]): any {
     const that = this
     return elements.find((e) => Utils.colision(e, that))
   }

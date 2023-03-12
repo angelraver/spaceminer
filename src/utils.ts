@@ -1,5 +1,5 @@
+import { Ordinal } from './types'
 import SPRITE from './sprite'
-import { Ordinal } from './config'
 /**
  * Simple functions to return values
  * - Does not update globals

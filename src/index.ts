@@ -1,7 +1,9 @@
-import { CONFIG as C, CONFIG, Limits } from './config'
+import { Limits } from './types'
+import { CONFIG as C, CONFIG } from './config'
 import SPRITE from './sprite'
+import ASTEROID from './asteroid'
 import TEXT from './text'
-import Asteroid from './asteroid'
+import AsteroidManager from './asteroidManager'
 import screenLevelStart from './screenLevelStart'
 import screenAction from './screenAction'
 import CROSSHAIR from './crosshair'
@@ -25,13 +27,10 @@ declare global {
   Background: PLAIN,
   Hero: HERO,
   Central: SPRITE,
-  AsteroidsNumber: number,
-  Asteroids: SPRITE[],
   Crosshair: CROSSHAIR,
-  AsteroidModelCurrent: number,
-  AsteroidModelNew: number,
-  CurrentAsteroid: SPRITE,
-  Cargo: number,
+  AsteroidsNumber: number,
+  Asteroids: ASTEROID[],
+  CurrentAsteroid: ASTEROID,
   CargoTotal: number,
   CargoGoal: number,
   InCentral: boolean,
@@ -64,9 +63,6 @@ gt.Crosshair = undefined
 gt.CurrentAsteroid = undefined
 gt.Asteroids = []
 gt.AsteroidsNumber = 0
-gt.AsteroidModelCurrent = undefined
-gt.AsteroidModelNew = undefined
-gt.Cargo = 0
 gt.CargoTotal = 0
 gt.CargoGoal = 0
 gt.InCentral = false
@@ -104,7 +100,7 @@ function clearGameFrame() {
 // Catch all mouse click events
 function click(e: any) {
   Hero.click(e)
-  Asteroid.click(e)
+  AsteroidManager.click(e)
 }
 
 function clickValid(e: any) {

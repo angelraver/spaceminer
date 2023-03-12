@@ -1,5 +1,4 @@
-import Asteroid from './asteroid'
-import { CONFIG } from './config'
+import AsteroidManager from './asteroidManager'
 
 /**
  * Executes all the actions on each frame
@@ -7,10 +6,10 @@ import { CONFIG } from './config'
 export default function screenAction () {
 
   InCentral = typeof Hero.colisionWith([Central]) === 'object'
-  if (InCentral && Cargo > 0) {
-    Asteroid.hiting('hit_central', Cargo, Hero.x, Hero.y)
-    CargoTotal += Cargo
-    Cargo = 0
+  if (InCentral && Hero.cargo > 0) {
+    AsteroidManager.hiting('hit_central', Hero.cargo, Hero.x, Hero.y)
+    CargoTotal += Hero.cargo
+    Hero.resetCargo()
   }
 
   Anchor.positionByHero()

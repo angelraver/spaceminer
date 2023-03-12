@@ -1,21 +1,28 @@
 import SPRITE from "./sprite";
-import { CONFIG, Ordinal } from './config'
+import { Mineral, Ordinal } from './types'
+import { CONFIG, MINERALS } from './config'
 import Utils from './utils'
 
 /**
- * Extends SPRITE to add background features
+ * Extends SPRITE to add hero features
  */
 export default class HERO extends SPRITE {
   goingLeft: boolean
   goingRight: boolean
   goingTop: boolean
   goingBottom: boolean
+  cargo: number
+  cargoMineralsFull: boolean
+  cargoMineralsPositions: Ordinal[]
+  cargoMinerals: SPRITE[]
+  
   constructor(props: any) {
     super(props);
     this.goingLeft = false
     this.goingRight = false
     this.goingTop = false
     this.goingBottom = false
+    this.resetCargo()
   }
   /**
    * Overwrite draw
@@ -29,6 +36,11 @@ export default class HERO extends SPRITE {
     ctx.rotate(-this.r)
     ctx.scale(this.scaleX, this.scaleY)
     ctx.drawImage(this.image, this.frameX, this.frameY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
+
+    this.cargoMinerals.forEach((cargo) => {
+      ctx.drawImage(cargo.image, cargo.frameX, cargo.frameY, cargo.frameW, cargo.frameH, cargo.x, cargo.y, cargo.w, cargo.h)
+    })
+
     ctx.restore()
   }
   /**
@@ -39,9 +51,56 @@ export default class HERO extends SPRITE {
     const hittingAsteroid = Utils.hit(e, CurrentAsteroid)
     if (!hittingAsteroid) {
       engineSound.play()
-      Hero.setPath({ x: e.x, y: e.y })
+      this.setPath({ x: e.x, y: e.y })
     }
   }
+
+  /**
+   * add the cargo sprite to the Hero CargoMinerals prop
+   * the cargo is based on the asteroid mineral
+   */
+  addCargoMineral(): void {
+    const position = this.getCargoMineralsPosition()
+    const mineralCargo = new SPRITE({
+      id: 'cargo-' + CurrentAsteroid.id,
+      frameX: CurrentAsteroid.mineral.sheet.x,
+      frameY: CurrentAsteroid.mineral.sheet.y,
+      frameW: CurrentAsteroid.mineral.sheet.w,
+      frameH: CurrentAsteroid.mineral.sheet.h,
+      sheet: CurrentAsteroid.mineral.sheet.image,
+      x: position.x,
+      y: position.y,
+      w: this.w / 2,
+      h: this.w / 2 // yes the w, for square simetry
+    })
+    this.cargoMinerals.push(mineralCargo)
+    if (this.cargoMineralsPositions.length === 0) {
+      this.cargoMineralsFull = true
+    }
+  }
+
+  /**
+   * Returns one of the 4 cargo position available if it is.
+   */
+  getCargoMineralsPosition(): Ordinal {
+    return this.cargoMineralsPositions.pop()
+  }
+
+  /**
+   * Resets the cargo relative props
+   */
+  resetCargo(): void {
+    this.cargo = 0
+    this.cargoMineralsFull = false
+    this.cargoMinerals = []
+    this.cargoMineralsPositions = [
+      { x: 0, y: 0 },
+      { x: 0, y: 0 - this.w / 2 },
+      { x: 0 - this.w / 2, y: 0 },
+      { x: 0 - this.w / 2, y: 0 - this.w / 2 }
+    ]
+  }
+
   /**
   * Update the global Going family top, right, bottom ,left to know where the hero is going
   */
