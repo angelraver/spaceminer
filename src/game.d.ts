@@ -1,0 +1,38 @@
+import { Limits } from './types';
+import SPRITE from './sprite';
+import ASTEROID from './asteroid';
+import TEXT from './text';
+import CROSSHAIR from './crosshair';
+import HERO from './hero';
+import BACKGROUND from './background';
+import PLAIN from './plain';
+export default class GAME {
+    GlobalTime: number;
+    MarkTime: number;
+    Speed: number;
+    CurrentScreen: string;
+    GameOver: boolean;
+    Pause: boolean;
+    SetNewGame: boolean;
+    Background: PLAIN;
+    Hero: HERO;
+    Central: SPRITE;
+    Crosshair: CROSSHAIR;
+    AsteroidsNumber: number;
+    Asteroids: ASTEROID[];
+    CurrentAsteroid: ASTEROID;
+    CargoTotal: number;
+    CargoGoal: number;
+    InCentral: boolean;
+    HitsLabels: TEXT[];
+    OffSetHorizontal: number;
+    OffSetVertical: number;
+    bkgProportion: number;
+    Stars: BACKGROUND[];
+    Margin: number;
+    Anchor: SPRITE;
+    VisibleArea: PLAIN;
+    LevelLimits: Limits;
+    engineSound: HTMLAudioElement;
+    constructor();
+}

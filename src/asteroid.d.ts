@@ -1,8 +1,12 @@
 import SPRITE from "./sprite";
-export default class Asteroid {
-    static create(id: string): SPRITE;
-    static createGroup(n: number): SPRITE[];
-    static destroy(id: string): void;
-    static click(): boolean;
-    static hiting(id: string, number: number, x: number, y: number): void;
+import { Mineral } from "./types";
+/**
+ * Extend SPRITE to add asteroid features
+ */
+export default class ASTEROID extends SPRITE {
+    mineral: Mineral;
+    modelCurrent: number;
+    modelNew: number;
+    empty: boolean;
+    constructor(props: any);
 }
