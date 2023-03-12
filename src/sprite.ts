@@ -141,7 +141,7 @@ export default class SPRITE {
     this.currentPathPosition = 0
     const origin = { x: this.x, y: this.y }
     let targetFit = { x: target.x, y: target.y }
-    this.path = Utils.pathLinear(origin, targetFit, Speed)
+    this.path = Utils.pathLinear(origin, targetFit, g.Speed)
     this.r = Utils.radiants(origin, targetFit)
   }
   /**
@@ -184,17 +184,17 @@ export default class SPRITE {
    * Updates the x and y relative to the movement of the Hero
    */
   positionByHero(): void {
-    if (Hero.goingTop) {
-      this.y = this.y + Speed
+    if (g.Hero.goingTop) {
+      this.y = this.y + g.Speed
     }
-    if (Hero.goingRight) {
-      this.x = this.x - Speed
+    if (g.Hero.goingRight) {
+      this.x = this.x - g.Speed
     }
-    if (Hero.goingBottom) {
-      this.y = this.y - Speed
+    if (g.Hero.goingBottom) {
+      this.y = this.y - g.Speed
     }
-    if (Hero.goingLeft) {
-      this.x = this.x + Speed
+    if (g.Hero.goingLeft) {
+      this.x = this.x + g.Speed
     }
   }
 /**
@@ -203,7 +203,7 @@ export default class SPRITE {
    * @returns boolean
  */
   isVisible(): boolean {
-    return Utils.colision(VisibleArea, {
+    return Utils.colision(g.VisibleArea, {
       x: this.x - this.w,
       y: this.y - this.h,
       w: this.w + this.w,

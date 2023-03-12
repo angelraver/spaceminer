@@ -48,9 +48,9 @@ export default class HERO extends SPRITE {
    * @param e 
    */
   click(e: Ordinal) {
-    const hittingAsteroid = Utils.hit(e, CurrentAsteroid)
+    const hittingAsteroid = Utils.hit(e, g.CurrentAsteroid)
     if (!hittingAsteroid) {
-      engineSound.play()
+      g.engineSound.play()
       this.setPath({ x: e.x, y: e.y })
     }
   }
@@ -62,12 +62,12 @@ export default class HERO extends SPRITE {
   addCargoMineral(): void {
     const position = this.getCargoMineralsPosition()
     const mineralCargo = new SPRITE({
-      id: 'cargo-' + CurrentAsteroid.id,
-      frameX: CurrentAsteroid.mineral.sheet.x,
-      frameY: CurrentAsteroid.mineral.sheet.y,
-      frameW: CurrentAsteroid.mineral.sheet.w,
-      frameH: CurrentAsteroid.mineral.sheet.h,
-      sheet: CurrentAsteroid.mineral.sheet.image,
+      id: 'cargo-' + g.CurrentAsteroid.id,
+      frameX: g.CurrentAsteroid.mineral.sheet.x,
+      frameY: g.CurrentAsteroid.mineral.sheet.y,
+      frameW: g.CurrentAsteroid.mineral.sheet.w,
+      frameH: g.CurrentAsteroid.mineral.sheet.h,
+      sheet: g.CurrentAsteroid.mineral.sheet.image,
       x: position.x,
       y: position.y,
       w: this.w / 2,
@@ -107,20 +107,20 @@ export default class HERO extends SPRITE {
   checkDirection() {
     if (this.currenPosition) {
       this.goingTop = this.currenPosition.y < this.previousPosition.y // the hero is moving up
-        && this.y < Margin // the hero is inside the top margin
-        && Anchor.y + Anchor.h + Speed < LevelLimits.b //the anchor will not cross the bottom limit
+        && this.y < g.Margin // the hero is inside the top margin
+        && g.Anchor.y + g.Anchor.h + g.Speed < g.LevelLimits.b //the anchor will not cross the bottom limit
 
       this.goingRight = this.currenPosition.x > this.previousPosition.x // the hero is moving right
-        && this.x > CONFIG.GAME_WIDTH - Margin // the hero is inside the right margin
-        && Anchor.x - Speed > LevelLimits.l // the anchor will not cross the left limit
+        && this.x > CONFIG.GAME_WIDTH - g.Margin // the hero is inside the right margin
+        && g.Anchor.x - g.Speed > g.LevelLimits.l // the anchor will not cross the left limit
 
       this.goingBottom = this.currenPosition.y > this.previousPosition.y // the hero is going bottom
-        && this.y + this.h > CONFIG.GAME_HEIGHT - Margin // the hero is inside the bottom margin
-        && Anchor.y - Speed > LevelLimits.t // the anchor will not cross the top limit
+        && this.y + this.h > CONFIG.GAME_HEIGHT - g.Margin // the hero is inside the bottom margin
+        && g.Anchor.y - g.Speed > g.LevelLimits.t // the anchor will not cross the top limit
 
       this.goingLeft = this.currenPosition.x < this.previousPosition.x // the hero is moving left
-        && this.x < Margin // the hero is inside the left margin
-        && Anchor.x + Anchor.w + Speed < LevelLimits.r // the anchor will not cross the right limit
+        && this.x < g.Margin // the hero is inside the left margin
+        && g.Anchor.x + g.Anchor.w + g.Speed < g.LevelLimits.r // the anchor will not cross the right limit
     }
   }
 }

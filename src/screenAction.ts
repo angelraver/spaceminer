@@ -4,25 +4,25 @@ import AsteroidManager from './asteroidManager'
  * Executes all the actions on each frame
  */
 export default function screenAction () {
-  CurrentAsteroid = Hero.colisionWith(Asteroids)
-  InCentral = typeof Hero.colisionWith([Central]) === 'object'
+  g.CurrentAsteroid = g.Hero.colisionWith(g.Asteroids)
+  g.InCentral = typeof g.Hero.colisionWith([g.Central]) === 'object'
 
-  if (InCentral && Hero.cargo > 0) {
-    AsteroidManager.hiting('hit_central', Hero.cargo, Hero.x, Hero.y)
-    CargoTotal += Hero.cargo
-    Hero.resetCargo()
+  if (g.InCentral && g.Hero.cargo > 0) {
+    AsteroidManager.hiting('hit_central', g.Hero.cargo, g.Hero.x, g.Hero.y)
+    g.CargoTotal += g.Hero.cargo
+    g.Hero.resetCargo()
   }
 
-  Anchor.positionByHero()
-  Background.draw()
-  Stars.map(s => s.draw())
-  Central.draw()
-  Asteroids.map(a => a.draw())
-  Hero.draw()
-  Crosshair.draw()
-  HitsLabels.map(h => h.draw())
+  g.Anchor.positionByHero()
+  g.Background.draw()
+  g.Stars.map(s => s.draw())
+  g.Central.draw()
+  g.Asteroids.map(a => a.draw())
+  g.Hero.draw()
+  g.Crosshair.draw()
+  g.HitsLabels.map(h => h.draw())
 
-  HitsLabels = HitsLabels.filter((s) => s.currentLoop < s.loops)
+  g.HitsLabels = g.HitsLabels.filter((s) => s.currentLoop < s.loops)
 }
 
 

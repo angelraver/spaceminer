@@ -9,20 +9,21 @@ export default class BACKGROUND extends SPRITE {
   }
   /**
    * Updates the x and y origin of the image relative to the movement of the Hero
-   */
+  */
     positionByHero(): void {
-      bkgProportion = 2
-      if (Hero.goingTop) {
-        this.y = this.y + Speed / bkgProportion
+      // for the background to move different from other sprites for the ilusion of deep
+      g.bkgProportion = 2
+      if (g.Hero.goingTop) {
+        this.y = this.y + g.Speed / g.bkgProportion
       }
-      if (Hero.goingRight) {
-        this.x = this.x - Speed / bkgProportion
+      if (g.Hero.goingRight) {
+        this.x = this.x - g.Speed / g.bkgProportion
       }
-      if (Hero.goingBottom) {
-        this.y = this.y - Speed / bkgProportion
+      if (g.Hero.goingBottom) {
+        this.y = this.y - g.Speed / g.bkgProportion
       }
-      if (Hero.goingLeft) {
-        this.x = this.x + Speed / bkgProportion
+      if (g.Hero.goingLeft) {
+        this.x = this.x + g.Speed / g.bkgProportion
       }
     }
 }

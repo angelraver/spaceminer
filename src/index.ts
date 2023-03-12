@@ -1,85 +1,24 @@
-import { Limits } from './types'
 import { CONFIG as C, } from './config'
-import SPRITE from './sprite'
-import ASTEROID from './asteroid'
-import TEXT from './text'
 import AsteroidManager from './asteroidManager'
 import screenLevelStart from './screenLevelStart'
 import screenAction from './screenAction'
-import CROSSHAIR from './crosshair'
-import HERO from './hero'
-import BACKGROUND from './background'
-import PLAIN from './plain'
+import GAME from './game'
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')
 canvas.width = C.GAME_WIDTH
 canvas.height = C.GAME_HEIGHT
 
 declare global {
-  var GlobalTime: number,
-  ctx: CanvasRenderingContext2D,
-  MarkTime: number,
-  Speed: number,
-  CurrentScreen: string,
-  GameOver: boolean,
-  Pause: boolean,
-  SetNewGame: boolean,
-  Background: PLAIN,
-  Hero: HERO,
-  Central: SPRITE,
-  Crosshair: CROSSHAIR,
-  AsteroidsNumber: number,
-  Asteroids: ASTEROID[],
-  CurrentAsteroid: ASTEROID,
-  CargoTotal: number,
-  CargoGoal: number,
-  InCentral: boolean,
-  HitsLabels: TEXT[],
-  OffSetHorizontal: number,
-  OffSetVertical: number,
-  bkgProportion: number,
-  Stars: BACKGROUND[],
-  Margin: number,
-  Anchor: SPRITE,
-  VisibleArea: PLAIN,
-  LevelLimits: Limits,
-  engineSound: HTMLAudioElement
+  var g: GAME,
+  ctx: CanvasRenderingContext2D
 }
 
-const gt = globalThis
-
-gt.ctx = canvas.getContext('2d')
-gt.GlobalTime = 0
-gt.MarkTime = 0
-gt.Speed = 10
-gt.CurrentScreen = 'levelStart'
-gt.GameOver = false
-gt.Pause = false
-gt.SetNewGame = true
-gt.Background = undefined
-gt.Hero = undefined
-gt.Central = undefined
-gt.Crosshair = undefined
-gt.CurrentAsteroid = undefined
-gt.Asteroids = []
-gt.AsteroidsNumber = 0
-gt.CargoTotal = 0
-gt.CargoGoal = 0
-gt.InCentral = false
-gt.HitsLabels = []
-gt.bkgProportion = 4
-gt.OffSetHorizontal = C.GAME_WIDTH
-gt.OffSetVertical = C.GAME_HEIGHT
-gt.Stars = []
-gt.Margin = 100
-gt.VisibleArea = undefined
-gt.Anchor = undefined
-gt.LevelLimits = undefined
-gt.engineSound = undefined
+globalThis.g = new GAME()
+globalThis.ctx = canvas.getContext('2d')
 
 // Increase the internal game time counter
 function timing() {
-  GlobalTime = globalThis.GlobalTime + .5
+  g.GlobalTime = g.GlobalTime + .5
 }
 
 // Restart the game loop
@@ -99,7 +38,7 @@ function clearGameFrame() {
 
 // Catch all mouse click events
 function click(e: any): void {
-  Hero.click(e)
+  g.Hero.click(e)
   AsteroidManager.click(e)
 }
 
@@ -108,7 +47,7 @@ document.body.addEventListener('click', click)
 // Executes the correspondent screen
 function rolling() {
   clearGameFrame()
-  switch(CurrentScreen) {
+  switch(g.CurrentScreen) {
     // case 'title' :
     //   titleScreen()
     //   break

@@ -11,20 +11,20 @@ import PLAIN from './plain'
  * Prepare the game stats before the action screen
  */
 export default function screenLevelStart() {
-  engineSound = new Audio(CONFIG.SOUND_FOLDER + 'engines.wav')
+  g.engineSound = new Audio(CONFIG.SOUND_FOLDER + 'engines.wav')
 
-  LevelLimits = {
-    t: -OffSetVertical,
-    r: CONFIG.GAME_WIDTH + OffSetHorizontal,
-    b: CONFIG.GAME_HEIGHT + OffSetVertical,
-    l: -OffSetHorizontal
+  g.LevelLimits = {
+    t: -g.OffSetVertical,
+    r: CONFIG.GAME_WIDTH + g.OffSetHorizontal,
+    b: CONFIG.GAME_HEIGHT + g.OffSetVertical,
+    l: -g.OffSetHorizontal
   }
 
-  if (SetNewGame) {
-    GameOver = false
-    SetNewGame = false
+  if (g.SetNewGame) {
+    g.GameOver = false
+    g.SetNewGame = false
 
-    Background = new PLAIN({
+    g.Background = new PLAIN({
       x: 0,
       y: 0,
       w: CONFIG.GAME_WIDTH,
@@ -33,7 +33,7 @@ export default function screenLevelStart() {
       alpha: 1
     })
 
-    Anchor = new SPRITE({
+    g.Anchor = new SPRITE({
       id: 'anchor',
       x: 0,
       y: 0,
@@ -41,7 +41,7 @@ export default function screenLevelStart() {
       h: CONFIG.GAME_HEIGHT
     })
 
-    VisibleArea = new PLAIN({
+    g.VisibleArea = new PLAIN({
       id: 'visiblArea',
       x: 0,
       y: 0,
@@ -49,11 +49,11 @@ export default function screenLevelStart() {
       h: CONFIG.GAME_HEIGHT,
     })
 
-    Stars = Array.from({ length: 1000 }, function (v, i) {
+    g.Stars = Array.from({ length: 1000 }, function (v, i) {
       return new BACKGROUND({
         id: 'star_' + i,
-        x: Utils.random(LevelLimits.l, LevelLimits.r),
-        y: Utils.random(LevelLimits.t, LevelLimits.b),
+        x: Utils.random(g.LevelLimits.l, g.LevelLimits.r),
+        y: Utils.random(g.LevelLimits.t, g.LevelLimits.b),
         w: 30,
         h: 30,
         frameX: Utils.random(0, 4) * 50,
@@ -65,10 +65,10 @@ export default function screenLevelStart() {
       })
     })
 
-    AsteroidsNumber = 100
-    AsteroidManager.createGroup(AsteroidsNumber)
+    g.AsteroidsNumber = 100
+    AsteroidManager.createGroup()
 
-    Central = new SPRITE({
+    g.Central = new SPRITE({
       id: 'central',
       x: C.GAME_WIDTH / 2,
       y: C.GAME_HEIGHT / 2,
@@ -81,7 +81,7 @@ export default function screenLevelStart() {
       scaleY: 2,
     })
 
-    Hero = new HERO({
+    g.Hero = new HERO({
       id: 'hero',
       x: C.GAME_MID_H - C.BLOCK_UNITY / 2,
       y: C.GAME_HEIGHT - C.GAME_HEIGHT / 2,
@@ -93,9 +93,9 @@ export default function screenLevelStart() {
       scaleX: 1,
       scaleY: 1,
     })
-    Hero.target = { x: Hero.x, y: Hero.y }
+    g.Hero.target = { x: g.Hero.x, y: g.Hero.y }
 
-    Crosshair = new CROSSHAIR({
+    g.Crosshair = new CROSSHAIR({
       id: 'crosshair',
       h: 64,
       w: 64, 
@@ -105,7 +105,7 @@ export default function screenLevelStart() {
     })
   }
 
-  CurrentScreen = 'action'
-  MarkTime = 0
-  GlobalTime = 0
+  g.CurrentScreen = 'action'
+  g.MarkTime = 0
+  g.GlobalTime = 0
 }

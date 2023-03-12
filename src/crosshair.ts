@@ -13,11 +13,11 @@ export default class CROSSHAIR extends SPRITE {
    * - Apply looping
    */
   draw(): void {
-    if (!CurrentAsteroid) return
-    if (CurrentAsteroid.empty) return
+    if (!g.CurrentAsteroid) return
+    if (g.CurrentAsteroid.empty) return
 
-    this.x = CurrentAsteroid.x
-    this.y = CurrentAsteroid.y
+    this.x = g.CurrentAsteroid.x
+    this.y = g.CurrentAsteroid.y
 
     this.looping()
     if (this.currentLoop === this.loops) {

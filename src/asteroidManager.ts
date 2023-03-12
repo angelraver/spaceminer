@@ -26,17 +26,11 @@ export default class AsteroidManager {
       hitsLimit: 9
     }) 
   
-    asteroid.x = Utils.random(-OffSetHorizontal + asteroid.w / 2, CONFIG.GAME_WIDTH + OffSetHorizontal - asteroid.w / 2) 
-    asteroid.y = Utils.random(-OffSetVertical + asteroid.h / 2, OffSetVertical + CONFIG.GAME_HEIGHT - asteroid.h / 2) 
+    asteroid.x = Utils.random(-g.OffSetHorizontal + asteroid.w / 2, CONFIG.GAME_WIDTH + g.OffSetHorizontal - asteroid.w / 2) 
+    asteroid.y = Utils.random(-g.OffSetVertical + asteroid.h / 2, g.OffSetVertical + CONFIG.GAME_HEIGHT - asteroid.h / 2) 
   
     const insideCenter = Utils.colision(asteroid, CONFIG.CENTER_VOID)
-    const asteroidMarginArea = {
-      x: asteroid.x + asteroid.w / 2,
-      y: asteroid.y + asteroid.h / 2,
-      w: asteroid.w + asteroid.w / 2,
-      h: asteroid.h + asteroid.h / 2
-    }
-    const overlaping = Asteroids.some((a) => Utils.colision(a, asteroid)) 
+    const overlaping = g.Asteroids.some((a) => Utils.colision(a, asteroid)) 
     if (insideCenter || overlaping) {
       return this.create(id) 
     }
@@ -50,10 +44,10 @@ export default class AsteroidManager {
    * @param n amount of SPRITES
    * @returns SPRITE[]
    */
-  static createGroup(n: number): void {
+  static createGroup(): void {
     const that = this
-    for (let i = 0; i < n; i++) {
-      Asteroids.push(that.create(i.toString()))
+    for (let i = 0; i < g.AsteroidsNumber; i++) {
+      g.Asteroids.push(that.create(i.toString()))
     }
   }
   /**
@@ -61,7 +55,7 @@ export default class AsteroidManager {
    * @param id 
    */
   static destroy(id: string) {
-    Asteroids = Asteroids.map((a) => {
+    g.Asteroids = g.Asteroids.map((a) => {
       if (a.id === id) {
         a.sheet = 'a-empty.png'
       }
@@ -77,33 +71,33 @@ export default class AsteroidManager {
    * @returns nothing
    */
   static click(e: any) {
-    if (!CurrentAsteroid) return false 
-    if (!Utils.hit(e, CurrentAsteroid)) return false
-    if (Hero.cargoMineralsFull) return false
+    if (!g.CurrentAsteroid) return false 
+    if (!Utils.hit(e, g.CurrentAsteroid)) return false
+    if (g.Hero.cargoMineralsFull) return false
 
     // hit the asteroid
-    CurrentAsteroid.hit() 
+    g.CurrentAsteroid.hit() 
 
     // update the model and cargo points
-    switch(CurrentAsteroid.hits) {
+    switch(g.CurrentAsteroid.hits) {
       case 3:
-        CurrentAsteroid.modelNew = 1 
-        Hero.cargo += 3 
-        this.hiting('hit_' + CurrentAsteroid.id, 1, CurrentAsteroid.x, CurrentAsteroid.y) 
+        g.CurrentAsteroid.modelNew = 1 
+        g.Hero.cargo += 3 
+        this.hiting('hit_' + g.CurrentAsteroid.id, 1, g.CurrentAsteroid.x, g.CurrentAsteroid.y) 
         break
       case 6:
-        CurrentAsteroid.modelNew = 2 
-        this.hiting('hit_' + CurrentAsteroid.id, 4, CurrentAsteroid.x, CurrentAsteroid.y) 
-        Hero.cargo += 5 
+        g.CurrentAsteroid.modelNew = 2 
+        this.hiting('hit_' + g.CurrentAsteroid.id, 4, g.CurrentAsteroid.x, g.CurrentAsteroid.y) 
+        g.Hero.cargo += 5 
         break
     }
 
     // changing the asteroid visual
-    if (CurrentAsteroid.modelCurrent != CurrentAsteroid.modelNew) {
-      CurrentAsteroid.modelCurrent = CurrentAsteroid.modelNew 
-      let model = ASTEROIDS_MODELS[CurrentAsteroid.modelCurrent] 
-      Asteroids = Asteroids.map((asteroid) => {
-        if (asteroid.id === CurrentAsteroid.id) {
+    if (g.CurrentAsteroid.modelCurrent != g.CurrentAsteroid.modelNew) {
+      g.CurrentAsteroid.modelCurrent = g.CurrentAsteroid.modelNew 
+      let model = ASTEROIDS_MODELS[g.CurrentAsteroid.modelCurrent] 
+      g.Asteroids = g.Asteroids.map((asteroid) => {
+        if (asteroid.id === g.CurrentAsteroid.id) {
           asteroid.h = model.h 
           asteroid.w = model.w 
           asteroid.sheet = model.sheet 
@@ -114,11 +108,11 @@ export default class AsteroidManager {
     }
 
     // asteroid going empty
-    if (CurrentAsteroid.hits === CurrentAsteroid.hitsLimit) {
-      Hero.addCargoMineral()
-      CurrentAsteroid.empty = true
-      this.destroy(CurrentAsteroid.id) 
-      Hero.cargo += 8 
+    if (g.CurrentAsteroid.hits === g.CurrentAsteroid.hitsLimit) {
+      g.Hero.addCargoMineral()
+      g.CurrentAsteroid.empty = true
+      this.destroy(g.CurrentAsteroid.id) 
+      g.Hero.cargo += 8 
     }
   }
 
@@ -137,7 +131,7 @@ export default class AsteroidManager {
       y: y,
       loops: 30
     }) 
-    HitsLabels.push(hitLabel) 
+    g.HitsLabels.push(hitLabel) 
   } 
 
   static getMineral(): Mineral {
