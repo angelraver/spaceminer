@@ -4,8 +4,9 @@ import AsteroidManager from './asteroidManager'
  * Executes all the actions on each frame
  */
 export default function screenAction () {
-
+  CurrentAsteroid = Hero.colisionWith(Asteroids)
   InCentral = typeof Hero.colisionWith([Central]) === 'object'
+
   if (InCentral && Hero.cargo > 0) {
     AsteroidManager.hiting('hit_central', Hero.cargo, Hero.x, Hero.y)
     CargoTotal += Hero.cargo

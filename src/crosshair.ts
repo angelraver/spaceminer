@@ -13,7 +13,6 @@ export default class CROSSHAIR extends SPRITE {
    * - Apply looping
    */
   draw(): void {
-    CurrentAsteroid = Hero.colisionWith(Asteroids)
     if (!CurrentAsteroid) return
     if (CurrentAsteroid.empty) return
 

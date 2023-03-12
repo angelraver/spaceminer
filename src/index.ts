@@ -1,5 +1,5 @@
 import { Limits } from './types'
-import { CONFIG as C, CONFIG } from './config'
+import { CONFIG as C, } from './config'
 import SPRITE from './sprite'
 import ASTEROID from './asteroid'
 import TEXT from './text'
@@ -98,20 +98,12 @@ function clearGameFrame() {
 }
 
 // Catch all mouse click events
-function click(e: any) {
+function click(e: any): void {
   Hero.click(e)
   AsteroidManager.click(e)
 }
 
-function clickValid(e: any) {
-  return e.x > CONFIG.BLOCK_UNITY * 4
-    && e.x < CONFIG.GAME_WIDTH - CONFIG.BLOCK_UNITY * 4
-    && e.y > CONFIG.BLOCK_UNITY * 4
-    && e.y < CONFIG.GAME_HEIGHT - CONFIG.BLOCK_UNITY * 4
-}
-
 document.body.addEventListener('click', click)
-
 
 // Executes the correspondent screen
 function rolling() {
