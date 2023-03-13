@@ -1,6 +1,6 @@
 import SPRITE from "./sprite";
-import { Mineral, Ordinal } from './types'
-import { CONFIG, MINERALS } from './config'
+import { Ordinal } from './types'
+import { CONFIG } from './config'
 import Utils from './utils'
 
 /**
@@ -42,6 +42,7 @@ export default class HERO extends SPRITE {
     })
 
     ctx.restore()
+    this.tweenUpdate()
   }
   /**
    * Manage click event

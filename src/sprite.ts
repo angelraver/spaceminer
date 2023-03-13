@@ -1,6 +1,7 @@
 import { Ordinal } from './types'
 import { CONFIG } from './config'
 import Utils from './utils'
+const TWEEN = require('@tweenjs/tween.js')
 
 /**
  * Sprite class
@@ -33,6 +34,9 @@ export default class SPRITE {
   image: HTMLImageElement
   moving: boolean
   mini: boolean
+  internalState: {
+    rotationInterval: any
+  }
   constructor(props: any) {
     this.id = props.id
     this.y = props.y
@@ -63,6 +67,7 @@ export default class SPRITE {
     if (this.sheet) {
       this.updateImage()
     }
+    this.internalState = { rotationInterval: undefined }
   }
   /**
    * Set the spritesheet
@@ -137,6 +142,12 @@ export default class SPRITE {
         this.drawMini()
       }
     }
+
+    this.tweenUpdate()
+  }
+
+  tweenUpdate(): void {
+    TWEEN.update()
   }
 
   /**
@@ -165,7 +176,12 @@ export default class SPRITE {
     const origin = { x: this.x, y: this.y }
     let targetFit = { x: target.x, y: target.y }
     this.path = Utils.pathLinear(origin, targetFit, g.Speed)
-    this.r = Utils.radiants(origin, targetFit)
+    // this.r = Utils.radiants(origin, targetFit)
+    this.internalState.rotationInterval = new TWEEN.Tween({r: this.r})
+      .to({r: Utils.radiants(origin, targetFit)}, 550)
+      .easing(TWEEN.Easing.Cubic.Out)
+      .onUpdate((object: any) => this.r = object.r)
+      .start()
   }
   /**
    * Set the x and y SPRITE props following the current position inside the phat prop.

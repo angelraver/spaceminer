@@ -49,7 +49,17 @@ document.body.addEventListener('click', click)
 
 // Executes the correspondent screen
 function rolling() {
+  const now = Date.now()
+  const dt = now - g.lastUpdate
+
+  const currTime = new Date().getTime()
+	const timeToCall = Math.max(0, 16 - (currTime - g.lastUpdate))
+
   clearGameFrame()
+
+  g.lastUpdate = currTime
+  g.delta = dt
+
   switch(g.CurrentScreen) {
     // case 'title' :
     //   titleScreen()
