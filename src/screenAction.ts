@@ -16,7 +16,9 @@ export default function screenAction () {
 
   g.Anchor.positionByHero()
   g.Background.draw()
-  g.Stars.map(s => s.draw())
+  g.Stars.map(s => {
+    s.draw()
+  })
   g.Asteroids.map(a => a.draw())
   g.Central.draw()
   g.Hero.draw()
