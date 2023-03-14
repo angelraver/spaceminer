@@ -2,7 +2,7 @@ import Utils from './utils'
 import SPRITE from './sprite'
 import TEXT from './text'
 import { Mineral, Ordinal } from './types'
-import { ASTEROIDS_MODELS } from './config'
+import { ASTEROIDS_MODELS_BREAK } from './config'
 
 /**
  * Extend SPRITE to add asteroid features
@@ -25,7 +25,14 @@ export default class ASTEROID extends SPRITE {
    * @returns nothing
    */
   click(e: any) {
-    if (g.Hero.cargoMineralsFull) return false
+    if (
+      g.Hero.cargoMineralsFull
+      || g.CurrentAsteroid.empty
+      || !g.CurrentAsteroid.mineral
+      || !g.CurrentAsteroid.isClickIn(e)
+    ) {
+      return
+    }
 
     // hit the asteroid
     this.hit() 
@@ -33,12 +40,12 @@ export default class ASTEROID extends SPRITE {
     // update the model and cargo points
     switch(this.hits) {
       case 3:
-        this.modelNew = 1 
-        g.Hero.cargo += 3 
+        this.modelNew = 0
+        g.Hero.cargo += 3
         TEXT.hiting('hit_' + this.id, 1, this.x, this.y) 
         break
       case 6:
-        this.modelNew = 2 
+        this.modelNew = 1
         TEXT.hiting('hit_' + this.id, 4, this.x, this.y) 
         g.Hero.cargo += 5 
         break
@@ -47,12 +54,12 @@ export default class ASTEROID extends SPRITE {
     // changing the asteroid visual
     if (this.modelCurrent != this.modelNew) {
       this.modelCurrent = this.modelNew 
-      let model = ASTEROIDS_MODELS[this.modelCurrent] 
+      let model = ASTEROIDS_MODELS_BREAK[this.modelCurrent] 
       g.Asteroids = g.Asteroids.map((asteroid) => {
         if (asteroid.id === this.id) {
           asteroid.h = model.h 
           asteroid.w = model.w 
-          asteroid.sheet = model.sheet 
+          asteroid.sheet = model.sheet.image
           asteroid.updateImage() 
         }
         return asteroid 

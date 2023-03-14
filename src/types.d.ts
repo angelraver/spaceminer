@@ -2,6 +2,13 @@ export type Ordinal = {
     x: number;
     y: number;
 };
+export type AsteroidModel = {
+    h: number;
+    w: number;
+    x: number;
+    y: number;
+    sheet: Sheet;
+};
 export type Limits = {
     t: number;
     r: number;
@@ -14,6 +21,7 @@ export type Sheet = {
     y: number;
     w: number;
     h: number;
+    frameTotal: number;
 };
 export type Mineral = {
     type: string;

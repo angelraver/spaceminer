@@ -106,20 +106,20 @@ export default class HERO extends SPRITE {
   * Update the global Going family top, right, bottom ,left to know where the hero is going
   */
   checkDirection() {
-    if (this.currenPosition) {
-      this.goingTop = this.currenPosition.y < this.previousPosition.y // the hero is moving up
+    if (this.currentPosition) {
+      this.goingTop = this.currentPosition.y < this.previousPosition.y // the hero is moving up
         && this.y < g.Margin // the hero is inside the top margin
         && g.Anchor.y + g.Anchor.h + g.Speed < g.LevelLimits.b //the anchor will not cross the bottom limit
 
-      this.goingRight = this.currenPosition.x > this.previousPosition.x // the hero is moving right
+      this.goingRight = this.currentPosition.x > this.previousPosition.x // the hero is moving right
         && this.x > CONFIG.GAME_WIDTH - g.Margin // the hero is inside the right margin
         && g.Anchor.x - g.Speed > g.LevelLimits.l // the anchor will not cross the left limit
 
-      this.goingBottom = this.currenPosition.y > this.previousPosition.y // the hero is going bottom
+      this.goingBottom = this.currentPosition.y > this.previousPosition.y // the hero is going bottom
         && this.y + this.h > CONFIG.GAME_HEIGHT - g.Margin // the hero is inside the bottom margin
         && g.Anchor.y - g.Speed > g.LevelLimits.t // the anchor will not cross the top limit
 
-      this.goingLeft = this.currenPosition.x < this.previousPosition.x // the hero is moving left
+      this.goingLeft = this.currentPosition.x < this.previousPosition.x // the hero is moving left
         && this.x < g.Margin // the hero is inside the left margin
         && g.Anchor.x + g.Anchor.w + g.Speed < g.LevelLimits.r // the anchor will not cross the right limit
     }

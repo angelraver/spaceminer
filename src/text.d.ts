@@ -10,4 +10,8 @@ export default class TEXT extends SPRITE {
      * - Apply looping
      */
     draw(): void;
+    /**
+   * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
+   */
+    static hiting(id: string, number: number, x: number, y: number): void;
 }

@@ -14,7 +14,7 @@ export default class Utils {
  * @param b 
  * @returns 
  */
-  static colision(a: SPRITE, b: any): boolean {
+  static colision(a: any, b: any): boolean {
     return a.x + a.w > b.x &&
       a.y + a.h > b.y &&
       a.x < b.x + b.w &&

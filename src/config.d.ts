@@ -1,4 +1,4 @@
-import { Mineral } from './types';
+import { Mineral, AsteroidModel } from './types';
 /**
  * Global constants setting the game sources and values
  */
@@ -24,14 +24,11 @@ export declare const CONFIG: {
         h: number;
     };
 };
+export declare const ASTEROIDS_MODELS_FRESH: AsteroidModel[];
 /**
  * Collection of Asteroid sprites
  */
-export declare const ASTEROIDS_MODELS: {
-    w: number;
-    h: number;
-    sheet: string;
-}[];
+export declare const ASTEROIDS_MODELS_BREAK: AsteroidModel[];
 /**
  * Collection of minerals for the cargo
  */

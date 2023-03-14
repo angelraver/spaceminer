@@ -19,7 +19,7 @@ export default class SPRITE {
     frameCurrent: number;
     path: Array<Ordinal>;
     currentPathPosition: number;
-    currenPosition: Ordinal;
+    currentPosition: Ordinal;
     previousPosition: Ordinal;
     hits: number;
     hitsLimit: number;
@@ -29,6 +29,10 @@ export default class SPRITE {
     scaleY: number;
     image: HTMLImageElement;
     moving: boolean;
+    mini: boolean;
+    internalState: {
+        rotationInterval: any;
+    };
     constructor(props: any);
     /**
      * Set the spritesheet
@@ -58,6 +62,12 @@ export default class SPRITE {
      * Complex draw on the canvas with rotation and scaling
      */
     draw(): void;
+    tweenUpdate(): void;
+    /**
+   * Draw the mini version of the sprite a the border of the screen in the direcction
+   * of the original sprite, when is not visible
+   */
+    drawMini(): void;
     /**
      * Set the SPRITE.path property with the list of positions between the current position and the given target
      * Set the SPRITE.r (rotation) to follow the generated path

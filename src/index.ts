@@ -36,17 +36,6 @@ function clearGameFrame() {
   ctx.clearRect(0, 0, C.GAME_WIDTH, C.GAME_HEIGHT)
 }
 
-// Catch all mouse click events
-function click(e: any): void {
-  g.Hero.click(e)
-
-  if (g.CurrentAsteroid && g.CurrentAsteroid.isClickIn(e)) {
-    g.CurrentAsteroid.click(e)
-  }
-}
-
-document.body.addEventListener('click', click)
-
 // Executes the correspondent screen
 function rolling() {
   const now = Date.now()

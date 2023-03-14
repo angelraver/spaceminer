@@ -1,6 +1,6 @@
 import Utils from './utils'
-import { CONFIG, MINERALS } from './config'
-import { Mineral } from './types'
+import { CONFIG, MINERALS, ASTEROIDS_MODELS_FRESH } from './config'
+import { Mineral, AsteroidModel } from './types'
 import ASTEROID from './asteroid'
 
 /**
@@ -13,28 +13,22 @@ export default class AsteroidManager {
    * @returns SPRITE
    */
   static create( id: string): ASTEROID {
+    const model: AsteroidModel = this.getModel()
     const asteroid = new ASTEROID({
       id: 'asteroid_' + id,
-      h: 105,
-      w: 121,
-      sheet: 'a1.png',
-      frameTotal: 1,
+      x: model.x,
+      y: model.y,
+      w: model.w,
+      h: model.h,
+      sheet: model.sheet.image,
+      frameTotal: model.sheet.frameTotal,
       scaleX: Math.random() < 0.5 ? -1 : 1,
       scaleY: Math.random() < 0.5 ? -1 : 1,
       r: Utils.radiants(undefined, undefined, Math.random() * 180),
-      hitsLimit: 9
+      hitsLimit: 9,
+      mineral: this.getMineral()
     }) 
-  
-    asteroid.x = Utils.random(-g.OffSetHorizontal + asteroid.w / 2, CONFIG.GAME_WIDTH + g.OffSetHorizontal - asteroid.w / 2) 
-    asteroid.y = Utils.random(-g.OffSetVertical + asteroid.h / 2, g.OffSetVertical + CONFIG.GAME_HEIGHT - asteroid.h / 2) 
-  
-    const insideCenter = Utils.colision(asteroid, CONFIG.CENTER_VOID)
-    const overlaping = g.Asteroids.some((a) => Utils.colision(a, asteroid)) 
-    if (insideCenter || overlaping) {
-      return this.create(id) 
-    }
-
-    asteroid.mineral = this.getMineral()  
+ 
     return asteroid 
   }
 
@@ -55,7 +49,25 @@ export default class AsteroidManager {
    *
    */
   static getMineral(): Mineral {
-    const numberRandom = Utils.random(0, 100)
-    return MINERALS.find((m: Mineral) => numberRandom > m.chance[0] && numberRandom < m.chance[1])
+    const numberRandom = Utils.random(1, 100)
+    return MINERALS.find((m: Mineral) => numberRandom >= m.chance[0] && numberRandom <= m.chance[1])
+  }
+
+  static getModel(): AsteroidModel {
+    const selected = ASTEROIDS_MODELS_FRESH[Utils.random(0, ASTEROIDS_MODELS_FRESH.length - 1)]
+    const model = {
+      ...selected,
+      x: Utils.random(-g.OffSetHorizontal + selected.w / 2, CONFIG.GAME_WIDTH + g.OffSetHorizontal - selected.w / 2),
+      y: Utils.random(-g.OffSetVertical + selected.h / 2, g.OffSetVertical + CONFIG.GAME_HEIGHT - selected.h / 2)   
+    }
+
+    const insideCenter = Utils.colision(model, CONFIG.CENTER_VOID)
+    const overlaping = g.Asteroids.some((a) => Utils.colision(a, model))
+
+    if (insideCenter || overlaping) {
+      return this.getModel()
+    } else {
+      return model
+    }
   }
 }

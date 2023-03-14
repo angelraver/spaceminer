@@ -1,4 +1,4 @@
-import { Mineral } from './types'
+import { Mineral, AsteroidModel } from './types'
 
 
 const GAME_WIDTH = window.innerWidth
@@ -39,13 +39,83 @@ export const CONFIG = {
   CENTER_VOID: CENTER_VOID,
 }
 
+export const ASTEROIDS_MODELS_FRESH: AsteroidModel[] = [
+  {
+    x: 0,
+    y: 0,
+    h: 105,
+    w: 121,
+    sheet: {
+      x: 0,
+      y: 0,
+      h: 105,
+      w: 121,
+      image: 'a1.png',
+      frameTotal: 1
+    }
+  },
+  {
+    x: 0,
+    y: 0,
+    h: 105,
+    w: 121,
+    sheet: {
+      x: 0,
+      y: 0,
+      h: 105,
+      w: 121,
+      image: 'a1.png',
+      frameTotal: 1
+    }
+  },
+  {
+    x: 0,
+    y: 0,
+    h: 105,
+    w: 121,
+    sheet: {
+      x: 0,
+      y: 0,
+      h: 105,
+      w: 121,
+      image: 'a1.png',
+      frameTotal: 1
+    }
+  }
+]
+
 /**
  * Collection of Asteroid sprites
  */
-export const ASTEROIDS_MODELS = [
-  { w: 121, h: 105, sheet: 'a1.png' },
-  { w: 107, h: 106, sheet: 'a2.png' },
-  { w: 112, h: 89, sheet: 'a3.png' }
+export const ASTEROIDS_MODELS_BREAK: AsteroidModel[] = [
+  {
+    x: 0,
+    y: 0,
+    w: 107,
+    h: 106,
+    sheet: {
+      image: 'a2.png',
+      x: 0,
+      y: 0,
+      w: 107,
+      h: 106,
+      frameTotal: 1
+    }
+  },
+  {
+    x: 0,
+    y: 0,
+    w: 112,
+    h: 89,
+    sheet: {
+      image: 'a3.png',
+      x: 0,
+      y: 0,
+      w: 107,
+      h: 106,
+      frameTotal: 1
+    }
+  }
 ]
 
 /**
@@ -56,24 +126,52 @@ export const MINERALS: Mineral[] = [
     type: 'A',
     name: 'A',
     chance: [1, 50],
-    sheet: { x: 0, y: 0, w: 32, h: 32, image: 'asteroid-samples.png' }   
+    sheet: {
+      image: 'asteroid-samples.png',
+      x: 0,
+      y: 0,
+      w: 32,
+      h: 32,
+      frameTotal: 1
+    }
   },
   {
     type: 'B',
     name: 'B',
     chance: [51, 75],
-    sheet: { x: 0, y: 32, w: 32, h: 32, image: 'asteroid-samples.png' }   
+    sheet: {
+      image: 'asteroid-samples.png',
+      x: 0,
+      y: 32,
+      w: 32,
+      h: 32,
+      frameTotal: 1
+    }
   },
   {
     type: 'C',
     name: 'C',
     chance: [76, 90],
-    sheet: { x: 0, y: 64, w: 32, h: 32, image: 'asteroid-samples.png' }   
+    sheet: {
+      image: 'asteroid-samples.png',
+      x: 0,
+      y: 64,
+      w: 32,
+      h: 32,
+      frameTotal: 1
+    }
   },
   {
     type: 'D',
     name: 'D',
     chance: [91, 100],
-    sheet: { x: 0, y: 96, w: 32, h: 32, image: 'asteroid-samples.png' }   
+    sheet: {
+      image: 'asteroid-samples.png',
+      x: 0,
+      y: 96,
+      w: 32,
+      h: 32,
+      frameTotal: 1
+    }
   },
 ]

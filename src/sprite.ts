@@ -23,7 +23,7 @@ export default class SPRITE {
   frameCurrent: number
   path: Array<Ordinal>
   currentPathPosition: number
-  currenPosition: Ordinal
+  currentPosition: Ordinal
   previousPosition: Ordinal
   hits: number
   hitsLimit: number
@@ -50,11 +50,11 @@ export default class SPRITE {
     this.target = props.target
     this.r = props.r
     this.sheet = props.sheet
-    this.frameTotal = props.frameTotal
+    this.frameTotal = props.frameTotal || 1
     this.frameCurrent = 0
     this.path = []
     this.currentPathPosition = 0
-    this.currenPosition = undefined
+    this.currentPosition = undefined
     this.previousPosition = undefined
     this.hits = 0
     this.hitsLimit = props.hitsLimit ? props.hitsLimit : 1
@@ -119,7 +119,7 @@ export default class SPRITE {
    */
   colisionWith(elements: any[]): any {
     const that = this
-    return elements.find((e) => Utils.colision(e, that))
+    return elements.find((el) => Utils.colision(el, that))
   }
 
   /**
@@ -134,9 +134,12 @@ export default class SPRITE {
       ctx.translate(this.x, this.y)
       ctx.rotate(-this.r)
       ctx.scale(this.scaleX, this.scaleY)
+      // ctx.fillStyle = 'red'
+      // ctx.fillRect(0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
       ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
       ctx.restore()
       // pixelate(this)
+
     } else {
       if (this.mini) {
         this.drawMini()
@@ -190,7 +193,7 @@ export default class SPRITE {
   going(): void {
     const pathPos = this.currentPathPosition
     if (this.path[pathPos]) {
-      this.currenPosition = this.path[pathPos]
+      this.currentPosition = this.path[pathPos]
       this.previousPosition = this.path[pathPos > 0 ? pathPos - 1 : pathPos]
       this.moving = true
       this.x = this.path[pathPos].x

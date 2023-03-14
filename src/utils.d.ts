@@ -12,11 +12,11 @@ export default class Utils {
      * @param b
      * @returns
      */
-    static colision(a: SPRITE, b: any): boolean;
+    static colision(a: any, b: any): boolean;
     /**
      * Returns if the given point is in colision with the given SPRITE
      */
-    static hit(a: Ordinal, b: SPRITE): boolean;
+    static isHiting(a: Ordinal, b: SPRITE): boolean;
     /**
      * Translate degrees to radiants
      * @param degrees

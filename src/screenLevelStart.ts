@@ -65,7 +65,7 @@ export default function screenLevelStart() {
       })
     })
 
-    g.AsteroidsNumber = 100
+    g.AsteroidsNumber = 50
     AsteroidManager.createGroup()
 
     g.Central = new SPRITE({
@@ -109,4 +109,12 @@ export default function screenLevelStart() {
   g.CurrentScreen = 'action'
   g.MarkTime = 0
   g.GlobalTime = 0
+
+  // Catch all mouse click events
+  function click(e: any): void {
+    g.Hero.click(e)
+    g.CurrentAsteroid?.click(e)
+  }
+
+  document.body.addEventListener('click', click)
 }

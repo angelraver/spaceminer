@@ -1,5 +1,5 @@
-import { Mineral } from './types';
-import ASTEROID from "./asteroid";
+import { Mineral, AsteroidModel } from './types';
+import ASTEROID from './asteroid';
 /**
  * Static class to manage the SPRITES asteroids
  */
@@ -17,24 +17,9 @@ export default class AsteroidManager {
      */
     static createGroup(): void;
     /**
-     * Refesh the Asteroids array excluding the given id
-     * @param id
+     * returns the one mineral for the asteroid, from the collection of minerals based on probability of occurrence
+     *
      */
-    static destroy(id: string): void;
-    /**
-     * Manage the click on the asteroids
-     * - Update the cargo
-     * - Update the asteroid sprites
-     * @returns nothing
-     */
-    static click(e: any): boolean;
-    /**
-     * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
-     * @param id
-     * @param number
-     * @param x
-     * @param y
-     */
-    static hiting(id: string, number: number, x: number, y: number): void;
     static getMineral(): Mineral;
+    static getModel(): AsteroidModel;
 }
