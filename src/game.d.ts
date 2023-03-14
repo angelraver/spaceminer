@@ -34,7 +34,5 @@ export default class GAME {
     VisibleArea: PLAIN;
     LevelLimits: Limits;
     engineSound: HTMLAudioElement;
-    lastUpdate: number;
-    delta: number;
     constructor();
 }

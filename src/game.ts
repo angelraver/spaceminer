@@ -36,8 +36,6 @@ export default class GAME {
   VisibleArea: PLAIN
   LevelLimits: Limits
   engineSound: HTMLAudioElement
-  lastUpdate: number
-  delta: number
 
   constructor() {
     this.GlobalTime = 0
@@ -67,7 +65,5 @@ export default class GAME {
     this.Anchor = undefined
     this.LevelLimits = undefined
     this.engineSound = undefined
-    this.lastUpdate = Date.now()
-    this.delta = 0
   }
 }
