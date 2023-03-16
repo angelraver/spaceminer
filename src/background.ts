@@ -4,11 +4,15 @@ import SPRITE from "./sprite";
  * Extends SPRITE to add background features
  */
 export default class BACKGROUND extends SPRITE {
+  fixed: boolean
   constructor(props: any) {
-    super(props);
+    super(props)
+    this.fixed = props.fixed || false
   }
   draw(): void {
-    this.positionByHero()
+    if (!this.fixed) {
+      this.positionByHero()
+    }
     if (this.isVisible()) {
       ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  this.x,   this.y,     this.w,    this.h)
     }

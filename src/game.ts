@@ -24,7 +24,8 @@ export default class GAME {
   Asteroids: ASTEROID[]
   CurrentAsteroid: ASTEROID
   CargoTotal: number
-  CargoGoal: number
+  XpTotal: number
+  MineralsTotal: BACKGROUND[]
   InCentral: boolean
   HitsLabels: TEXT[]
   OffSetHorizontal: number
@@ -36,7 +37,6 @@ export default class GAME {
   VisibleArea: PLAIN
   LevelLimits: Limits
   engineSound: HTMLAudioElement
-
   constructor() {
     this.GlobalTime = 0
     this.MarkTime = 0
@@ -45,15 +45,9 @@ export default class GAME {
     this.GameOver = false
     this.Pause = false
     this.SetNewGame = true
-    this.Background = undefined
-    this.Hero = undefined
-    this.Central = undefined
-    this.Crosshair = undefined
-    this.CurrentAsteroid = undefined
     this.Asteroids = []
     this.AsteroidsNumber = 0
     this.CargoTotal = 0
-    this.CargoGoal = 0
     this.InCentral = false
     this.HitsLabels = []
     this.bkgProportion = 4
@@ -61,9 +55,7 @@ export default class GAME {
     this.OffSetVertical = CONFIG.GAME_HEIGHT
     this.Stars = []
     this.Margin = 100
-    this.VisibleArea = undefined
-    this.Anchor = undefined
-    this.LevelLimits = undefined
-    this.engineSound = undefined
+    this.MineralsTotal = []
+    this.XpTotal = 0
   }
 }

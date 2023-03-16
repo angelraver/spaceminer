@@ -13,7 +13,7 @@ export default class ASTEROID extends SPRITE {
   modelNew: number
   empty: boolean
   constructor(props: any) {
-    super(props);
+    super(props)
     this.mineral = props.mineral
     this.empty = false
   }
@@ -37,17 +37,17 @@ export default class ASTEROID extends SPRITE {
     // hit the asteroid
     this.hit() 
 
-    // update the model and cargo points
+    // update the model and xp points
     switch(this.hits) {
       case 3:
         this.modelNew = 0
-        g.Hero.cargo += 3
+        g.Hero.xp += 3
         TEXT.hiting('hit_' + this.id, 1, this.x, this.y) 
         break
       case 6:
         this.modelNew = 1
         TEXT.hiting('hit_' + this.id, 4, this.x, this.y) 
-        g.Hero.cargo += 5 
+        g.Hero.xp += 5 
         break
     }
 
@@ -71,7 +71,7 @@ export default class ASTEROID extends SPRITE {
       g.Hero.addCargoMineral()
       this.empty = true
       this.destroy() 
-      g.Hero.cargo += 8 
+      g.Hero.xp += 8 
     }
   }
   

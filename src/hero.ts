@@ -2,6 +2,8 @@ import SPRITE from "./sprite";
 import { Ordinal } from './types'
 import { CONFIG } from './config'
 import Utils from './utils'
+import TEXT from './text'
+import BACKGROUND from "./background";
 
 /**
  * Extends SPRITE to add hero features
@@ -11,7 +13,7 @@ export default class HERO extends SPRITE {
   goingRight: boolean
   goingTop: boolean
   goingBottom: boolean
-  cargo: number
+  xp: number
   cargoMineralsFull: boolean
   cargoMineralsPositions: Ordinal[]
   cargoMinerals: SPRITE[]
@@ -37,8 +39,8 @@ export default class HERO extends SPRITE {
     ctx.scale(this.scaleX, this.scaleY)
     ctx.drawImage(this.image, this.frameX, this.frameY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
 
-    this.cargoMinerals.forEach((cargo) => {
-      ctx.drawImage(cargo.image, cargo.frameX, cargo.frameY, cargo.frameW, cargo.frameH, cargo.x, cargo.y, cargo.w, cargo.h)
+    this.cargoMinerals.forEach((c) => {
+      ctx.drawImage(c.image, c.frameX, c.frameY, c.frameW, c.frameH, c.x, c.y, c.w, c.h)
     })
 
     ctx.restore()
@@ -62,13 +64,20 @@ export default class HERO extends SPRITE {
    */
   addCargoMineral(): void {
     const position = this.getCargoMineralsPosition()
+    const mineral = g.CurrentAsteroid.mineral
+    const mineralInfo = {
+      name: mineral.name,
+      chance: mineral.chance,
+      type: mineral.type 
+    }
     const mineralCargo = new SPRITE({
       id: 'cargo-' + g.CurrentAsteroid.id,
-      frameX: g.CurrentAsteroid.mineral.sheet.x,
-      frameY: g.CurrentAsteroid.mineral.sheet.y,
-      frameW: g.CurrentAsteroid.mineral.sheet.w,
-      frameH: g.CurrentAsteroid.mineral.sheet.h,
-      sheet: g.CurrentAsteroid.mineral.sheet.image,
+      metadata: mineralInfo,
+      frameX: mineral.sheet.x,
+      frameY: mineral.sheet.y,
+      frameW: mineral.sheet.w,
+      frameH: mineral.sheet.h,
+      sheet: mineral.sheet.image,
       x: position.x,
       y: position.y,
       w: this.w / 2,
@@ -88,10 +97,29 @@ export default class HERO extends SPRITE {
   }
 
   /**
+   * Unloads the cargo in the central
+   * - Creates the hit label
+   * - Updates the XpTotal
+   * - Updates the MineralsTotal
+   * - Resets the xp
+   */
+  unloadCargo(): void {
+    if (g.InCentral && g.Hero.xp > 0) { 
+      TEXT.hiting('hit_central', g.Hero.xp, g.Hero.x, g.Hero.y)
+      g.XpTotal += this.xp
+      this.cargoMinerals.forEach((m) => g.MineralsTotal.push(new BACKGROUND ({
+        ...m,
+      })))
+      this.resetCargo()
+    }
+  }
+
+  /**
    * Resets the cargo relative props
+   * Resets the xp
    */
   resetCargo(): void {
-    this.cargo = 0
+    this.xp = 0
     this.cargoMineralsFull = false
     this.cargoMinerals = []
     this.cargoMineralsPositions = [

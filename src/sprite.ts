@@ -34,6 +34,7 @@ export default class SPRITE {
   image: HTMLImageElement
   moving: boolean
   mini: boolean
+  metadata: any
   internalState: {
     rotationInterval: any
   }
