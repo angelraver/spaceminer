@@ -107,9 +107,7 @@ export default class HERO extends SPRITE {
     if (g.InCentral && g.Hero.xp > 0) { 
       TEXT.hiting('hit_central', g.Hero.xp, g.Hero.x, g.Hero.y)
       g.XpTotal += this.xp
-      this.cargoMinerals.forEach((m) => g.MineralsTotal.push(new BACKGROUND ({
-        ...m,
-      })))
+      this.cargoMinerals.forEach(m => g.MineralsTotal.push(m.metadata.type))
       this.resetCargo()
     }
   }

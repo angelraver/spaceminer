@@ -65,6 +65,7 @@ export default class SPRITE {
     this.scaleY = -props.scaleY || 1
     this.moving = false
     this.mini = props.mini || false
+    this.metadata = props.metadata
     if (this.sheet) {
       this.updateImage()
     }
