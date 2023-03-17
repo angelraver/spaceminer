@@ -6,6 +6,7 @@ import AsteroidManager from './asteroidManager'
 import CROSSHAIR from './crosshair'
 import Utils from './utils'
 import PLAIN from './plain'
+import INVENTORY from './inventory'
 
 /**
  * Prepare the game stats before the action screen
@@ -84,8 +85,8 @@ export default function screenLevelStart() {
 
     g.Hero = new HERO({
       id: 'hero',
-      x: C.GAME_MID_H - C.BLOCK_UNITY / 2,
-      y: C.GAME_HEIGHT - C.GAME_HEIGHT / 2,
+      x: C.GAME_MID_H,
+      y: C.GAME_MID_V,
       h: 74,
       w: 50,
       sheet: 'ship.png',
@@ -104,6 +105,8 @@ export default function screenLevelStart() {
       frameTotal: 1,
       r: 0
     })
+
+    g.Inventory = new INVENTORY()
   }
 
   g.CurrentScreen = 'action'

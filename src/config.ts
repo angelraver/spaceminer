@@ -1,4 +1,4 @@
-import { Mineral, AsteroidModel } from './types'
+import { Mineral, AsteroidModel, Ordinal } from './types'
 
 
 const GAME_WIDTH = window.innerWidth
@@ -29,7 +29,6 @@ const CENTER_VOID = {
 export const CONFIG = {
   SPRITES_FOLDER: './assets/sprites/',
   SOUND_FOLDER: './assets/sounds/',
-  BLOCK_UNITY: 10,
   GAME_SPEED: 45,
   GAME_WIDTH: GAME_WIDTH,
   GAME_HEIGHT: GAME_HEIGHT,
@@ -174,4 +173,12 @@ export const MINERALS: Mineral[] = [
       frameTotal: 1
     }
   },
+]
+
+export const INVENTORY_SLOT = 50
+export const INVENTORY_MINERAL_POSITIONS: Ordinal[] = [
+  { x: 0, y: 0 }, { x: INVENTORY_SLOT, y: 0 },
+  { x: 0, y: INVENTORY_SLOT }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT },
+  { x: 0, y: INVENTORY_SLOT * 2 }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT * 2 },
+  { x: 0, y: INVENTORY_SLOT * 3 }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT * 3 },
 ]

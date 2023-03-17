@@ -104,11 +104,12 @@ export default class HERO extends SPRITE {
    * - Resets the xp
    */
   unloadCargo(): void {
-    if (g.InCentral && g.Hero.xp > 0) { 
+    if (g.InCentral && g.Hero.xp > 0) {
       TEXT.hiting('hit_central', g.Hero.xp, g.Hero.x, g.Hero.y)
       g.XpTotal += this.xp
       this.cargoMinerals.forEach(m => g.MineralsTotal.push(m.metadata.type))
       this.resetCargo()
+      g.Inventory.updateMinerals()
     }
   }
 

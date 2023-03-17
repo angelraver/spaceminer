@@ -5,7 +5,6 @@ import { Mineral, AsteroidModel } from './types';
 export declare const CONFIG: {
     SPRITES_FOLDER: string;
     SOUND_FOLDER: string;
-    BLOCK_UNITY: number;
     GAME_SPEED: number;
     GAME_WIDTH: number;
     GAME_HEIGHT: number;

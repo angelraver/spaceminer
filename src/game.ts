@@ -7,6 +7,7 @@ import CROSSHAIR from './crosshair'
 import HERO from './hero'
 import BACKGROUND from './background'
 import PLAIN from './plain'
+import INVENTORY from './inventory'
 
 export default class GAME {
   GlobalTime: number
@@ -25,7 +26,7 @@ export default class GAME {
   CurrentAsteroid: ASTEROID
   CargoTotal: number
   XpTotal: number
-  MineralsTotal: BACKGROUND[]
+  MineralsTotal: string[]
   InCentral: boolean
   HitsLabels: TEXT[]
   OffSetHorizontal: number
@@ -37,6 +38,7 @@ export default class GAME {
   VisibleArea: PLAIN
   LevelLimits: Limits
   engineSound: HTMLAudioElement
+  Inventory: INVENTORY
   constructor() {
     this.GlobalTime = 0
     this.MarkTime = 0
