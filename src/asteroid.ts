@@ -41,13 +41,11 @@ export default class ASTEROID extends SPRITE {
     switch(this.hits) {
       case 3:
         this.modelNew = 0
-        g.Hero.xp += 3
-        TEXT.hiting('hit_' + this.id, 1, this.x, this.y) 
+        g.Hero.mining(3, this.id, this.x, this.y)
         break
       case 6:
         this.modelNew = 1
-        TEXT.hiting('hit_' + this.id, 4, this.x, this.y) 
-        g.Hero.xp += 5 
+        g.Hero.mining(5, this.id, this.x, this.y)
         break
     }
 
