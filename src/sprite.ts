@@ -16,11 +16,12 @@ export default class SPRITE {
   frameY: number
   frameW: number
   frameH: number
-  target: any
-  r: number
-  sheet: string
+  frameVertical: boolean
   frameTotal: number
   frameCurrent: number
+  sheet: string
+  target: any
+  r: number
   path: Array<Ordinal>
   currentPathPosition: number
   currentPosition: Ordinal
@@ -48,6 +49,7 @@ export default class SPRITE {
     this.frameY = props.frameY || 0
     this.frameW = props.frameW || this.w
     this.frameH = props.frameH || this.h
+    this.frameVertical = props.frameDirection
     this.target = props.target
     this.r = props.r
     this.sheet = props.sheet
@@ -85,7 +87,11 @@ export default class SPRITE {
    * Move the spritesheet to show the next frame in animation 
    */
   framing(): void {
-    this.frameY = this.frameCurrent * this.h
+    if (this.frameVertical) {
+      this.frameY = this.frameCurrent * this.frameH
+    } else {
+      this.frameX = this.frameCurrent * this.frameW
+    }
     if (this.frameCurrent < this.frameTotal - 1) {
       this.frameCurrent++
     } else {
