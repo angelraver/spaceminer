@@ -4,10 +4,8 @@ import SPRITE from "./sprite";
  * Extends SPRITE to add background features
  */
 export default class BACKGROUND extends SPRITE {
-  fixed: boolean
   constructor(props: any) {
     super(props)
-    this.fixed = props.fixed || false
   }
   draw(): void {
     if (!this.fixed) {

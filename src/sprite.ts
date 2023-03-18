@@ -36,6 +36,7 @@ export default class SPRITE {
   moving: boolean
   mini: boolean
   metadata: any
+  fixed: boolean
   internalState: {
     rotationInterval: any
   }
@@ -72,6 +73,7 @@ export default class SPRITE {
       this.updateImage()
     }
     this.internalState = { rotationInterval: undefined }
+    this.fixed = props.fixed || false
   }
   /**
    * Set the spritesheet
@@ -134,7 +136,9 @@ export default class SPRITE {
    * Complex draw on the canvas with rotation and scaling
    */
   draw(): void {
-    this.positionByHero()
+    if (!this.fixed) {
+      this.positionByHero()
+    }
     // if this is in colision with the VisibleArea, then is visible, then draw it
     if (this.isVisible()) {
       this.framing()

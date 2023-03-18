@@ -4,9 +4,17 @@ import SPRITE from "./sprite";
  */
 export default class TEXT extends SPRITE {
   text: string
+  color: string
+  colorLine: string
+  size: number
+  align: string // start / end / left / center / right
   constructor(props: any) {
-    super(props);
-    this.text = props.text;
+    super(props)
+    this.text = props.text
+    this.color = props.color
+    this.colorLine = props.colorLine
+    this.size = props.size
+    this.align = props.align || 'start'
   }
   /**
    * Draw the text on canvas
@@ -14,12 +22,13 @@ export default class TEXT extends SPRITE {
    */
   draw() {
     this.fadeOut()
-    ctx.font = "42px ArcadeClassic";
-    ctx.fillStyle = "white";
-    ctx.fillText(this.text, this.x, this.y);
-    ctx.strokeStyle = "black";
-    ctx.strokeText(this.text, this.x, this.y);
-    this.looping();
+    ctx.font = `${this.size}px ArcadeClassic`
+    ctx.fillStyle = this.color
+    ctx.textAlign = 'end'
+    ctx.fillText(this.text, this.x, this.y)
+    ctx.strokeStyle = this.colorLine
+    ctx.strokeText(this.text, this.x, this.y)
+    this.looping()
   }
 
   /**
@@ -31,7 +40,10 @@ export default class TEXT extends SPRITE {
       text: '+' + number,
       x: x,
       y: y,
-      loops: 30
+      color: 'white',
+      colorLine: 'black',
+      size: 46,
+      loops: 30,
     }) 
     g.HitsLabels.push(hitLabel) 
   } 

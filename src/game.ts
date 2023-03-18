@@ -8,6 +8,7 @@ import HERO from './hero'
 import BACKGROUND from './background'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
+import UIPANEL from './uiPanel'
 
 export default class GAME {
   GlobalTime: number
@@ -26,6 +27,7 @@ export default class GAME {
   CurrentAsteroid: ASTEROID
   CargoTotal: number
   XpTotal: number
+  MoneyTotal: number
   MineralsTotal: string[]
   InCentral: boolean
   HitsLabels: TEXT[]
@@ -39,6 +41,7 @@ export default class GAME {
   LevelLimits: Limits
   engineSound: HTMLAudioElement
   Inventory: INVENTORY
+  UiPanel: UIPANEL
   constructor() {
     this.GlobalTime = 0
     this.MarkTime = 0
@@ -59,5 +62,6 @@ export default class GAME {
     this.Margin = 100
     this.MineralsTotal = []
     this.XpTotal = 0
+    this.MoneyTotal = 0
   }
 }
