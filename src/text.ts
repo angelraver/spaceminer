@@ -42,7 +42,7 @@ export default class TEXT extends SPRITE {
       y: y,
       color: 'white',
       colorLine: 'black',
-      size: 46,
+      size: 32,
       loops: 30,
     }) 
     g.HitsLabels.push(hitLabel) 

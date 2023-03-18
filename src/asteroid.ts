@@ -1,6 +1,6 @@
 import Utils from './utils'
 import SPRITE from './sprite'
-import TEXT from './text'
+import Sound from './sound'
 import { Mineral, Ordinal } from './types'
 import { ASTEROIDS_MODELS_BREAK } from './config'
 
@@ -35,17 +35,22 @@ export default class ASTEROID extends SPRITE {
     }
 
     // hit the asteroid
-    this.hit() 
+    this.hit()
 
     // update the model and xp points
     switch(this.hits) {
       case 3:
         this.modelNew = 0
         g.Hero.mining(3, this.id, this.x, this.y)
+        Sound.play('pickoupcoin')
         break
       case 6:
         this.modelNew = 1
         g.Hero.mining(5, this.id, this.x, this.y)
+        Sound.play('pickoupcoin')
+        break
+      default:
+        Sound.play('miningclick')
         break
     }
 
@@ -66,14 +71,14 @@ export default class ASTEROID extends SPRITE {
 
     // asteroid going empty
     if (this.hits === this.hitsLimit) {
+      this.setEmpty()
       g.Hero.addCargoMineral()
-      this.empty = true
-      this.destroy() 
-      g.Hero.xp += 8 
     }
   }
   
-  destroy(): void {
+  setEmpty(): void {
+    Sound.play('asteroidEmpty')
+    this.empty = true
     this.sheet = 'a-empty.png'
     this.updateImage()
   }

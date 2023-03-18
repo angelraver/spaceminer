@@ -182,3 +182,16 @@ export const INVENTORY_MINERAL_POSITIONS: Ordinal[] = [
   { x: 0, y: INVENTORY_SLOT * 2 }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT * 2 },
   { x: 0, y: INVENTORY_SLOT * 3 }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT * 3 },
 ]
+
+type SoundLibrary = {
+  [key: string]: string 
+}
+
+export const SOUND_LIBRARY: SoundLibrary = {
+  engine: 'engines.wav',
+  miningclick: 'miningclick.wav',
+  asteroidEmpty: 'asteroidempty.wav',
+  mineralFound: 'mineralfound.wav',
+  pickoupcoin: 'pickupcoin.wav',
+  powerup23: 'powerup23.wav'
+}

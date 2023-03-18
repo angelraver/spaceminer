@@ -2,8 +2,8 @@ import SPRITE from "./sprite";
 import { Ordinal } from './types'
 import { CONFIG } from './config'
 import Utils from './utils'
+import Sound from './sound'
 import TEXT from './text'
-import BACKGROUND from "./background";
 
 /**
  * Extends SPRITE to add hero features
@@ -53,7 +53,7 @@ export default class HERO extends SPRITE {
   click(e: Ordinal) {
     const hittingAsteroid = Utils.isHiting(e, g.CurrentAsteroid)
     if (!hittingAsteroid) {
-      g.engineSound.play()
+      Sound.play('engine')
       this.setPath({ x: e.x, y: e.y })
     }
   }
@@ -76,6 +76,7 @@ export default class HERO extends SPRITE {
    * the cargo is based on the asteroid mineral
    */
   addCargoMineral(): void {
+    this.xp += 8
     const position = this.getCargoMineralsPosition()
     const mineral = g.CurrentAsteroid.mineral
     const mineralInfo = {
@@ -118,6 +119,7 @@ export default class HERO extends SPRITE {
    */
   unloadCargo(): void {
     if (g.InCentral && g.Hero.xp > 0) {
+      Sound.play('powerup23')
       TEXT.hiting('hit_central', g.Hero.xp, g.Hero.x, g.Hero.y)
       g.XpTotal += this.xp
       this.cargoMinerals.forEach(m => g.MineralsTotal.push(m.metadata.type))

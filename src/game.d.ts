@@ -33,6 +33,5 @@ export default class GAME {
     Anchor: SPRITE;
     VisibleArea: PLAIN;
     LevelLimits: Limits;
-    engineSound: HTMLAudioElement;
     constructor();
 }

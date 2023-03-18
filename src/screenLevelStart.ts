@@ -13,8 +13,6 @@ import UIPANEL from './uiPanel'
  * Prepare the game stats before the action screen
  */
 export default function screenLevelStart() {
-  g.engineSound = new Audio(CONFIG.SOUND_FOLDER + 'engines.wav')
-
   g.LevelLimits = {
     t: -g.OffSetVertical,
     r: CONFIG.GAME_WIDTH + g.OffSetHorizontal,
