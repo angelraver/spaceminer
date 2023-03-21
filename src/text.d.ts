@@ -4,6 +4,10 @@ import SPRITE from "./sprite";
  */
 export default class TEXT extends SPRITE {
     text: string;
+    color: string;
+    colorLine: string;
+    size: number;
+    align: string;
     constructor(props: any);
     /**
      * Draw the text on canvas

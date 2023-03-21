@@ -7,7 +7,7 @@ const config = {
   entry: './src/index.ts',
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
   },
   module: {
@@ -31,7 +31,7 @@ const config = {
     ]
   },
   devServer: {
-    static: path.join(__dirname, "dist"),
+    static: path.join(__dirname, "build"),
     compress: true,
     port: 4000,
   },

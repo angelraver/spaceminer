@@ -8,7 +8,7 @@ export default class HERO extends SPRITE {
     goingRight: boolean;
     goingTop: boolean;
     goingBottom: boolean;
-    cargo: number;
+    xp: number;
     cargoMineralsFull: boolean;
     cargoMineralsPositions: Ordinal[];
     cargoMinerals: SPRITE[];
@@ -23,6 +23,13 @@ export default class HERO extends SPRITE {
      */
     click(e: Ordinal): void;
     /**
+     * When the hero is clicking on an asteorid
+     * - Adds xp
+     * - Prepare xp to drop on central
+     * - Triggers the hit label
+     */
+    mining(xp: number, hitId: string, x: number, y: number): void;
+    /**
      * add the cargo sprite to the Hero CargoMinerals prop
      * the cargo is based on the asteroid mineral
      */
@@ -32,7 +39,16 @@ export default class HERO extends SPRITE {
      */
     getCargoMineralsPosition(): Ordinal;
     /**
+     * Unloads the cargo in the central
+     * - Creates the hit label
+     * - Updates the XpTotal
+     * - Updates the MineralsTotal
+     * - Resets the xp
+     */
+    unloadCargo(): void;
+    /**
      * Resets the cargo relative props
+     * Resets the xp
      */
     resetCargo(): void;
     /**

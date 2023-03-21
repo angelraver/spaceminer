@@ -12,11 +12,12 @@ export default class SPRITE {
     frameY: number;
     frameW: number;
     frameH: number;
-    target: any;
-    r: number;
-    sheet: string;
+    frameVertical: boolean;
     frameTotal: number;
     frameCurrent: number;
+    sheet: string;
+    target: any;
+    r: number;
     path: Array<Ordinal>;
     currentPathPosition: number;
     currentPosition: Ordinal;
@@ -30,6 +31,8 @@ export default class SPRITE {
     image: HTMLImageElement;
     moving: boolean;
     mini: boolean;
+    metadata: any;
+    fixed: boolean;
     internalState: {
         rotationInterval: any;
     };

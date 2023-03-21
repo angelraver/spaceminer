@@ -6,6 +6,8 @@ import CROSSHAIR from './crosshair';
 import HERO from './hero';
 import BACKGROUND from './background';
 import PLAIN from './plain';
+import INVENTORY from './inventory';
+import UIPANEL from './uiPanel';
 export default class GAME {
     GlobalTime: number;
     MarkTime: number;
@@ -22,7 +24,9 @@ export default class GAME {
     Asteroids: ASTEROID[];
     CurrentAsteroid: ASTEROID;
     CargoTotal: number;
-    CargoGoal: number;
+    XpTotal: number;
+    MoneyTotal: number;
+    MineralsTotal: string[];
     InCentral: boolean;
     HitsLabels: TEXT[];
     OffSetHorizontal: number;
@@ -33,5 +37,7 @@ export default class GAME {
     Anchor: SPRITE;
     VisibleArea: PLAIN;
     LevelLimits: Limits;
+    Inventory: INVENTORY;
+    UiPanel: UIPANEL;
     constructor();
 }

@@ -1,17 +1,20 @@
 {
+  "homepage":"https://angelraver.github.io/spaceminer/",
   "name": "myapp",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
     "develop": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "ts-loader": "^9.4.1",
     "webpack": "^5.74.0",

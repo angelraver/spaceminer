@@ -16,6 +16,6 @@ export default class ASTEROID extends SPRITE {
      * @returns nothing
      */
     click(e: any): void;
-    destroy(): void;
+    setEmpty(): void;
     isClickIn(e: Ordinal): boolean;
 }
