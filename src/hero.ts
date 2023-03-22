@@ -54,8 +54,8 @@ export default class HERO extends SPRITE {
     const hittingAsteroid = Utils.isHiting(e, g.CurrentAsteroid)
     if (!hittingAsteroid) {
       Sound.play('engine')
-      this.setPath({ x: e.x, y: e.y })
     }
+    this.setPath({ x: e.x, y: e.y })
   }
 
   /**

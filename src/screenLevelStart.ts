@@ -65,7 +65,7 @@ export default function screenLevelStart() {
       })
     })
 
-    g.AsteroidsNumber = 50
+    g.AsteroidsNumber = 75
     AsteroidManager.createGroup()
 
     g.Central = new SPRITE({
