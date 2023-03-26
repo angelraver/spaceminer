@@ -1,17 +1,26 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const config = {
   entry: './src/index.ts',
   mode: 'development',
+  target: 'web',
+  node: {
+    __dirname: false,
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
       {
         test: /\.ts(x)?$/,
         loader: 'ts-loader',
@@ -31,7 +40,7 @@ const config = {
     ]
   },
   devServer: {
-    static: path.join(__dirname, "build"),
+    static: path.join(__dirname, 'build'),
     compress: true,
     port: 4000,
   },
@@ -41,8 +50,8 @@ const config = {
         template: 'src/index.html' }),
     new CopyPlugin({
       patterns: [
-        { from: "src/assets", to: "assets" },
-        { from: "favicon.ico", to: "favicon.ico" }
+        { from: 'src/assets', to: 'assets' },
+        { from: 'favicon.ico', to: 'favicon.ico' }
       ]
     }),
   ],
