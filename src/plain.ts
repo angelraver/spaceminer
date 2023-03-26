@@ -9,6 +9,8 @@ export default class PLAIN extends SPRITE {
     super(props)
     this.color = props.color
     this.alpha = props.alpha
+    this.w = props.w
+    this.h = props.h
   }
   /**
    * Draw

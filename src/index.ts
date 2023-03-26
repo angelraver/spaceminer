@@ -1,13 +1,9 @@
 import { CONFIG as C, } from './config'
-import AsteroidManager from './asteroidManager'
 import screenLevelStart from './screenLevelStart'
 import screenAction from './screenAction'
 import GAME from './game'
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')
-canvas.width = C.GAME_WIDTH
-canvas.height = C.GAME_HEIGHT
-
 declare global {
   var g: GAME,
   ctx: CanvasRenderingContext2D
@@ -15,6 +11,9 @@ declare global {
 
 globalThis.g = new GAME()
 globalThis.ctx = canvas.getContext('2d')
+
+canvas.width = g.W
+canvas.height = g.H
 
 // Increase the internal game time counter
 function timing() {
@@ -33,7 +32,7 @@ function stop() {
 
 // Empty the canvas (before drawing again)
 function clearGameFrame() {
-  ctx.clearRect(0, 0, C.GAME_WIDTH, C.GAME_HEIGHT)
+  ctx.clearRect(0, 0, g.W, g.H)
 }
 
 // Executes the correspondent screen

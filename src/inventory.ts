@@ -23,8 +23,8 @@ export default class INVENTORY {
   create() {
     this.background = new BACKGROUND({
       id: 'inventory',
-      w: 600,
-      h: 600,
+      w: 10,
+      h: 10,
       frameX: 0,
       frameY: 50,
       frameW: 190,
@@ -33,8 +33,8 @@ export default class INVENTORY {
       frameTotal: 1,
       fixed: true
     })
-    this.background.x = (C.GAME_WIDTH- this.background.w) / 2
-    this.background.y = (C.GAME_HEIGHT - this.background.h) / 2
+    this.background.x = (g.W - this.background.w) / 2
+    this.background.y = (g.H - this.background.h) / 2
 
     this.mineralsAccount = []
     this.mineralsTypes = []

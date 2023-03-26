@@ -13,7 +13,7 @@ npm install
 ## Running local
 
 ```sh
-npm run develop
+npm run start
 ```
 
 ## Build

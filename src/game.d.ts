@@ -9,6 +9,14 @@ import PLAIN from './plain';
 import INVENTORY from './inventory';
 import UIPANEL from './uiPanel';
 export default class GAME {
+    Device: string;
+    W: number;
+    H: number;
+    Block: number;
+    OffSetHorizontal: number;
+    OffSetVertical: number;
+    BkgProportion: number;
+    CenterVoid: any;
     GlobalTime: number;
     MarkTime: number;
     Speed: number;
@@ -29,9 +37,6 @@ export default class GAME {
     MineralsTotal: string[];
     InCentral: boolean;
     HitsLabels: TEXT[];
-    OffSetHorizontal: number;
-    OffSetVertical: number;
-    bkgProportion: number;
     Stars: BACKGROUND[];
     Margin: number;
     Anchor: SPRITE;
@@ -40,4 +45,8 @@ export default class GAME {
     Inventory: INVENTORY;
     UiPanel: UIPANEL;
     constructor();
+    /**
+     * to know the current device desktop or mobile
+     */
+    setDevice(): void;
 }

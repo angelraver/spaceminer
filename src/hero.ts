@@ -37,7 +37,7 @@ export default class HERO extends SPRITE {
     ctx.translate(this.x, this.y)
     ctx.rotate(-this.r)
     ctx.scale(this.scaleX, this.scaleY)
-    ctx.drawImage(this.image, this.frameX, this.frameY, this.w, this.h, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
+    ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
 
     this.cargoMinerals.forEach((c) => {
       ctx.drawImage(c.image, c.frameX, c.frameY, c.frameW, c.frameH, c.x, c.y, c.w, c.h)
@@ -64,7 +64,6 @@ export default class HERO extends SPRITE {
    * - Prepare xp to drop on central
    * - Triggers the hit label
    */
-
   mining(xp: number, hitId: string, x: number, y: number) {
     this.xp += xp
     g.XpTotal += xp
@@ -94,8 +93,8 @@ export default class HERO extends SPRITE {
       sheet: mineral.sheet.image,
       x: position.x,
       y: position.y,
-      w: this.w / 2,
-      h: this.w / 2 // yes the w, for square simetry
+      w: this.w / g.Block / 2,
+      h: this.w / g.Block / 2 // yes the w, for square simetry
     })
     this.cargoMinerals.push(mineralCargo)
     if (this.cargoMineralsPositions.length === 0) {
@@ -154,11 +153,11 @@ export default class HERO extends SPRITE {
         && g.Anchor.y + g.Anchor.h + g.Speed < g.LevelLimits.b //the anchor will not cross the bottom limit
 
       this.goingRight = this.currentPosition.x > this.previousPosition.x // the hero is moving right
-        && this.x > CONFIG.GAME_WIDTH - g.Margin // the hero is inside the right margin
+        && this.x > g.W - g.Margin // the hero is inside the right margin
         && g.Anchor.x - g.Speed > g.LevelLimits.l // the anchor will not cross the left limit
 
       this.goingBottom = this.currentPosition.y > this.previousPosition.y // the hero is going bottom
-        && this.y + this.h > CONFIG.GAME_HEIGHT - g.Margin // the hero is inside the bottom margin
+        && this.y + this.h > g.H - g.Margin // the hero is inside the bottom margin
         && g.Anchor.y - g.Speed > g.LevelLimits.t // the anchor will not cross the top limit
 
       this.goingLeft = this.currentPosition.x < this.previousPosition.x // the hero is moving left

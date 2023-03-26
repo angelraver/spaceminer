@@ -12,7 +12,7 @@ export default class BACKGROUND extends SPRITE {
       this.positionByHero()
     }
     if (this.isVisible()) {
-      ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  this.x,   this.y,     this.w,    this.h)
+      ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH, this.x, this.y, this.w, this.h)
     }
   }
   /**
@@ -20,18 +20,18 @@ export default class BACKGROUND extends SPRITE {
   */
   positionByHero(): void {
     // for the background to move different from other sprites for the ilusion of deep
-    g.bkgProportion = 2
+    g.BkgProportion = 2
     if (g.Hero.goingTop) {
-      this.y = this.y + g.Speed / g.bkgProportion
+      this.y = this.y + g.Speed / g.BkgProportion
     }
     if (g.Hero.goingRight) {
-      this.x = this.x - g.Speed / g.bkgProportion
+      this.x = this.x - g.Speed / g.BkgProportion
     }
     if (g.Hero.goingBottom) {
-      this.y = this.y - g.Speed / g.bkgProportion
+      this.y = this.y - g.Speed / g.BkgProportion
     }
     if (g.Hero.goingLeft) {
-      this.x = this.x + g.Speed / g.bkgProportion
+      this.x = this.x + g.Speed / g.BkgProportion
     }
   }
 }

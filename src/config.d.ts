@@ -6,24 +6,13 @@ export declare const CONFIG: {
     SPRITES_FOLDER: string;
     SOUND_FOLDER: string;
     GAME_SPEED: number;
-    GAME_WIDTH: number;
-    GAME_HEIGHT: number;
-    GAME_MID_H: number;
-    GAME_MID_V: number;
-    CENTER_LIMITS: {
-        x1: number;
-        x2: number;
-        y1: number;
-        y2: number;
-    };
-    CENTER_VOID: {
-        x: number;
-        y: number;
-        w: number;
-        h: number;
-    };
+    BLOCK_DESKTOP: number;
+    BLOCK_MOBILE: number;
+    OFFSET_MOBILE_X: number;
+    OFFSET_MOBILE_Y: number;
+    OFFSET_DESKTOP_X: number;
+    OFFSET_DESKTOP_Y: number;
 };
-export declare const ASTEROIDS_MODELS_FRESH: AsteroidModel[];
 /**
  * Collection of Asteroid sprites
  */

@@ -2,7 +2,6 @@ import Utils from './utils'
 import SPRITE from './sprite'
 import Sound from './sound'
 import { Mineral, Ordinal } from './types'
-import { ASTEROIDS_MODELS_BREAK } from './config'
 
 /**
  * Extend SPRITE to add asteroid features
@@ -55,19 +54,19 @@ export default class ASTEROID extends SPRITE {
     }
 
     // changing the asteroid visual
-    if (this.modelCurrent != this.modelNew) {
-      this.modelCurrent = this.modelNew 
-      let model = ASTEROIDS_MODELS_BREAK[this.modelCurrent] 
-      g.Asteroids = g.Asteroids.map((asteroid) => {
-        if (asteroid.id === this.id) {
-          asteroid.h = model.h 
-          asteroid.w = model.w 
-          asteroid.sheet = model.sheet.image
-          asteroid.updateImage() 
-        }
-        return asteroid 
-      }) 
-    }
+    // if (this.modelCurrent != this.modelNew) {
+    //   this.modelCurrent = this.modelNew 
+    //   let model = ASTEROIDS_MODELS_BREAK[this.modelCurrent] 
+    //   g.Asteroids = g.Asteroids.map((asteroid) => {
+    //     if (asteroid.id === this.id) {
+    //       asteroid.h = model.h 
+    //       asteroid.w = model.w 
+    //       asteroid.sheet = model.sheet.image
+    //       asteroid.updateImage() 
+    //     }
+    //     return asteroid 
+    //   }) 
+    // }
 
     // asteroid going empty
     if (this.hits === this.hitsLimit) {

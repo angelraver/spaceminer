@@ -5,8 +5,6 @@ export type Ordinal = {
 export type AsteroidModel = {
     h: number;
     w: number;
-    x: number;
-    y: number;
     sheet: Sheet;
 };
 export type Limits = {

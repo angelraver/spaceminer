@@ -15,8 +15,8 @@ import UIPANEL from './uiPanel'
 export default function screenLevelStart() {
   g.LevelLimits = {
     t: -g.OffSetVertical,
-    r: CONFIG.GAME_WIDTH + g.OffSetHorizontal,
-    b: CONFIG.GAME_HEIGHT + g.OffSetVertical,
+    r: g.W + g.OffSetHorizontal,
+    b: g.H + g.OffSetVertical,
     l: -g.OffSetHorizontal
   }
 
@@ -24,38 +24,19 @@ export default function screenLevelStart() {
     g.GameOver = false
     g.SetNewGame = false
 
-    g.Background = new PLAIN({
-      x: 0,
-      y: 0,
-      w: CONFIG.GAME_WIDTH,
-      h: CONFIG.GAME_HEIGHT,
-      color: '#2c2137',
-      alpha: 1
-    })
+    g.Background = new PLAIN({ x: 0, y: 0, w: g.W, h: g.H, color: '#2c2137', alpha: 1 })
 
-    g.Anchor = new SPRITE({
-      id: 'anchor',
-      x: 0,
-      y: 0,
-      w: CONFIG.GAME_WIDTH,
-      h: CONFIG.GAME_HEIGHT
-    })
+    g.Anchor = new SPRITE({ id: 'anchor', x: 0, y: 0, w: g.W / g.Block, h: g.H / g.Block })
 
-    g.VisibleArea = new PLAIN({
-      id: 'visiblArea',
-      x: 0,
-      y: 0,
-      w: CONFIG.GAME_WIDTH,
-      h: CONFIG.GAME_HEIGHT,
-    })
+    g.VisibleArea = new PLAIN({ id: 'visiblArea', x: 0, y: 0, w: g.W, h: g.H })
 
     g.Stars = Array.from({ length: 1000 }, function (v, i) {
       return new BACKGROUND({
         id: 'star_' + i,
         x: Utils.random(g.LevelLimits.l, g.LevelLimits.r),
         y: Utils.random(g.LevelLimits.t, g.LevelLimits.b),
-        w: 30,
-        h: 30,
+        w: 4,
+        h: 4,
         frameX: Utils.random(0, 4) * 50,
         frameY: Utils.random(0, 4) * 50,
         frameW: 50,
@@ -65,16 +46,20 @@ export default function screenLevelStart() {
       })
     })
 
-    g.AsteroidsNumber = 75
+    g.AsteroidsNumber = 400
     AsteroidManager.createGroup()
 
     g.Central = new SPRITE({
       id: 'central',
-      x: C.GAME_WIDTH / 2,
-      y: C.GAME_HEIGHT / 2,
-      w: 91,
-      h: 90,
+      x: g.W / 2,
+      y: g.H / 2,
+      w: 10,
+      h: 10,
       sheet: 'central.png',
+      frameX: 0,
+      frameY: 0,
+      frameW: 91,
+      frameH: 90,
       frameTotal: 1,
       r: 20,
       scaleX: 2,
@@ -84,11 +69,15 @@ export default function screenLevelStart() {
 
     g.Hero = new HERO({
       id: 'hero',
-      x: C.GAME_MID_H,
-      y: C.GAME_MID_V,
-      h: 74,
-      w: 50,
+      x: g.W / 2,
+      y: g.H / 2,
+      h: 6,
+      w: 6,
       sheet: 'ship.png',
+      frameX: 0,
+      frameY: 0,
+      frameW: 50,
+      frameH: 50,
       frameTotal: 1,
       r: 0,
       scaleX: 1,
@@ -98,8 +87,12 @@ export default function screenLevelStart() {
 
     g.Crosshair = new CROSSHAIR({
       id: 'crosshair',
-      h: 64,
-      w: 64, 
+      w: 8,
+      h: 8,
+      frameX: 0,
+      frameY: 0,
+      frameW: 64,
+      frameH: 64,
       sheet: 'crosshair158.png',
       frameTotal: 1,
       r: 0

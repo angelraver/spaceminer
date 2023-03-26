@@ -21,9 +21,13 @@ export default class AsteroidManager {
       w: model.w,
       h: model.h,
       sheet: model.sheet.image,
+      frameX: model.sheet.x,
+      frameY: model.sheet.y,
+      frameW: model.sheet.w,
+      frameH: model.sheet.h,
       frameTotal: model.sheet.frameTotal,
-      scaleX: Math.random() < 0.5 ? -1 : 1,
-      scaleY: Math.random() < 0.5 ? -1 : 1,
+      // scaleX: Math.random() < 0.5 ? -1 : 1,
+      // scaleY: Math.random() < 0.5 ? -1 : 1,
       r: Utils.radiants(undefined, undefined, Math.random() * 180),
       hitsLimit: 9,
       mineral: this.getMineral()
@@ -57,12 +61,17 @@ export default class AsteroidManager {
     const selected = ASTEROIDS_MODELS_FRESH[Utils.random(0, ASTEROIDS_MODELS_FRESH.length - 1)]
     const model = {
       ...selected,
-      x: Utils.random(-g.OffSetHorizontal + selected.w / 2, CONFIG.GAME_WIDTH + g.OffSetHorizontal - selected.w / 2),
-      y: Utils.random(-g.OffSetVertical + selected.h / 2, g.OffSetVertical + CONFIG.GAME_HEIGHT - selected.h / 2)   
+      x: Utils.random(-g.OffSetHorizontal + selected.w / 2, g.W + g.OffSetHorizontal - selected.w / 2),
+      y: Utils.random(-g.OffSetVertical + selected.h / 2, g.OffSetVertical + g.H - selected.h / 2)
+    }
+    const modelWithDimensionsCalculated = {
+      ...model,
+      w: model.w * g.Block,
+      h: model.h * g.Block
     }
 
-    const insideCenter = Utils.colision(model, CONFIG.CENTER_VOID)
-    const overlaping = g.Asteroids.some((a) => Utils.colision(a, model))
+    const insideCenter = Utils.colision(modelWithDimensionsCalculated, g.CenterVoid)
+    const overlaping = g.Asteroids.some((a) => Utils.colision(a, modelWithDimensionsCalculated))
 
     if (insideCenter || overlaping) {
       return this.getModel()

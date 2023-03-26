@@ -44,8 +44,8 @@ export default class SPRITE {
     this.id = props.id
     this.y = props.y
     this.x = props.x
-    this.h = props.h
-    this.w = props.w
+    this.h = props.h * g.Block
+    this.w = props.w * g.Block
     this.frameX = props.frameX || 0
     this.frameY = props.frameY || 0
     this.frameW = props.frameW || this.w
@@ -147,7 +147,7 @@ export default class SPRITE {
       ctx.rotate(-this.r)
       ctx.scale(this.scaleX, this.scaleY)
       // ctx.fillStyle = 'red'
-      // ctx.fillRect(0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
+      // ctx.fillRect(0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
       ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
       ctx.restore()
       // pixelate(this)

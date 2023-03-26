@@ -1,28 +1,5 @@
 import { Mineral, AsteroidModel, Ordinal } from './types'
 
-
-const GAME_WIDTH = window.innerWidth
-const GAME_HEIGHT = window.innerHeight
-/**
- * Location of 4 points around the screen center
- */
-const CENTER_LIMITS = {
-  x1: GAME_WIDTH / 4,
-  x2: GAME_WIDTH - GAME_WIDTH / 4,
-  y1: GAME_HEIGHT / 4,
-  y2: GAME_HEIGHT - GAME_HEIGHT / 4
-}
-
-/**
- * Limits around the center of the screen
- */
-const CENTER_VOID = {
-  x: CENTER_LIMITS.x1,
-  y: CENTER_LIMITS.y1,
-  w: CENTER_LIMITS.x2 - CENTER_LIMITS.x1,
-  h: CENTER_LIMITS.y2 - CENTER_LIMITS.y1
-}
-
 /**
  * Global constants setting the game sources and values
  */
@@ -30,88 +7,48 @@ export const CONFIG = {
   SPRITES_FOLDER: './assets/sprites/',
   SOUND_FOLDER: './assets/sounds/',
   GAME_SPEED: 45,
-  GAME_WIDTH: GAME_WIDTH,
-  GAME_HEIGHT: GAME_HEIGHT,
-  GAME_MID_H: GAME_WIDTH / 2,
-  GAME_MID_V: GAME_HEIGHT / 2,
-  CENTER_LIMITS: CENTER_LIMITS,
-  CENTER_VOID: CENTER_VOID,
+  BLOCK_DESKTOP: 8,
+  BLOCK_MOBILE: 6,
+  OFFSET_MOBILE_X: 2,
+  OFFSET_MOBILE_Y: 2,
+  OFFSET_DESKTOP_X: 2,
+  OFFSET_DESKTOP_Y: 2
 }
 
 export const ASTEROIDS_MODELS_FRESH: AsteroidModel[] = [
   {
-    x: 0,
-    y: 0,
-    h: 105,
-    w: 121,
+    x: 0, y: 0,
+    w: 15,
+    h: 13,
     sheet: {
-      x: 0,
-      y: 0,
-      h: 105,
+      x: 0, y: 0,
       w: 121,
+      h: 105,
       image: 'a1.png',
       frameTotal: 1
     }
   },
   {
-    x: 0,
-    y: 0,
-    h: 105,
-    w: 121,
+    x: 0, y: 0,
+    w: 12,
+    h: 12,
     sheet: {
-      x: 0,
-      y: 0,
-      h: 105,
-      w: 121,
-      image: 'a1.png',
-      frameTotal: 1
-    }
-  },
-  {
-    x: 0,
-    y: 0,
-    h: 105,
-    w: 121,
-    sheet: {
-      x: 0,
-      y: 0,
-      h: 105,
-      w: 121,
-      image: 'a1.png',
-      frameTotal: 1
-    }
-  }
-]
-
-/**
- * Collection of Asteroid sprites
- */
-export const ASTEROIDS_MODELS_BREAK: AsteroidModel[] = [
-  {
-    x: 0,
-    y: 0,
-    w: 107,
-    h: 106,
-    sheet: {
+      x: 0, y: 0,
+      w: 96,
+      h: 96,
       image: 'a2.png',
-      x: 0,
-      y: 0,
-      w: 107,
-      h: 106,
       frameTotal: 1
     }
   },
   {
-    x: 0,
-    y: 0,
-    w: 112,
-    h: 89,
+    x: 0, y: 0,
+    w: 13,
+    h: 11,
     sheet: {
+      x: 0, y: 0,
+      w: 104,
+      h: 88,
       image: 'a3.png',
-      x: 0,
-      y: 0,
-      w: 107,
-      h: 106,
       frameTotal: 1
     }
   }
