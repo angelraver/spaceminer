@@ -1,26 +1,52 @@
-import { CONFIG as C, MINERALS, INVENTORY_SLOT, INVENTORY_MINERAL_POSITIONS } from './config'
+import Utils from './utils'
+import { Ordinal } from './types'
 import BACKGROUND from './background'
 import TEXT from './text'
 import SPRITE from './sprite'
 
-export default class UIPANEL {
-  panel: BACKGROUND
-  xp: TEXT
+export default class UI {
+  controlsButton: SPRITE
+  xpPanel: BACKGROUND
+  xpText: TEXT
   xpIcon: SPRITE
-  money: TEXT
+  moneyPanel: BACKGROUND
+  moneyText: TEXT
   moneyIcon: SPRITE
+  fontSize: number
   constructor() {
+    this.fontSize = g.Block * 3
     this.create()
   }
 
   create() {
-    this.panel = new BACKGROUND({
+    this.setXp()
+    this.setMoney()
+    this.setControls()
+  }
+
+  setControls() {
+    this.controlsButton = new BACKGROUND({
+      fixed: true,
+      id: 'ui_controlsButton',
+      w: 8,
+      h: 8,
+      frameX: 0,
+      frameY: 0,
+      frameW: 64,
+      frameH: 64,
+      totaFrames: 1,
+      sheet: 'controls-icon.png'
+    })
+    this.controlsButton.x = g.W / 2 - this.controlsButton.w / 2
+    this.controlsButton.y = g.H - this.controlsButton.h * 1.5
+  }
+
+  setXp() {
+    this.xpPanel = new BACKGROUND({
       fixed: true,
       id: 'ui_panel',
-      x: g.W / 2 - 150,
-      y: g.H / 30,
-      w: 30,
-      h: 5,
+      w: 18,
+      h: 3,
       frameX: 0,
       frameY: 0,
       frameW: 190,
@@ -28,20 +54,14 @@ export default class UIPANEL {
       totaFrames: 1,
       sheet: 'ui.png'
     })
-    this.xp = new TEXT({
-      x: this.panel.x + this.panel.w - 40,
-      y: this.panel.y + 28,
-      size: 24,
-      color: 'black',
-      colorLine: 'black',
-      align: 'end'
-    })
+    this.xpPanel.x = g.W / 2 + g.W / 10
+    this.xpPanel.y = this.xpPanel.h
+
     this.xpIcon = new SPRITE({
+      id: 'ui_xpIcon',
       fixed: true,
-      x: this.xp.x + 15,
-      y: this.xp.y - 5,
-      w: 4,
-      h: 4,
+      w: 3,
+      h: 3,
       frameX: 0,
       frameY: 0,
       frameW: 17,
@@ -50,20 +70,41 @@ export default class UIPANEL {
       frameTotal: 1,
       sheet: 'xpicon.png'
     })
-    this.money = new TEXT({
-      x: this.panel.x + this.panel.w - 40,
-      y: this.panel.y + 54,
-      size: 24,
+    this.xpIcon.x = this.xpPanel.x + this.xpPanel.w - this.xpIcon.w / 2
+    this.xpIcon.y = this.xpPanel.y + this.xpIcon.h / 1.8
+
+    this.xpText = new TEXT({
+      id: 'ui_xpText',
+      x: this.xpPanel.x + this.xpPanel.w - this.xpIcon.w,
+      y: this.xpPanel.y + g.Block * 2.4,
+      size: this.fontSize,
       color: 'black',
       colorLine: 'black',
       align: 'end'
     })
-    this.moneyIcon = new SPRITE({
+  }
+
+  setMoney() {
+    this.moneyPanel = new BACKGROUND({
       fixed: true,
-      x: this.money.x + 15,
-      y: this.money.y - 5,
-      w: 4,
-      h: 4,
+      id: 'ui_moneyPanel',
+      w: 18,
+      h: 3,
+      frameX: 0,
+      frameY: 0,
+      frameW: 190,
+      frameH: 49 ,
+      totaFrames: 1,
+      sheet: 'ui.png'
+    })
+    this.moneyPanel.x = g.W / 2 - this.moneyPanel.w - g.W / 10
+    this.moneyPanel.y = this.moneyPanel.h
+
+    this.moneyIcon = new SPRITE({
+      id: 'ui_moneyIcon',
+      fixed: true,
+      w: 3,
+      h: 3,
       frameX: 0,
       frameY: 0,
       frameW: 17,
@@ -72,16 +113,46 @@ export default class UIPANEL {
       frameTotal: 1,
       sheet: 'moneyicon.png'
     })
+    this.moneyIcon.x = this.moneyPanel.x + this.moneyPanel.w - this.moneyIcon.w / 2
+    this.moneyIcon.y = this.moneyPanel.y + this.xpIcon.h / 1.8
+
+    this.moneyText = new TEXT({
+      id: 'ui_moneyText',
+      x: this.moneyPanel.x + this.moneyPanel.w - this.moneyIcon.w,
+      y: this.moneyPanel.y + g.Block * 2.4,
+      size: this.fontSize,
+      color: 'black',
+      colorLine: 'black',
+      align: 'end'
+    })    
+  }
+/**
+ * Show / Hide inventory
+ */
+  click(e: Ordinal) {
+    // hitting control button
+    if (Utils.isHiting(e, g.UiPanel.controlsButton)) {
+      g.Inventory.showInventory = true
+    } else {
+      // not hitting control button
+      // hitting the inventory panel
+      if (g.Inventory.showInventory && !Utils.isHiting(e, g.Inventory.background)) {
+        g.Inventory.showInventory = false
+      }
+    }
   }
 
   draw() {
-    this.xp.text = g.XpTotal.toString()
-    this.money.text = g.MoneyTotal.toString()
-    
-    this.panel.draw()
-    this.xp.draw()
-    this.xpIcon.draw()
-    this.money.draw()
+    this.xpText.text = g.XpTotal.toString()
+    this.moneyText.text = g.MoneyTotal.toString()
+
+    this.xpPanel.draw()
+    this.xpIcon .draw()
+    this.xpText .draw()
+    this.moneyPanel.draw()
     this.moneyIcon.draw()
+    this.moneyText.draw()
+
+    this.controlsButton.draw()
   } 
 }

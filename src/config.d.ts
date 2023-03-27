@@ -13,10 +13,7 @@ export declare const CONFIG: {
     OFFSET_DESKTOP_X: number;
     OFFSET_DESKTOP_Y: number;
 };
-/**
- * Collection of Asteroid sprites
- */
-export declare const ASTEROIDS_MODELS_BREAK: AsteroidModel[];
+export declare const ASTEROIDS_MODELS_FRESH: AsteroidModel[];
 /**
  * Collection of minerals for the cargo
  */

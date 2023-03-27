@@ -7,7 +7,7 @@ import CROSSHAIR from './crosshair'
 import Utils from './utils'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
-import UIPANEL from './uiPanel'
+import UI from './uiPanel'
 
 /**
  * Prepare the game stats before the action screen
@@ -99,7 +99,7 @@ export default function screenLevelStart() {
     })
 
     g.Inventory = new INVENTORY()
-    g.UiPanel = new UIPANEL()
+    g.UiPanel = new UI()
   }
 
   g.CurrentScreen = 'action'
@@ -110,6 +110,7 @@ export default function screenLevelStart() {
   function click(e: any): void {
     g.Hero.click(e)
     g.CurrentAsteroid?.click(e)
+    g.UiPanel.click(e)
   }
 
   document.body.addEventListener('click', click)

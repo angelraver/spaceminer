@@ -8,6 +8,7 @@ type MineralsAccount = {
  * Sprite class
  */
 export default class INVENTORY {
+    showInventory: Boolean;
     background: BACKGROUND;
     minerals: BACKGROUND[];
     mineralsTypes: string[];

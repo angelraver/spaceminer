@@ -24,13 +24,23 @@ export default class Utils {
   /**
    * Returns if the given point is in colision with the given SPRITE
    */
-  static isHiting(a: Ordinal, b: SPRITE): boolean {
+  static isHiting(a: Ordinal, b: any): boolean {
     if (b) {
-      return a.x >= b.x - b.w / 2
-      && a.x <= b.x + b.w + b.w / 2
-      && a.y >= b.y - b.h / 2
-      && a.y <= b.y + b.w + b.h / 2
+      if (b.type === 'sprite') {
+        return a.x >= b.x - b.w / 2
+          && a.x <= b.x + b.w + b.w / 2
+          && a.y >= b.y - b.h / 2
+          && a.y <= b.y + b.w + b.h / 2
+      }
+
+      if (b.type === 'background') {
+        return a.x >= b.x
+          && a.x <= b.x + b.w
+          && a.y >= b.y
+          && a.y <= b.y + b.h
+      }
     }
+
     return false
   }
 /**

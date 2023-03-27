@@ -8,7 +8,7 @@ import HERO from './hero'
 import BACKGROUND from './background'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
-import UIPANEL from './uiPanel'
+import UI from './uiPanel'
 
 const MOBILE = 'mobile'
 const DESKTOP = 'desktop'
@@ -48,7 +48,7 @@ export default class GAME {
   VisibleArea: PLAIN
   LevelLimits: Limits
   Inventory: INVENTORY
-  UiPanel: UIPANEL
+  UiPanel: UI
   constructor() {
     this.W = window.innerWidth
     this.H = window.innerHeight

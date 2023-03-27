@@ -8,6 +8,7 @@ const TWEEN = require('@tweenjs/tween.js')
  */
 export default class SPRITE {
   id: string
+  type: string
   y: number
   x: number
   h: number
@@ -41,6 +42,7 @@ export default class SPRITE {
     rotationInterval: any
   }
   constructor(props: any) {
+    this.type = 'sprite'
     this.id = props.id
     this.y = props.y
     this.x = props.x

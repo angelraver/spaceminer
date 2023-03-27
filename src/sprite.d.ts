@@ -4,6 +4,7 @@ import { Ordinal } from './types';
  */
 export default class SPRITE {
     id: string;
+    type: string;
     y: number;
     x: number;
     h: number;

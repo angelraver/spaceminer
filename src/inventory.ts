@@ -11,6 +11,7 @@ type MineralsAccount = {
  * Sprite class
  */
 export default class INVENTORY {
+  showInventory: Boolean
   background: BACKGROUND
   minerals: BACKGROUND[]
   mineralsTypes: string[]
@@ -18,17 +19,18 @@ export default class INVENTORY {
   slots: []
   constructor() {
     this.create()
+    this.showInventory = false
   }
 
   create() {
     this.background = new BACKGROUND({
       id: 'inventory',
-      w: 10,
-      h: 10,
-      frameX: 0,
-      frameY: 50,
-      frameW: 190,
-      frameH: 97,
+      w: 50,
+      h: 80,
+      frameX: 190,
+      frameY: 0,
+      frameW: 110,
+      frameH: 145,
       sheet: 'ui.png',
       frameTotal: 1,
       fixed: true
@@ -41,7 +43,9 @@ export default class INVENTORY {
   }
 
   draw() {
-    // this.background.draw()
+    if (g.Inventory.showInventory) {
+      this.background.draw()
+    }
   }
   
   getMineral(type: string): Mineral {

@@ -1,5 +1,4 @@
 import { Ordinal } from './types';
-import SPRITE from './sprite';
 /**
  * Simple functions to return values
  * - Does not update globals
@@ -16,7 +15,7 @@ export default class Utils {
     /**
      * Returns if the given point is in colision with the given SPRITE
      */
-    static isHiting(a: Ordinal, b: SPRITE): boolean;
+    static isHiting(a: Ordinal, b: any): boolean;
     /**
      * Translate degrees to radiants
      * @param degrees

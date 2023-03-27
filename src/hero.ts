@@ -51,8 +51,12 @@ export default class HERO extends SPRITE {
    * @param e 
    */
   click(e: Ordinal) {
-    const hittingAsteroid = Utils.isHiting(e, g.CurrentAsteroid)
-    if (!hittingAsteroid) {
+    // if the inventory is on dont move
+    if (g.Inventory.showInventory) return
+    // if the click is on the controls button dont move
+    if (Utils.isHiting(e, g.UiPanel.controlsButton)) return
+    // if not hitting the asteroid move!
+    if (!Utils.isHiting(e, g.CurrentAsteroid)) {
       Sound.play('engine')
     }
     this.setPath({ x: e.x, y: e.y })

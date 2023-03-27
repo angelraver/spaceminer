@@ -6,6 +6,7 @@ import SPRITE from "./sprite";
 export default class BACKGROUND extends SPRITE {
   constructor(props: any) {
     super(props)
+    this.type = 'background'
   }
   draw(): void {
     if (!this.fixed) {

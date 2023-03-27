@@ -7,7 +7,7 @@ import HERO from './hero';
 import BACKGROUND from './background';
 import PLAIN from './plain';
 import INVENTORY from './inventory';
-import UIPANEL from './uiPanel';
+import UI from './uiPanel';
 export default class GAME {
     Device: string;
     W: number;
@@ -43,7 +43,7 @@ export default class GAME {
     VisibleArea: PLAIN;
     LevelLimits: Limits;
     Inventory: INVENTORY;
-    UiPanel: UIPANEL;
+    UiPanel: UI;
     constructor();
     /**
      * to know the current device desktop or mobile
