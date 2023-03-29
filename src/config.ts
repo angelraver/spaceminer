@@ -1,4 +1,4 @@
-import { Mineral, AsteroidModel, Ordinal } from './types'
+import { Mineral, AsteroidModel } from './types'
 
 /**
  * Global constants setting the game sources and values
@@ -110,14 +110,6 @@ export const MINERALS: Mineral[] = [
       frameTotal: 1
     }
   },
-]
-
-export const INVENTORY_SLOT = 50
-export const INVENTORY_MINERAL_POSITIONS: Ordinal[] = [
-  { x: 0, y: 0 }, { x: INVENTORY_SLOT, y: 0 },
-  { x: 0, y: INVENTORY_SLOT }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT },
-  { x: 0, y: INVENTORY_SLOT * 2 }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT * 2 },
-  { x: 0, y: INVENTORY_SLOT * 3 }, { x: INVENTORY_SLOT, y: INVENTORY_SLOT * 3 },
 ]
 
 type SoundLibrary = {

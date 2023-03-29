@@ -10,12 +10,10 @@ type MineralsAccount = {
 export default class INVENTORY {
     showInventory: Boolean;
     background: BACKGROUND;
-    minerals: BACKGROUND[];
     mineralsTypes: string[];
     mineralsAccount: MineralsAccount[];
-    slots: [];
+    slots: any[];
     constructor();
-    create(): void;
     draw(): void;
     getMineral(type: string): Mineral;
     updateMinerals(): void;

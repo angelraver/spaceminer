@@ -20,6 +20,6 @@ export default class AsteroidManager {
      * returns the one mineral for the asteroid, from the collection of minerals based on probability of occurrence
      *
      */
-    static getMineral(): Mineral;
+    static getRandomMineral(): Mineral;
     static getModel(): AsteroidModel;
 }

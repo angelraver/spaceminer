@@ -30,7 +30,7 @@ export default class AsteroidManager {
       // scaleY: Math.random() < 0.5 ? -1 : 1,
       r: Utils.radiants(undefined, undefined, Math.random() * 180),
       hitsLimit: 9,
-      mineral: this.getMineral()
+      mineral: this.getRandomMineral()
     }) 
  
     return asteroid 
@@ -52,7 +52,7 @@ export default class AsteroidManager {
    * returns the one mineral for the asteroid, from the collection of minerals based on probability of occurrence
    *
    */
-  static getMineral(): Mineral {
+  static getRandomMineral(): Mineral {
     const numberRandom = Utils.random(1, 100)
     return MINERALS.find((m: Mineral) => numberRandom >= m.chance[0] && numberRandom <= m.chance[1])
   }
