@@ -1,6 +1,6 @@
 import SPRITE from "./sprite";
 import { Ordinal } from './types'
-import { CONFIG } from './config'
+import { MINERALS } from './config'
 import Utils from './utils'
 import Sound from './sound'
 import TEXT from './text'
@@ -37,10 +37,10 @@ export default class HERO extends SPRITE {
     ctx.translate(this.x, this.y)
     ctx.rotate(-this.r)
     ctx.scale(this.scaleX, this.scaleY)
-    ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
+    ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
 
     this.cargoMinerals.forEach((c) => {
-      ctx.drawImage(c.image, c.frameX, c.frameY, c.frameW, c.frameH, c.x, c.y, c.w, c.h)
+      ctx.drawImage(c.img, c.fX, c.fY, c.fW, c.fH, c.x, c.y, c.w, c.h)
     })
 
     ctx.restore()
@@ -68,10 +68,10 @@ export default class HERO extends SPRITE {
    * - Prepare xp to drop on central
    * - Triggers the hit label
    */
-  mining(xp: number, hitId: string, x: number, y: number) {
+  mining(xp: number, x: number, y: number) {
     this.xp += xp
     g.XpTotal += xp
-    TEXT.hiting('hit_' + hitId, xp, x, y)
+    TEXT.hiting(xp, x, y)
   }
 
   /**
@@ -81,20 +81,19 @@ export default class HERO extends SPRITE {
   addCargoMineral(): void {
     this.xp += 8
     const position = this.getCargoMineralsPosition()
-    const mineral = g.CurrentAsteroid.mineral
+    const mineral = MINERALS.find((min) => min.type === g.CurrentAsteroid.mineralType)
     const mineralInfo = {
       name: mineral.name,
       chance: mineral.chance,
       type: mineral.type 
     }
     const mineralCargo = new SPRITE({
-      id: 'cargo-' + g.CurrentAsteroid.id,
       metadata: mineralInfo,
-      frameX: mineral.sheet.x,
-      frameY: mineral.sheet.y,
-      frameW: mineral.sheet.w,
-      frameH: mineral.sheet.h,
-      sheet: mineral.sheet.image,
+      fX: mineral.sheet.x,
+      fY: mineral.sheet.y,
+      fW: mineral.sheet.w,
+      fH: mineral.sheet.h,
+      sheet: mineral.sheet.img,
       x: position.x,
       y: position.y,
       w: this.w / g.Block / 2,
@@ -123,7 +122,7 @@ export default class HERO extends SPRITE {
   unloadCargo(): void {
     if (g.InCentral && g.Hero.xp > 0) {
       Sound.play('powerup23')
-      TEXT.hiting('hit_central', g.Hero.xp, g.Hero.x, g.Hero.y)
+      TEXT.hiting(g.Hero.xp, g.Hero.x, g.Hero.y)
       g.XpTotal += this.xp
       this.cargoMinerals.forEach(m => g.MineralsTotal.push(m.metadata.type))
       this.resetCargo()
@@ -151,20 +150,20 @@ export default class HERO extends SPRITE {
   * Update the global Going family top, right, bottom ,left to know where the hero is going
   */
   checkDirection() {
-    if (this.currentPosition) {
-      this.goingTop = this.currentPosition.y < this.previousPosition.y // the hero is moving up
+    if (this.currentPos) {
+      this.goingTop = this.currentPos.y < this.previousPos.y // the hero is moving up
         && this.y < g.Margin // the hero is inside the top margin
         && g.Anchor.y + g.Anchor.h + g.Speed < g.LevelLimits.b //the anchor will not cross the bottom limit
 
-      this.goingRight = this.currentPosition.x > this.previousPosition.x // the hero is moving right
+      this.goingRight = this.currentPos.x > this.previousPos.x // the hero is moving right
         && this.x > g.W - g.Margin // the hero is inside the right margin
         && g.Anchor.x - g.Speed > g.LevelLimits.l // the anchor will not cross the left limit
 
-      this.goingBottom = this.currentPosition.y > this.previousPosition.y // the hero is going bottom
+      this.goingBottom = this.currentPos.y > this.previousPos.y // the hero is going bottom
         && this.y + this.h > g.H - g.Margin // the hero is inside the bottom margin
         && g.Anchor.y - g.Speed > g.LevelLimits.t // the anchor will not cross the top limit
 
-      this.goingLeft = this.currentPosition.x < this.previousPosition.x // the hero is moving left
+      this.goingLeft = this.currentPos.x < this.previousPos.x // the hero is moving left
         && this.x < g.Margin // the hero is inside the left margin
         && g.Anchor.x + g.Anchor.w + g.Speed < g.LevelLimits.r // the anchor will not cross the right limit
     }

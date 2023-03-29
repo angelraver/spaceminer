@@ -30,12 +30,12 @@ export default class UI {
       id: 'ui_controlsButton',
       w: 8,
       h: 8,
-      frameX: 0,
-      frameY: 0,
-      frameW: 64,
-      frameH: 64,
+      fX: 0,
+      fY: 0,
+      fW: 64,
+      fH: 64,
       totaFrames: 1,
-      sheet: 'controls-icon.png'
+      sheet: 'controls-icon'
     })
     this.controlsButton.x = g.W / 2 - this.controlsButton.w / 2
     this.controlsButton.y = g.H - this.controlsButton.h * 1.5
@@ -47,12 +47,12 @@ export default class UI {
       id: 'ui_panel',
       w: 18,
       h: 3,
-      frameX: 0,
-      frameY: 0,
-      frameW: 190,
-      frameH: 49 ,
+      fX: 0,
+      fY: 0,
+      fW: 190,
+      fH: 49 ,
       totaFrames: 1,
-      sheet: 'ui.png'
+      sheet: 'ui'
     })
     this.xpPanel.x = g.W / 2 + g.W / 10
     this.xpPanel.y = this.xpPanel.h
@@ -62,13 +62,12 @@ export default class UI {
       fixed: true,
       w: 3,
       h: 3,
-      frameX: 0,
-      frameY: 0,
-      frameW: 17,
-      frameH: 18,
-      frameVertical: false,
-      frameTotal: 1,
-      sheet: 'xpicon.png'
+      fX: 0,
+      fY: 0,
+      fW: 17,
+      fH: 18,
+      fVertical: false,
+      sheet: 'xpicon'
     })
     this.xpIcon.x = this.xpPanel.x + this.xpPanel.w - this.xpIcon.w / 2
     this.xpIcon.y = this.xpPanel.y + this.xpIcon.h / 1.8
@@ -90,12 +89,12 @@ export default class UI {
       id: 'ui_moneyPanel',
       w: 18,
       h: 3,
-      frameX: 0,
-      frameY: 0,
-      frameW: 190,
-      frameH: 49 ,
+      fX: 0,
+      fY: 0,
+      fW: 190,
+      fH: 49 ,
       totaFrames: 1,
-      sheet: 'ui.png'
+      sheet: 'ui'
     })
     this.moneyPanel.x = g.W / 2 - this.moneyPanel.w - g.W / 10
     this.moneyPanel.y = this.moneyPanel.h
@@ -105,13 +104,12 @@ export default class UI {
       fixed: true,
       w: 3,
       h: 3,
-      frameX: 0,
-      frameY: 0,
-      frameW: 17,
-      frameH: 18,
-      frameVertical: false,
-      frameTotal: 1,
-      sheet: 'moneyicon.png'
+      fX: 0,
+      fY: 0,
+      fW: 17,
+      fH: 18,
+      fVertical: false,
+      sheet: 'moneyicon'
     })
     this.moneyIcon.x = this.moneyPanel.x + this.moneyPanel.w - this.moneyIcon.w / 2
     this.moneyIcon.y = this.moneyPanel.y + this.xpIcon.h / 1.8

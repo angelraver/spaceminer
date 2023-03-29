@@ -1,4 +1,4 @@
-import { Mineral, AsteroidModel } from './types';
+import { AsteroidModel } from './types';
 import ASTEROID from './asteroid';
 /**
  * Static class to manage the SPRITES asteroids
@@ -20,6 +20,6 @@ export default class AsteroidManager {
      * returns the one mineral for the asteroid, from the collection of minerals based on probability of occurrence
      *
      */
-    static getRandomMineral(): Mineral;
+    static getRandomMineralType(): string;
     static getModel(): AsteroidModel;
 }

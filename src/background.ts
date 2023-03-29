@@ -6,14 +6,14 @@ import SPRITE from "./sprite";
 export default class BACKGROUND extends SPRITE {
   constructor(props: any) {
     super(props)
-    this.type = 'background'
+    this.type = 'bkg'
   }
   draw(): void {
     if (!this.fixed) {
       this.positionByHero()
     }
     if (this.isVisible()) {
-      ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH, this.x, this.y, this.w, this.h)
+      ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, this.x, this.y, this.w, this.h)
     }
   }
   /**

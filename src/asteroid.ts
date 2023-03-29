@@ -1,19 +1,19 @@
 import Utils from './utils'
 import SPRITE from './sprite'
 import Sound from './sound'
-import { Mineral, Ordinal } from './types'
+import { Ordinal } from './types'
 
 /**
  * Extend SPRITE to add asteroid features
  */
 export default class ASTEROID extends SPRITE {
-  mineral: Mineral
+  mineralType: string
   modelCurrent: number
   modelNew: number
   empty: boolean
   constructor(props: any) {
     super(props)
-    this.mineral = props.mineral
+    this.mineralType = props.mineralType
     this.empty = false
   }
 
@@ -27,12 +27,10 @@ export default class ASTEROID extends SPRITE {
     if (
       g.Hero.cargoMineralsFull
       || g.CurrentAsteroid.empty
-      || !g.CurrentAsteroid.mineral
       || !g.CurrentAsteroid.isClickIn(e)
     ) {
       return
     }
-
     // hit the asteroid
     this.hit()
 
@@ -40,12 +38,12 @@ export default class ASTEROID extends SPRITE {
     switch(this.hits) {
       case 3:
         this.modelNew = 0
-        g.Hero.mining(3, this.id, this.x, this.y)
+        g.Hero.mining(3, this.x, this.y)
         Sound.play('pickoupcoin')
         break
       case 6:
         this.modelNew = 1
-        g.Hero.mining(5, this.id, this.x, this.y)
+        g.Hero.mining(5, this.x, this.y)
         Sound.play('pickoupcoin')
         break
       default:
@@ -61,7 +59,7 @@ export default class ASTEROID extends SPRITE {
     //     if (asteroid.id === this.id) {
     //       asteroid.h = model.h 
     //       asteroid.w = model.w 
-    //       asteroid.sheet = model.sheet.image
+    //       asteroid.sheet = model.sheet.img
     //       asteroid.updateImage() 
     //     }
     //     return asteroid 
@@ -78,7 +76,7 @@ export default class ASTEROID extends SPRITE {
   setEmpty(): void {
     Sound.play('asteroidEmpty')
     this.empty = true
-    this.sheet = 'a-empty.png'
+    this.sheet = 'a-empty'
     this.updateImage()
   }
 

@@ -1,5 +1,5 @@
 import Utils from './utils'
-import { CONFIG, MINERALS, ASTEROIDS_MODELS_FRESH } from './config'
+import { MINERALS, ASTEROIDS_MODELS_FRESH } from './config'
 import { Mineral, AsteroidModel } from './types'
 import ASTEROID from './asteroid'
 
@@ -15,22 +15,22 @@ export default class AsteroidManager {
   static create( id: string): ASTEROID {
     const model: AsteroidModel = this.getModel()
     const asteroid = new ASTEROID({
-      id: 'asteroid_' + id,
+      id: 'a' + id,
       x: model.x,
       y: model.y,
       w: model.w,
       h: model.h,
-      sheet: model.sheet.image,
-      frameX: model.sheet.x,
-      frameY: model.sheet.y,
-      frameW: model.sheet.w,
-      frameH: model.sheet.h,
-      frameTotal: model.sheet.frameTotal,
+      sheet: model.sheet.img,
+      fX: model.sheet.x,
+      fY: model.sheet.y,
+      fW: model.sheet.w,
+      fH: model.sheet.h,
+      fQty: model.sheet.fQty,
       // scaleX: Math.random() < 0.5 ? -1 : 1,
       // scaleY: Math.random() < 0.5 ? -1 : 1,
       r: Utils.radiants(undefined, undefined, Math.random() * 180),
       hitsLimit: 9,
-      mineral: this.getRandomMineral()
+      mineralType: this.getRandomMineralType()
     }) 
  
     return asteroid 
@@ -52,9 +52,9 @@ export default class AsteroidManager {
    * returns the one mineral for the asteroid, from the collection of minerals based on probability of occurrence
    *
    */
-  static getRandomMineral(): Mineral {
+  static getRandomMineralType(): string {
     const numberRandom = Utils.random(1, 100)
-    return MINERALS.find((m: Mineral) => numberRandom >= m.chance[0] && numberRandom <= m.chance[1])
+    return MINERALS.find((m: Mineral) => numberRandom >= m.chance[0] && numberRandom <= m.chance[1]).type
   }
 
   static getModel(): AsteroidModel {

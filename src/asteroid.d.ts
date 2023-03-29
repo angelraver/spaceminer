@@ -1,10 +1,10 @@
 import SPRITE from './sprite';
-import { Mineral, Ordinal } from './types';
+import { Ordinal } from './types';
 /**
  * Extend SPRITE to add asteroid features
  */
 export default class ASTEROID extends SPRITE {
-    mineral: Mineral;
+    mineralType: string;
     modelCurrent: number;
     modelNew: number;
     empty: boolean;

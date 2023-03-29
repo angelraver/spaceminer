@@ -28,7 +28,7 @@ export default class HERO extends SPRITE {
      * - Prepare xp to drop on central
      * - Triggers the hit label
      */
-    mining(xp: number, hitId: string, x: number, y: number): void;
+    mining(xp: number, x: number, y: number): void;
     /**
      * add the cargo sprite to the Hero CargoMinerals prop
      * the cargo is based on the asteroid mineral

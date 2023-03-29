@@ -47,8 +47,8 @@ Exploración espacial, la galaxia tiene que ser tipo roguelike, generado automá
 
 22.3.2023
 feedback 1
-- mas espacio en el espacio para la version movile (y desktop también debería ser)
-- reducir la ui de xp y money y botn inventario lo más posible pegados al borde superior.
+- mas espacio en el espacio para la version movile (y desktop también debería ser) OK
+- reducir la ui de xp y money y botn inventario lo más posible pegados al borde superior. OK
 - poder incrementar la velocidad de la nave para que no sea tedioso ir de una lugar a otro cuando las distancias son largas.
 - poner sorpresas en los asteroides como simpáticos aliens que dan recompensas. o también aliens que piden ayuda, costosa ayuda en forma de recursos. puedo elegir ayudarlos o no. si ayudo mas adelante en el tiempo pueden venir y agradecerme.
 

@@ -29,12 +29,11 @@ export default class INVENTORY {
       id: 'inventory',
       w: 50,
       h: 80,
-      frameX: 190,
-      frameY: 0,
-      frameW: 110,
-      frameH: 145,
-      sheet: 'ui.png',
-      frameTotal: 1,
+      fX: 190,
+      fY: 0,
+      fW: 110,
+      fH: 145,
+      sheet: 'ui',
       fixed: true
     })
     this.background.x = (g.W - this.background.w) / 2
@@ -49,17 +48,18 @@ export default class INVENTORY {
         type: position.t,
         qty: 0,
         spriteImage: new BACKGROUND({
+          fixed: true,
           id: 'inv_mineral_' + position.t,
           x: this.background.x + (this.background.w / 2) + (position.x * g.Block),
           y: this.background.y + (g.Block * 3) + (position.y * g.Block),
           w: 6,
           h: 6,
-          sheet: mineral.sheet.image,
-          frameX: mineral.sheet.x,
-          frameY: mineral.sheet.y,
-          frameW: mineral.sheet.w,
-          frameH: mineral.sheet.h,
-          frameTotal: mineral.sheet.frameTotal
+          sheet: mineral.sheet.img,
+          fX: mineral.sheet.x,
+          fY: mineral.sheet.y,
+          fW: mineral.sheet.w,
+          fH: mineral.sheet.h,
+          fQty: mineral.sheet.fQty
         }),
         spriteText: new TEXT({
           id: 'inv_mineral_qty_' + position.t,

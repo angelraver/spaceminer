@@ -34,9 +34,8 @@ export default class TEXT extends SPRITE {
   /**
  * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
  */
-  static hiting(id: string, number: number, x: number, y: number) {
+  static hiting(number: number, x: number, y: number) {
     const hitLabel: TEXT = new TEXT({
-      id: id,
       text: '+' + number,
       x: x,
       y: y,

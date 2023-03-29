@@ -26,14 +26,14 @@ export default class Utils {
    */
   static isHiting(a: Ordinal, b: any): boolean {
     if (b) {
-      if (b.type === 'sprite') {
+      if (b.type === 'spr') {
         return a.x >= b.x - b.w / 2
           && a.x <= b.x + b.w + b.w / 2
           && a.y >= b.y - b.h / 2
           && a.y <= b.y + b.w + b.h / 2
       }
 
-      if (b.type === 'background') {
+      if (b.type === 'bkg') {
         return a.x >= b.x
           && a.x <= b.x + b.w
           && a.y >= b.y

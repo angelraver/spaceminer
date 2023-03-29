@@ -13,27 +13,27 @@ export default class SPRITE {
   x: number
   h: number
   w: number
-  frameX: number
-  frameY: number
-  frameW: number
-  frameH: number
-  frameVertical: boolean
-  frameTotal: number
-  frameCurrent: number
+  fX: number
+  fY: number
+  fW: number
+  fH: number
+  fVertical: boolean
+  fQty: number
+  fCurrent: number
   sheet: string
   target: any
   r: number
   path: Array<Ordinal>
-  currentPathPosition: number
-  currentPosition: Ordinal
-  previousPosition: Ordinal
+  currentPathPos: number
+  currentPos: Ordinal
+  previousPos: Ordinal
   hits: number
   hitsLimit: number
   loops: number
   currentLoop: number
   scaleX: number
   scaleY: number
-  image: HTMLImageElement
+  img: HTMLImageElement
   moving: boolean
   mini: boolean
   metadata: any
@@ -42,40 +42,51 @@ export default class SPRITE {
     rotationInterval: any
   }
   constructor(props: any) {
-    this.type = 'sprite'
-    this.id = props.id
+    this.type = 'spr'
     this.y = props.y
     this.x = props.x
     this.h = props.h * g.Block
     this.w = props.w * g.Block
-    this.frameX = props.frameX || 0
-    this.frameY = props.frameY || 0
-    this.frameW = props.frameW || this.w
-    this.frameH = props.frameH || this.h
-    this.frameVertical = props.frameDirection
+    this.fX = props.fX || 0
+    this.fY = props.fY || 0
+    this.fW = props.fW || this.w
+    this.fH = props.fH || this.h
+    this.fVertical = props.fVertical
     this.target = props.target
     this.r = props.r
-    this.sheet = props.sheet
-    this.frameTotal = props.frameTotal || 1
-    this.frameCurrent = 0
-    this.path = []
-    this.currentPathPosition = 0
-    this.currentPosition = undefined
-    this.previousPosition = undefined
-    this.hits = 0
-    this.hitsLimit = props.hitsLimit ? props.hitsLimit : 1
-    this.loops = props.loops
-    this.currentLoop = 0
-    this.scaleX = props.scaleX || 1
-    this.scaleY = -props.scaleY || 1
-    this.moving = false
-    this.mini = props.mini || false
-    this.metadata = props.metadata
+
+    if (props.sheet) {
+      this.sheet = props.sheet
+    }
+    if (props.metadata) {
+      this.metadata = props.metadata
+    }
+
+    if (props.loops) {
+      this.loops = props.loops
+      this.currentLoop = 0
+    }
+    if (props.mini) {
+      this.mini = props.mini
+    }
+    if (props.fQty) {
+      this.fQty = props.fQty
+    }
+    if (props.hitsLimit) {
+      this.hitsLimit = props.hitsLimit
+    }
+    if (props.scaleX) {
+      this.scaleX = props.scaleX
+    }
+    if (props.scaleY) {
+      this.scaleY = -props.scaleY
+    }
     if (this.sheet) {
       this.updateImage()
     }
-    this.internalState = { rotationInterval: undefined }
-    this.fixed = props.fixed || false
+    if (props.fixed) {
+      this.fixed = props.fixed
+    }
   }
   /**
    * Set the spritesheet
@@ -83,23 +94,23 @@ export default class SPRITE {
   updateImage(): void {
     var img = new Image()
     // img.crossOrigin = "Anonymous"
-    img.src = CONFIG.SPRITES_FOLDER + this.sheet
-    this.image = img
+    img.src = CONFIG.SPRITES_FOLDER + this.sheet + '.png'
+    this.img = img
   }
 
   /**
    * Move the spritesheet to show the next frame in animation 
    */
   framing(): void {
-    if (this.frameVertical) {
-      this.frameY = this.frameCurrent * this.frameH
+    if (this.fVertical) {
+      this.fY = this.fCurrent * this.fH
     } else {
-      this.frameX = this.frameCurrent * this.frameW
+      this.fX = this.fCurrent * this.fW
     }
-    if (this.frameCurrent < this.frameTotal - 1) {
-      this.frameCurrent++
+    if (this.fCurrent < this.fQty - 1) {
+      this.fCurrent++
     } else {
-      this.frameCurrent = 0
+      this.fCurrent = 0
     }
   }
   /**
@@ -143,14 +154,17 @@ export default class SPRITE {
     }
     // if this is in colision with the VisibleArea, then is visible, then draw it
     if (this.isVisible()) {
-      this.framing()
+
+      if (this.fQty) {
+        this.framing()
+      }
       ctx.save()
       ctx.translate(this.x, this.y)
       ctx.rotate(-this.r)
       ctx.scale(this.scaleX, this.scaleY)
       // ctx.fillStyle = 'red'
       // ctx.fillRect(0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-      ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
+      ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH,  0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
       ctx.restore()
       // pixelate(this)
 
@@ -180,7 +194,7 @@ export default class SPRITE {
     if (this.y > g.VisibleArea.h) position.y = g.VisibleArea.h - this.w / 4
     if (this.y >= 0 && this.y <= g.VisibleArea.h) position.y = this.y
 
-    ctx.drawImage(this.image, this.frameX, this.frameY, this.frameW, this.frameH,  position.x,   position.y,     this.w / 4,    this.h / 4)
+    ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH,  position.x,   position.y,     this.w / 4,    this.h / 4)
   }
   
   /**
@@ -189,11 +203,12 @@ export default class SPRITE {
    * @param target 
    */
   setPath(target: any): void {
-    this.currentPathPosition = 0
+    this.currentPathPos = 0
     const origin = { x: this.x, y: this.y }
     let targetFit = { x: target.x, y: target.y }
     this.path = Utils.pathLinear(origin, targetFit, g.Speed)
     // this.r = Utils.radiants(origin, targetFit)
+    this.internalState = { rotationInterval: 0 }
     this.internalState.rotationInterval = new TWEEN.Tween({r: this.r})
       .to({r: Utils.radiants(origin, targetFit)}, 550)
       .easing(TWEEN.Easing.Cubic.Out)
@@ -205,14 +220,14 @@ export default class SPRITE {
    * Move forward inside the path prop elements
    */
   going(): void {
-    const pathPos = this.currentPathPosition
-    if (this.path[pathPos]) {
-      this.currentPosition = this.path[pathPos]
-      this.previousPosition = this.path[pathPos > 0 ? pathPos - 1 : pathPos]
+    const pathPos = this.currentPathPos
+    if (this.path && this.path[pathPos]) {
+      this.currentPos = this.path[pathPos]
+      this.previousPos = this.path[pathPos > 0 ? pathPos - 1 : pathPos]
       this.moving = true
       this.x = this.path[pathPos].x
       this.y = this.path[pathPos].y
-      this.currentPathPosition++
+      this.currentPathPos++
     } else {
       this.moving = false
     }
@@ -222,6 +237,9 @@ export default class SPRITE {
    * Increase the hits prop
    */
   hit(): void {
+    if (!this.hits) {
+      this.hits = 0
+    }
     this.hits++
   }
   /**
