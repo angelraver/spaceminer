@@ -5,6 +5,7 @@ import ASTEROID from './asteroid'
 import TEXT from './text'
 import CROSSHAIR from './crosshair'
 import HERO from './hero'
+import CLIENT from './client'
 import BACKGROUND from './background'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
@@ -49,11 +50,11 @@ export default class GAME {
   LevelLimits: Limits
   Inventory: INVENTORY
   UiPanel: UI
+  Client: CLIENT
   constructor() {
     this.W = window.innerWidth
     this.H = window.innerHeight
     this.BkgProportion = 4
-    this.CenterVoid = 
     this.GlobalTime = 0
     this.MarkTime = 0
     this.Speed = 10

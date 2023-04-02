@@ -1,4 +1,3 @@
-import { CONFIG as C, CONFIG } from './config'
 import HERO from './hero'
 import SPRITE from './sprite'
 import BACKGROUND from './background'
@@ -8,6 +7,7 @@ import Utils from './utils'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
 import UI from './uiPanel'
+import CLIENT from './client'
 
 /**
  * Prepare the game stats before the action screen
@@ -50,7 +50,6 @@ export default function screenLevelStart() {
     AsteroidManager.createGroup()
 
     g.Central = new SPRITE({
-      id: 'central',
       x: g.W / 2,
       y: g.H / 2,
       w: 10,
@@ -67,7 +66,6 @@ export default function screenLevelStart() {
     })
 
     g.Hero = new HERO({
-      id: 'hero',
       x: g.W / 2,
       y: g.H / 2,
       h: 6,
@@ -82,6 +80,17 @@ export default function screenLevelStart() {
       scaleY: 1,
     })
     g.Hero.target = { x: g.Hero.x, y: g.Hero.y }
+
+    g.Client = new CLIENT({
+      period: 3,
+      h: 6,
+      w: 6,
+      sheet: 'client1',
+      fX: 0,
+      fY: 0,
+      fW: 50,
+      fH: 50,
+    })
 
     g.Crosshair = new CROSSHAIR({
       id: 'crosshair',
@@ -111,4 +120,5 @@ export default function screenLevelStart() {
   }
 
   document.body.addEventListener('click', click)
+  Utils.randomOuterPoint()
 }

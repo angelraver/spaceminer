@@ -27,9 +27,14 @@ export type Limits = {
   l: number
 }
 
-export type Mineral = {
+export type MineralModel = {
   type: string
   name: string
   chance: number[]
+  sheet: Sheet
+}
+
+export type ClientModel = {
+  period: number,
   sheet: Sheet
 }

@@ -24,7 +24,7 @@ export default class SPRITE {
   target: any
   r: number
   path: Array<Ordinal>
-  currentPathPos: number
+  currentPathIndex: number
   currentPos: Ordinal
   previousPos: Ordinal
   hits: number
@@ -203,11 +203,10 @@ export default class SPRITE {
    * @param target 
    */
   setPath(target: any): void {
-    this.currentPathPos = 0
+    this.currentPathIndex = 0
     const origin = { x: this.x, y: this.y }
     let targetFit = { x: target.x, y: target.y }
     this.path = Utils.pathLinear(origin, targetFit, g.Speed)
-    // this.r = Utils.radiants(origin, targetFit)
     this.internalState = { rotationInterval: 0 }
     this.internalState.rotationInterval = new TWEEN.Tween({r: this.r})
       .to({r: Utils.radiants(origin, targetFit)}, 550)
@@ -220,14 +219,14 @@ export default class SPRITE {
    * Move forward inside the path prop elements
    */
   going(): void {
-    const pathPos = this.currentPathPos
+    const pathPos = this.currentPathIndex
     if (this.path && this.path[pathPos]) {
       this.currentPos = this.path[pathPos]
       this.previousPos = this.path[pathPos > 0 ? pathPos - 1 : pathPos]
       this.moving = true
       this.x = this.path[pathPos].x
       this.y = this.path[pathPos].y
-      this.currentPathPos++
+      this.currentPathIndex++
     } else {
       this.moving = false
     }

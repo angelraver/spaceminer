@@ -1,6 +1,6 @@
 import Utils from './utils'
-import { MINERALS, ASTEROIDS_MODELS_FRESH } from './config'
-import { Mineral, AsteroidModel } from './types'
+import { MINERAL_MODELS, ASTEROID_MODELS } from './config'
+import { MineralModel, AsteroidModel } from './types'
 import ASTEROID from './asteroid'
 
 /**
@@ -54,11 +54,11 @@ export default class AsteroidManager {
    */
   static getRandomMineralType(): string {
     const numberRandom = Utils.random(1, 100)
-    return MINERALS.find((m: Mineral) => numberRandom >= m.chance[0] && numberRandom <= m.chance[1]).type
+    return MINERAL_MODELS.find((m: MineralModel) => numberRandom >= m.chance[0] && numberRandom <= m.chance[1]).type
   }
 
   static getModel(): AsteroidModel {
-    const selected = ASTEROIDS_MODELS_FRESH[Utils.random(0, ASTEROIDS_MODELS_FRESH.length - 1)]
+    const selected = ASTEROID_MODELS[Utils.random(0, ASTEROID_MODELS.length - 1)]
     const model = {
       ...selected,
       x: Utils.random(-g.OffSetHorizontal + selected.w / 2, g.W + g.OffSetHorizontal - selected.w / 2),

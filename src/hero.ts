@@ -1,6 +1,6 @@
 import SPRITE from "./sprite";
 import { Ordinal } from './types'
-import { MINERALS } from './config'
+import { MINERAL_MODELS } from './config'
 import Utils from './utils'
 import Sound from './sound'
 import TEXT from './text'
@@ -30,6 +30,7 @@ export default class HERO extends SPRITE {
    * Overwrite draw
    */
   draw(): void {
+    this.unloadCargo()
     this.checkDirection()
     this.going()
 
@@ -81,7 +82,7 @@ export default class HERO extends SPRITE {
   addCargoMineral(): void {
     this.xp += 8
     const position = this.getCargoMineralsPosition()
-    const mineral = MINERALS.find((min) => min.type === g.CurrentAsteroid.mineralType)
+    const mineral = MINERAL_MODELS.find((min) => min.type === g.CurrentAsteroid.mineralType)
     const mineralInfo = {
       name: mineral.name,
       chance: mineral.chance,

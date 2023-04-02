@@ -1,5 +1,5 @@
 import { Ordinal } from './types'
-import SPRITE from './sprite'
+
 /**
  * Simple functions to return values
  * - Does not update globals
@@ -86,14 +86,14 @@ export default class Utils {
     let pos = { x: origin.x, y: origin.y }
     let positions = []
     const limit = xIsLonger ? xSteps : ySteps
-    const xIsLongerSpeed = speed / (xSteps / ySteps)
-    const yIsLongerSpeed = speed / (ySteps / xSteps)
+    let calculatedSpeed = 0
     for (let i = 0; i < limit; i++) {
       if (xIsLonger) {
+        calculatedSpeed = speed / (xSteps / ySteps)
         if (target.y < pos.y) {
-          pos.y = pos.y - xIsLongerSpeed
+          pos.y = pos.y - calculatedSpeed
         } else {
-          pos.y = pos.y + xIsLongerSpeed
+          pos.y = pos.y + calculatedSpeed
         }
         if (target.x < pos.x) {
           pos.x = pos.x - speed
@@ -101,20 +101,58 @@ export default class Utils {
           pos.x = pos.x + speed
         }
       } else {
+        calculatedSpeed = speed / (ySteps / xSteps)
         if (target.y < pos.y) {
           pos.y = pos.y - speed
         } else {
           pos.y = pos.y + speed
         }
         if (target.x < pos.x) {
-          pos.x = pos.x - yIsLongerSpeed
+          pos.x = pos.x - calculatedSpeed
         } else {
-          pos.x = pos.x + yIsLongerSpeed
+          pos.x = pos.x + calculatedSpeed
         }
       }
+
+      let xCompleted = pos.x === target.x
+      let yCompleted = pos.y === target.y
       positions.push({ ...pos })
     }
     return positions
+  }
+
+  /**
+   * get random point beyond the offSets of the game
+   */
+  static randomOuterPoint() {
+    const randomIndex = this.random(0,3)
+    const margin = g.Block * 10
+    const yRandomPoint = this.random(-g.OffSetVertical, g.H + g.OffSetVertical)
+    const xRandomPoint = this.random(-g.OffSetHorizontal, g.W + g.OffSetHorizontal)
+    const points = [
+      { // from top
+        x: xRandomPoint,
+        y: -g.OffSetVertical - margin
+      },
+      { // from right
+        x: g.W + g.OffSetHorizontal + margin,
+        y: yRandomPoint
+      },
+      { // from bottom
+        x: xRandomPoint,
+        y: g.H + g.OffSetVertical + margin
+      },
+      { // from left
+        x: -g.OffSetHorizontal - margin,
+        y: yRandomPoint
+      }
+    ]
+
+    return points[randomIndex]
+  }
+
+  static valueInMargin(a:number, b: number, margin: number) {
+    return a >= (b - margin) && a <= (b + margin)
   }
 
   // pixelation = 40

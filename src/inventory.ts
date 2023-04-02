@@ -1,6 +1,6 @@
-import { MINERALS } from './config'
+import { MINERAL_MODELS } from './config'
 import BACKGROUND from './background'
-import { Mineral } from './types'
+import { MineralModel } from './types'
 import TEXT from './text'
 
 type MineralsAccount = { 
@@ -43,7 +43,7 @@ export default class INVENTORY {
     this.mineralsTypes = []
     this.showInventory = false
     this.slots = INVENTORY_MINERAL_POSITIONS.filter((pos) => !!this.getMineral(pos.t)).map((position) => {
-      const mineral: Mineral = this.getMineral(position.t)
+      const mineral: MineralModel = this.getMineral(position.t)
       return {
         type: position.t,
         qty: 0,
@@ -84,8 +84,8 @@ export default class INVENTORY {
     })
   }
 
-  getMineral(type: string): Mineral {
-    return MINERALS.find(m => m.type === type)
+  getMineral(type: string): MineralModel {
+    return MINERAL_MODELS.find(m => m.type === type)
   }
 
   updateMinerals() {
