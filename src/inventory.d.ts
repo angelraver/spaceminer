@@ -1,5 +1,5 @@
 import BACKGROUND from './background';
-import { Mineral } from './types';
+import { MineralModel } from './types';
 type MineralsAccount = {
     type: string;
     qty: number;
@@ -15,7 +15,7 @@ export default class INVENTORY {
     slots: any[];
     constructor();
     draw(): void;
-    getMineral(type: string): Mineral;
+    getMineral(type: string): MineralModel;
     updateMinerals(): void;
 }
 export {};

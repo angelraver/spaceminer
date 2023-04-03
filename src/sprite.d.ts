@@ -20,7 +20,7 @@ export default class SPRITE {
     target: any;
     r: number;
     path: Array<Ordinal>;
-    currentPathPos: number;
+    currentPathIndex: number;
     currentPos: Ordinal;
     previousPos: Ordinal;
     hits: number;

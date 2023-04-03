@@ -1,4 +1,4 @@
-import { Mineral, AsteroidModel } from './types';
+import { MineralModel, AsteroidModel, ClientModel } from './types';
 /**
  * Global constants setting the game sources and values
  */
@@ -13,13 +13,14 @@ export declare const CONFIG: {
     OFFSET_DESKTOP_X: number;
     OFFSET_DESKTOP_Y: number;
 };
-export declare const ASTEROIDS_MODELS_FRESH: AsteroidModel[];
+export declare const ASTEROID_MODELS: AsteroidModel[];
 /**
  * Collection of minerals for the cargo
  */
-export declare const MINERALS: Mineral[];
+export declare const MINERAL_MODELS: MineralModel[];
 type SoundLibrary = {
     [key: string]: string;
 };
 export declare const SOUND_LIBRARY: SoundLibrary;
+export declare const CLIENT_MODELS: ClientModel[];
 export {};

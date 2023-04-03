@@ -81,16 +81,7 @@ export default function screenLevelStart() {
     })
     g.Hero.target = { x: g.Hero.x, y: g.Hero.y }
 
-    g.Client = new CLIENT({
-      period: 3,
-      h: 6,
-      w: 6,
-      sheet: 'client1',
-      fX: 0,
-      fY: 0,
-      fW: 50,
-      fH: 50,
-    })
+    g.Clients = []
 
     g.Crosshair = new CROSSHAIR({
       id: 'crosshair',

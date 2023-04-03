@@ -16,11 +16,11 @@ export default class CLIENT extends SPRITE {
   timeArrivalCentral: number
   timeArrivalOutside: number
   timeShopping: number
-  isGone: boolean
   
   constructor(props: any) {
     super(props);
     this.period = props.period
+    this.timeShopping = props.timeShopping
     this.destiny = { x: g.Central.x, y: g.Central.y }
     this.r = 0
     this.scaleX = 1
@@ -29,7 +29,6 @@ export default class CLIENT extends SPRITE {
     this.pathBlocked = false
     this.isOutside = false
     this.isInCentral = false
-    this.timeShopping = 5
     this.origin = Utils.randomOuterPoint()
     this.x = this.origin.x
     this.y = this.origin.y
@@ -40,9 +39,13 @@ export default class CLIENT extends SPRITE {
    * Before it checks the path and blocked it
    */
   draw(): void {
+    if (g.XpTotal < 10 && this.path.length === 0) return
+
     this.going()
     this.checkPath()
     this.pathByHero()
+
+    if (this.isOutside) return
 
     if(this.isVisible()) {
       ctx.save()
@@ -92,8 +95,6 @@ export default class CLIENT extends SPRITE {
  * Check if it is time to the client to leave
  */
   checkPath() {
-    if (g.GlobalTime < 1) return
-    
     this.isOutside = this.x < -g.OffSetHorizontal || this.x > g.W + g.OffSetHorizontal || this.y < -g.OffSetVertical || this.y > g.H + g.OffSetVertical
     this.isInCentral = Utils.valueInMargin(this.x, g.Central.x, 10) && Utils.valueInMargin(this.x, g.Central.x, 10)
 
@@ -132,7 +133,7 @@ export default class CLIENT extends SPRITE {
       if (!this.timeArrivalCentral) {
         // console.log('setear time arribal')
         this.timeArrivalCentral = g.GlobalTime
-      } else if (g.GlobalTime !== this.timeArrivalCentral) {
+      } else if (g.GlobalTime > this.timeArrivalCentral) {
         // console.log('should we set the return path? ')
         if ((g.GlobalTime - this.timeArrivalCentral) % this.timeShopping === 0) {
           // console.log('---time to set the returning path')

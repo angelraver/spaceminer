@@ -39,4 +39,12 @@ export default class Utils {
      * @returns
      */
     static pathLinear(origin: Ordinal, target: Ordinal, speed: number): Ordinal[];
+    /**
+     * get random point beyond the offSets of the game
+     */
+    static randomOuterPoint(): {
+        x: number;
+        y: number;
+    };
+    static valueInMargin(a: number, b: number, margin: number): boolean;
 }

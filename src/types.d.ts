@@ -23,9 +23,16 @@ export type Limits = {
     b: number;
     l: number;
 };
-export type Mineral = {
+export type MineralModel = {
     type: string;
     name: string;
     chance: number[];
+    sheet: Sheet;
+};
+export type ClientModel = {
+    id: string;
+    requiredXp: number;
+    period: number;
+    timeShopping: number;
     sheet: Sheet;
 };

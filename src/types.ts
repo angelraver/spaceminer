@@ -35,6 +35,9 @@ export type MineralModel = {
 }
 
 export type ClientModel = {
-  period: number,
+  id: string
+  requiredXp: number
+  period: number
+  timeShopping: number
   sheet: Sheet
 }

@@ -81,15 +81,24 @@ export const SOUND_LIBRARY: SoundLibrary = {
 
 export const CLIENT_MODELS: ClientModel[] = [
   {
+    id: 'A',
+    requiredXp: 10,
     period: 10,
+    timeShopping: 5,
     sheet: { img: 'client1', x: 0, y: 0, w: 50, h: 50 }
   },
   {
+    id: 'B',
+    requiredXp: 20,
     period: 15,
+    timeShopping: 8,
     sheet: { img: 'client2', x: 0, y: 0, w: 50, h: 50 }
   },
   {
+    id: 'C',
+    requiredXp: 40,
     period: 25,
+    timeShopping: 12,
     sheet: { img: 'client3', x: 0, y: 0, w: 50, h: 50 }
   }
 ]
