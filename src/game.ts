@@ -15,63 +15,63 @@ const MOBILE = 'mobile'
 const DESKTOP = 'desktop'
 
 export default class GAME {
-  Device: string
-  W: number
-  H: number
-  Block: number
-  OffSetHorizontal: number
-  OffSetVertical: number
-  BkgProportion: number
-  CenterVoid: any
-  GlobalTime: number
-  MarkTime: number
-  Speed: number
-  CurrentScreen: string
-  GameOver: boolean
-  Pause: boolean
-  SetNewGame: boolean
-  Background: PLAIN
-  Hero: HERO
-  Central: SPRITE
-  Crosshair: CROSSHAIR
+  Anchor: SPRITE
   AsteroidsNumber: number
   Asteroids: ASTEROID[]
-  CurrentAsteroid: ASTEROID
+  Background: PLAIN
+  BkgProportion: number
+  Block: number
   CargoTotal: number
-  XpTotal: number
-  MoneyTotal: number
-  MineralsTotal: string[]
-  InCentral: boolean
+  CenterVoid: any
+  Central: SPRITE
+  Clients: CLIENT[]
+  Crosshair: CROSSHAIR
+  CurrentScreen: string
+  CurrentAsteroid: ASTEROID
+  Device: string
+  GameOver: boolean
+  GlobalTime: number
+  H: number
+  Hero: HERO
   HitsLabels: TEXT[]
-  Stars: BACKGROUND[]
-  Margin: number
-  Anchor: SPRITE
-  VisibleArea: PLAIN
-  LevelLimits: Limits
+  InCentral: boolean
   Inventory: INVENTORY
+  LevelLimits: Limits
+  Margin: number
+  MarkTime: number
+  MineralsTotal: string[]
+  MoneyTotal: number
+  OffSetHorizontal: number
+  OffSetVertical: number
+  Pause: boolean
+  Stars: BACKGROUND[]
+  SetNewGame: boolean
+  Speed: number
+  VisibleArea: PLAIN
   UiPanel: UI
-  Client: CLIENT
+  XpTotal: number
+  W: number
   constructor() {
-    this.W = window.innerWidth
-    this.H = window.innerHeight
-    this.BkgProportion = 4
-    this.GlobalTime = 0
-    this.MarkTime = 0
-    this.Speed = 10
-    this.CurrentScreen = 'levelStart'
-    this.GameOver = false
-    this.Pause = false
-    this.SetNewGame = true
     this.Asteroids = []
     this.AsteroidsNumber = 0
+    this.BkgProportion = 4
     this.CargoTotal = 0
-    this.InCentral = false
+    this.CurrentScreen = 'levelStart'
+    this.GlobalTime = 0
+    this.GameOver = false
+    this.H = window.innerHeight
     this.HitsLabels = []
-    this.Stars = []
+    this.InCentral = false
+    this.MarkTime = 0
     this.Margin = 100
     this.MineralsTotal = []
-    this.XpTotal = 0
     this.MoneyTotal = 0
+    this.Pause = false
+    this.Stars = []
+    this.SetNewGame = true
+    this.Speed = 10
+    this.XpTotal = 0
+    this.W = window.innerWidth
     this.setDevice()
   }
 /**
