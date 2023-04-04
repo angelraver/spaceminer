@@ -27,14 +27,13 @@ export default class UI {
   setControls() {
     this.controlsButton = new BACKGROUND({
       fixed: true,
-      id: 'ui_controlsButton',
       w: 8,
       h: 8,
       fX: 0,
       fY: 0,
       fW: 64,
       fH: 64,
-      totaFrames: 1,
+      fQty: 1,
       sheet: 'controls-icon'
     })
     this.controlsButton.x = g.W / 2 - this.controlsButton.w / 2
@@ -44,21 +43,19 @@ export default class UI {
   setXp() {
     this.xpPanel = new BACKGROUND({
       fixed: true,
-      id: 'ui_panel',
       w: 18,
       h: 3,
       fX: 0,
       fY: 0,
       fW: 190,
       fH: 49 ,
-      totaFrames: 1,
+      fQty: 1,
       sheet: 'ui'
     })
     this.xpPanel.x = g.W / 2 + g.W / 10
     this.xpPanel.y = this.xpPanel.h
 
     this.xpIcon = new SPRITE({
-      id: 'ui_xpIcon',
       fixed: true,
       w: 3,
       h: 3,
@@ -73,7 +70,6 @@ export default class UI {
     this.xpIcon.y = this.xpPanel.y + this.xpIcon.h / 1.8
 
     this.xpText = new TEXT({
-      id: 'ui_xpText',
       x: this.xpPanel.x + this.xpPanel.w - this.xpIcon.w,
       y: this.xpPanel.y + g.Block * 2.4,
       size: this.fontSize,
@@ -86,21 +82,19 @@ export default class UI {
   setMoney() {
     this.moneyPanel = new BACKGROUND({
       fixed: true,
-      id: 'ui_moneyPanel',
       w: 18,
       h: 3,
       fX: 0,
       fY: 0,
       fW: 190,
       fH: 49 ,
-      totaFrames: 1,
+      fQty: 1,
       sheet: 'ui'
     })
     this.moneyPanel.x = g.W / 2 - this.moneyPanel.w - g.W / 10
     this.moneyPanel.y = this.moneyPanel.h
 
     this.moneyIcon = new SPRITE({
-      id: 'ui_moneyIcon',
       fixed: true,
       w: 3,
       h: 3,
@@ -115,7 +109,6 @@ export default class UI {
     this.moneyIcon.y = this.moneyPanel.y + this.xpIcon.h / 1.8
 
     this.moneyText = new TEXT({
-      id: 'ui_moneyText',
       x: this.moneyPanel.x + this.moneyPanel.w - this.moneyIcon.w,
       y: this.moneyPanel.y + g.Block * 2.4,
       size: this.fontSize,
@@ -124,17 +117,20 @@ export default class UI {
       align: 'end'
     })    
   }
+
+
+
 /**
  * Show / Hide inventory
  */
   click(e: Ordinal) {
     // hitting control button
-    if (Utils.isHiting(e, g.UiPanel.controlsButton)) {
+    if (Utils.isHiting(e, this.controlsButton)) {
       g.Inventory.showInventory = true
     } else {
       // not hitting control button
       // hitting the inventory panel
-      if (g.Inventory.showInventory && !Utils.isHiting(e, g.Inventory.background)) {
+      if (g.Inventory.showInventory && !Utils.isHiting(e, g.Inventory.panel)) {
         g.Inventory.showInventory = false
       }
     }
@@ -150,7 +146,6 @@ export default class UI {
     this.moneyPanel.draw()
     this.moneyIcon.draw()
     this.moneyText.draw()
-
     this.controlsButton.draw()
   } 
 }

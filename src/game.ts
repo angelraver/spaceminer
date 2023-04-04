@@ -46,6 +46,7 @@ export default class GAME {
   Pause: boolean
   Stars: BACKGROUND[]
   SetNewGame: boolean
+  SoundOn: boolean
   Speed: number
   VisibleArea: PLAIN
   UiPanel: UI
@@ -69,6 +70,7 @@ export default class GAME {
     this.Pause = false
     this.Stars = []
     this.SetNewGame = true
+    this.SoundOn = true
     this.Speed = 10
     this.XpTotal = 0
     this.W = window.innerWidth

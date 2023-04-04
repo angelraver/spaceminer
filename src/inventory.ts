@@ -1,7 +1,8 @@
 import { MINERAL_MODELS } from './config'
 import BACKGROUND from './background'
-import { MineralModel } from './types'
+import { MineralModel, Ordinal } from './types'
 import TEXT from './text'
+import Utils from './utils'
 
 type MineralsAccount = { 
   type: string
@@ -20,12 +21,19 @@ const INVENTORY_MINERAL_POSITIONS: any[] = [
  */
 export default class INVENTORY {
   showInventory: Boolean
-  background: BACKGROUND
+  panel: BACKGROUND
   mineralsTypes: string[]
   mineralsAccount: MineralsAccount[]
   slots: any[]
+  soundButton: BACKGROUND
   constructor() {
-    this.background = new BACKGROUND({
+    this.setPanel()
+    this.setMinerals()
+    this.setSoundButton()
+  }
+  
+  setPanel() {
+    this.panel = new BACKGROUND({
       id: 'inventory',
       w: 50,
       h: 80,
@@ -36,9 +44,11 @@ export default class INVENTORY {
       sheet: 'ui',
       fixed: true
     })
-    this.background.x = (g.W - this.background.w) / 2
-    this.background.y = (g.H - this.background.h) / 2
+    this.panel.x = (g.W - this.panel.w) / 2
+    this.panel.y = (g.H - this.panel.h) / 2
+  }
 
+  setMinerals(){
     this.mineralsAccount = []
     this.mineralsTypes = []
     this.showInventory = false
@@ -50,8 +60,8 @@ export default class INVENTORY {
         spriteImage: new BACKGROUND({
           fixed: true,
           id: 'inv_mineral_' + position.t,
-          x: this.background.x + (this.background.w / 2) + (position.x * g.Block),
-          y: this.background.y + (g.Block * 3) + (position.y * g.Block),
+          x: this.panel.x + (this.panel.w / 2) + (position.x * g.Block),
+          y: this.panel.y + (g.Block * 3) + (position.y * g.Block),
           w: 6,
           h: 6,
           sheet: mineral.sheet.img,
@@ -63,24 +73,14 @@ export default class INVENTORY {
         }),
         spriteText: new TEXT({
           id: 'inv_mineral_qty_' + position.t,
-          x: this.background.x + (this.background.w / 2) + (position.x * g.Block) + (g.Block * 6),
-          y: this.background.y + (g.Block * 3) + (position.y * g.Block) + (g.Block * 7),
+          x: this.panel.x + (this.panel.w / 2) + (position.x * g.Block) + (g.Block * 6),
+          y: this.panel.y + (g.Block * 3) + (position.y * g.Block) + (g.Block * 7),
           size: g.Block * 3,
           color: 'black',
           colorLine: 'black',
           align: 'end'
         })
       }
-    })
-  }
-
-  draw() {
-    if (!g.Inventory.showInventory) return
-
-    this.background.draw()
-    this.slots.filter((slot) => slot.qty > 0).forEach((slot) => {
-      slot.spriteImage.draw()
-      slot.spriteText.draw()
     })
   }
 
@@ -109,5 +109,48 @@ export default class INVENTORY {
       }
       return slot
     })
+  }
+
+  setSoundButton() {
+    this.soundButton = new BACKGROUND({
+      fixed: true,
+      w: 4,
+      h: 4,
+      fX: 0,
+      fY: 0,
+      fW: 50,
+      fH: 47,
+      fQty: 1,
+      sheet: 'sound'
+    })
+    this.soundButton.x = this.panel.x + this.panel.w - this.soundButton.w * 2
+    this.soundButton.y = this.panel.y + this.panel.h - this.soundButton.h * 1.5
+  }
+
+  click(e: Ordinal) {
+    if (!g.Inventory.showInventory) return
+
+    if (Utils.isHiting(e, this.soundButton)) {
+      if (g.SoundOn) {
+        g.SoundOn = false
+        this.soundButton.fY = 47
+      } else {
+        g.SoundOn = true
+        this.soundButton.fY = 0
+      }
+    }
+  }
+
+
+  draw() {
+    if (!g.Inventory.showInventory) return
+
+    this.panel.draw()
+    this.slots.filter((slot) => slot.qty > 0).forEach((slot) => {
+      slot.spriteImage.draw()
+      slot.spriteText.draw()
+    })
+
+    this.soundButton.draw()
   }
 }

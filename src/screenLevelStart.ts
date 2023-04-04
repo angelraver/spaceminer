@@ -41,7 +41,7 @@ export default function screenLevelStart() {
         fY: Utils.random(0, 4) * 50,
         fW: 50,
         fH: 50,
-        totaFrames: 1,
+        fQty: 1,
         sheet: 'st'
       })
     })
@@ -108,6 +108,7 @@ export default function screenLevelStart() {
     g.Hero.click(e)
     g.CurrentAsteroid?.click(e)
     g.UiPanel.click(e)
+    g.Inventory.click(e)
   }
 
   document.body.addEventListener('click', click)

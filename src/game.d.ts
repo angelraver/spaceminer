@@ -41,6 +41,7 @@ export default class GAME {
     Pause: boolean;
     Stars: BACKGROUND[];
     SetNewGame: boolean;
+    SoundOn: boolean;
     Speed: number;
     VisibleArea: PLAIN;
     UiPanel: UI;
