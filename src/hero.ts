@@ -98,7 +98,8 @@ export default class HERO extends SPRITE {
       x: position.x,
       y: position.y,
       w: this.w / g.Block / 2,
-      h: this.w / g.Block / 2 // yes the w, for square simetry
+      h: this.w / g.Block / 2, // yes the w, for square simetry
+      r: Utils.random(0, 360)
     })
     this.cargoMinerals.push(mineralCargo)
     if (this.cargoMineralsPositions.length === 0) {
@@ -140,10 +141,10 @@ export default class HERO extends SPRITE {
     this.cargoMineralsFull = false
     this.cargoMinerals = []
     this.cargoMineralsPositions = [
-      { x: 0, y: 0 },
-      { x: 0, y: 0 - this.w / 2 },
-      { x: 0 - this.w / 2, y: 0 },
-      { x: 0 - this.w / 2, y: 0 - this.w / 2 }
+      { x: -this.w / 7, y: -this.h / 2 },
+      { x: -this.w / 2.5, y: -this.h / 2 },
+      { x: -this.w / 7, y: -this.h / 3 },
+      { x: -this.w / 2.5, y: -this.h / 3 }
     ]
   }
 
