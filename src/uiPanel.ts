@@ -1,3 +1,4 @@
+import { SPRITE_LIBRARY } from './config'
 import Utils from './utils'
 import { Ordinal } from './types'
 import BACKGROUND from './background'
@@ -34,7 +35,7 @@ export default class UI {
       fW: 64,
       fH: 64,
       fQty: 1,
-      sheet: 'controls-icon'
+      sheet: SPRITE_LIBRARY.controlsIcon
     })
     this.controlsButton.x = g.W / 2 - this.controlsButton.w / 2
     this.controlsButton.y = g.H - this.controlsButton.h * 1.5
@@ -50,7 +51,7 @@ export default class UI {
       fW: 190,
       fH: 49 ,
       fQty: 1,
-      sheet: 'ui'
+      sheet: SPRITE_LIBRARY.ui
     })
     this.xpPanel.x = g.W / 2 + g.W / 10
     this.xpPanel.y = this.xpPanel.h
@@ -64,7 +65,7 @@ export default class UI {
       fW: 17,
       fH: 18,
       fVertical: false,
-      sheet: 'xpicon'
+      sheet: SPRITE_LIBRARY.xpIcon
     })
     this.xpIcon.x = this.xpPanel.x + this.xpPanel.w - this.xpIcon.w / 2
     this.xpIcon.y = this.xpPanel.y + this.xpIcon.h / 1.8
@@ -89,7 +90,7 @@ export default class UI {
       fW: 190,
       fH: 49 ,
       fQty: 1,
-      sheet: 'ui'
+      sheet: SPRITE_LIBRARY.ui
     })
     this.moneyPanel.x = g.W / 2 - this.moneyPanel.w - g.W / 10
     this.moneyPanel.y = this.moneyPanel.h
@@ -103,7 +104,7 @@ export default class UI {
       fW: 17,
       fH: 18,
       fVertical: false,
-      sheet: 'moneyicon'
+      sheet: SPRITE_LIBRARY.moneyIcon
     })
     this.moneyIcon.x = this.moneyPanel.x + this.moneyPanel.w - this.moneyIcon.w / 2
     this.moneyIcon.y = this.moneyPanel.y + this.xpIcon.h / 1.8

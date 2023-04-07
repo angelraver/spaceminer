@@ -12,7 +12,7 @@ export type AsteroidModel = {
 }
 
 export type Sheet = {
-  img: string
+  img?: string
   x: number
   y: number
   w: number
@@ -40,4 +40,8 @@ export type ClientModel = {
   period: number
   timeShopping: number
   sheet: Sheet
+}
+
+export type LibraryItem = {
+  [key: string]: string 
 }

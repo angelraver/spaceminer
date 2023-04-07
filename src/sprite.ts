@@ -58,10 +58,11 @@ export default class SPRITE {
     if (props.id) {
       this.id = props.id
     }
-    
+
     if (props.sheet) {
       this.sheet = props.sheet
     }
+
     if (props.metadata) {
       this.metadata = props.metadata
     }

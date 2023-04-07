@@ -1,4 +1,4 @@
-import SPRITE from "./sprite"
+import SPRITE from './sprite'
 import { Ordinal, ClientModel } from './types'
 import Utils from "./utils"
 import { CLIENT_MODELS } from "./config"
@@ -32,32 +32,6 @@ export default class CLIENT extends SPRITE {
     this.origin = Utils.randomOuterPoint()
     this.x = this.origin.x
     this.y = this.origin.y
-  }
-  /**
-   * Overwrite draw
-   * Before it checks the path by hero
-   * Before it checks the path and blocked it
-   */
-  draw(): void {
-    if (g.XpTotal < 10 && this.path.length === 0) return
-
-    this.going()
-    this.checkPath()
-    this.pathByHero()
-
-    if (this.isOutside) return
-
-    if(this.isVisible()) {
-      ctx.save()
-      ctx.translate(this.x, this.y)
-      ctx.rotate(-this.r)
-      ctx.scale(this.scaleX, this.scaleY)
-      ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-      ctx.restore()
-      this.tweenUpdate()
-    } else {
-      this.drawMini()
-    }
   }
   
   /**
@@ -144,6 +118,61 @@ export default class CLIENT extends SPRITE {
           // console.log('new origin: ', this.origin)
         }
       }
+    }
+  }
+
+  /**
+   * Check if there are new clients, add new clients
+   */
+  static checkIn() {
+    if (g.Clients.length === CLIENT_MODELS.length) return
+  
+    CLIENT_MODELS.forEach((model: ClientModel) => {
+      if (model.requiredXp >= g.XpTotal) {
+        const existing = g.Clients.find((c: CLIENT) => model.id === c.id)
+        if (!existing) {
+          g.Clients.push(new CLIENT({
+            id: model.id,
+            h: 6,
+            w: 6,
+            period: model.period,
+            timeShopping: model.timeShopping,
+            sheet: model.sheet.img,
+            fX: model.sheet.x,
+            fY: model.sheet.y,
+            fQty: model.sheet.fQty,
+            fH: model.sheet.h,
+            fW: model.sheet.w
+          }))
+        }
+      }    
+    })
+  }
+
+  /**
+ * Overwrite draw
+ * Before it checks the path by hero
+ * Before it checks the path and blocked it
+ */
+  draw(): void {
+    if (g.XpTotal < 10 && this.path.length === 0) return
+
+    this.going()
+    this.checkPath()
+    this.pathByHero()
+
+    if (this.isOutside) return
+
+    if(this.isVisible()) {
+      ctx.save()
+      ctx.translate(this.x, this.y)
+      ctx.rotate(-this.r)
+      ctx.scale(this.scaleX, this.scaleY)
+      ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
+      ctx.restore()
+      this.tweenUpdate()
+    } else {
+      this.drawMini()
     }
   }
 }

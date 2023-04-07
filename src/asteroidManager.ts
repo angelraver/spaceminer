@@ -37,13 +37,12 @@ export default class AsteroidManager {
   }
 
   /**
-   * Returns an array of SPRITES Asteroids
-   * @param n amount of SPRITES
-   * @returns SPRITE[]
+   * Updates g.Asteroids, each asteroid is related with the previous ones
+   * it must be this way to avoid overlaping
    */
-  static createGroup(): void {
+  static createGroup(qty: number): void {
     const that = this
-    for (let i = 0; i < g.AsteroidsNumber; i++) {
+    for (let i = 0; i < qty; i++) {
       g.Asteroids.push(that.create(i.toString()))
     }
   }

@@ -1,4 +1,4 @@
-import SPRITE from "./sprite";
+import SPRITE from './sprite'
 
 /**
  * Extends SPRITE to add background features

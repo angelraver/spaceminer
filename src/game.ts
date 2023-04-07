@@ -16,7 +16,6 @@ const DESKTOP = 'desktop'
 
 export default class GAME {
   Anchor: SPRITE
-  AsteroidsNumber: number
   Asteroids: ASTEROID[]
   Background: PLAIN
   BkgProportion: number
@@ -29,6 +28,7 @@ export default class GAME {
   CurrentScreen: string
   CurrentAsteroid: ASTEROID
   Device: string
+  Explosions: SPRITE[]
   GameOver: boolean
   GlobalTime: number
   H: number
@@ -54,10 +54,10 @@ export default class GAME {
   W: number
   constructor() {
     this.Asteroids = []
-    this.AsteroidsNumber = 0
     this.BkgProportion = 4
     this.CargoTotal = 0
     this.CurrentScreen = 'levelStart'
+    this.Explosions = []
     this.GlobalTime = 0
     this.GameOver = false
     this.H = window.innerHeight

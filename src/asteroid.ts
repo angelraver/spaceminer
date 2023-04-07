@@ -2,6 +2,7 @@ import Utils from './utils'
 import SPRITE from './sprite'
 import Sound from './sound'
 import { Ordinal } from './types'
+import EXPLOSION from './explosion'
 
 /**
  * Extend SPRITE to add asteroid features
@@ -37,40 +38,32 @@ export default class ASTEROID extends SPRITE {
     // update the model and xp points
     switch(this.hits) {
       case 3:
-        this.modelNew = 0
-        g.Hero.mining(3, this.x, this.y)
-        Sound.play('pickoupcoin')
+        EXPLOSION.add({ x: this.x, y: this.y })
+        this.heroMining(3)
+        console.log(1)
         break
       case 6:
-        this.modelNew = 1
-        g.Hero.mining(5, this.x, this.y)
-        Sound.play('pickoupcoin')
+        EXPLOSION.add({ x: this.x, y: this.y })
+        this.heroMining(5)
+        console.log(2)
+        break
+      case this.hitsLimit: // asteroid going empty
+        EXPLOSION.add({ x: this.x, y: this.y })
+        this.setEmpty()
+        g.Hero.addCargoMineral()
+        console.log(3)
         break
       default:
+        console.log(4 )
         Sound.play('miningclick')
         break
     }
-
-    // changing the asteroid visual
-    // if (this.modelCurrent != this.modelNew) {
-    //   this.modelCurrent = this.modelNew 
-    //   let model = ASTEROIDS_MODELS_BREAK[this.modelCurrent] 
-    //   g.Asteroids = g.Asteroids.map((asteroid) => {
-    //     if (asteroid.id === this.id) {
-    //       asteroid.h = model.h 
-    //       asteroid.w = model.w 
-    //       asteroid.sheet = model.sheet.img
-    //       asteroid.updateImage() 
-    //     }
-    //     return asteroid 
-    //   }) 
-    // }
-
-    // asteroid going empty
-    if (this.hits === this.hitsLimit) {
-      this.setEmpty()
-      g.Hero.addCargoMineral()
-    }
+  }
+  
+  
+  heroMining(xp: number): void {
+    g.Hero.mining(xp, this.x, this.y)
+    Sound.play('pickoupcoin')
   }
   
   setEmpty(): void {

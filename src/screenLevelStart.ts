@@ -1,3 +1,4 @@
+import { SPRITE_LIBRARY } from './config'
 import HERO from './hero'
 import SPRITE from './sprite'
 import BACKGROUND from './background'
@@ -7,7 +8,7 @@ import Utils from './utils'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
 import UI from './uiPanel'
-import CLIENT from './client'
+import EXPLOSION from './explosion'
 
 /**
  * Prepare the game stats before the action screen
@@ -32,70 +33,35 @@ export default function screenLevelStart() {
 
     g.Stars = Array.from({ length: 1000 }, function (v, i) {
       return new BACKGROUND({
-        id: 'star_' + i,
         x: Utils.random(g.LevelLimits.l, g.LevelLimits.r),
         y: Utils.random(g.LevelLimits.t, g.LevelLimits.b),
-        w: 4,
-        h: 4,
+        w: 4,h: 4,
         fX: Utils.random(0, 4) * 50,
         fY: Utils.random(0, 4) * 50,
-        fW: 50,
-        fH: 50,
+        fW: 50, fH: 50,
         fQty: 1,
-        sheet: 'st'
+        sheet: SPRITE_LIBRARY.stars
       })
     })
 
-    g.AsteroidsNumber = 400
-    AsteroidManager.createGroup()
+    AsteroidManager.createGroup(200)
 
     g.Central = new SPRITE({
-      x: g.W / 2,
-      y: g.H / 2,
-      w: 10,
-      h: 10,
-      sheet: 'central',
-      fX: 0,
-      fY: 0,
-      fW: 91,
-      fH: 90,
+      w: 10, h: 10,
+      x: g.W / 2, y: g.H / 2,
+      sheet: SPRITE_LIBRARY.central,
+      fX: 0, fY: 0, fW: 91, fH: 90,
       r: 20,
-      scaleX: 2,
-      scaleY: 2,
+      scaleX: 2, scaleY: 2,
       mini: true
     })
 
-    g.Hero = new HERO({
-      x: g.W / 2,
-      y: g.H / 2,
-      h: 10,
-      w: 8,
-      sheet: 'ship',
-      fX: 0,
-      fY: 0,
-      fW: 72,
-      fH: 89,
-      fQty: 1,
-      r: 0,
-      scaleX: 1,
-      scaleY: 1,
-    })
+    g.Hero = new HERO({ h: 10, w: 8 })
     g.Hero.target = { x: g.Hero.x, y: g.Hero.y }
-
+    
     g.Clients = []
 
-    g.Crosshair = new CROSSHAIR({
-      id: 'crosshair',
-      w: 8,
-      h: 8,
-      fX: 0,
-      fY: 0,
-      fW: 64,
-      fH: 64,
-      sheet: 'crosshair',
-      r: 0
-    })
-
+    g.Crosshair = new CROSSHAIR({ w: 8, h: 8 })
     g.Inventory = new INVENTORY()
     g.UiPanel = new UI()
   }

@@ -1,4 +1,4 @@
-import SPRITE from "./sprite";
+import SPRITE from './sprite'
 import { Ordinal } from './types'
 import { MINERAL_MODELS } from './config'
 import Utils from './utils'
@@ -19,11 +19,23 @@ export default class HERO extends SPRITE {
   cargoMinerals: SPRITE[]
   
   constructor(props: any) {
-    super(props);
+    super(props)
+    this.x = g.W / 2
+    this.y = g.H / 2
+    this.sheet = 'ship'
+    this.fX = 0
+    this.fY = 0
+    this.fW = 72
+    this.fH = 89
+    this.fQty = 1
+    this.r = 0
+    this.scaleX = 1
+    this.scaleY = 1
     this.goingLeft = false
     this.goingRight = false
     this.goingTop = false
     this.goingBottom = false
+    this.updateImage()
     this.resetCargo()
   }
   /**

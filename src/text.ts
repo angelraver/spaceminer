@@ -1,4 +1,4 @@
-import SPRITE from "./sprite";
+import SPRITE from './sprite';
 /**
  * Extends SPRITE to add text features
  */
@@ -16,6 +16,22 @@ export default class TEXT extends SPRITE {
     this.size = props.size
     this.align = props.align || 'start'
   }
+  
+  /**
+   * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
+  */
+ static hiting(number: number, x: number, y: number) {
+   const hitLabel: TEXT = new TEXT({
+     text: '+' + number,
+     x: x,
+     y: y,
+     color: 'white',
+     colorLine: 'black',
+     size: 32,
+     loops: 30,
+    }) 
+    g.HitsLabels.push(hitLabel) 
+  }
   /**
    * Draw the text on canvas
    * - Apply looping
@@ -30,20 +46,4 @@ export default class TEXT extends SPRITE {
     ctx.strokeText(this.text, this.x, this.y)
     this.looping()
   }
-
-  /**
- * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
- */
-  static hiting(number: number, x: number, y: number) {
-    const hitLabel: TEXT = new TEXT({
-      text: '+' + number,
-      x: x,
-      y: y,
-      color: 'white',
-      colorLine: 'black',
-      size: 32,
-      loops: 30,
-    }) 
-    g.HitsLabels.push(hitLabel) 
-  } 
 }

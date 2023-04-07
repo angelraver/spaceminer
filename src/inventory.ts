@@ -1,4 +1,4 @@
-import { MINERAL_MODELS } from './config'
+import { SPRITE_LIBRARY, MINERAL_MODELS } from './config'
 import BACKGROUND from './background'
 import { MineralModel, Ordinal } from './types'
 import TEXT from './text'
@@ -41,7 +41,7 @@ export default class INVENTORY {
       fY: 0,
       fW: 110,
       fH: 145,
-      sheet: 'ui',
+      sheet: SPRITE_LIBRARY.ui,
       fixed: true
     })
     this.panel.x = (g.W - this.panel.w) / 2
@@ -121,7 +121,7 @@ export default class INVENTORY {
       fW: 50,
       fH: 47,
       fQty: 1,
-      sheet: 'sound'
+      sheet: SPRITE_LIBRARY.sound
     })
     this.soundButton.x = this.panel.x + this.panel.w - this.soundButton.w * 2
     this.soundButton.y = this.panel.y + this.panel.h - this.soundButton.h * 1.5
