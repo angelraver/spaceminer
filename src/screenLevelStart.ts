@@ -2,13 +2,13 @@ import { SPRITE_LIBRARY } from './config'
 import HERO from './hero'
 import SPRITE from './sprite'
 import BACKGROUND from './background'
-import AsteroidManager from './asteroidManager'
 import CROSSHAIR from './crosshair'
 import Utils from './utils'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
 import UI from './uiPanel'
 import EXPLOSION from './explosion'
+import ASTEROID from './asteroid'
 
 /**
  * Prepare the game stats before the action screen
@@ -44,7 +44,7 @@ export default function screenLevelStart() {
       })
     })
 
-    AsteroidManager.createGroup(200)
+    ASTEROID.createGroup(200)
 
     g.Central = new SPRITE({
       w: 10, h: 10,

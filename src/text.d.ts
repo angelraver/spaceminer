@@ -1,4 +1,4 @@
-import SPRITE from "./sprite";
+import SPRITE from './sprite';
 /**
  * Extends SPRITE to add text features
  */
@@ -10,12 +10,12 @@ export default class TEXT extends SPRITE {
     align: string;
     constructor(props: any);
     /**
+     * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
+    */
+    static hiting(number: number, x: number, y: number): void;
+    /**
      * Draw the text on canvas
      * - Apply looping
      */
     draw(): void;
-    /**
-   * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
-   */
-    static hiting(number: number, x: number, y: number): void;
 }

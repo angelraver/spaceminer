@@ -1,4 +1,4 @@
-import SPRITE from "./sprite";
+import SPRITE from './sprite';
 import { Ordinal } from './types';
 /**
  * Extends SPRITE to add hero features

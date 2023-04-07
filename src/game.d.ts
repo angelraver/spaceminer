@@ -11,7 +11,6 @@ import INVENTORY from './inventory';
 import UI from './uiPanel';
 export default class GAME {
     Anchor: SPRITE;
-    AsteroidsNumber: number;
     Asteroids: ASTEROID[];
     Background: PLAIN;
     BkgProportion: number;
@@ -24,6 +23,7 @@ export default class GAME {
     CurrentScreen: string;
     CurrentAsteroid: ASTEROID;
     Device: string;
+    Explosions: SPRITE[];
     GameOver: boolean;
     GlobalTime: number;
     H: number;
