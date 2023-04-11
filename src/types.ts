@@ -45,3 +45,8 @@ export type ClientModel = {
 export type LibraryItem = {
   [key: string]: string 
 }
+
+export type ItemAccount = { 
+  type: string
+  qty: number
+}

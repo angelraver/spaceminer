@@ -130,7 +130,7 @@ export default class HERO extends SPRITE {
    * Unloads the cargo in the central
    * - Creates the hit label
    * - Updates the XpTotal
-   * - Updates the MineralsTotal
+   * - Updates the MineralsStock
    * - Resets the xp
    */
   unloadCargo(): void {
@@ -138,9 +138,12 @@ export default class HERO extends SPRITE {
       Sound.play('powerup23')
       TEXT.hiting(g.Hero.xp, g.Hero.x, g.Hero.y)
       g.XpTotal += this.xp
-      this.cargoMinerals.forEach(m => g.MineralsTotal.push(m.metadata.type))
+      this.cargoMinerals.forEach((m) => {
+        g.MineralsHistory = Utils.updateQtyList(g.MineralsHistory, m.metadata.type, true)
+        g.MineralsStock = Utils.updateQtyList(g.MineralsStock, m.metadata.type, true)
+      })
       this.resetCargo()
-      g.Inventory.updateMinerals()
+      g.Inventory.updateStockMinerals()
     }
   }
 

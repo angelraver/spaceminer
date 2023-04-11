@@ -1,4 +1,4 @@
-import { Ordinal } from './types';
+import { Ordinal, ItemAccount } from './types';
 /**
  * Simple functions to return values
  * - Does not update globals
@@ -46,5 +46,12 @@ export default class Utils {
         x: number;
         y: number;
     };
+    /**
+     * checks if a is inside b + the margin
+     */
     static valueInMargin(a: number, b: number, margin: number): boolean;
+    /**
+     * returns a new list if the type exists in the list updates the qty
+     */
+    static updateQtyList(list: ItemAccount[], type: string, addition: boolean): ItemAccount[];
 }

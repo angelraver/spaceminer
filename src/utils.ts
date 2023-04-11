@@ -1,4 +1,4 @@
-import { Ordinal } from './types'
+import { Ordinal, ItemAccount } from './types'
 
 /**
  * Simple functions to return values
@@ -151,8 +151,32 @@ export default class Utils {
     return points[randomIndex]
   }
 
-  static valueInMargin(a:number, b: number, margin: number) {
+  /**
+   * checks if a is inside b + the margin
+   */
+  static valueInMargin(a: number, b: number, margin: number): boolean {
     return a >= (b - margin) && a <= (b + margin)
+  }
+
+  /**
+   * returns a new list if the type exists in the list updates the qty
+   */
+  static updateQtyList(list: ItemAccount[], type: string, addition: boolean): ItemAccount[] {
+    const items = [...list]
+    if(items.map((m) => m.type).includes(type)) {
+      return items.map((item) => {
+        if (item.type === type) {
+          if (addition) {
+            item.qty++
+          } else {
+            item.qty--
+          }        
+        }
+        return item
+      })
+    } else {
+      return [...items, { type: type, qty: 1 }]
+    }
   }
 
   // pixelation = 40

@@ -42,7 +42,7 @@ export default class HERO extends SPRITE {
      * Unloads the cargo in the central
      * - Creates the hit label
      * - Updates the XpTotal
-     * - Updates the MineralsTotal
+     * - Updates the MineralsStock
      * - Resets the xp
      */
     unloadCargo(): void;

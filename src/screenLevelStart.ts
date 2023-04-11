@@ -70,6 +70,8 @@ export default function screenLevelStart() {
   g.MarkTime = 0
   g.GlobalTime = 0
 
+  // g.MineralsStock = ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D']
+  // g.MineralsOnSale = ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D']
   // Catch all mouse click events
   function click(e: any): void {
     g.Hero.click(e)

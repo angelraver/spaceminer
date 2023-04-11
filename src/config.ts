@@ -16,12 +16,12 @@ export const CONFIG = {
 }
 
 export const SOUND_LIBRARY: LibraryItem = {
-  engine: 'engines.wav',
-  miningclick: 'miningclick.wav',
-  asteroidEmpty: 'asteroidempty.wav',
-  mineralFound: 'mineralfound.wav',
-  pickoupcoin: 'pickupcoin.wav',
-  powerup23: 'powerup23.wav'
+  engine: 'engines.mp3',
+  miningclick: 'miningclick.mp3',
+  asteroidEmpty: 'asteroidempty.mp3',
+  mineralFound: 'mineralfound.mp3',
+  pickoupcoin: 'pickupcoin.mp3',
+  powerup23: 'powerup23.mp3'
 }
 
 export const SPRITE_LIBRARY: LibraryItem = {
@@ -37,6 +37,7 @@ export const SPRITE_LIBRARY: LibraryItem = {
   client3: 'client3',
   controlsIcon: 'controls-icon',
   explosions: 'explosions',
+  inventoryPanel: 'inventorypanel',
   minerals: 'minerals',
   moneyIcon: 'money-icon',
   stars: 'stars',

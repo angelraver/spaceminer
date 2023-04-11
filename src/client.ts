@@ -96,16 +96,16 @@ export default class CLIENT extends SPRITE {
     }
     
     if (!this.isOutside && !this.isInCentral) {
-      // console.log('estamosa adentro')
+      // console.log('estamos adentro')
       this.pathBlocked = false
     }
 
     if (this.isInCentral) {
-      // console.log('estamos en central! time arribal: ', this.timeArrivalCentral)
+      // console.log('we're in central! time arrival: ', this.timeArrivalCentral)
       if (this.pathBlocked) return
 
       if (!this.timeArrivalCentral) {
-        // console.log('setear time arribal')
+        // console.log('set arrival time')
         this.timeArrivalCentral = g.GlobalTime
       } else if (g.GlobalTime > this.timeArrivalCentral) {
         // console.log('should we set the return path? ')

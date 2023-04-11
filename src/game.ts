@@ -1,4 +1,4 @@
-import { Limits } from './types'
+import { ItemAccount, Limits } from './types'
 import { CONFIG } from './config'
 import SPRITE from './sprite'
 import ASTEROID from './asteroid'
@@ -39,7 +39,9 @@ export default class GAME {
   LevelLimits: Limits
   Margin: number
   MarkTime: number
-  MineralsTotal: string[]
+  MineralsStock: ItemAccount[]
+  MineralsOnSale: ItemAccount[]
+  MineralsHistory: ItemAccount[]
   MoneyTotal: number
   OffSetHorizontal: number
   OffSetVertical: number
@@ -65,7 +67,9 @@ export default class GAME {
     this.InCentral = false
     this.MarkTime = 0
     this.Margin = 100
-    this.MineralsTotal = []
+    this.MineralsStock = []
+    this.MineralsOnSale = []
+    this.MineralsHistory = []
     this.MoneyTotal = 0
     this.Pause = false
     this.Stars = []

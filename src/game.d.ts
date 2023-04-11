@@ -1,4 +1,4 @@
-import { Limits } from './types';
+import { ItemAccount, Limits } from './types';
 import SPRITE from './sprite';
 import ASTEROID from './asteroid';
 import TEXT from './text';
@@ -34,7 +34,9 @@ export default class GAME {
     LevelLimits: Limits;
     Margin: number;
     MarkTime: number;
-    MineralsTotal: string[];
+    MineralsStock: ItemAccount[];
+    MineralsOnSale: ItemAccount[];
+    MineralsHistory: ItemAccount[];
     MoneyTotal: number;
     OffSetHorizontal: number;
     OffSetVertical: number;
