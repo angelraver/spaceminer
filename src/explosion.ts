@@ -17,7 +17,7 @@ export default class EXPLOSION extends SPRITE {
     const sheet: Sheet = EXPLOSIONS_SHEETS[Utils.random(0, EXPLOSIONS_SHEETS.length - 1)]
     return new EXPLOSION({
       id: `explosion_${Utils.random(0, 100000)}`,
-      x: pos.x, y: pos.y, w: 26, h: 26,
+      x: pos.x, y: pos.y, w: 20, h: 20,
       r: Utils.random(0, 180),
       fX: sheet.x, fY: sheet.y, fW: sheet.w, fH: sheet.h, 
       sheet: SPRITE_LIBRARY.explosions,
