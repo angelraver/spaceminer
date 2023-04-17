@@ -1,7 +1,7 @@
 import SPRITE from './sprite'
 import { Ordinal, ClientModel } from './types'
 import Utils from "./utils"
-import { CLIENT_MODELS } from "./config"
+import { CLIENT_MODELS, MINERAL_MODELS } from "./config"
 
 /**
  * Extends SPRITE to add hero features
@@ -16,6 +16,8 @@ export default class CLIENT extends SPRITE {
   timeArrivalCentral: number
   timeArrivalOutside: number
   timeShopping: number
+  mineralTypeBought: string
+  mineralCargo: SPRITE
   
   constructor(props: any) {
     super(props);
@@ -67,6 +69,7 @@ export default class CLIENT extends SPRITE {
 /**
  * Check if it is time to the client to get a path to appear
  * Check if it is time to the client to leave
+ * Set the mineral to buy
  */
   checkPath() {
     this.isOutside = this.x < -g.OffSetHorizontal || this.x > g.W + g.OffSetHorizontal || this.y < -g.OffSetVertical || this.y > g.H + g.OffSetVertical
@@ -110,6 +113,8 @@ export default class CLIENT extends SPRITE {
       } else if (g.GlobalTime > this.timeArrivalCentral) {
         // console.log('should we set the return path? ')
         if ((g.GlobalTime - this.timeArrivalCentral) % this.timeShopping === 0) {
+          // console.log('time to take the mineral!')
+          this.buyMineral()
           // console.log('---time to set the returning path')
           this.setPath(this.origin)
           // console.log('origin: ', this.origin)
@@ -122,9 +127,37 @@ export default class CLIENT extends SPRITE {
   }
 
   /**
+   * updates the client mineralTypeBought prop
+   * updates the g.MineralsOnSale
+   */
+  buyMineral():void {
+    const minelasOnSale = g.MineralsOnSale.filter((min) => min.qty > 0)
+    if (minelasOnSale.length > 0) {
+      this.mineralTypeBought = g.MineralsOnSale[Utils.random(0, g.MineralsOnSale.length - 1)].type
+      g.Inventory.setMineralTo('sold', this.mineralTypeBought)
+      const mineral = MINERAL_MODELS.find((min) => min.type === this.mineralTypeBought)
+      this.mineralCargo = new SPRITE({
+        metadata: mineral,
+        fX: mineral.sheet.x,
+        fY: mineral.sheet.y,
+        fW: mineral.sheet.w,
+        fH: mineral.sheet.h,
+        sheet: mineral.sheet.img,
+        x: this.x,
+        y: this.y,
+        w: this.w / g.Block,
+        h: this.w / g.Block, // yes the w, for square simetry
+        r: Utils.random(0, 360)
+      })
+    } else {
+      console.log('NOTHING TO BUY! :(')
+    }
+  }
+
+  /**
    * Check if there are new clients, add new clients
    */
-  static checkIn() {
+  static checkIfIsIn() {
     if (g.Clients.length === CLIENT_MODELS.length) return
   
     CLIENT_MODELS.forEach((model: ClientModel) => {
@@ -161,7 +194,10 @@ export default class CLIENT extends SPRITE {
     this.checkPath()
     this.pathByHero()
 
-    if (this.isOutside) return
+    if (this.isOutside) {
+      this.mineralCargo = null
+      return
+    }
 
     if(this.isVisible()) {
       ctx.save()
@@ -169,6 +205,12 @@ export default class CLIENT extends SPRITE {
       ctx.rotate(-this.r)
       ctx.scale(this.scaleX, this.scaleY)
       ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
+
+      const cargo = this.mineralCargo
+      if (cargo) {
+        ctx.drawImage(cargo.img, cargo.fX, cargo.fY, cargo.fW, cargo.fH, 0 - this.w / 2, 0 - this.h / 2, cargo.w, cargo.h)
+      }
+  
       ctx.restore()
       this.tweenUpdate()
     } else {

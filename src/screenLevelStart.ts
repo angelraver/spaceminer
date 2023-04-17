@@ -7,7 +7,6 @@ import Utils from './utils'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
 import UI from './uiPanel'
-import EXPLOSION from './explosion'
 import ASTEROID from './asteroid'
 
 /**
@@ -70,9 +69,6 @@ export default function screenLevelStart() {
   g.MarkTime = 0
   g.GlobalTime = 0
 
-  // g.MineralsStock = ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D']
-  // g.MineralsOnSale = ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D']
-  // Catch all mouse click events
   function click(e: any): void {
     g.Hero.click(e)
     g.CurrentAsteroid?.click(e)

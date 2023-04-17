@@ -26,16 +26,11 @@ export default class INVENTORY {
   textSale: TEXT
   showInventory: Boolean
   panel: BACKGROUND
-  mineralsStockTypes: string[]
   slotsStock: any[]
-  mineralsSaleTypes: string[]
   slotsSale: any[]
   soundButton: BACKGROUND
 
   constructor() {
-    this.mineralsStockTypes = []
-    this.mineralsSaleTypes = []
-
     this.setPanel()
     this.setTexts()
     this.setStockMinerals()
