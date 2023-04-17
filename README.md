@@ -40,17 +40,22 @@ Exploración espacial, la galaxia tiene que ser tipo roguelike, generado automá
 - tendremos todo el mapa seteado pero solo procesar para la pantalla visible lo que esté dentro de la pantalla visible en cada momento. OK
 - el hero va recolectando consas y esas cosas se ven en el hero como las acumula y tiene que volver a dejarlas porque su capacidad de acopio es limitada. OK
 - los recursos consumidos se quedan en pantalla, se los ve muertos, como los muertos del doom. OK
-- portales que llevan al hero a otro mapa
-- casita del hero donde acumula cosas
-- la nave mina, pero también construye instalaciones que van trabajando solas produciendo y luego habrá que pasar a recoletar el producto.
+
+próximo
+- implementar sistema de niveles de experiencia, que la nave empiece con solo 1 de capacidad, y que luego de X xp vaya aumentando
 - construir drones que pasan por las bases o los asteroides y recogen recursos y los llevan a la central solitos.
+- poner sorpresas en los asteroides como simpáticos aliens que dan recompensas. o también aliens que piden ayuda, costosa ayuda en forma de recursos. puedo elegir ayudarlos o no. si ayudo mas adelante en el tiempo pueden venir y agradecerme.
+
 
 22.3.2023
 feedback 1
 - mas espacio en el espacio para la version movile (y desktop también debería ser) OK
 - reducir la ui de xp y money y botn inventario lo más posible pegados al borde superior. OK
 - poder incrementar la velocidad de la nave para que no sea tedioso ir de una lugar a otro cuando las distancias son largas.
-- poner sorpresas en los asteroides como simpáticos aliens que dan recompensas. o también aliens que piden ayuda, costosa ayuda en forma de recursos. puedo elegir ayudarlos o no. si ayudo mas adelante en el tiempo pueden venir y agradecerme.
 
 
+ideas desconectadas aún
+- la nave mina, pero también construye instalaciones que van trabajando solas produciendo y luego habrá que pasar a recoletar el producto.
+- casita del hero donde acumula cosas
+- portales que llevan al hero a otro mapa
 
