@@ -39,6 +39,9 @@ export default class INVENTORY {
      * updates the qty of mineralas in the slots
      */
     updateStockMinerals(): void;
+    /**
+     * updates MineralsOnSale and MineralsStock for stock, sale or sold action
+     */
     setMineralTo(action: string, type: string): void;
     /**
      * returns one random mineral from the SlotSale

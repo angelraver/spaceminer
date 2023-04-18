@@ -5,17 +5,15 @@ import TEXT from './text'
 import Utils from './utils'
 
 const STOCK_MINERAL_POSITIONS: any[] = [
-  { x: 0, y: 0, t: 'A' }, { x: 7, y: 0, t: 'B' },
-  { x: 0, y: 10, t: 'C' }, { x: 7, y: 10, t: 'D' },
-  { x: 0, y: 20, t: 'E' }, { x: 7, y: 20, t: 'F' },
-  { x: 0, y: 30, t: 'G' }, { x: 7, y: 30, t: 'H' },
+  { x: 0, y: 0, t: 'A' },   { x: 7, y: 0, t: 'B' },   { x: 14, y: 0, t: 'C' },  { x: 21, y: 0, t: 'D' },
+  { x: 0, y: 8, t: 'E' },  { x: 7, y: 8, t: 'F' },  { x: 14, y: 8, t: 'G' }, { x: 21, y: 8, t: 'H' },
 ]
 
 const SALE_MINERAL_POSITIONS: any[] = [
   { x: 0, y: 0, t: 'A' }, { x: 9, y: 0, t: 'B' },
-  { x: 0, y: 16, t: 'C' }, { x: 9, y: 16, t: 'D' },
-  { x: 0, y: 32, t: 'E' }, { x: 9, y: 32, t: 'F' },
-  { x: 0, y: 48, t: 'G' }, { x: 9, y: 48, t: 'H' },
+  { x: 0, y: 8, t: 'C' }, { x: 9, y: 8, t: 'D' },
+  { x: 0, y: 16, t: 'E' }, { x: 9, y: 16, t: 'F' },
+  { x: 0, y: 24, t: 'G' }, { x: 9, y: 24, t: 'H' },
 ]
 
 /**
@@ -90,7 +88,7 @@ export default class INVENTORY {
         qty: 0,
         spriteImage: new BACKGROUND({
           fixed: true,
-          x: this.panel.x + (this.panel.w / 2) + (position.x * g.Block),
+          x: this.panel.x + (this.panel.w / 3) + (position.x * g.Block) + (g.Block * 2),
           y: this.panel.y + (g.Block * 3) + (position.y * g.Block),
           w: 6,
           h: 6,
@@ -102,7 +100,7 @@ export default class INVENTORY {
           fQty: mineral.sheet.fQty
         }),
         spriteText: new TEXT({
-          x: this.panel.x + (this.panel.w / 2) + (position.x * g.Block) + (g.Block * 6),
+          x: this.panel.x + (this.panel.w / 3) + (position.x * g.Block) + (g.Block * 8),
           y: this.panel.y + (g.Block * 3) + (position.y * g.Block) + (g.Block * 7),
           size: g.Block * 3,
           color: 'black',
@@ -146,9 +144,9 @@ export default class INVENTORY {
     return MINERAL_MODELS.find(m => m.type === type)
   }
   
-/**
- * updates the qty of mineralas in the slots
- */
+  /**
+   * updates the qty of mineralas in the slots
+   */
   updateStockMinerals() {  
     this.slotsStock = this.slotsStock.map((slot) => {
       const mineral = g.MineralsStock.find((m) => m.type === slot.type)
@@ -169,6 +167,9 @@ export default class INVENTORY {
     })
   }
 
+  /**
+   * updates MineralsOnSale and MineralsStock for stock, sale or sold action
+   */
   setMineralTo(action: string, type: string) {
     if (action === 'sold') {
       g.MineralsOnSale = Utils.updateQtyList(g.MineralsOnSale, type, false)
