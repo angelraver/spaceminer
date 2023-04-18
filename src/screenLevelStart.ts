@@ -69,6 +69,18 @@ export default function screenLevelStart() {
   g.MarkTime = 0
   g.GlobalTime = 0
 
+  g.MineralsPrices = [
+    { type: 'A', price: 5 },
+    { type: 'B', price: 10 },
+    { type: 'C', price: 20 },
+    { type: 'D', price: 50 },
+    { type: 'E', price: 60 },
+    { type: 'F', price: 70 },
+    { type: 'G', price: 80 },
+    { type: 'H', price: 90 },
+    { type: 'I', price: 100 }
+  ]
+
   function click(e: any): void {
     g.Hero.click(e)
     g.CurrentAsteroid?.click(e)

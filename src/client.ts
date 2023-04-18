@@ -2,6 +2,7 @@ import SPRITE from './sprite'
 import { Ordinal, ClientModel } from './types'
 import Utils from "./utils"
 import { CLIENT_MODELS, MINERAL_MODELS } from "./config"
+import TEXT from './text'
 
 /**
  * Extends SPRITE to add hero features
@@ -149,6 +150,9 @@ export default class CLIENT extends SPRITE {
         h: this.w / g.Block, // yes the w, for square simetry
         r: Utils.random(0, 360)
       })
+      const price = g.MineralsPrices.find((m) => m.type === this.mineralTypeBought).price
+      g.MoneyTotal += price 
+      TEXT.hiting(price.toString(), this.x, this.y, 'gold', 'white')
     } else {
       console.log('NOTHING TO BUY! :(')
     }

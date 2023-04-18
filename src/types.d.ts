@@ -43,3 +43,7 @@ export type ItemAccount = {
     type: string;
     qty: number;
 };
+export type MineralPrice = {
+    type: string;
+    price: number;
+};

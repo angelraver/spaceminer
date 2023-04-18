@@ -1,4 +1,4 @@
-import { ItemAccount, Limits } from './types';
+import { ItemAccount, Limits, MineralPrice } from './types';
 import SPRITE from './sprite';
 import ASTEROID from './asteroid';
 import TEXT from './text';
@@ -29,6 +29,7 @@ export default class GAME {
     H: number;
     Hero: HERO;
     HitsLabels: TEXT[];
+    HitsLabelsDone: TEXT[];
     InCentral: boolean;
     Inventory: INVENTORY;
     LevelLimits: Limits;
@@ -36,6 +37,7 @@ export default class GAME {
     MarkTime: number;
     MineralsStock: ItemAccount[];
     MineralsOnSale: ItemAccount[];
+    MineralsPrices: MineralPrice[];
     MineralsHistory: ItemAccount[];
     MoneyTotal: number;
     OffSetHorizontal: number;
