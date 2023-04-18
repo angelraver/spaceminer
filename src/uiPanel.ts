@@ -138,8 +138,8 @@ export default class UI {
   }
 
   draw() {
-    this.xpText.text = g.XpTotal.toString()
-    this.moneyText.text = g.MoneyTotal.toString()
+    this.xpText.text = Utils.getNumberAscending(Number(this.xpText.text), g.XpTotal).toString()
+    this.moneyText.text = Utils.getNumberAscending(Number(this.moneyText.text), g.MoneyTotal).toString()
 
     this.xpPanel.draw()
     this.xpIcon .draw()

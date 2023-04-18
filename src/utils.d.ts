@@ -54,4 +54,8 @@ export default class Utils {
      * returns a new list if the type exists in the list updates the qty
      */
     static updateQtyList(list: ItemAccount[], type: string, addition: boolean): ItemAccount[];
+    /**
+     * returns a number in ascendent order from the start to end
+     */
+    static getNumberAscending(start: number, end: number): number;
 }

@@ -179,6 +179,16 @@ export default class Utils {
     }
   }
 
+  /**
+   * returns a number in ascendent order from the start to end
+   */
+  static getNumberAscending(start: number, end: number) {
+    if (start < end) {
+      return start + 1
+    } else {
+      return end
+    }
+  }
   // pixelation = 40
   // static pixelate({ w, h, x: _x, y: _y }) {
   //   var imageData = ctx.getImageData(_x, _y, w, h),
