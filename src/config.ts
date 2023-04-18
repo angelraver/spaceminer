@@ -17,7 +17,8 @@ export const CONFIG = {
 
 export const SOUND_LIBRARY: LibraryItem = {
   engine: 'engines.mp3',
-  miningclick: 'miningclick.mp3',
+  // miningclick: 'miningclick.mp3',
+  miningclick: 'asteroidempty.mp3',
   asteroidEmpty: 'asteroidempty.mp3',
   mineralFound: 'mineralfound.mp3',
   pickoupcoin: 'pickupcoin.mp3',
@@ -35,6 +36,8 @@ export const SPRITE_LIBRARY: LibraryItem = {
   client1: 'client1',
   client2: 'client2',
   client3: 'client3',
+  client4: 'client4',
+  client5: 'client5',
   controlsIcon: 'controls-icon',
   explosions: 'explosions',
   inventoryPanel: 'inventorypanel',
@@ -58,15 +61,29 @@ export const CLIENT_MODELS: ClientModel[] = [
     id: 'B',
     requiredXp: 20,
     period: 15,
-    timeShopping: 8,
+    timeShopping: 5,
     sheet: { img: SPRITE_LIBRARY.client2, x: 0, y: 0, w: 50, h: 50 }
   },
   {
     id: 'C',
-    requiredXp: 40,
+    requiredXp: 30,
     period: 25,
-    timeShopping: 12,
+    timeShopping: 5,
     sheet: { img: SPRITE_LIBRARY.client3, x: 0, y: 0, w: 50, h: 50 }
+  },
+  {
+    id: 'D',
+    requiredXp: 40,
+    period: 10,
+    timeShopping: 5,
+    sheet: { img: SPRITE_LIBRARY.client4, x: 0, y: 0, w: 50, h: 50 }
+  },
+  {
+    id: 'E',
+    requiredXp: 50,
+    period: 15,
+    timeShopping: 5,
+    sheet: { img: SPRITE_LIBRARY.client5, x: 0, y: 0, w: 50, h: 50 }
   }
 ]
 
@@ -96,28 +113,36 @@ export const ASTEROID_MODELS: AsteroidModel[] = [
  */
 export const MINERAL_MODELS: MineralModel[] = [
   {
-    type: 'A',
-    name: 'A',
-    chance: [1, 50],
+    type: 'A', name: '1', chance: [1, 20],
     sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 0, w: 32, h: 32 }
   },
   {
-    type: 'B',
-    name: 'B',
-    chance: [51, 75],
+    type: 'B', name: '2', chance: [21, 30],
     sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 32, w: 32, h: 32 }
   },
   {
-    type: 'C',
-    name: 'C',
-    chance: [76, 90],
+    type: 'C', name: '3', chance: [31, 40],
     sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 64, w: 32, h: 32 }
   },
   {
-    type: 'D',
-    name: 'D',
-    chance: [91, 100],
+    type: 'D', name: '4', chance: [41, 50],
     sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 96, w: 32, h: 32 }
+  },
+  {
+    type: 'E', name: '5', chance: [51, 60],
+    sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 128, w: 32, h: 32 }
+  },
+  {
+    type: 'F', name: '6', chance: [61, 70],
+    sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 160, w: 32, h: 32 }
+  },
+  {
+    type: 'G', name: '7', chance: [71, 80],
+    sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 192, w: 32, h: 32 }
+  },
+  {
+    type: 'H', name: '8', chance: [81, 100],
+    sheet: { img: SPRITE_LIBRARY.minerals, x: 0, y: 224, w: 32, h: 32 }
   },
 ]
 
