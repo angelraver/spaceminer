@@ -84,7 +84,7 @@ export default class HERO extends SPRITE {
   mining(xp: number, x: number, y: number) {
     this.xp += xp
     g.XpTotal += xp
-    TEXT.hiting(xp, x, y)
+    TEXT.hiting(xp.toString(), x, y, 'blue', 'white')
   }
 
   /**
@@ -136,7 +136,7 @@ export default class HERO extends SPRITE {
   unloadCargo(): void {
     if (g.InCentral && g.Hero.xp > 0) {
       Sound.play('powerup23')
-      TEXT.hiting(g.Hero.xp, g.Hero.x, g.Hero.y)
+      TEXT.hiting(g.Hero.xp.toString(), g.Hero.x, g.Hero.y, 'blue', 'white')
       g.XpTotal += this.xp
       this.cargoMinerals.forEach((m) => {
         g.MineralsHistory = Utils.updateQtyList(g.MineralsHistory, m.metadata.type, true)

@@ -20,13 +20,13 @@ export default class TEXT extends SPRITE {
   /**
    * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
   */
- static hiting(number: number, x: number, y: number) {
+ static hiting(value: string, x: number, y: number, color: string, colorLine: string) {
    const hitLabel: TEXT = new TEXT({
-     text: '+' + number,
+     text: value,
      x: x,
      y: y,
-     color: 'white',
-     colorLine: 'black',
+     color: color,
+     colorLine: colorLine,
      size: 32,
      loops: 30,
     }) 
