@@ -3,6 +3,7 @@ import BACKGROUND from './background'
 import { MineralModel, Ordinal, ItemAccount } from './types'
 import TEXT from './text'
 import Utils from './utils'
+import Sound from './sound'
 
 const STOCK_MINERAL_POSITIONS: any[] = [
   { x: 0, y: 0, t: 'A' },   { x: 7, y: 0, t: 'B' },   { x: 14, y: 0, t: 'C' },  { x: 21, y: 0, t: 'D' },
@@ -217,6 +218,7 @@ export default class INVENTORY {
     this.slotsStock.forEach((slot) => {
       if (Utils.isHiting(e, slot.spriteImage)) {// clicking on the mineral
         if (slot.qty > 0) {
+          Sound.play('mineralSelect')
           this.setMineralTo('sale', slot.type)
         }
       }
@@ -226,6 +228,7 @@ export default class INVENTORY {
     this.slotsSale.forEach((slot) => {
       if (Utils.isHiting(e, slot.spriteImage)) {// clicking on the mineral
         if (slot.qty > 0) {
+          Sound.play('mineralUnselect')
           this.setMineralTo('stock', slot.type)
         }
       }

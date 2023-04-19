@@ -4,6 +4,7 @@ import { Ordinal } from './types'
 import BACKGROUND from './background'
 import TEXT from './text'
 import SPRITE from './sprite'
+import Sound from './sound'
 
 export default class UI {
   controlsButton: SPRITE
@@ -119,14 +120,13 @@ export default class UI {
     })    
   }
 
-
-
 /**
  * Show / Hide inventory
  */
   click(e: Ordinal) {
     // hitting control button
     if (Utils.isHiting(e, this.controlsButton)) {
+      Sound.play('inventoryOpen')
       g.Inventory.showInventory = true
     } else {
       // not hitting control button

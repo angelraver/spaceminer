@@ -1,6 +1,22 @@
-import { CONFIG, SOUND_LIBRARY } from './config'
+import { CONFIG } from './config'
+import { LibraryItem } from './types'
+
+const SOUND_LIBRARY: LibraryItem = {
+  engine: 'engines.mp3',
+  asteroidEmpty: 'asteroidempty.mp3',
+  miningclick: 'asteroidempty.mp3',
+  mineralFound: 'mineralfound.mp3',
+  pickoupcoin: 'pickupcoin.mp3',
+  powerup23: 'powerup23.mp3',
+  inventoryOpen: 'inventory-open.mp3',
+  clientBuy: 'client-buy.mp3',
+  clientNobuy: 'client-nobuy.mp3',
+  mineralSelect: 'mineral-select.mp3',
+  mineralUnselect: 'mineral-unselect.mp3',
+}
+
 /**
- * Methos for audio
+ * Methods for audio
  */
 export default class Sound {
   /**

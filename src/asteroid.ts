@@ -60,7 +60,7 @@ export default class ASTEROID extends SPRITE {
   
   heroMining(xp: number): void {
     g.Hero.mining(xp, this.x, this.y)
-    Sound.play('pickoupcoin')
+    // Sound.play('pickoupcoin')
   }
   
   setEmpty(): void {

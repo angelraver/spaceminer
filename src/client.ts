@@ -3,6 +3,7 @@ import { Ordinal, ClientModel } from './types'
 import Utils from "./utils"
 import { CLIENT_MODELS, MINERAL_MODELS } from "./config"
 import TEXT from './text'
+import Sound from './sound'
 
 /**
  * Extends SPRITE to add hero features
@@ -133,6 +134,7 @@ export default class CLIENT extends SPRITE {
    */
   buyMineral():void {
     const minelasOnSale = g.MineralsOnSale.filter((min) => min.qty > 0)
+    // console.log(g.MineralsOnSale)
     if (minelasOnSale.length > 0) {
       this.mineralTypeBought = g.MineralsOnSale[Utils.random(0, g.MineralsOnSale.length - 1)].type
       g.Inventory.setMineralTo('sold', this.mineralTypeBought)
@@ -153,8 +155,10 @@ export default class CLIENT extends SPRITE {
       const price = g.MineralsPrices.find((m) => m.type === this.mineralTypeBought).price
       g.MoneyTotal += price 
       TEXT.hiting(price.toString(), this.x, this.y, 'gold', 'white')
+      Sound.play('clientBuy')
     } else {
       console.log('NOTHING TO BUY! :(')
+      Sound.play('clientNobuy')
     }
   }
 
@@ -165,7 +169,7 @@ export default class CLIENT extends SPRITE {
     if (g.Clients.length === CLIENT_MODELS.length) return
   
     CLIENT_MODELS.forEach((model: ClientModel) => {
-      if (model.requiredXp >= g.XpTotal) {
+      if (g.XpTotal >= model.requiredXp) {
         const existing = g.Clients.find((c: CLIENT) => model.id === c.id)
         if (!existing) {
           g.Clients.push(new CLIENT({
@@ -192,8 +196,6 @@ export default class CLIENT extends SPRITE {
  * Before it checks the path and blocked it
  */
   draw(): void {
-    if (g.XpTotal < 10 && this.path.length === 0) return
-
     this.going()
     this.checkPath()
     this.pathByHero()

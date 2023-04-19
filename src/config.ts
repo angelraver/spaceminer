@@ -15,16 +15,6 @@ export const CONFIG = {
   OFFSET_DESKTOP_Y: 2
 }
 
-export const SOUND_LIBRARY: LibraryItem = {
-  engine: 'engines.mp3',
-  // miningclick: 'miningclick.mp3',
-  miningclick: 'asteroidempty.mp3',
-  asteroidEmpty: 'asteroidempty.mp3',
-  mineralFound: 'mineralfound.mp3',
-  pickoupcoin: 'pickupcoin.mp3',
-  powerup23: 'powerup23.mp3'
-}
-
 export const SPRITE_LIBRARY: LibraryItem = {
   asteroid1: 'a1',
   asteroid2: 'a2',
