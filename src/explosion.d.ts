@@ -17,5 +17,5 @@ export default class EXPLOSION extends SPRITE {
      * Draw the text on canvas
      * - Apply looping
      */
-    draw(): void;
+    drawing(): void;
 }

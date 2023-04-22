@@ -47,26 +47,26 @@ export default class SPRITE {
      */
     framing(): void;
     /**
-     * flip vertically through the canvas scale prop
-     * @param direction
-     */
-    flipVertically(direction: number): void;
-    /**
-     * flip horizontally through the canvas scale prop
-     * @param direction
-     */
-    flipHorizontally(direction: number): void;
-    /**
      * Given an sprite array it returs the fist with collision
      * @param elements list of SPRITEs to check
      * @returns SPRITE collisioning with
      */
     colisionWith(elements: any[]): any;
     /**
-     * Complex draw on the canvas with rotation and scaling
+     * Complex draw on the canvas with rotation and scaling and mini
+     * can receive a inner callback to execute inside
      */
-    draw(): void;
-    tweenUpdate(): void;
+    draw(callBackInner?: () => void): void;
+    /**
+     * executes applis rotation, scaleing and call the drawImage
+     * can receive a inner callback to execute inside
+     */
+    drawNormal(callBackInner?: () => void): void;
+    /**
+     * executes the ctx.drawImage
+     * can receive a inner callback to execute inside
+     */
+    drawImage({ x, y, w, h, img, fX, fY, fW, fH }: any): void;
     /**
    * Draw the mini version of the sprite a the border of the screen in the direcction
    * of the original sprite, when is not visible

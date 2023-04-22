@@ -9,6 +9,7 @@ import BACKGROUND from './background';
 import PLAIN from './plain';
 import INVENTORY from './inventory';
 import UI from './uiPanel';
+import EXPLOSION from './explosion';
 export default class GAME {
     Anchor: SPRITE;
     Asteroids: ASTEROID[];
@@ -23,7 +24,7 @@ export default class GAME {
     CurrentScreen: string;
     CurrentAsteroid: ASTEROID;
     Device: string;
-    Explosions: SPRITE[];
+    Explosions: EXPLOSION[];
     GameOver: boolean;
     GlobalTime: number;
     H: number;
@@ -52,8 +53,4 @@ export default class GAME {
     XpTotal: number;
     W: number;
     constructor();
-    /**
-     * to know the current device desktop or mobile
-     */
-    setDevice(): void;
 }

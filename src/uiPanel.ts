@@ -126,7 +126,6 @@ export default class UI {
   click(e: Ordinal) {
     // hitting control button
     if (Utils.isHiting(e, this.controlsButton)) {
-      Sound.play('inventoryOpen')
       g.Inventory.showInventory = true
     } else {
       // not hitting control button

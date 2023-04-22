@@ -13,9 +13,14 @@ export default class CLIENT extends SPRITE {
     timeArrivalCentral: number;
     timeArrivalOutside: number;
     timeShopping: number;
-    mineralTypeBought: string;
+    mineralTypeToBuy: string;
     mineralCargo: SPRITE;
+    flame1: SPRITE;
     constructor(props: any);
+    /**
+     * Check if there are new clients, add new clients
+     */
+    static create(): void;
     /**
      * Updates the path array positions to stay relative to the hero current position
      */
@@ -27,18 +32,14 @@ export default class CLIENT extends SPRITE {
      */
     checkPath(): void;
     /**
-     * updates the client mineralTypeBought prop
+     * updates the client mineralTypeToBuy prop
      * updates the g.MineralsOnSale
      */
     buyMineral(): void;
-    /**
-     * Check if there are new clients, add new clients
-     */
-    static checkIfIsIn(): void;
     /**
    * Overwrite draw
    * Before it checks the path by hero
    * Before it checks the path and blocked it
    */
-    draw(): void;
+    drawing(): void;
 }

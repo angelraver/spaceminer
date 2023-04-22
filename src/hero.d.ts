@@ -12,11 +12,13 @@ export default class HERO extends SPRITE {
     cargoMineralsFull: boolean;
     cargoMineralsPositions: Ordinal[];
     cargoMinerals: SPRITE[];
+    flame1: SPRITE;
+    flame2: SPRITE;
     constructor(props: any);
     /**
      * Overwrite draw
      */
-    draw(): void;
+    drawing(): void;
     /**
      * Manage click event
      * @param e
@@ -55,4 +57,5 @@ export default class HERO extends SPRITE {
     * Update the global Going family top, right, bottom ,left to know where the hero is going
     */
     checkDirection(): void;
+    checkMoving(): boolean;
 }

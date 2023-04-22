@@ -8,8 +8,8 @@ export const CONFIG = {
   SOUND_FOLDER: './assets/sounds/',
   GAME_SPEED: 45,
   BLOCK: 8,
-  OFFSET_X: 2,
-  OFFSET_Y: 2
+  OFFSET_X: 1,
+  OFFSET_Y: 1
 }
 
 export const SPRITE_LIBRARY: LibraryItem = {
