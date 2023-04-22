@@ -12,9 +12,6 @@ import INVENTORY from './inventory'
 import UI from './uiPanel'
 import EXPLOSION from './explosion'
 
-const MOBILE = 'mobile'
-const DESKTOP = 'desktop'
-
 export default class GAME {
   Anchor: SPRITE
   Asteroids: ASTEROID[]
@@ -82,34 +79,14 @@ export default class GAME {
     this.Speed = 10
     this.XpTotal = 0
     this.W = window.innerWidth
-    this.setDevice()
-  }
-/**
- * to know the current device desktop or mobile
- */
-  setDevice() {
-    if (this.W < 500 || this.H < 500) {
-      this.Device = MOBILE
-      this.Block = CONFIG.BLOCK_MOBILE
-      this.OffSetHorizontal = this.W * CONFIG.OFFSET_MOBILE_X
-      this.OffSetVertical = this.H * CONFIG.OFFSET_MOBILE_Y
-      this.CenterVoid = {
-        x: 0,
-        y: this.H / 2 - this.H / 4,
-        w: this.W,
-        h: this.H / 2
-      }
-    } else {
-      this.Device = DESKTOP
-      this.Block = CONFIG.BLOCK_DESKTOP
-      this.OffSetHorizontal = this.W * CONFIG.OFFSET_DESKTOP_X  
-      this.OffSetVertical = this.H * CONFIG.OFFSET_DESKTOP_Y
-      this.CenterVoid = {
-        x: this.W / 2 - this.W / 4,
-        y: this.H / 2 - this.H / 4,
-        w: this.W / 2,
-        h: this.H / 2
-      }
+    this.Block = CONFIG.BLOCK
+    this.OffSetHorizontal = this.W * CONFIG.OFFSET_X  
+    this.OffSetVertical = this.H * CONFIG.OFFSET_Y
+    this.CenterVoid = {
+      x: this.W / 4,
+      y: this.H / 4,
+      w: this.W / 2,
+      h: this.H / 2
     }
   }
 }
