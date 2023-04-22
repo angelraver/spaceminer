@@ -10,6 +10,7 @@ import BACKGROUND from './background'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
 import UI from './uiPanel'
+import EXPLOSION from './explosion'
 
 const MOBILE = 'mobile'
 const DESKTOP = 'desktop'
@@ -28,7 +29,7 @@ export default class GAME {
   CurrentScreen: string
   CurrentAsteroid: ASTEROID
   Device: string
-  Explosions: SPRITE[]
+  Explosions: EXPLOSION[]
   GameOver: boolean
   GlobalTime: number
   H: number

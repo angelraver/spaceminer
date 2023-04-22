@@ -31,6 +31,7 @@ export const SPRITE_LIBRARY: LibraryItem = {
   controlsIcon: 'controls-icon',
   explosions: 'explosions',
   flameBlue: 'flameblue',
+  flameBlue2: 'flameblue2',
   inventoryPanel: 'inventorypanel',
   minerals: 'minerals',
   moneyIcon: 'money-icon',

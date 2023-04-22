@@ -20,7 +20,8 @@ export default class CLIENT extends SPRITE {
   timeShopping: number
   mineralTypeBought: string
   mineralCargo: SPRITE
-  
+  flame1: SPRITE
+
   constructor(props: any) {
     super(props);
     this.period = props.period
@@ -36,8 +37,41 @@ export default class CLIENT extends SPRITE {
     this.origin = Utils.randomOuterPoint()
     this.x = this.origin.x
     this.y = this.origin.y
+    this.mini = true
+    this.fixed = true
+    this.flame1 = new SPRITE({
+      x: this.w / -2 + 8, y: this.h / -2 + 68, w: 5, h: 6,
+      sheet: 'flameblue2', fX: 0, fY: 0, fW: 16, fH: 16, fQty: 4
+    })
   }
   
+  /**
+   * Check if there are new clients, add new clients
+   */
+  static create() {
+    if (g.Clients.length === CLIENT_MODELS.length) return
+  
+    const models = CLIENT_MODELS.filter((m) => { 
+      return g.XpTotal > m.requiredXp && !g.Clients.find((c: CLIENT) => m.id === c.id)
+    })
+
+    models.forEach((model: ClientModel) => {
+      g.Clients.push(new CLIENT({
+        id: model.id,
+        h: 8,
+        w: 7,
+        period: model.period,
+        timeShopping: model.timeShopping,
+        sheet: model.sheet.img,
+        fX: model.sheet.x,
+        fY: model.sheet.y,
+        fQty: model.sheet.fQty,
+        fH: model.sheet.h,
+        fW: model.sheet.w
+      }))
+    })
+  }
+
   /**
    * Updates the path array positions to stay relative to the hero current position
    */
@@ -146,8 +180,8 @@ export default class CLIENT extends SPRITE {
         fW: mineral.sheet.w,
         fH: mineral.sheet.h,
         sheet: mineral.sheet.img,
-        x: this.x,
-        y: this.y,
+        x: this.w / -2,
+        y: this.h / -2,
         w: this.w / g.Block,
         h: this.w / g.Block, // yes the w, for square simetry
         r: Utils.random(0, 360)
@@ -163,64 +197,27 @@ export default class CLIENT extends SPRITE {
   }
 
   /**
-   * Check if there are new clients, add new clients
-   */
-  static checkIfIsIn() {
-    if (g.Clients.length === CLIENT_MODELS.length) return
-  
-    CLIENT_MODELS.forEach((model: ClientModel) => {
-      if (g.XpTotal >= model.requiredXp) {
-        const existing = g.Clients.find((c: CLIENT) => model.id === c.id)
-        if (!existing) {
-          g.Clients.push(new CLIENT({
-            id: model.id,
-            h: 6,
-            w: 6,
-            period: model.period,
-            timeShopping: model.timeShopping,
-            sheet: model.sheet.img,
-            fX: model.sheet.x,
-            fY: model.sheet.y,
-            fQty: model.sheet.fQty,
-            fH: model.sheet.h,
-            fW: model.sheet.w
-          }))
-        }
-      }    
-    })
-  }
-
-  /**
  * Overwrite draw
  * Before it checks the path by hero
  * Before it checks the path and blocked it
  */
-  draw(): void {
-    this.going()
+  drawing(): void {
     this.checkPath()
     this.pathByHero()
 
     if (this.isOutside) {
       this.mineralCargo = null
-      return
     }
 
-    if(this.isVisible()) {
-      ctx.save()
-      ctx.translate(this.x, this.y)
-      ctx.rotate(-this.r)
-      ctx.scale(this.scaleX, this.scaleY)
-      ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-
-      const cargo = this.mineralCargo
-      if (cargo) {
-        ctx.drawImage(cargo.img, cargo.fX, cargo.fY, cargo.fW, cargo.fH, 0 - this.w / 2, 0 - this.h / 2, cargo.w, cargo.h)
+    this.draw(() => {
+      const c = this.mineralCargo
+      if (c) {
+        this.drawImage({ ...c })
       }
-  
-      ctx.restore()
-      this.tweenUpdate()
-    } else {
-      this.drawMini()
-    }
+      if (this.moving) {
+        this.flame1.framing()
+        this.drawImage({ ...this.flame1 })
+      }
+    })
   }
 }

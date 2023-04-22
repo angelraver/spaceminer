@@ -36,20 +36,8 @@ export default class EXPLOSION extends SPRITE {
    * Draw the text on canvas
    * - Apply looping
    */
-  draw(): void {
-    this.looping()
-    if (this.currentLoop === this.loops) {
-      this.currentLoop = 0
-    }
-
-    ctx.save()
-    ctx.translate(this.x, this.y)
-    ctx.rotate(this.r)
-    ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-    ctx.restore()
-
-    if (this.currentLoop === 0) {
-      g.Explosions = g.Explosions.filter((e) => e.id !== this.id)
-    }
+  drawing(): void {
+    this.draw()
+    g.Explosions = g.Explosions.filter((e) => e.currentLoop > 0)
   }
 }

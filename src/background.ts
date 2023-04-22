@@ -9,17 +9,18 @@ export default class BACKGROUND extends SPRITE {
     this.type = 'bkg'
   }
   draw(): void {
-    if (!this.fixed) {
-      this.positionByHero()
-    }
+    this.positionByHero()
+
     if (this.isVisible()) {
-      ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, this.x, this.y, this.w, this.h)
+      this.drawImage({ ...this })
     }
   }
   /**
    * Updates the x and y origin of the image relative to the movement of the Hero
   */
   positionByHero(): void {
+    if (this.fixed) return
+
     // for the background to move different from other sprites for the ilusion of deep
     g.BkgProportion = 2
     if (g.Hero.goingTop) {

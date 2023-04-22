@@ -1,5 +1,5 @@
 /**
- * Methos for audio
+ * Methods for audio
  */
 export default class Sound {
     /**

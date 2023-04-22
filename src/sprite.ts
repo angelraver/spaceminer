@@ -98,7 +98,6 @@ export default class SPRITE {
    */
   updateImage(): void {
     var img = new Image()
-    // img.crossOrigin = "Anonymous"
     img.src = CONFIG.SPRITES_FOLDER + this.sheet + '.png'
     this.img = img
   }
@@ -107,6 +106,8 @@ export default class SPRITE {
    * Move the spritesheet to show the next frame in animation 
    */
   framing(): void {
+    if (!this.fQty) return
+
     if (this.fVertical) {
       this.fY = this.fCurrent * this.fH
     } else {
@@ -118,28 +119,7 @@ export default class SPRITE {
       this.fCurrent = 0
     }
   }
-  /**
-   * flip vertically through the canvas scale prop
-   * @param direction 
-   */
-  flipVertically(direction: number): void {
-    if (Math.sign(direction) == 1) {
-      this.scaleY = -Math.abs(this.scaleY)
-    } else {
-      this.scaleY = Math.abs(this.scaleY)
-    }
-  }
-  /**
-   * flip horizontally through the canvas scale prop
-   * @param direction 
-   */
-  flipHorizontally(direction: number): void {
-    if (Math.sign(direction) == 1) {
-      this.scaleX = -Math.abs(this.scaleX)
-    } else {
-      this.scaleX = Math.abs(this.scaleX)
-    }
-  }
+
   /**
    * Given an sprite array it returs the fist with collision
    * @param elements list of SPRITEs to check
@@ -151,39 +131,43 @@ export default class SPRITE {
   }
 
   /**
-   * Complex draw on the canvas with rotation and scaling
+   * Complex draw on the canvas with rotation and scaling and mini
+   * can receive a inner callback to execute inside
    */
-  draw(): void {
-    if (!this.fixed) {
-      this.positionByHero()
-    }
-    // if this is in colision with the VisibleArea, then is visible, then draw it
+  draw(callBackInner = () => {}): void {
+    this.looping()
+    this.positionByHero()
+    this.framing()
+    this.going()
+
     if (this.isVisible()) {
-
-      if (this.fQty) {
-        this.framing()
-      }
-      ctx.save()
-      ctx.translate(this.x, this.y)
-      ctx.rotate(-this.r)
-      ctx.scale(this.scaleX, this.scaleY)
-      // ctx.fillStyle = 'red'
-      // ctx.fillRect(0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-      ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH,  0 - this.w / 2,   0 - this.h / 2,     this.w,    this.h)
-      ctx.restore()
-      // pixelate(this)
-
+      this.drawNormal(callBackInner)
     } else {
-      if (this.mini) {
-        this.drawMini()
-      }
+      this.drawMini()
     }
-
-    this.tweenUpdate()
   }
 
-  tweenUpdate(): void {
+  /**
+   * executes applis rotation, scaleing and call the drawImage
+   * can receive a inner callback to execute inside
+   */
+  drawNormal(callBackInner = () => {}): void {
+    ctx.save()
+    ctx.translate(this.x, this.y)
+    ctx.rotate(-this.r)
+    ctx.scale(this.scaleX, this.scaleY)
+    this.drawImage({ ...this, x: this.w / -2, y: this.h / -2 })
+    callBackInner()
+    ctx.restore()
     TWEEN.update()
+  }
+
+/**
+ * executes the ctx.drawImage
+ * can receive a inner callback to execute inside
+ */
+  drawImage({ x, y, w, h, img, fX, fY, fW, fH }: any) {
+    ctx.drawImage(img, fX, fY, fW, fH, x, y, w, h)
   }
 
   /**
@@ -191,6 +175,8 @@ export default class SPRITE {
  * of the original sprite, when is not visible
  */
   drawMini(): void {
+    if (!this.mini) return
+
     const position: Ordinal = { x: 0, y: 0 }
     if (this.x + this.w < 0) position.x = 0
     if (this.x > g.VisibleArea.w) position.x = g.VisibleArea.w - this.w / 4
@@ -199,7 +185,7 @@ export default class SPRITE {
     if (this.y > g.VisibleArea.h) position.y = g.VisibleArea.h - this.w / 4
     if (this.y >= 0 && this.y <= g.VisibleArea.h) position.y = this.y
 
-    ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH,  position.x,   position.y,     this.w / 4,    this.h / 4)
+    this.drawImage({ ...this, x: position.x, y: position.y, w: this.w / 4, h: this.h / 4 })
   }
   
   /**
@@ -235,7 +221,6 @@ export default class SPRITE {
     } else {
       this.moving = false
     }
-
   }
   /**
    * Increase the hits prop
@@ -250,7 +235,7 @@ export default class SPRITE {
    * Increase the currentLoop prop
    */
   looping(): void {
-    this.currentLoop++
+    this.currentLoop = this.currentLoop === this.loops ? 0 : this.currentLoop + 1
   }
   /**
    * Move the SPRITE up during the loop
@@ -262,6 +247,9 @@ export default class SPRITE {
    * Updates the x and y relative to the movement of the Hero
    */
   positionByHero(): void {
+    if (this.fixed) return
+    if (this.id === 'hero') return
+
     if (g.Hero.goingTop) {
       this.y = this.y + g.Speed
     }

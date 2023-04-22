@@ -13,7 +13,6 @@ export declare const CONFIG: {
     OFFSET_DESKTOP_X: number;
     OFFSET_DESKTOP_Y: number;
 };
-export declare const SOUND_LIBRARY: LibraryItem;
 export declare const SPRITE_LIBRARY: LibraryItem;
 export declare const CLIENT_MODELS: ClientModel[];
 export declare const ASTEROID_MODELS: AsteroidModel[];

@@ -17,9 +17,12 @@ export default class HERO extends SPRITE {
   cargoMineralsFull: boolean
   cargoMineralsPositions: Ordinal[]
   cargoMinerals: SPRITE[]
+  flame1: SPRITE
+  flame2: SPRITE
   
   constructor(props: any) {
     super(props)
+    this.id = 'hero'
     this.x = g.W / 2
     this.y = g.H / 2
     this.sheet = 'ship'
@@ -30,35 +33,42 @@ export default class HERO extends SPRITE {
     this.fQty = 1
     this.r = 0
     this.scaleX = 1
-    this.scaleY = 1
+    this.scaleY = -1
     this.goingLeft = false
     this.goingRight = false
     this.goingTop = false
     this.goingBottom = false
     this.updateImage()
     this.resetCargo()
+    this.flame1 = new SPRITE({
+      x: (this.w / -2) - 16, y: (this.h / -2) - 6, w: 5, h: 6,
+      sheet: 'flameblue', fX: 0, fY: 0, fW: 16, fH: 16, fQty: 4
+    })
+    this.flame2 = new SPRITE({
+      x: (this.w / -2) + 40, y: (this.h / -2) - 6, w: 5, h: 6,
+      sheet: 'flameblue', fX: 0, fY: 0, fW: 16, fH: 16, fQty: 4
+    })
+
   }
   /**
    * Overwrite draw
    */
-  draw(): void {
+  drawing(): void {
     this.unloadCargo()
     this.checkDirection()
-    this.going()
-
-    ctx.save()
-    ctx.translate(this.x, this.y)
-    ctx.rotate(-this.r)
-    ctx.scale(this.scaleX, this.scaleY)
-    ctx.drawImage(this.img, this.fX, this.fY, this.fW, this.fH, 0 - this.w / 2, 0 - this.h / 2, this.w, this.h)
-
-    this.cargoMinerals.forEach((c) => {
-      ctx.drawImage(c.img, c.fX, c.fY, c.fW, c.fH, c.x, c.y, c.w, c.h)
+    this.draw(() => {
+      this.cargoMinerals.forEach((c) => {
+        this.drawImage({ ...c })
+      })
+      if (this.checkMoving()) {
+        this.flame1.framing()
+        this.drawImage({ ...this.flame1 })
+        this.flame2.framing()
+        this.drawImage({ ...this.flame2 })
+      }
     })
-
-    ctx.restore()
-    this.tweenUpdate()
   }
+
   /**
    * Manage click event
    * @param e 
@@ -184,5 +194,9 @@ export default class HERO extends SPRITE {
         && this.x < g.Margin // the hero is inside the left margin
         && g.Anchor.x + g.Anchor.w + g.Speed < g.LevelLimits.r // the anchor will not cross the right limit
     }
+  }
+
+  checkMoving(): boolean {
+    return this.moving || this.goingTop || this.goingRight || this.goingBottom || this.goingLeft 
   }
 }
