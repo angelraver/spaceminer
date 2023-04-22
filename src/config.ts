@@ -22,7 +22,7 @@ export const SPRITE_LIBRARY: LibraryItem = {
   asteroid4: 'a4',
   asteroid5: 'a5',
   asteroid6: 'a6',
-  central: 'central',
+  central: 'basecentral',
   client1: 'client1',
   client2: 'client2',
   client3: 'client3',
@@ -30,6 +30,7 @@ export const SPRITE_LIBRARY: LibraryItem = {
   client5: 'client5',
   controlsIcon: 'controls-icon',
   explosions: 'explosions',
+  flameBlue: 'flameblue',
   inventoryPanel: 'inventorypanel',
   minerals: 'minerals',
   moneyIcon: 'money-icon',
@@ -45,35 +46,35 @@ export const CLIENT_MODELS: ClientModel[] = [
     requiredXp: 10,
     period: 10,
     timeShopping: 5,
-    sheet: { img: SPRITE_LIBRARY.client1, x: 0, y: 0, w: 50, h: 50 }
+    sheet: { img: SPRITE_LIBRARY.client1, x: 0, y: 0, w: 72, h: 85 }
   },
   {
     id: 'B',
     requiredXp: 20,
     period: 15,
     timeShopping: 5,
-    sheet: { img: SPRITE_LIBRARY.client2, x: 0, y: 0, w: 50, h: 50 }
+    sheet: { img: SPRITE_LIBRARY.client2, x: 0, y: 0, w: 72, h: 85 }
   },
   {
     id: 'C',
     requiredXp: 30,
     period: 25,
     timeShopping: 5,
-    sheet: { img: SPRITE_LIBRARY.client3, x: 0, y: 0, w: 50, h: 50 }
+    sheet: { img: SPRITE_LIBRARY.client3, x: 0, y: 0, w: 72, h: 85 }
   },
   {
     id: 'D',
     requiredXp: 40,
     period: 10,
     timeShopping: 5,
-    sheet: { img: SPRITE_LIBRARY.client4, x: 0, y: 0, w: 50, h: 50 }
+    sheet: { img: SPRITE_LIBRARY.client4, x: 0, y: 0, w: 72, h: 85 }
   },
   {
     id: 'E',
     requiredXp: 50,
     period: 15,
     timeShopping: 5,
-    sheet: { img: SPRITE_LIBRARY.client5, x: 0, y: 0, w: 50, h: 50 }
+    sheet: { img: SPRITE_LIBRARY.client5, x: 0, y: 0, w: 72, h: 85 }
   }
 ]
 

@@ -46,12 +46,12 @@ export default function screenLevelStart() {
     ASTEROID.createGroup(200)
 
     g.Central = new SPRITE({
-      w: 10, h: 10,
+      w: 10, h: 8,
       x: g.W / 2, y: g.H / 2,
       sheet: SPRITE_LIBRARY.central,
-      fX: 0, fY: 0, fW: 91, fH: 90,
-      r: 20,
-      scaleX: 2, scaleY: 2,
+      fX: 0, fY: 0, fW: 76, fH: 54,
+      r: 0,
+      scaleX: 2, scaleY: -2,
       mini: true
     })
 
