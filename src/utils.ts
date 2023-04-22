@@ -163,19 +163,23 @@ export default class Utils {
    */
   static updateQtyList(list: ItemAccount[], type: string, addition: boolean): ItemAccount[] {
     const items = [...list]
-    if(items.map((m) => m.type).includes(type)) {
-      return items.map((item) => {
-        if (item.type === type) {
+    const mineralInList = items.map((m) => m.type).includes(type)
+
+    if(mineralInList) {
+      return items.map((m) => {
+        if (m.type === type) {
           if (addition) {
-            item.qty++
+            m.qty = m.qty + 1
           } else {
-            item.qty--
+            m.qty = m.qty - 1
           }        
         }
-        return item
+        return m
       })
     } else {
-      return [...items, { type: type, qty: 1 }]
+      if (addition) {
+        return [...items, { type: type, qty: 1 }]
+      }
     }
   }
 

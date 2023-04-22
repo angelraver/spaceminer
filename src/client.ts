@@ -18,7 +18,7 @@ export default class CLIENT extends SPRITE {
   timeArrivalCentral: number
   timeArrivalOutside: number
   timeShopping: number
-  mineralTypeBought: string
+  mineralTypeToBuy: string
   mineralCargo: SPRITE
   flame1: SPRITE
 
@@ -163,16 +163,15 @@ export default class CLIENT extends SPRITE {
   }
 
   /**
-   * updates the client mineralTypeBought prop
+   * updates the client mineralTypeToBuy prop
    * updates the g.MineralsOnSale
    */
   buyMineral():void {
-    const minelasOnSale = g.MineralsOnSale.filter((min) => min.qty > 0)
-    // console.log(g.MineralsOnSale)
-    if (minelasOnSale.length > 0) {
-      this.mineralTypeBought = g.MineralsOnSale[Utils.random(0, g.MineralsOnSale.length - 1)].type
-      g.Inventory.setMineralTo('sold', this.mineralTypeBought)
-      const mineral = MINERAL_MODELS.find((min) => min.type === this.mineralTypeBought)
+    const mineralsOnSale = g.MineralsOnSale.filter((m) => m.qty > 0)
+    if (mineralsOnSale.length > 0) {
+      this.mineralTypeToBuy = mineralsOnSale[Utils.random(0, mineralsOnSale.length - 1)].type
+      g.Inventory.mineralSold(this.mineralTypeToBuy)
+      const mineral = MINERAL_MODELS.find((m) => m.type === this.mineralTypeToBuy)
       this.mineralCargo = new SPRITE({
         metadata: mineral,
         fX: mineral.sheet.x,
@@ -186,7 +185,7 @@ export default class CLIENT extends SPRITE {
         h: this.w / g.Block, // yes the w, for square simetry
         r: Utils.random(0, 360)
       })
-      const price = g.MineralsPrices.find((m) => m.type === this.mineralTypeBought).price
+      const price = g.MineralsPrices.find((m) => m.type === this.mineralTypeToBuy).price
       g.MoneyTotal += price 
       TEXT.hiting(price.toString(), this.x, this.y, 'gold', 'white')
       Sound.play('clientBuy')

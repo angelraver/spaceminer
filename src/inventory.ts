@@ -148,7 +148,7 @@ export default class INVENTORY {
   /**
    * updates the qty of mineralas in the slots
    */
-  updateStockMinerals() {  
+  mineralsUpdateSlots() {  
     this.slotsStock = this.slotsStock.map((slot) => {
       const mineral = g.MineralsStock.find((m) => m.type === slot.type)
       if (mineral) {
@@ -168,28 +168,21 @@ export default class INVENTORY {
     })
   }
 
-  /**
-   * updates MineralsOnSale and MineralsStock for stock, sale or sold action
-   */
-  setMineralTo(action: string, type: string) {
-    if (action === 'sold') {
-      g.MineralsOnSale = Utils.updateQtyList(g.MineralsOnSale, type, false)
-    } else {
-      g.MineralsStock = Utils.updateQtyList(g.MineralsStock, type, action === 'stock')
-      g.MineralsOnSale = Utils.updateQtyList(g.MineralsOnSale, type, action === 'sale')
-    }
-
-    this.updateStockMinerals()
+  mineralAddToSale(type: string) {
+    g.MineralsStock = Utils.updateQtyList(g.MineralsStock, type, false)
+    g.MineralsOnSale = Utils.updateQtyList(g.MineralsOnSale, type, true)
+    this.mineralsUpdateSlots()
   }
 
-  /**
-   * returns one random mineral from the SlotSale
-   */
-  mineralSold() {
-    const slots = this.slotsStock.filter((slot) => slot.qty > 0)
-    if (slots.length > 0) {
-      
-    }
+  mineralReturnToStock(type: string) {
+    g.MineralsOnSale = Utils.updateQtyList(g.MineralsOnSale, type, false)
+    g.MineralsStock = Utils.updateQtyList(g.MineralsStock, type, true)
+    this.mineralsUpdateSlots()
+  }
+
+  mineralSold(type: string) {
+    g.MineralsOnSale = Utils.updateQtyList(g.MineralsOnSale, type, false)
+    this.mineralsUpdateSlots()
   }
 
 /**
@@ -219,7 +212,7 @@ export default class INVENTORY {
       if (Utils.isHiting(e, slot.spriteImage)) {// clicking on the mineral
         if (slot.qty > 0) {
           Sound.play('mineralSelect')
-          this.setMineralTo('sale', slot.type)
+          this.mineralAddToSale(slot.type)
         }
       }
     })
@@ -229,7 +222,7 @@ export default class INVENTORY {
       if (Utils.isHiting(e, slot.spriteImage)) {// clicking on the mineral
         if (slot.qty > 0) {
           Sound.play('mineralUnselect')
-          this.setMineralTo('stock', slot.type)
+          this.mineralReturnToStock(slot.type)
         }
       }
     })

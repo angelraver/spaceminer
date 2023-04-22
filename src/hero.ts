@@ -30,7 +30,8 @@ export default class HERO extends SPRITE {
     this.fY = 0
     this.fW = 72
     this.fH = 89
-    this.fQty = 1
+    this.fVertical = true
+    this.fQty = 9
     this.r = 0
     this.scaleX = 1
     this.scaleY = -1
@@ -56,6 +57,7 @@ export default class HERO extends SPRITE {
   drawing(): void {
     this.unloadCargo()
     this.checkDirection()
+    this.framing()
     this.draw(() => {
       this.cargoMinerals.forEach((c) => {
         this.drawImage({ ...c })
@@ -153,7 +155,7 @@ export default class HERO extends SPRITE {
         g.MineralsStock = Utils.updateQtyList(g.MineralsStock, m.metadata.type, true)
       })
       this.resetCargo()
-      g.Inventory.updateStockMinerals()
+      g.Inventory.mineralsUpdateSlots()
     }
   }
 
