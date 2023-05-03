@@ -4,8 +4,8 @@ import { MineralModel, AsteroidModel, ClientModel, LibraryItem, Sheet } from './
  * Global constants setting the game sources and values
  */
 export const CONFIG = {
-  SPRITES_FOLDER: './assets/sprites/',
-  SOUND_FOLDER: './assets/sounds/',
+  SPRITES_FOLDER: 'assets/sprites/',
+  SOUND_FOLDER: 'assets/sounds/',
   GAME_SPEED: 45,
   BLOCK: 8,
   OFFSET_X: 1,
@@ -34,6 +34,7 @@ export const SPRITE_LIBRARY: LibraryItem = {
   moneyIcon: 'money-icon',
   stars: 'stars',
   sound: 'sound',
+  title: 'title',
   ui: 'ui',
   xpIcon: 'xp-icon'
 }

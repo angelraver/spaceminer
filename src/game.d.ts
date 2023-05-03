@@ -45,12 +45,18 @@ export default class GAME {
     OffSetVertical: number;
     Pause: boolean;
     Stars: BACKGROUND[];
+    StarsData: any[];
     SetNewGame: boolean;
     SoundOn: boolean;
     Speed: number;
+    Title: SPRITE;
     VisibleArea: PLAIN;
     UiPanel: UI;
     XpTotal: number;
     W: number;
     constructor();
+    save(): void;
+    getSaveData(): string;
+    load(): any;
+    newgame(): void;
 }

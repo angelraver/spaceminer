@@ -1,4 +1,5 @@
 import { CONFIG as C, } from './config'
+import { screenTitle, screenTitleSetup } from './screenTitle'
 import screenLevelStart from './screenLevelStart'
 import screenAction from './screenAction'
 import GAME from './game'
@@ -40,9 +41,12 @@ function rolling() {
   clearGameFrame()
 
   switch(g.CurrentScreen) {
-    // case 'title' :
-    //   titleScreen()
-    //   break
+    case 'titleSetup' :
+      screenTitleSetup()
+      break
+    case 'title' :
+      screenTitle()
+      break
     case 'levelStart' :
       screenLevelStart()
       break

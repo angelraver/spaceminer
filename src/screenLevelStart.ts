@@ -13,13 +13,6 @@ import ASTEROID from './asteroid'
  * Prepare the game stats before the action screen
  */
 export default function screenLevelStart() {
-  g.LevelLimits = {
-    t: -g.OffSetVertical,
-    r: g.W + g.OffSetHorizontal,
-    b: g.H + g.OffSetVertical,
-    l: -g.OffSetHorizontal
-  }
-
   if (g.SetNewGame) {
     g.GameOver = false
     g.SetNewGame = false
@@ -30,13 +23,10 @@ export default function screenLevelStart() {
 
     g.VisibleArea = new PLAIN({ id: 'visiblArea', x: 0, y: 0, w: g.W, h: g.H })
 
-    g.Stars = Array.from({ length: 1000 }, function (v, i) {
+    g.Stars = g.StarsData.map((star) => {
       return new BACKGROUND({
-        x: Utils.random(g.LevelLimits.l, g.LevelLimits.r),
-        y: Utils.random(g.LevelLimits.t, g.LevelLimits.b),
-        w: 4,h: 4,
-        fX: Utils.random(0, 4) * 50,
-        fY: Utils.random(0, 4) * 50,
+        x: star.x, y: star.y, w: 4,h: 4,
+        fX: star.fX, fY: star.fY,
         fW: 50, fH: 50,
         fQty: 1,
         sheet: SPRITE_LIBRARY.stars

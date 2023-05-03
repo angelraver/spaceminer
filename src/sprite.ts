@@ -250,17 +250,19 @@ export default class SPRITE {
     if (this.fixed) return
     if (this.id === 'hero') return
 
-    if (g.Hero.goingTop) {
-      this.y = this.y + g.Speed
-    }
-    if (g.Hero.goingRight) {
-      this.x = this.x - g.Speed
-    }
-    if (g.Hero.goingBottom) {
-      this.y = this.y - g.Speed
-    }
-    if (g.Hero.goingLeft) {
-      this.x = this.x + g.Speed
+    if (g.Hero) {
+      if (g.Hero.goingTop) {
+        this.y = this.y + g.Speed
+      }
+      if (g.Hero.goingRight) {
+        this.x = this.x - g.Speed
+      }
+      if (g.Hero.goingBottom) {
+        this.y = this.y - g.Speed
+      }
+      if (g.Hero.goingLeft) {
+        this.x = this.x + g.Speed
+      }
     }
   }
 /**
@@ -269,6 +271,8 @@ export default class SPRITE {
    * @returns boolean
  */
   isVisible(): boolean {
+    if (!g.VisibleArea) return true
+
     return Utils.colision(g.VisibleArea, {
       x: this.x - this.w,
       y: this.y - this.h,
