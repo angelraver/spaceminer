@@ -56,8 +56,16 @@ const config = {
     }),
   ],
   optimization: {
+    minimize: true,
     minimizer: [
-      new TerserPlugin()
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      })
     ],
   },
   resolve: {
