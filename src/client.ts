@@ -1,7 +1,7 @@
 import SPRITE from './sprite'
 import { Ordinal, ClientModel } from './types'
 import Utils from "./utils"
-import { CLIENT_MODELS, MINERAL_MODELS } from "./config"
+import { CLIENT_MODELS, MINERAL_MODELS, SPRITE_LIBRARY } from "./config"
 import TEXT from './text'
 import Sound from './sound'
 
@@ -40,8 +40,8 @@ export default class CLIENT extends SPRITE {
     this.mini = true
     this.fixed = true
     this.flame1 = new SPRITE({
-      x: this.w / -2 + 8, y: this.h / -2 + 68, w: 5, h: 6,
-      sheet: 'flameblue2', fX: 0, fY: 0, fW: 16, fH: 16, fQty: 4
+      x: this.w / -2 + 8, y: this.h / -2 + 68, w: 40, h: 48,
+      sheet: SPRITE_LIBRARY.flameBlue2
     })
   }
   
@@ -58,16 +58,11 @@ export default class CLIENT extends SPRITE {
     models.forEach((model: ClientModel) => {
       g.Clients.push(new CLIENT({
         id: model.id,
-        h: 8,
-        w: 7,
+        h: 64,
+        w: 56,
         period: model.period,
         timeShopping: model.timeShopping,
-        sheet: model.sheet.img,
-        fX: model.sheet.x,
-        fY: model.sheet.y,
-        fQty: model.sheet.fQty,
-        fH: model.sheet.h,
-        fW: model.sheet.w
+        sheet: model.sheet,
       }))
     })
   }
@@ -174,15 +169,11 @@ export default class CLIENT extends SPRITE {
       const mineral = MINERAL_MODELS.find((m) => m.type === this.mineralTypeToBuy)
       this.mineralCargo = new SPRITE({
         metadata: mineral,
-        fX: mineral.sheet.x,
-        fY: mineral.sheet.y,
-        fW: mineral.sheet.w,
-        fH: mineral.sheet.h,
-        sheet: mineral.sheet.img,
+        sheet: mineral.sheet,
         x: this.w / -2,
         y: this.h / -2,
-        w: this.w / g.Block,
-        h: this.w / g.Block, // yes the w, for square simetry
+        w: this.w,
+        h: this.w, // yes the w, for square simetry
         r: Utils.random(0, 360)
       })
       const price = g.MineralsPrices.find((m) => m.type === this.mineralTypeToBuy).price

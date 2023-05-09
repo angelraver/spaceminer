@@ -1,4 +1,4 @@
-import { Ordinal } from './types';
+import { Ordinal, Sheet } from './types';
 /**
  * Sprite class
  */
@@ -9,14 +9,9 @@ export default class SPRITE {
     x: number;
     h: number;
     w: number;
-    fX: number;
-    fY: number;
-    fW: number;
-    fH: number;
     fVertical: boolean;
-    fQty: number;
     fCurrent: number;
-    sheet: string;
+    sheet: Sheet;
     target: any;
     r: number;
     path: Array<Ordinal>;
@@ -66,7 +61,7 @@ export default class SPRITE {
      * executes the ctx.drawImage
      * can receive a inner callback to execute inside
      */
-    drawImage({ x, y, w, h, img, fX, fY, fW, fH }: any): void;
+    drawImage({ x, y, w, h, img, sheet }: any): void;
     /**
    * Draw the mini version of the sprite a the border of the screen in the direcction
    * of the original sprite, when is not visible

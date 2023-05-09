@@ -12,7 +12,7 @@ export type AsteroidModel = {
 }
 
 export type Sheet = {
-  img?: string
+  i?: string
   x: number
   y: number
   w: number
@@ -44,6 +44,10 @@ export type ClientModel = {
 
 export type LibraryItem = {
   [key: string]: string 
+}
+
+export type LibraryImage = {
+  [key: string]: Sheet 
 }
 
 export type ItemAccount = { 

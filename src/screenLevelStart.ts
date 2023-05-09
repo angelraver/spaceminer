@@ -19,38 +19,34 @@ export default function screenLevelStart() {
 
     g.Background = new PLAIN({ x: 0, y: 0, w: g.W, h: g.H, color: '#2c2137', alpha: 1 })
 
-    g.Anchor = new SPRITE({ id: 'anchor', x: 0, y: 0, w: g.W / g.Block, h: g.H / g.Block })
+    g.Anchor = new SPRITE({ id: 'anchor', x: 0, y: 0, w: g.W / 8, h: g.H / 8 })
 
     g.VisibleArea = new PLAIN({ id: 'visiblArea', x: 0, y: 0, w: g.W, h: g.H })
 
     g.Stars = g.StarsData.map((star) => {
       return new BACKGROUND({
-        x: star.x, y: star.y, w: 4,h: 4,
-        fX: star.fX, fY: star.fY,
-        fW: 50, fH: 50,
-        fQty: 1,
-        sheet: SPRITE_LIBRARY.stars
+        x: star.x, y: star.y, w: 32,h: 32,
+        sheet: { i: 'stars', x: star.fX, y: star.fY, w: 50, h: 50, fQty: 1 }
       })
     })
 
     ASTEROID.createGroup(200)
 
     g.Central = new SPRITE({
-      w: 10, h: 8,
+      w: 80, h: 64,
       x: g.W / 2, y: g.H / 2,
       sheet: SPRITE_LIBRARY.central,
-      fX: 0, fY: 0, fW: 76, fH: 54,
       r: 0,
       scaleX: 2, scaleY: -2,
       mini: true
     })
 
-    g.Hero = new HERO({ h: 10, w: 8 })
+    g.Hero = new HERO({ h: 80, w: 64 })
     g.Hero.target = { x: g.Hero.x, y: g.Hero.y }
     
     g.Clients = []
 
-    g.Crosshair = new CROSSHAIR({ w: 8, h: 8 })
+    g.Crosshair = new CROSSHAIR({ w: 64, h: 64 })
     g.Inventory = new INVENTORY()
     g.UiPanel = new UI()
   }
@@ -78,6 +74,6 @@ export default function screenLevelStart() {
     g.Inventory.click(e)
   }
 
+  document.body.removeEventListener('click', g.ScreenTitle.click)
   document.body.addEventListener('click', click)
-  Utils.randomOuterPoint()
 }

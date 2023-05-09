@@ -16,7 +16,7 @@ export default class UI {
   moneyIcon: SPRITE
   fontSize: number
   constructor() {
-    this.fontSize = g.Block * 3
+    this.fontSize = 24
     this.create()
   }
 
@@ -29,13 +29,8 @@ export default class UI {
   setControls() {
     this.controlsButton = new BACKGROUND({
       fixed: true,
-      w: 8,
-      h: 8,
-      fX: 0,
-      fY: 0,
-      fW: 64,
-      fH: 64,
-      fQty: 1,
+      w: 64,
+      h: 64,
       sheet: SPRITE_LIBRARY.controlsIcon
     })
     this.controlsButton.x = g.W / 2 - this.controlsButton.w / 2
@@ -43,37 +38,17 @@ export default class UI {
   }
 
   setXp() {
-    this.xpPanel = new BACKGROUND({
-      fixed: true,
-      w: 18,
-      h: 3,
-      fX: 0,
-      fY: 0,
-      fW: 190,
-      fH: 49 ,
-      fQty: 1,
-      sheet: SPRITE_LIBRARY.ui
-    })
+    this.xpPanel = new BACKGROUND({ fixed: true, w: 144, h: 24, sheet: SPRITE_LIBRARY.ui })
     this.xpPanel.x = g.W / 2 + g.W / 10
     this.xpPanel.y = this.xpPanel.h
 
-    this.xpIcon = new SPRITE({
-      fixed: true,
-      w: 3,
-      h: 3,
-      fX: 0,
-      fY: 0,
-      fW: 17,
-      fH: 18,
-      fVertical: false,
-      sheet: SPRITE_LIBRARY.xpIcon
-    })
+    this.xpIcon = new SPRITE({ fixed: true, w: 24, h: 24, fVertical: false, sheet: SPRITE_LIBRARY.xpIcon })
     this.xpIcon.x = this.xpPanel.x + this.xpPanel.w - this.xpIcon.w / 2
     this.xpIcon.y = this.xpPanel.y + this.xpIcon.h / 1.8
 
     this.xpText = new TEXT({
       x: this.xpPanel.x + this.xpPanel.w - this.xpIcon.w,
-      y: this.xpPanel.y + g.Block * 2.4,
+      y: this.xpPanel.y + 20,
       size: this.fontSize,
       color: 'black',
       colorLine: 'black',
@@ -82,37 +57,17 @@ export default class UI {
   }
 
   setMoney() {
-    this.moneyPanel = new BACKGROUND({
-      fixed: true,
-      w: 18,
-      h: 3,
-      fX: 0,
-      fY: 0,
-      fW: 190,
-      fH: 49 ,
-      fQty: 1,
-      sheet: SPRITE_LIBRARY.ui
-    })
+    this.moneyPanel = new BACKGROUND({ fixed: true, w: 144, h: 24, sheet: SPRITE_LIBRARY.ui })
     this.moneyPanel.x = g.W / 2 - this.moneyPanel.w - g.W / 10
     this.moneyPanel.y = this.moneyPanel.h
 
-    this.moneyIcon = new SPRITE({
-      fixed: true,
-      w: 3,
-      h: 3,
-      fX: 0,
-      fY: 0,
-      fW: 17,
-      fH: 18,
-      fVertical: false,
-      sheet: SPRITE_LIBRARY.moneyIcon
-    })
+    this.moneyIcon = new SPRITE({ fixed: true, w: 24, h: 24, fVertical: false, sheet: SPRITE_LIBRARY.moneyIcon })
     this.moneyIcon.x = this.moneyPanel.x + this.moneyPanel.w - this.moneyIcon.w / 2
     this.moneyIcon.y = this.moneyPanel.y + this.xpIcon.h / 1.8
 
     this.moneyText = new TEXT({
       x: this.moneyPanel.x + this.moneyPanel.w - this.moneyIcon.w,
-      y: this.moneyPanel.y + g.Block * 2.4,
+      y: this.moneyPanel.y + 20,
       size: this.fontSize,
       color: 'black',
       colorLine: 'black',

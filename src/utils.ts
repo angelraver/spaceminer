@@ -126,7 +126,7 @@ export default class Utils {
    */
   static randomOuterPoint() {
     const randomIndex = this.random(0,3)
-    const margin = g.Block * 10
+    const margin = 80
     const yRandomPoint = this.random(-g.OffSetVertical, g.H + g.OffSetVertical)
     const xRandomPoint = this.random(-g.OffSetHorizontal, g.W + g.OffSetHorizontal)
     const points = [

@@ -52,7 +52,6 @@ export default class ASTEROID extends SPRITE {
         g.Hero.addCargoMineral()
         break
       default:
-        Sound.play('miningclick')
         break
     }
   }
@@ -60,13 +59,14 @@ export default class ASTEROID extends SPRITE {
   
   heroMining(xp: number): void {
     g.Hero.mining(xp, this.x, this.y)
+    Sound.play('miningclick')
     // Sound.play('pickoupcoin')
   }
   
   setEmpty(): void {
     Sound.play('asteroidEmpty')
     this.empty = true
-    this.sheet = 'a-empty'
+    this.sheet.i = 'a-empty'
     this.updateImage()
   }
 
@@ -87,12 +87,7 @@ export default class ASTEROID extends SPRITE {
       y: model.y,
       w: model.w,
       h: model.h,
-      sheet: model.sheet.img,
-      fX: model.sheet.x,
-      fY: model.sheet.y,
-      fW: model.sheet.w,
-      fH: model.sheet.h,
-      fQty: model.sheet.fQty,
+      sheet: model.sheet,
       // scaleX: Math.random() < 0.5 ? -1 : 1,
       // scaleY: Math.random() < 0.5 ? -1 : 1,
       r: Utils.radiants(undefined, undefined, Math.random() * 180),
@@ -132,8 +127,8 @@ export default class ASTEROID extends SPRITE {
     }
     const modelWithDimensionsCalculated = {
       ...model,
-      w: model.w * g.Block,
-      h: model.h * g.Block
+      w: model.w,
+      h: model.h
     }
 
     const insideCenter = Utils.colision(modelWithDimensionsCalculated, g.CenterVoid)

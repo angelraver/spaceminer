@@ -1,6 +1,6 @@
 import SPRITE from './sprite'
 import { Ordinal } from './types'
-import { MINERAL_MODELS } from './config'
+import { MINERAL_MODELS, SPRITE_LIBRARY } from './config'
 import Utils from './utils'
 import Sound from './sound'
 import TEXT from './text'
@@ -25,13 +25,8 @@ export default class HERO extends SPRITE {
     this.id = 'hero'
     this.x = g.W / 2
     this.y = g.H / 2
-    this.sheet = 'ship'
-    this.fX = 0
-    this.fY = 0
-    this.fW = 72
-    this.fH = 89
+    this.sheet = SPRITE_LIBRARY.hero
     this.fVertical = true
-    this.fQty = 9
     this.r = 0
     this.scaleX = 1
     this.scaleY = -1
@@ -42,12 +37,12 @@ export default class HERO extends SPRITE {
     this.updateImage()
     this.resetCargo()
     this.flame1 = new SPRITE({
-      x: (this.w / -2) - 16, y: (this.h / -2) - 6, w: 5, h: 6,
-      sheet: 'flameblue', fX: 0, fY: 0, fW: 16, fH: 16, fQty: 4
+      x: (this.w / -2) - 16, y: (this.h / -2) - 6, w: 40, h: 48,
+      sheet: SPRITE_LIBRARY.flameBlue1
     })
     this.flame2 = new SPRITE({
-      x: (this.w / -2) + 40, y: (this.h / -2) - 6, w: 5, h: 6,
-      sheet: 'flameblue', fX: 0, fY: 0, fW: 16, fH: 16, fQty: 4
+      x: (this.w / -2) + 40, y: (this.h / -2) - 6, w: 40, h: 48,
+      sheet: SPRITE_LIBRARY.flameBlue1
     })
 
   }
@@ -112,17 +107,17 @@ export default class HERO extends SPRITE {
       chance: mineral.chance,
       type: mineral.type 
     }
+    // console.log(g.CurrentAsteroid.mineralType)
+    // console.log(mineral)
+    // console.log(mineral.sheet)
+    // console.log('------')
     const mineralCargo = new SPRITE({
       metadata: mineralInfo,
-      fX: mineral.sheet.x,
-      fY: mineral.sheet.y,
-      fW: mineral.sheet.w,
-      fH: mineral.sheet.h,
-      sheet: mineral.sheet.img,
+      sheet: mineral.sheet,
       x: position.x,
       y: position.y,
-      w: this.w / g.Block / 2,
-      h: this.w / g.Block / 2, // yes the w, for square simetry
+      w: this.w / 2,
+      h: this.w / 2, // yes the w, for square simetry
       r: Utils.random(0, 360)
     })
     this.cargoMinerals.push(mineralCargo)

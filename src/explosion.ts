@@ -1,4 +1,4 @@
-import { EXPLOSIONS_SHEETS, SPRITE_LIBRARY } from './config'
+import { EXPLOSIONS_SHEETS } from './config'
 import SPRITE from './sprite'
 import { Ordinal, Sheet } from './types'
 import Utils from './utils'
@@ -16,11 +16,9 @@ export default class EXPLOSION extends SPRITE {
   static get(pos: Ordinal): EXPLOSION {
     const sheet: Sheet = EXPLOSIONS_SHEETS[Utils.random(0, EXPLOSIONS_SHEETS.length - 1)]
     return new EXPLOSION({
-      id: `explosion_${Utils.random(0, 100000)}`,
-      x: pos.x, y: pos.y, w: 20, h: 20,
+      x: pos.x, y: pos.y, w: 160, h: 160,
       r: Utils.random(0, 180),
-      fX: sheet.x, fY: sheet.y, fW: sheet.w, fH: sheet.h, 
-      sheet: SPRITE_LIBRARY.explosions,
+      sheet: sheet,
       loops: 5
     })
   }

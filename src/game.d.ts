@@ -1,4 +1,4 @@
-import { ItemAccount, Limits, MineralPrice } from './types';
+import { ItemAccount, Limits, MineralPrice, Ordinal } from './types';
 import SPRITE from './sprite';
 import ASTEROID from './asteroid';
 import TEXT from './text';
@@ -15,7 +15,6 @@ export default class GAME {
     Asteroids: ASTEROID[];
     Background: PLAIN;
     BkgProportion: number;
-    Block: number;
     CargoTotal: number;
     CenterVoid: any;
     Central: SPRITE;
@@ -49,7 +48,11 @@ export default class GAME {
     SetNewGame: boolean;
     SoundOn: boolean;
     Speed: number;
-    Title: SPRITE;
+    ScreenTitle: {
+        title: BACKGROUND;
+        buttonNewGame: BACKGROUND;
+        click: (e: Ordinal) => void;
+    };
     VisibleArea: PLAIN;
     UiPanel: UI;
     XpTotal: number;

@@ -6,15 +6,15 @@ import Utils from './utils'
 import Sound from './sound'
 
 const STOCK_MINERAL_POSITIONS: any[] = [
-  { x: 0, y: 0, t: 'A' },   { x: 7, y: 0, t: 'B' },   { x: 14, y: 0, t: 'C' },  { x: 21, y: 0, t: 'D' },
-  { x: 0, y: 8, t: 'E' },  { x: 7, y: 8, t: 'F' },  { x: 14, y: 8, t: 'G' }, { x: 21, y: 8, t: 'H' },
+  { x: 0, y: 0, t: 'A' },   { x: 56, y: 0, t: 'B' },   { x: 112, y: 0, t: 'C' },  { x: 168, y: 0, t: 'D' },
+  { x: 0, y: 64, t: 'E' },  { x: 56, y: 64, t: 'F' },  { x: 112, y: 64, t: 'G' }, { x: 168, y: 64, t: 'H' },
 ]
 
 const SALE_MINERAL_POSITIONS: any[] = [
-  { x: 0, y: 0, t: 'A' }, { x: 9, y: 0, t: 'B' },
-  { x: 0, y: 8, t: 'C' }, { x: 9, y: 8, t: 'D' },
-  { x: 0, y: 16, t: 'E' }, { x: 9, y: 16, t: 'F' },
-  { x: 0, y: 24, t: 'G' }, { x: 9, y: 24, t: 'H' },
+  { x: 0, y: 0, t: 'A' }, { x: 72, y: 0, t: 'B' },
+  { x: 0, y: 64, t: 'C' }, { x: 72, y: 64, t: 'D' },
+  { x: 0, y: 128, t: 'E' }, { x: 72, y: 128, t: 'F' },
+  { x: 0, y: 192, t: 'G' }, { x: 72, y: 192, t: 'H' },
 ]
 
 /**
@@ -41,12 +41,7 @@ export default class INVENTORY {
    * set the inventory panel
    */
   setPanel() {
-    this.panel = new BACKGROUND({
-      w: 50, h: 80,
-      fX: 0, fY: 0, fW: 289, fH: 381,
-      sheet: SPRITE_LIBRARY.inventoryPanel,
-      fixed: true
-    })
+    this.panel = new BACKGROUND({ w: 400, h: 640, sheet: SPRITE_LIBRARY.inventoryPanel, fixed: true })
     this.panel.x = (g.W - this.panel.w) / 2
     this.panel.y = (g.H - this.panel.h) / 2
   }
@@ -60,8 +55,8 @@ export default class INVENTORY {
     this.textStock = new TEXT({
       text: 'STOCK',
       x: this.panel.x + (this.panel.w / 2) + (this.panel.w / 4),
-      y: this.panel.y + (g.Block * 3),
-      size: g.Block * 3,
+      y: this.panel.y + 24,
+      size: 24,
       color: 'crimson',
       colorLine: 'black',
       align: 'center'
@@ -69,9 +64,9 @@ export default class INVENTORY {
 
     this.textSale = new TEXT({
       text: 'ON SALE',
-      x: this.panel.x + (g.Block * 12),
-      y: this.panel.y + (g.Block * 3),
-      size: g.Block * 3, 
+      x: this.panel.x + 95,
+      y: this.panel.y + 24,
+      size: 24, 
       color: 'crimson',
       colorLine: 'black',
       align: 'start'
@@ -89,21 +84,16 @@ export default class INVENTORY {
         qty: 0,
         spriteImage: new BACKGROUND({
           fixed: true,
-          x: this.panel.x + (this.panel.w / 3) + (position.x * g.Block) + (g.Block * 2),
-          y: this.panel.y + (g.Block * 3) + (position.y * g.Block),
-          w: 6,
-          h: 6,
-          sheet: mineral.sheet.img,
-          fX: mineral.sheet.x,
-          fY: mineral.sheet.y,
-          fW: mineral.sheet.w,
-          fH: mineral.sheet.h,
-          fQty: mineral.sheet.fQty
+          x: this.panel.x + (this.panel.w / 3) + position.x + 16,
+          y: this.panel.y + 24 + position.y,
+          w: 48,
+          h: 48,
+          sheet: mineral.sheet,
         }),
         spriteText: new TEXT({
-          x: this.panel.x + (this.panel.w / 3) + (position.x * g.Block) + (g.Block * 8),
-          y: this.panel.y + (g.Block * 3) + (position.y * g.Block) + (g.Block * 7),
-          size: g.Block * 3,
+          x: this.panel.x + (this.panel.w / 3) + position.x + 64,
+          y: this.panel.y + 80 + position.y,
+          size: 24,
           color: 'black',
           colorLine: 'black',
           align: 'end'
@@ -123,16 +113,15 @@ export default class INVENTORY {
         qty: 0,
         spriteImage: new BACKGROUND({
           fixed: true,
-          x: this.panel.x + (g.Block * 1) + (position.x * g.Block),
-          y: this.panel.y + (g.Block * 3) + (position.y * g.Block),
-          w: 6, h: 6,
-          sheet: mineral.sheet.img,
-          fX: mineral.sheet.x, fY: mineral.sheet.y, fW: mineral.sheet.w, fH: mineral.sheet.h, fQty: mineral.sheet.fQty
+          x: this.panel.x + 8 + position.x ,
+          y: this.panel.y + 24 + position.y,
+          w: 48, h: 48,
+          sheet: mineral.sheet
         }),
         spriteText: new TEXT({
-          x: this.panel.x + (g.Block * 5) + (position.x * g.Block),
-          y: this.panel.y + (g.Block * 11) + (position.y * g.Block),
-          size: g.Block * 3, color: 'black', colorLine: 'black', align: 'center'
+          x: this.panel.x + 40 + position.x,
+          y: this.panel.y + 88 + position.y,
+          size: 24, color: 'black', colorLine: 'black', align: 'center'
         })
       }
     })
@@ -189,12 +178,7 @@ export default class INVENTORY {
  * sets the button for the sound ON / OFF
  */
   setSoundButton() {
-    this.soundButton = new BACKGROUND({
-      fixed: true,
-      w: 4, h: 4,
-      fX: 0, fY: 0, fW: 50, fH: 47, fQty: 1,
-      sheet: SPRITE_LIBRARY.sound
-    })
+    this.soundButton = new BACKGROUND({ fixed: true, w: 32, h: 32 , sheet: SPRITE_LIBRARY.buttonSound })
     this.soundButton.x = this.panel.x + this.panel.w - this.soundButton.w * 1.7
     this.soundButton.y = this.panel.y + this.panel.h - this.soundButton.h * 1.7
   }
@@ -231,10 +215,10 @@ export default class INVENTORY {
     if (Utils.isHiting(e, this.soundButton)) {
       if (g.SoundOn) {
         g.SoundOn = false
-        this.soundButton.fY = 47
+        this.soundButton.sheet.y = 47
       } else {
         g.SoundOn = true
-        this.soundButton.fY = 0
+        this.soundButton.sheet.y = 0
       }
     }
   }

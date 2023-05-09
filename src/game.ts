@@ -1,4 +1,4 @@
-import { ItemAccount, Limits, MineralPrice } from './types'
+import { ItemAccount, Limits, MineralPrice, Ordinal } from './types'
 import { CONFIG } from './config'
 import SPRITE from './sprite'
 import ASTEROID from './asteroid'
@@ -18,7 +18,6 @@ export default class GAME {
   Asteroids: ASTEROID[]
   Background: PLAIN
   BkgProportion: number
-  Block: number
   CargoTotal: number
   CenterVoid: any
   Central: SPRITE
@@ -52,7 +51,7 @@ export default class GAME {
   SetNewGame: boolean
   SoundOn: boolean
   Speed: number
-  Title: SPRITE
+  ScreenTitle: { title: BACKGROUND, buttonNewGame: BACKGROUND, click: (e: Ordinal) => void }
   VisibleArea: PLAIN
   UiPanel: UI
   XpTotal: number
@@ -61,7 +60,7 @@ export default class GAME {
     this.Asteroids = []
     this.BkgProportion = 4
     this.CargoTotal = 0
-    this.CurrentScreen = 'levelStart' // titleSetup title levelStart action
+    this.CurrentScreen = 'titleSetup' // titleSetup title levelStart action
     this.Explosions = []
     this.GlobalTime = 0
     this.GameOver = false
@@ -83,7 +82,6 @@ export default class GAME {
     this.Speed = 10
     this.XpTotal = 0
     this.W = window.innerWidth
-    this.Block = CONFIG.BLOCK
     this.OffSetHorizontal = this.W * CONFIG.OFFSET_X  
     this.OffSetVertical = this.H * CONFIG.OFFSET_Y
     this.CenterVoid = {
@@ -137,13 +135,13 @@ export default class GAME {
       }
       return ''
     }
-    const gameData = JSON.parse(getCookie('spaceminer'))
-    g.MineralsStock = gameData.MineralsStock
-    g.MineralsOnSale = gameData.MineralsOnSale
-    g.MineralsHistory = gameData.MineralsHistory
-    g.XpTotal = gameData.XpTotal
-    g.MoneyTotal = gameData.MoneyTotal
-    console.log(gameData)
+    // const gameData = JSON.parse(getCookie('spaceminer'))
+    // g.MineralsStock = gameData.MineralsStock
+    // g.MineralsOnSale = gameData.MineralsOnSale
+    // g.MineralsHistory = gameData.MineralsHistory
+    // g.XpTotal = gameData.XpTotal
+    // g.MoneyTotal = gameData.MoneyTotal
+    // console.log(gameData)
   }
 
   newgame(): void {

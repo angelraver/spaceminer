@@ -1,4 +1,4 @@
-import { MineralModel, AsteroidModel, ClientModel, LibraryItem, Sheet } from './types';
+import { MineralModel, AsteroidModel, ClientModel, Sheet, LibraryImage } from './types';
 /**
  * Global constants setting the game sources and values
  */
@@ -6,11 +6,10 @@ export declare const CONFIG: {
     SPRITES_FOLDER: string;
     SOUND_FOLDER: string;
     GAME_SPEED: number;
-    BLOCK: number;
     OFFSET_X: number;
     OFFSET_Y: number;
 };
-export declare const SPRITE_LIBRARY: LibraryItem;
+export declare const SPRITE_LIBRARY: LibraryImage;
 export declare const CLIENT_MODELS: ClientModel[];
 export declare const ASTEROID_MODELS: AsteroidModel[];
 /**

@@ -1,4 +1,4 @@
-import { Ordinal } from './types'
+import { Ordinal, Sheet } from './types'
 import { CONFIG } from './config'
 import Utils from './utils'
 const TWEEN = require('@tweenjs/tween.js')
@@ -13,14 +13,9 @@ export default class SPRITE {
   x: number
   h: number
   w: number
-  fX: number
-  fY: number
-  fW: number
-  fH: number
   fVertical: boolean
-  fQty: number
   fCurrent: number
-  sheet: string
+  sheet: Sheet
   target: any
   r: number
   path: Array<Ordinal>
@@ -45,12 +40,8 @@ export default class SPRITE {
     this.type = 'spr'
     this.y = props.y
     this.x = props.x
-    this.h = props.h * g.Block
-    this.w = props.w * g.Block
-    this.fX = props.fX || 0
-    this.fY = props.fY || 0
-    this.fW = props.fW || this.w
-    this.fH = props.fH || this.h
+    this.h = props.h
+    this.w = props.w
     this.fVertical = props.fVertical
     this.target = props.target
     this.r = props.r
@@ -74,9 +65,6 @@ export default class SPRITE {
     if (props.mini) {
       this.mini = props.mini
     }
-    if (props.fQty) {
-      this.fQty = props.fQty
-    }
     if (props.hitsLimit) {
       this.hitsLimit = props.hitsLimit
     }
@@ -98,7 +86,7 @@ export default class SPRITE {
    */
   updateImage(): void {
     var img = new Image()
-    img.src = CONFIG.SPRITES_FOLDER + this.sheet + '.png'
+    img.src = CONFIG.SPRITES_FOLDER + this.sheet.i + '.png'
     this.img = img
   }
 
@@ -106,14 +94,14 @@ export default class SPRITE {
    * Move the spritesheet to show the next frame in animation 
    */
   framing(): void {
-    if (!this.fQty) return
+    if (!this.sheet.fQty) return
 
     if (this.fVertical) {
-      this.fY = this.fCurrent * this.fH
+      this.sheet.y = this.fCurrent * this.sheet.h
     } else {
-      this.fX = this.fCurrent * this.fW
+      this.sheet.x = this.fCurrent * this.sheet.w
     }
-    if (this.fCurrent < this.fQty - 1) {
+    if (this.fCurrent < this.sheet.fQty - 1) {
       this.fCurrent++
     } else {
       this.fCurrent = 0
@@ -166,8 +154,8 @@ export default class SPRITE {
  * executes the ctx.drawImage
  * can receive a inner callback to execute inside
  */
-  drawImage({ x, y, w, h, img, fX, fY, fW, fH }: any) {
-    ctx.drawImage(img, fX, fY, fW, fH, x, y, w, h)
+  drawImage({ x, y, w, h, img, sheet }: any) {
+    ctx.drawImage(img, sheet.x, sheet.y, sheet.w, sheet.h, x, y, w, h)
   }
 
   /**
