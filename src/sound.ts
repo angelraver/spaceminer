@@ -4,7 +4,7 @@ import { LibraryItem } from './types'
 const SOUND_LIBRARY: LibraryItem = {
   engine: 'engines.mp3',
   asteroidEmpty: 'asteroidempty.mp3',
-  miningclick: 'asteroidempty.mp3',
+  miningclick: 'miningclick.mp3',
   mineralFound: 'mineralfound.mp3',
   pickoupcoin: 'pickupcoin.mp3',
   powerup23: 'powerup23.mp3',

@@ -107,10 +107,6 @@ export default class HERO extends SPRITE {
       chance: mineral.chance,
       type: mineral.type 
     }
-    // console.log(g.CurrentAsteroid.mineralType)
-    // console.log(mineral)
-    // console.log(mineral.sheet)
-    // console.log('------')
     const mineralCargo = new SPRITE({
       metadata: mineralInfo,
       sheet: mineral.sheet,

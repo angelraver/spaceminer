@@ -34,6 +34,7 @@ export const SPRITE_LIBRARY: LibraryImage = {
   mineralsE: { i: 'minerals', x: 0, y: 128, w: 32, h: 32 },
   mineralsF: { i: 'minerals', x: 0, y: 160, w: 32, h: 32 },
   mineralsG: { i: 'minerals', x: 0, y: 192, w: 32, h: 32 },
+  mineralsH: { i: 'minerals', x: 0, y: 224, w: 32, h: 32 },
   moneyIcon: { i: 'money-icon', x: 0, y: 0, w: 17, h: 18 },
   buttonSound: { i: 'sound', x: 0, y: 0, w: 50, h: 47, fQty: 1 },
   title: { i: 'title', x: 0, y: 0, w: 204, h: 130 },

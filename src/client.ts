@@ -178,10 +178,10 @@ export default class CLIENT extends SPRITE {
       })
       const price = g.MineralsPrices.find((m) => m.type === this.mineralTypeToBuy).price
       g.MoneyTotal += price 
-      TEXT.hiting(price.toString(), this.x, this.y, 'gold', 'white')
+      TEXT.hiting(price.toString(), this.x, this.y, 'gold', 'black')
       Sound.play('clientBuy')
     } else {
-      console.log('NOTHING TO BUY! :(')
+      TEXT.hiting('SOLD OUT', this.x, this.y, 'red', 'white')
       Sound.play('clientNobuy')
     }
   }

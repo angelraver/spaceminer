@@ -12,7 +12,7 @@ export default class TEXT extends SPRITE {
     /**
      * Adds a hit label (SPRITE type TEXT) to the global array of Hitlabels
     */
-    static hiting(value: string, x: number, y: number, color: string, colorLine: string): void;
+    static hiting(value: string, x: number, y: number, color: string, colorLine: string, size?: number): void;
     /**
      * Draw the text on canvas
      * - Apply looping

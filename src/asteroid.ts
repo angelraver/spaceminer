@@ -4,6 +4,7 @@ import Utils from './utils'
 import SPRITE from './sprite'
 import Sound from './sound'
 import { Ordinal, AsteroidModel, MineralModel } from './types'
+import TEXT from './text'
 
 /**
  * Extend SPRITE to add asteroid features
@@ -26,23 +27,27 @@ export default class ASTEROID extends SPRITE {
    * @returns nothing
    */
   click(e: any) {
-    if (
-      g.Hero.cargoMineralsFull
-      || g.CurrentAsteroid.empty
-      || !g.CurrentAsteroid.isClickIn(e)
-    ) {
+    if (!g.CurrentAsteroid.isClickIn(e)) return
+    if (g.CurrentAsteroid.empty) {
+      TEXT.hiting('0', this.x, this.y, 'white', 'red')
       return
     }
+
+    if (g.Hero.cargoMineralsFull) {
+      TEXT.hiting('FULL', this.x, this.y, 'orange', 'black')
+      return
+    }
+
     // hit the asteroid
     this.hit()
 
     // update the model and xp points
     switch(this.hits) {
-      case 3:
+      case 1:
         EXPLOSION.add({ x: this.x, y: this.y })
         this.heroMining(3)
         break
-      case 6:
+      case 2:
         EXPLOSION.add({ x: this.x, y: this.y })
         this.heroMining(5)
         break
@@ -91,7 +96,7 @@ export default class ASTEROID extends SPRITE {
       // scaleX: Math.random() < 0.5 ? -1 : 1,
       // scaleY: Math.random() < 0.5 ? -1 : 1,
       r: Utils.radiants(undefined, undefined, Math.random() * 180),
-      hitsLimit: 9,
+      hitsLimit: 3,
       mineralType: this.getRandomMineralType()
     }) 
 
