@@ -14,10 +14,20 @@ export default class ASTEROID extends SPRITE {
   modelCurrent: number
   modelNew: number
   empty: boolean
+  rotationDirection: string
+  rotationSpeed: number
   constructor(props: any) {
     super(props)
     this.mineralType = props.mineralType
     this.empty = false
+    this.currentLoop = 0
+    this.loops = 3
+    this.rotationDirection = props.rotationDirection
+    this.rotationSpeed = props.rotationSpeed
+    this.r = Utils.radiants(undefined, undefined, Math.random() * 180)
+    this.hitsLimit = 3
+    this.rotationDirection = Utils.random(0, 1) === 1 ? 'r' : 'l'
+    this.rotationSpeed = Utils.random(1, 3) * 0.01
   }
 
   /**
@@ -95,8 +105,6 @@ export default class ASTEROID extends SPRITE {
       sheet: model.sheet,
       // scaleX: Math.random() < 0.5 ? -1 : 1,
       // scaleY: Math.random() < 0.5 ? -1 : 1,
-      r: Utils.radiants(undefined, undefined, Math.random() * 180),
-      hitsLimit: 3,
       mineralType: this.getRandomMineralType()
     }) 
 
@@ -143,6 +151,18 @@ export default class ASTEROID extends SPRITE {
       return this.getModel()
     } else {
       return model
+    }
+  }
+  draw(): void {
+    console.log(this.rotationDirection)
+    this.looping()
+    this.positionByHero()
+    if (this.currentLoop === this.loops) {
+      this.r = this.rotationDirection === 'r' ? this.r + this.rotationSpeed : this.r - this.rotationSpeed
+      this.currentLoop = 0
+    } 
+    if (this.isVisible()) {
+      this.drawNormal()
     }
   }
 }
