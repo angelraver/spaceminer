@@ -103,10 +103,11 @@ export default class ASTEROID extends SPRITE {
       w: model.w,
       h: model.h,
       sheet: model.sheet,
-      // scaleX: Math.random() < 0.5 ? -1 : 1,
-      // scaleY: Math.random() < 0.5 ? -1 : 1,
       mineralType: this.getRandomMineralType()
     }) 
+    const scaleRandom = Math.random() * 1 + 0.5
+    asteroid.scaleX = scaleRandom
+    asteroid.scaleY = scaleRandom
 
     return asteroid 
   }
@@ -154,7 +155,6 @@ export default class ASTEROID extends SPRITE {
     }
   }
   draw(): void {
-    console.log(this.rotationDirection)
     this.looping()
     this.positionByHero()
     if (this.currentLoop === this.loops) {
