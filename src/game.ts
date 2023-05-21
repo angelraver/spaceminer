@@ -18,6 +18,7 @@ export default class GAME {
   Asteroids: ASTEROID[]
   Background: PLAIN
   BkgProportion: number
+  BaseRock: SPRITE
   CargoTotal: number
   CenterVoid: any
   Central: SPRITE
@@ -85,10 +86,10 @@ export default class GAME {
     this.OffSetHorizontal = this.W * CONFIG.OFFSET_X  
     this.OffSetVertical = this.H * CONFIG.OFFSET_Y
     this.CenterVoid = {
-      x: this.W / 4,
-      y: this.H / 4,
-      w: this.W / 2,
-      h: this.H / 2
+      x: this.W / 10,
+      y: this.H / 10,
+      w: this.W - this.W / 10 * 2,
+      h: this.H - this.H / 10 * 2
     }
     this.LevelLimits = {
       t: -this.OffSetVertical,

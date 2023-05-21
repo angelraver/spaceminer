@@ -11,6 +11,7 @@ export default function screenAction () {
   g.Anchor.positionByHero()
   g.Background.draw()
   g.Stars.forEach(s => s.draw())
+  g.BaseRock.draw()
   g.Asteroids.forEach(a => a.draw())
   g.Explosions.forEach(e => e.drawing())
   g.Clients.forEach(c => c.drawing())
