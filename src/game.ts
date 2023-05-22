@@ -1,5 +1,5 @@
 import { ItemAccount, Limits, MineralPrice, Ordinal } from './types'
-import { CONFIG } from './config'
+import { CONFIG, SPRITE_LIBRARY } from './config'
 import SPRITE from './sprite'
 import ASTEROID from './asteroid'
 import TEXT from './text'
@@ -52,6 +52,7 @@ export default class GAME {
   Pause: boolean
   Stars: BACKGROUND[]
   StarsData: any[]
+  Images: any
   SetNewGame: boolean
   SoundOn: boolean
   Speed: number
@@ -100,6 +101,28 @@ export default class GAME {
       b: this.H + this.OffSetVertical,
       l: -this.OffSetHorizontal
     }
+
+    this.Images = {}
+
+    const starsImage = new Image() 
+    starsImage.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.stars.i + '.png'
+    this.Images.stars = starsImage
+
+    const a1Image = new Image() 
+    a1Image.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.asteroid1.i + '.png'
+    this.Images.a1 = a1Image
+
+    const a2Image = new Image() 
+    a2Image.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.asteroid2.i + '.png'
+    this.Images.a2 = a2Image
+
+    const a3Image = new Image() 
+    a3Image.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.asteroid3.i + '.png'
+    this.Images.a3 = a3Image
+
+    const a0Image = new Image() 
+    a0Image.src = CONFIG.SPRITES_FOLDER + 'a-empty.png'
+    this.Images.a0 = a0Image
   }
 
   save(): void {

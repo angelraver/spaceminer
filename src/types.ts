@@ -3,14 +3,6 @@ export type Ordinal = {
   y: number
 }
 
-export type AsteroidModel = {
-  h: number
-  w: number
-  x: number
-  y: number
-  sheet: Sheet 
-}
-
 export type Sheet = {
   i?: string
   x: number

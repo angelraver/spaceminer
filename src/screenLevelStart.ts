@@ -1,9 +1,8 @@
 import { SPRITE_LIBRARY } from './config'
 import HERO from './hero'
 import SPRITE from './sprite'
-import BACKGROUND from './background'
+import STAR from './star'
 import CROSSHAIR from './crosshair'
-import Utils from './utils'
 import PLAIN from './plain'
 import INVENTORY from './inventory'
 import UI from './uiPanel'
@@ -24,9 +23,9 @@ export default function screenLevelStart() {
     g.VisibleArea = new PLAIN({ id: 'visiblArea', x: 0, y: 0, w: g.W, h: g.H })
 
     g.Stars = g.StarsData.map((star) => {
-      return new BACKGROUND({
+      return new STAR({
         x: star.x, y: star.y, w: 32,h: 32,
-        sheet: { i: 'stars', x: star.fX, y: star.fY, w: 50, h: 50, fQty: 1 }
+        sheet: { x: star.fX, y: star.fY, w: 50, h: 50, fQty: 1 }
       })
     })
 
@@ -54,7 +53,6 @@ export default function screenLevelStart() {
       y: g.Central.y - g.Central.h,
       sheet: SPRITE_LIBRARY.centralWorkshop,
       scaleX: 2, scaleY: -2,
-      mini: true
     })
 
     g.CentralFabric = new SPRITE({
@@ -63,7 +61,6 @@ export default function screenLevelStart() {
       y: g.Central.y - g.Central.h * 2.2,
       sheet: SPRITE_LIBRARY.centralFabric,
       scaleX: 2, scaleY: -2,
-      mini: true
     })
 
     g.CentralRefinery = new SPRITE({
@@ -73,7 +70,6 @@ export default function screenLevelStart() {
       sheet: SPRITE_LIBRARY.centralRefinery,
       r: 0,
       scaleX: 2, scaleY: -2,
-      mini: true
     })
 
     g.Hero = new HERO({ h: 80, w: 64 })

@@ -1,4 +1,4 @@
-import { MineralModel, AsteroidModel, ClientModel, Sheet, LibraryImage } from './types'
+import { MineralModel, ClientModel, Sheet, LibraryImage } from './types'
 
 /**
  * Global constants setting the game sources and values
@@ -41,6 +41,7 @@ export const SPRITE_LIBRARY: LibraryImage = {
   mineralsH: { i: 'minerals', x: 0, y: 224, w: 32, h: 32 },
   moneyIcon: { i: 'money-icon', x: 0, y: 0, w: 17, h: 18 },
   buttonSound: { i: 'sound', x: 0, y: 0, w: 50, h: 47, fQty: 1 },
+  stars: { i: 'stars', x: 0, y: 0, w: 250, h: 250, fQty: 1 },
   title: { i: 'title', x: 0, y: 0, w: 204, h: 130 },
   titleButtonNewGame: { i: 'buttonnewgame', x: 0, y: 0, w: 280, h: 104 },
   ui: { i: 'ui', x: 0, y: 0, w: 190, h: 49, fQty: 1 },
@@ -87,11 +88,7 @@ export const CLIENT_MODELS: ClientModel[] = [
   }
 ]
 
-export const ASTEROID_MODELS: AsteroidModel[] = [
-  { x: 0, y: 0, w: 120, h: 104, sheet: SPRITE_LIBRARY.asteroid1 },
-  { x: 0, y: 0, w: 96, h: 96, sheet: SPRITE_LIBRARY.asteroid2 },
-  { x: 0, y: 0, w: 104, h: 88, sheet: SPRITE_LIBRARY.asteroid3 }
-]
+export const ASTEROID_MODELS: Sheet[] = [SPRITE_LIBRARY.asteroid1, SPRITE_LIBRARY.asteroid2 , SPRITE_LIBRARY.asteroid3]
 
 /**
  * Collection of minerals for the cargo

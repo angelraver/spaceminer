@@ -3,7 +3,7 @@ import { MINERAL_MODELS, ASTEROID_MODELS } from './config'
 import Utils from './utils'
 import SPRITE from './sprite'
 import Sound from './sound'
-import { Ordinal, AsteroidModel, MineralModel } from './types'
+import { Ordinal, Sheet, MineralModel } from './types'
 import TEXT from './text'
 
 /**
@@ -29,6 +29,44 @@ export default class ASTEROID extends SPRITE {
     this.rotationDirection = Utils.random(0, 1) === 1 ? 'r' : 'l'
     this.rotationSpeed = Utils.random(1, 3) * 0.01
   }
+
+  updateImage(): void {
+    this.img = g.Images[this.sheet.i]
+  }
+
+    /**
+   * Returns an SPRITE with random position
+   * @param id string
+   * @returns SPRITE
+   */
+    static create( id: string): ASTEROID {
+      const model: Sheet = this.getModel()
+      const asteroid = new ASTEROID({
+        id: 'a' + id,
+        x: model.x,
+        y: model.y,
+        w: model.w,
+        h: model.h,
+        sheet: { ...model, x: 0, y: 0 },
+        mineralType: this.getRandomMineralType()
+      }) 
+      const scaleRandom = Math.random() * 1 + 0.5
+      asteroid.scaleX = scaleRandom
+      asteroid.scaleY = scaleRandom
+  
+      return asteroid 
+    }
+  
+    /**
+     * Updates g.Asteroids, each asteroid is related with the previous ones
+     * it must be this way to avoid overlaping
+     */
+    static createGroup(qty: number): void {
+      const that = this
+      for (let i = 0; i < qty; i++) {
+        g.Asteroids.push(that.create(i.toString()))
+      }
+    }
 
   /**
    * Manage the click on the CurrentAsteroid
@@ -81,46 +119,12 @@ export default class ASTEROID extends SPRITE {
   setEmpty(): void {
     Sound.play('asteroidEmpty')
     this.empty = true
-    this.sheet.i = 'a-empty'
+    this.sheet.i = 'a0'
     this.updateImage()
   }
 
   isClickIn(e: Ordinal): boolean {
     return Utils.isHiting(e, this)
-  }
-
-  /**
-   * Returns an SPRITE with random position
-   * @param id string
-   * @returns SPRITE
-   */
-  static create( id: string): ASTEROID {
-    const model: AsteroidModel = this.getModel()
-    const asteroid = new ASTEROID({
-      id: 'a' + id,
-      x: model.x,
-      y: model.y,
-      w: model.w,
-      h: model.h,
-      sheet: model.sheet,
-      mineralType: this.getRandomMineralType()
-    }) 
-    const scaleRandom = Math.random() * 1 + 0.5
-    asteroid.scaleX = scaleRandom
-    asteroid.scaleY = scaleRandom
-
-    return asteroid 
-  }
-
-  /**
-   * Updates g.Asteroids, each asteroid is related with the previous ones
-   * it must be this way to avoid overlaping
-   */
-  static createGroup(qty: number): void {
-    const that = this
-    for (let i = 0; i < qty; i++) {
-      g.Asteroids.push(that.create(i.toString()))
-    }
   }
   
   /**
@@ -132,12 +136,12 @@ export default class ASTEROID extends SPRITE {
     return MINERAL_MODELS.find((m: MineralModel) => numberRandom >= m.chance[0] && numberRandom <= m.chance[1]).type
   }
 
-  static getModel(): AsteroidModel {
+  static getModel(): Sheet {
     const selected = ASTEROID_MODELS[Utils.random(0, ASTEROID_MODELS.length - 1)]
     const model = {
       ...selected,
-      x: Utils.random(-g.OffSetHorizontal + selected.w / 2, g.W + g.OffSetHorizontal - selected.w / 2),
-      y: Utils.random(-g.OffSetVertical + selected.h / 2, g.OffSetVertical + g.H - selected.h / 2)
+      x: Utils.random(-g.W -g.OffSetHorizontal + selected.w * 2, g.W + g.OffSetHorizontal - selected.w * 2),
+      y: Utils.random(-g.H -g.OffSetVertical + selected.h * 2, g.OffSetVertical + g.H - selected.h * 2)
     }
     const modelWithDimensionsCalculated = {
       ...model,
@@ -154,6 +158,7 @@ export default class ASTEROID extends SPRITE {
       return model
     }
   }
+
   draw(): void {
     this.looping()
     this.positionByHero()
