@@ -44,6 +44,33 @@ export default function screenLevelStart() {
       w: 80, h: 64,
       x: g.W / 2, y: g.H / 2,
       sheet: SPRITE_LIBRARY.central,
+      scaleX: 2, scaleY: -2,
+      mini: true
+    })
+
+    g.CentralWorkshop = new SPRITE({
+      w: 80, h: 80,
+      x: g.Central.x + g.Central.w * 2.2,
+      y: g.Central.y - g.Central.h,
+      sheet: SPRITE_LIBRARY.centralWorkshop,
+      scaleX: 2, scaleY: -2,
+      mini: true
+    })
+
+    g.CentralFabric = new SPRITE({
+      w: 80, h: 80,
+      x: g.Central.x,
+      y: g.Central.y - g.Central.h * 2.2,
+      sheet: SPRITE_LIBRARY.centralFabric,
+      scaleX: 2, scaleY: -2,
+      mini: true
+    })
+
+    g.CentralRefinery = new SPRITE({
+      w: 80, h: 80,
+      x: g.Central.x - g.Central.w * 2.2,
+      y: g.Central.y - g.Central.h,
+      sheet: SPRITE_LIBRARY.centralRefinery,
       r: 0,
       scaleX: 2, scaleY: -2,
       mini: true
