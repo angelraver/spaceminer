@@ -36,13 +36,11 @@ export default class ASTEROID extends SPRITE {
 
     /**
    * Returns an SPRITE with random position
-   * @param id string
    * @returns SPRITE
    */
-    static create( id: string): ASTEROID {
+    static create(): ASTEROID {
       const model: Sheet = this.getModel()
       const asteroid = new ASTEROID({
-        id: 'a' + id,
         x: model.x,
         y: model.y,
         w: model.w,
@@ -57,16 +55,19 @@ export default class ASTEROID extends SPRITE {
       return asteroid 
     }
   
-    /**
-     * Updates g.Asteroids, each asteroid is related with the previous ones
-     * it must be this way to avoid overlaping
-     */
-    static createGroup(qty: number): void {
-      const that = this
-      for (let i = 0; i < qty; i++) {
-        g.Asteroids.push(that.create(i.toString()))
-      }
-    }
+  /**
+   * returns a list of asteorids lists
+   * one big list throws error on some devices
+   */
+  static getGroups(totalQty: number, groupLimit: number): any[] {
+    const that = this
+    const listsQty = Math.ceil(totalQty / groupLimit)
+    return Array.from({ length: listsQty }, () => {
+      return Array.from({ length: groupLimit }, () => {
+        return that.create()
+      })
+    })
+  }
 
   /**
    * Manage the click on the CurrentAsteroid
@@ -150,7 +151,7 @@ export default class ASTEROID extends SPRITE {
     }
 
     const insideCenter = Utils.colision(modelWithDimensionsCalculated, g.CenterVoid)
-    const overlaping = g.Asteroids.some((a) => Utils.colision(a, modelWithDimensionsCalculated))
+    const overlaping = g.Asteroids.flat().some((a) => Utils.colision(a, modelWithDimensionsCalculated))
 
     if (insideCenter || overlaping) {
       return this.getModel()

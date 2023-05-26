@@ -48,7 +48,7 @@ function rolling() {
       screenTitle()
       break
     case 'levelStart' :
-      g.newgame()
+      g.newGame()
       g.load()
       screenLevelStart()
       break

@@ -22,14 +22,9 @@ export default function screenLevelStart() {
 
     g.VisibleArea = new PLAIN({ id: 'visiblArea', x: 0, y: 0, w: g.W, h: g.H })
 
-    g.Stars = g.StarsData.map((star) => {
-      return new STAR({
-        x: star.x, y: star.y, w: 32,h: 32,
-        sheet: { x: star.fX, y: star.fY, w: 50, h: 50, fQty: 1 }
-      })
-    })
+    g.Stars = STAR.getGroups()
 
-    ASTEROID.createGroup(100)
+    g.Asteroids = ASTEROID.getGroups(200, 50)
 
     g.BaseRock = new SPRITE({
       w: 150, h: 150,

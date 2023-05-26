@@ -7,8 +7,6 @@ export const CONFIG = {
   SPRITES_FOLDER: 'assets/sprites/',
   SOUND_FOLDER: 'assets/sounds/',
   GAME_SPEED: 45,
-  OFFSET_X: 1,
-  OFFSET_Y: 1
 }
 
 export const SPRITE_LIBRARY: LibraryImage = {

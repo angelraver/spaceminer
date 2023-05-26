@@ -1,5 +1,5 @@
 import SPRITE from './sprite';
-import { Ordinal, AsteroidModel } from './types';
+import { Ordinal, Sheet } from './types';
 /**
  * Extend SPRITE to add asteroid features
  */
@@ -8,7 +8,20 @@ export default class ASTEROID extends SPRITE {
     modelCurrent: number;
     modelNew: number;
     empty: boolean;
+    rotationDirection: string;
+    rotationSpeed: number;
     constructor(props: any);
+    updateImage(): void;
+    /**
+   * Returns an SPRITE with random position
+   * @returns SPRITE
+   */
+    static create(): ASTEROID;
+    /**
+     * returns a list of asteorids lists
+     * one big list throws error on some devices
+     */
+    static getGroups(totalQty: number, groupLimit: number): any[];
     /**
      * Manage the click on the CurrentAsteroid
      * - Update the cargo
@@ -20,20 +33,10 @@ export default class ASTEROID extends SPRITE {
     setEmpty(): void;
     isClickIn(e: Ordinal): boolean;
     /**
-     * Returns an SPRITE with random position
-     * @param id string
-     * @returns SPRITE
-     */
-    static create(id: string): ASTEROID;
-    /**
-     * Updates g.Asteroids, each asteroid is related with the previous ones
-     * it must be this way to avoid overlaping
-     */
-    static createGroup(qty: number): void;
-    /**
      * returns the one mineral for the asteroid, from the collection of minerals based on probability of occurrence
      *
      */
     static getRandomMineralType(): string;
-    static getModel(): AsteroidModel;
+    static getModel(): Sheet;
+    draw(): void;
 }

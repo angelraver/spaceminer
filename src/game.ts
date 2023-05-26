@@ -15,7 +15,7 @@ import Utils from './utils'
 
 export default class GAME {
   Anchor: SPRITE
-  Asteroids: ASTEROID[]
+  Asteroids: any[]
   Background: PLAIN
   BkgProportion: number
   BaseRock: SPRITE
@@ -84,14 +84,8 @@ export default class GAME {
     this.Speed = 10
     this.XpTotal = 0
     this.W = window.innerWidth
-    this.OffSetHorizontal = this.W * CONFIG.OFFSET_X  
-    this.OffSetVertical = this.H * CONFIG.OFFSET_Y
-    this.CenterVoid = {
-      x: this.W / 10,
-      y: this.H / 10,
-      w: this.W - this.W / 10 * 2,
-      h: this.H - this.H / 10 * 2
-    }
+    this.setCenterVoid()
+    this.setLimits()
     this.LevelLimits = {
       t: -this.OffSetVertical,
       r: this.W + this.OffSetHorizontal,
@@ -143,6 +137,34 @@ export default class GAME {
     return JSON.stringify(data)
   }
 
+  setCenterVoid(): void {
+    if (this.W < 500) {
+      this.CenterVoid = {
+        x: 0,
+        y: this.H / 10,
+        w: this.W,
+        h: this.H - this.H / 10 * 2
+      }
+    } else {
+      this.CenterVoid = {
+        x: this.W / 10,
+        y: this.H / 10,
+        w: this.W - this.W / 10 * 2,
+        h: this.H - this.H / 10 * 2
+      }
+    }
+  }
+
+  setLimits(): void {
+    if (this.W < 500) {
+      this.OffSetHorizontal = this.W * 5
+      this.OffSetVertical = this.H * 3
+    } else {
+      this.OffSetHorizontal = this.W * 2
+      this.OffSetVertical = this.H * 2
+    }
+  } 
+  
   load(): any {
     function getCookie(cname: string) {
       let name = cname + '='
@@ -168,7 +190,7 @@ export default class GAME {
     // console.log(gameData)
   }
 
-  newgame(): void {
+  newGame(): void {
     g.StarsData = Array.from({ length: 1000 }, () => {
       return {
         x: Utils.random(g.LevelLimits.l, g.LevelLimits.r),

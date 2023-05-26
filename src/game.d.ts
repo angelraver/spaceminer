@@ -12,9 +12,10 @@ import UI from './uiPanel';
 import EXPLOSION from './explosion';
 export default class GAME {
     Anchor: SPRITE;
-    Asteroids: ASTEROID[];
+    Asteroids: any[];
     Background: PLAIN;
     BkgProportion: number;
+    BaseRock: SPRITE;
     CargoTotal: number;
     CenterVoid: any;
     Central: SPRITE;
@@ -45,6 +46,7 @@ export default class GAME {
     Pause: boolean;
     Stars: BACKGROUND[];
     StarsData: any[];
+    Images: any;
     SetNewGame: boolean;
     SoundOn: boolean;
     Speed: number;
@@ -60,6 +62,8 @@ export default class GAME {
     constructor();
     save(): void;
     getSaveData(): string;
+    setCenterVoid(): void;
+    setLimits(): void;
     load(): any;
-    newgame(): void;
+    newGame(): void;
 }
