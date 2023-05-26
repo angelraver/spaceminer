@@ -29,14 +29,14 @@ export default function screenLevelStart() {
       })
     })
 
-    ASTEROID.createGroup(200)
+    ASTEROID.createGroup(100)
 
     g.BaseRock = new SPRITE({
       w: 150, h: 150,
       x: g.W / 2, y: g.H / 2,
       sheet: SPRITE_LIBRARY.baserock,
       r: 0,
-      scaleX: 3, scaleY: -3
+      scaleX: 2, scaleY: 2
     })
 
     g.Central = new SPRITE({
@@ -45,31 +45,6 @@ export default function screenLevelStart() {
       sheet: SPRITE_LIBRARY.central,
       scaleX: 2, scaleY: -2,
       mini: true
-    })
-
-    g.CentralWorkshop = new SPRITE({
-      w: 80, h: 80,
-      x: g.Central.x + g.Central.w * 2.2,
-      y: g.Central.y - g.Central.h,
-      sheet: SPRITE_LIBRARY.centralWorkshop,
-      scaleX: 2, scaleY: -2,
-    })
-
-    g.CentralFabric = new SPRITE({
-      w: 80, h: 80,
-      x: g.Central.x,
-      y: g.Central.y - g.Central.h * 2.2,
-      sheet: SPRITE_LIBRARY.centralFabric,
-      scaleX: 2, scaleY: -2,
-    })
-
-    g.CentralRefinery = new SPRITE({
-      w: 80, h: 80,
-      x: g.Central.x - g.Central.w * 2.2,
-      y: g.Central.y - g.Central.h,
-      sheet: SPRITE_LIBRARY.centralRefinery,
-      r: 0,
-      scaleX: 2, scaleY: -2,
     })
 
     g.Hero = new HERO({ h: 80, w: 64 })

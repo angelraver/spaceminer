@@ -22,9 +22,6 @@ export default class GAME {
   CargoTotal: number
   CenterVoid: any
   Central: SPRITE
-  CentralFabric: SPRITE
-  CentralRefinery: SPRITE
-  CentralWorkshop: SPRITE
   Clients: CLIENT[]
   Crosshair: CROSSHAIR
   CurrentScreen: string
