@@ -35,10 +35,10 @@ export default function screenLevelStart() {
     })
 
     g.Central = new SPRITE({
-      w: 80, h: 64,
+      w: 160, h: 128,
       x: g.W / 2, y: g.H / 2,
       sheet: SPRITE_LIBRARY.central,
-      scaleX: 2, scaleY: -2,
+      // scaleX: 2, scaleY: -2,
       mini: true
     })
 

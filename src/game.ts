@@ -13,6 +13,7 @@ import UI from './uiPanel'
 import EXPLOSION from './explosion'
 import Utils from './utils'
 import CHARACTER from './character'
+import ENEMY from './enemy'
 
 export default class GAME {
   Anchor: SPRITE
@@ -30,6 +31,7 @@ export default class GAME {
   CurrentAsteroid: ASTEROID
   Device: string
   Explosions: EXPLOSION[]
+  Enemys: ENEMY[]
   GameOver: boolean
   GlobalTime: number
   H: number
@@ -65,6 +67,7 @@ export default class GAME {
     this.BkgProportion = 4
     this.CargoTotal = 0
     this.CurrentScreen = 'titleSetup' // titleSetup title levelStart action
+    this.Enemys = []
     this.Explosions = []
     this.GlobalTime = 0
     this.GameOver = false

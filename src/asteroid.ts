@@ -5,6 +5,7 @@ import SPRITE from './sprite'
 import Sound from './sound'
 import { Ordinal, Sheet, MineralModel } from './types'
 import TEXT from './text'
+import ENEMY from './enemy'
 
 /**
  * Extend SPRITE to add asteroid features
@@ -93,6 +94,7 @@ export default class ASTEROID extends SPRITE {
     // update the model and xp points
     switch(this.hits) {
       case 1:
+        ENEMY.create()
         EXPLOSION.add({ x: this.x, y: this.y })
         this.heroMining(3)
         break

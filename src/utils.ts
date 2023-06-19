@@ -154,8 +154,8 @@ export default class Utils {
   /**
    * checks if a is inside b + the margin
    */
-  static valueInMargin(a: number, b: number, margin: number): boolean {
-    return a >= (b - margin) && a <= (b + margin)
+  static valueInMargin(a: number, b: number, body: number, margin: number): boolean {
+    return a >= (b - margin) && a <= (b + body + margin)
   }
 
   /**
@@ -217,6 +217,10 @@ export default class Utils {
       }
     }
     return lineArray;
+  }
+
+  static absInt(value: number): number {
+    return Math.abs(parseInt(value.toString()))
   }
 
   // pixelation = 40

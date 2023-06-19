@@ -182,7 +182,7 @@ export default class SPRITE {
    * Set the SPRITE.r (rotation) to follow the generated path
    * @param target 
    */
-  setPath(target: any): void {
+  setPath(target: Ordinal): void {
     this.currentPathIndex = 0
     const origin = { x: this.x, y: this.y }
     let targetFit = { x: target.x, y: target.y }

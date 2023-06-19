@@ -17,9 +17,13 @@ export default function screenAction () {
   g.Clients.forEach(c => c.drawing())
   g.Crosshair.draw()
   g.Central.draw()
+  //////
+  g.Enemys.forEach(e => e.drawing())
   g.Hero.drawing()
+  //////
   g.HitsLabels.forEach(h => h.draw())
   g.HitsLabels = g.HitsLabels.filter((s) => s.currentLoop < s.loops)
+  //////
   g.Inventory.draw()
   g.UiPanel.draw()
   g.Characters.forEach((c) => c.drawing())

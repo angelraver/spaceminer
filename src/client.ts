@@ -104,7 +104,7 @@ export default class CLIENT extends SPRITE {
  */
   checkPath() {
     this.isOutside = this.x < -g.OffSetHorizontal || this.x > g.W + g.OffSetHorizontal || this.y < -g.OffSetVertical || this.y > g.H + g.OffSetVertical
-    this.isInCentral = Utils.valueInMargin(this.x, g.Central.x, 10) && Utils.valueInMargin(this.x, g.Central.x, 10)
+    this.isInCentral = Utils.valueInMargin(this.x, g.Central.x, g.Central.w, 10) && Utils.valueInMargin(this.y, g.Central.y, g.Central.h, 10)
 
     if (this.path.length > 0 && this.currentPathIndex === this.path.length) {
       // console.log('no hay path')
