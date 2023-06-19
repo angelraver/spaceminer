@@ -15,6 +15,7 @@ export const SPRITE_LIBRARY: LibraryImage = {
   asteroid3: { i: 'a3', x: 0, y: 0, w: 104, h: 88 },
   baserock: { i: 'baserock', x: 0, y: 0, w: 100, h: 100 }, 
   central: { i: 'basecentral', x: 0, y: 0, w: 76, h: 54 },
+  characterMinerGlad: { i: 'palegre', x: 0, y: 0, w: 20, h: 33 },
   client1: { i: 'client1', x: 0, y: 0, w: 72, h: 85 },
   client2: { i: 'client2', x: 0, y: 0, w: 72, h: 85 },
   client3: { i: 'client3', x: 0, y: 0, w: 72, h: 85 },

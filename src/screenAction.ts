@@ -22,5 +22,6 @@ export default function screenAction () {
   g.HitsLabels = g.HitsLabels.filter((s) => s.currentLoop < s.loops)
   g.Inventory.draw()
   g.UiPanel.draw()
+  g.Characters.forEach((c) => c.drawing())
 }
 

@@ -60,7 +60,7 @@ export default class SPRITE {
 
     if (props.loops) {
       this.loops = props.loops
-      this.currentLoop = 0
+      this.currentLoop = 1
     }
     if (props.mini) {
       this.mini = props.mini
@@ -140,6 +140,7 @@ export default class SPRITE {
    * can receive a inner callback to execute inside
    */
   drawNormal(callBackInner = () => {}): void {
+    ctx.imageSmoothingEnabled = false
     ctx.save()
     ctx.translate(this.x, this.y)
     ctx.rotate(-this.r)

@@ -4,6 +4,7 @@ import { MINERAL_MODELS, SPRITE_LIBRARY } from './config'
 import Utils from './utils'
 import Sound from './sound'
 import TEXT from './text'
+import CHARACTER from './character'
 
 /**
  * Extends SPRITE to add hero features
@@ -147,6 +148,7 @@ export default class HERO extends SPRITE {
       })
       this.resetCargo()
       g.Inventory.mineralsUpdateSlots()
+      CHARACTER.call('characterMinerGlad', 'WELL DONE!', 'blue')
     }
   }
 

@@ -24,7 +24,7 @@ export default function screenLevelStart() {
 
     g.Stars = STAR.getGroups()
 
-    g.Asteroids = ASTEROID.getGroups(200, 50)
+    ASTEROID.setGroups(500, 50)
 
     g.BaseRock = new SPRITE({
       w: 150, h: 150,
@@ -50,6 +50,8 @@ export default function screenLevelStart() {
     g.Crosshair = new CROSSHAIR({ w: 64, h: 64 })
     g.Inventory = new INVENTORY()
     g.UiPanel = new UI()
+
+    g.Characters = []
   }
 
   g.CurrentScreen = 'action'

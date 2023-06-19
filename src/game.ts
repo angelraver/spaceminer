@@ -12,6 +12,7 @@ import INVENTORY from './inventory'
 import UI from './uiPanel'
 import EXPLOSION from './explosion'
 import Utils from './utils'
+import CHARACTER from './character'
 
 export default class GAME {
   Anchor: SPRITE
@@ -22,6 +23,7 @@ export default class GAME {
   CargoTotal: number
   CenterVoid: any
   Central: SPRITE
+  Characters: CHARACTER[]
   Clients: CLIENT[]
   Crosshair: CROSSHAIR
   CurrentScreen: string

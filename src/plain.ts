@@ -1,6 +1,6 @@
 import SPRITE from './sprite'
 /**
- * Extends SPRITE to add text features
+ * Extends SPRITE to add a plain of color
  */
 export default class PLAIN extends SPRITE {
   color: string
@@ -17,9 +17,9 @@ export default class PLAIN extends SPRITE {
    */
   draw() {
     ctx.save()
+    ctx.globalAlpha = this.alpha
     ctx.fillStyle = this.color
     ctx.fillRect(this.x, this.y, this.w, this.h)
-    ctx.globalAlpha = this.alpha
     ctx.restore()
   }
 }
