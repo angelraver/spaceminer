@@ -38,7 +38,7 @@ export default class ASTEROID extends SPRITE {
    * Returns an SPRITE with random position
    * @returns SPRITE
    */
-    static create(): ASTEROID {
+    static create(): void {
       const model: Sheet = this.getModel()
       const asteroid = new ASTEROID({
         x: model.x,
@@ -47,19 +47,19 @@ export default class ASTEROID extends SPRITE {
         h: model.h,
         sheet: { ...model, x: 0, y: 0 },
         mineralType: this.getRandomMineralType()
-      }) 
+      })
       const scaleRandom = Math.random() * 1 + 0.5
       asteroid.scaleX = scaleRandom
       asteroid.scaleY = scaleRandom
-  
-      return asteroid 
+
+      g.Asteroids.push(asteroid) 
     }
   
   /**
    * returns a list of asteorids lists
    * one big list throws error on some devices
    */
-  static getGroups(totalQty: number, groupLimit: number): any[] {
+  static setGroups(totalQty: number, groupLimit: number): any[] {
     const that = this
     const listsQty = Math.ceil(totalQty / groupLimit)
     return Array.from({ length: listsQty }, () => {
@@ -144,15 +144,15 @@ export default class ASTEROID extends SPRITE {
       x: Utils.random(-g.W -g.OffSetHorizontal + selected.w * 2, g.W + g.OffSetHorizontal - selected.w * 2),
       y: Utils.random(-g.H -g.OffSetVertical + selected.h * 2, g.OffSetVertical + g.H - selected.h * 2)
     }
+
     const modelWithDimensionsCalculated = {
       ...model,
-      w: model.w,
-      h: model.h
     }
 
-    const insideCenter = Utils.colision(modelWithDimensionsCalculated, g.CenterVoid)
-    const overlaping = g.Asteroids.flat().some((a) => Utils.colision(a, modelWithDimensionsCalculated))
-
+    const insideCenter = Utils.colision(model, g.CenterVoid)
+    const overlaping = g.Asteroids.flat().some((a) => {
+      return Utils.colision(a, model)
+    })
     if (insideCenter || overlaping) {
       return this.getModel()
     } else {
