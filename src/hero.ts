@@ -20,7 +20,9 @@ export default class HERO extends SPRITE {
   cargoMinerals: SPRITE[]
   flame1: SPRITE
   flame2: SPRITE
-  
+  shoot: SPRITE
+  enemyTarget: SPRITE
+
   constructor(props: any) {
     super(props)
     this.id = 'hero'
@@ -45,31 +47,10 @@ export default class HERO extends SPRITE {
       x: (this.w / -2) + 40, y: (this.h / -2) - 6, w: 40, h: 48,
       sheet: SPRITE_LIBRARY.flameBlue1
     })
-
-  }
-  /**
-   * Overwrite draw
-   */
-  drawing(): void {
-    this.unloadCargo()
-    this.checkDirection()
-    this.framing()
-    this.draw(() => {
-      this.cargoMinerals.forEach((c) => {
-        this.drawImage({ ...c })
-      })
-      if (this.checkMoving()) {
-        this.flame1.framing()
-        this.drawImage({ ...this.flame1 })
-        this.flame2.framing()
-        this.drawImage({ ...this.flame2 })
-      }
-    })
   }
 
   /**
    * Manage click event
-   * @param e 
    */
   click(e: Ordinal) {
     // if the inventory is on dont move
@@ -80,7 +61,7 @@ export default class HERO extends SPRITE {
     if (!Utils.isHiting(e, g.CurrentAsteroid)) {
       Sound.play('engine')
     }
-    this.setPath({ x: e.x, y: e.y })
+    this.setPath({ x: e.x, y: e.y }, g.SpeedHero)
   }
 
   /**
@@ -175,23 +156,86 @@ export default class HERO extends SPRITE {
     if (this.currentPos) {
       this.goingTop = this.currentPos.y < this.previousPos.y // the hero is moving up
         && this.y < g.Margin // the hero is inside the top margin
-        && g.Anchor.y + g.Anchor.h + g.Speed < g.LevelLimits.b //the anchor will not cross the bottom limit
+        && g.Anchor.y + g.Anchor.h + g.SpeedHero < g.LevelLimits.b //the anchor will not cross the bottom limit
 
       this.goingRight = this.currentPos.x > this.previousPos.x // the hero is moving right
         && this.x > g.W - g.Margin // the hero is inside the right margin
-        && g.Anchor.x - g.Speed > g.LevelLimits.l // the anchor will not cross the left limit
+        && g.Anchor.x - g.SpeedHero > g.LevelLimits.l // the anchor will not cross the left limit
 
       this.goingBottom = this.currentPos.y > this.previousPos.y // the hero is going bottom
         && this.y + this.h > g.H - g.Margin // the hero is inside the bottom margin
-        && g.Anchor.y - g.Speed > g.LevelLimits.t // the anchor will not cross the top limit
+        && g.Anchor.y - g.SpeedHero > g.LevelLimits.t // the anchor will not cross the top limit
 
       this.goingLeft = this.currentPos.x < this.previousPos.x // the hero is moving left
         && this.x < g.Margin // the hero is inside the left margin
-        && g.Anchor.x + g.Anchor.w + g.Speed < g.LevelLimits.r // the anchor will not cross the right limit
+        && g.Anchor.x + g.Anchor.w + g.SpeedHero < g.LevelLimits.r // the anchor will not cross the right limit
     }
   }
 
   checkMoving(): boolean {
     return this.moving || this.goingTop || this.goingRight || this.goingBottom || this.goingLeft 
+  }
+
+  checkEmemys(): void {
+    if (g.Enemys.length > 0) {
+      const visibleEnemys = g.Enemys.filter((e) => e.isVisible())
+      if (visibleEnemys.length > 0) {
+        this.enemyTarget = visibleEnemys[0]
+      }
+    }
+  }
+
+  checkShoot(): void {
+    if (this.enemyTarget) {
+      // console.log('enemy target!')
+      if (!this.shoot) {
+        // console.log('create shoot!')
+        this.shoot = new SPRITE({
+          x: g.Hero.x,
+          y: g.Hero.y,
+          h: 20,
+          w: 20,
+          r: this.r,
+          sheet: SPRITE_LIBRARY.heroShoot,
+        })
+        this.shoot.setPath({ x: this.enemyTarget.x, y: this.enemyTarget.y }, g.SpeedHeroShoot)
+      }
+
+      if (this.shoot) {
+        // console.log('shoot exists!')
+console.log(this.enemyTarget.hits)
+        if (Utils.colision(this.shoot, this.enemyTarget)) {
+          this.enemyTarget.hit()
+        }
+
+        if (this.shoot.currentPathIndex > this.path.length - 2) {
+          this.shoot = null
+          return
+        }
+        // console.log('hero: ', this.x, this.y)
+        // console.log('shot: ', this.shoot.x, this.shoot.y, ' ____ ', this.shoot.currentPathIndex, '/', this.shoot.path.length,)
+        // console.log('----')
+        this.shoot.draw()
+      }
+    }
+  }
+
+  drawing(): void {
+    this.unloadCargo()
+    this.checkDirection()
+    this.framing()
+    this.checkEmemys()
+    this.checkShoot()
+    this.draw(() => {
+      this.cargoMinerals.forEach((c) => {
+        this.drawImage({ ...c })
+      })
+      if (this.checkMoving()) {
+        this.flame1.framing()
+        this.drawImage({ ...this.flame1 })
+        this.flame2.framing()
+        this.drawImage({ ...this.flame2 })
+      }
+    })
   }
 }

@@ -16,12 +16,12 @@ export default class ASTEROID extends SPRITE {
    * Returns an SPRITE with random position
    * @returns SPRITE
    */
-    static create(): ASTEROID;
+    static create(): void;
     /**
      * returns a list of asteorids lists
      * one big list throws error on some devices
      */
-    static getGroups(totalQty: number, groupLimit: number): any[];
+    static setGroups(totalQty: number, groupLimit: number): any[];
     /**
      * Manage the click on the CurrentAsteroid
      * - Update the cargo

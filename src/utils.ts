@@ -152,6 +152,36 @@ export default class Utils {
   }
 
   /**
+   * get random point beyond the offSets of the game
+   */
+  static randomNoVisiblePoint() {
+    const randomIndex = this.random(0,3)
+    const margin = 200
+    const yRandomPoint = this.random(0, g.H)
+    const xRandomPoint = this.random(0, g.W)
+    const points = [
+      { // from top
+        x: xRandomPoint,
+        y: -margin
+      },
+      { // from right
+        x: g.W + margin,
+        y: yRandomPoint
+      },
+      { // from bottom
+        x: xRandomPoint,
+        y: g.H + margin
+      },
+      { // from left
+        x: -margin,
+        y: yRandomPoint
+      }
+    ]
+
+    return points[randomIndex]
+  }
+
+  /**
    * checks if a is inside b + the margin
    */
   static valueInMargin(a: number, b: number, body: number, margin: number): boolean {

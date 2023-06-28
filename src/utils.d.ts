@@ -47,9 +47,16 @@ export default class Utils {
         y: number;
     };
     /**
+     * get random point beyond the offSets of the game
+     */
+    static randomNoVisiblePoint(): {
+        x: number;
+        y: number;
+    };
+    /**
      * checks if a is inside b + the margin
      */
-    static valueInMargin(a: number, b: number, margin: number): boolean;
+    static valueInMargin(a: number, b: number, body: number, margin: number): boolean;
     /**
      * returns a new list if the type exists in the list updates the qty
      */
@@ -58,4 +65,10 @@ export default class Utils {
      * returns a number in ascendent order from the start to end
      */
     static getNumberAscending(start: number, end: number): number;
+    static wrapText(text: string, x: number, y: number, maxWidth: number, lineHeight: number): {
+        line: string;
+        x: number;
+        y: number;
+    }[];
+    static absInt(value: number): number;
 }

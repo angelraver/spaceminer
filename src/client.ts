@@ -72,27 +72,27 @@ export default class CLIENT extends SPRITE {
    */
   pathByHero() {
     if (g.Hero.goingTop) {
-      this.y = this.y + g.Speed
+      this.y = this.y + g.SpeedClient
       this.path = this.path.map((p) => {
-        return { ...p, y: p.y + g.Speed }
+        return { ...p, y: p.y + g.SpeedClient }
       })
     }
     if (g.Hero.goingRight) {
-      this.x = this.x - g.Speed
+      this.x = this.x - g.SpeedClient
       this.path = this.path.map((p) => {
-        return { ...p, x: p.x - g.Speed }
+        return { ...p, x: p.x - g.SpeedClient }
       })
     }
     if (g.Hero.goingBottom) {
-      this.y = this.y - g.Speed
+      this.y = this.y - g.SpeedClient
       this.path = this.path.map((p) => {
-        return { ...p, y: p.y - g.Speed }
+        return { ...p, y: p.y - g.SpeedClient }
       })
     }
     if (g.Hero.goingLeft) {
-      this.x = this.x + g.Speed
+      this.x = this.x + g.SpeedClient
       this.path = this.path.map((p) => {
-        return { ...p, x: p.x + g.Speed }
+        return { ...p, x: p.x + g.SpeedClient }
       })
     }
   }
@@ -123,7 +123,7 @@ export default class CLIENT extends SPRITE {
         // console.log('Es momento de setear el path!')
         this.x = this.origin.x
         this.y = this.origin.y
-        this.setPath(g.Central)
+        this.setPath(g.Central, g.SpeedClient)
         // console.log(this.path)
         this.pathBlocked = true
       }
@@ -147,7 +147,7 @@ export default class CLIENT extends SPRITE {
           // console.log('time to take the mineral!')
           this.buyMineral()
           // console.log('---time to set the returning path')
-          this.setPath(this.origin)
+          this.setPath(this.origin, g.SpeedClient)
           // console.log('origin: ', this.origin)
           this.pathBlocked = true
           this.origin = Utils.randomOuterPoint()
@@ -174,7 +174,7 @@ export default class CLIENT extends SPRITE {
         y: this.h / -2,
         w: this.w,
         h: this.w, // yes the w, for square simetry
-        r: Utils.random(0, 360)
+        r: Utils.random(0, 180)
       })
       const price = g.MineralsPrices.find((m) => m.type === this.mineralTypeToBuy).price
       g.MoneyTotal += price 

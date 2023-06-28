@@ -10,6 +10,8 @@ import PLAIN from './plain';
 import INVENTORY from './inventory';
 import UI from './uiPanel';
 import EXPLOSION from './explosion';
+import CHARACTER from './character';
+import ENEMY from './enemy';
 export default class GAME {
     Anchor: SPRITE;
     Asteroids: any[];
@@ -19,12 +21,14 @@ export default class GAME {
     CargoTotal: number;
     CenterVoid: any;
     Central: SPRITE;
+    Characters: CHARACTER[];
     Clients: CLIENT[];
     Crosshair: CROSSHAIR;
     CurrentScreen: string;
     CurrentAsteroid: ASTEROID;
     Device: string;
     Explosions: EXPLOSION[];
+    Enemys: ENEMY[];
     GameOver: boolean;
     GlobalTime: number;
     H: number;
@@ -49,7 +53,10 @@ export default class GAME {
     Images: any;
     SetNewGame: boolean;
     SoundOn: boolean;
-    Speed: number;
+    SpeedClient: number;
+    SpeedEnemy: number;
+    SpeedHero: number;
+    SpeedHeroShoot: number;
     ScreenTitle: {
         title: BACKGROUND;
         buttonNewGame: BACKGROUND;

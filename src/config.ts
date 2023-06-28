@@ -29,6 +29,7 @@ export const SPRITE_LIBRARY: LibraryImage = {
   flameBlue1: { i: 'flameblue1', x: 0, y: 0, w: 16, h: 16, fQty: 4 },
   flameBlue2: { i: 'flameblue2', x: 0, y: 0, w: 16, h: 16, fQty: 4 },
   hero: { i: 'ship', x: 0, y: 0, w: 72, h: 89, fQty: 9 },
+  heroShoot: { i: 'heroshoot', x: 0, y: 0, w: 16, h: 16, fQty: 6 },
   inventoryPanel: { i: 'inventorypanel', x: 0, y: 0, w: 289, h: 381, },
   mineralsA: { i: 'minerals', x: 0, y: 0, w: 32, h: 32 },
   mineralsB: { i: 'minerals', x: 0, y: 32, w: 32, h: 32 },

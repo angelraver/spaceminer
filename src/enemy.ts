@@ -14,21 +14,17 @@ export default class ENEMY extends SPRITE {
   pathBlocked: boolean
   period: number
   isCloseToHero: boolean
-  isOutside: Boolean
-  flame1: SPRITE
 
   constructor(props: any) {
     super(props);
-    this.period = props.period
     this.destiny = { x: g.Central.x, y: g.Central.y }
     this.r = 0
     this.scaleX = 1
     this.scaleY = 1
     this.path = []
     this.pathBlocked = false
-    this.isOutside = false
     this.isCloseToHero = false
-    this.origin = Utils.randomOuterPoint()
+    this.origin = Utils.randomNoVisiblePoint()
     this.x = this.origin.x
     this.y = this.origin.y
     this.mini = true
@@ -40,9 +36,10 @@ export default class ENEMY extends SPRITE {
       id: 'a',
       h: 64,
       w: 64,
-      period: 10,
       sheet: SPRITE_LIBRARY.enemy1,
-      fVertical: true
+      fVertical: true,
+      hits: 0,
+      hitsLimit: 3
     }))
   }
 
@@ -52,27 +49,27 @@ export default class ENEMY extends SPRITE {
   pathByHero() {
     this.checkPath()
     if (g.Hero.goingTop) {
-      this.y = this.y + g.Speed
+      this.y = this.y + g.SpeedEnemy
       this.path = this.path.map((p) => {
-        return { ...p, y: p.y + g.Speed }
+        return { ...p, y: p.y + g.SpeedEnemy }
       })
     }
     if (g.Hero.goingRight) {
-      this.x = this.x - g.Speed
+      this.x = this.x - g.SpeedEnemy
       this.path = this.path.map((p) => {
-        return { ...p, x: p.x - g.Speed }
+        return { ...p, x: p.x - g.SpeedEnemy }
       })
     }
     if (g.Hero.goingBottom) {
-      this.y = this.y - g.Speed
+      this.y = this.y - g.SpeedEnemy
       this.path = this.path.map((p) => {
-        return { ...p, y: p.y - g.Speed }
+        return { ...p, y: p.y - g.SpeedEnemy }
       })
     }
     if (g.Hero.goingLeft) {
-      this.x = this.x + g.Speed
+      this.x = this.x + g.SpeedEnemy
       this.path = this.path.map((p) => {
-        return { ...p, x: p.x + g.Speed }
+        return { ...p, x: p.x + g.SpeedEnemy }
       })
     }
   }
@@ -84,11 +81,10 @@ export default class ENEMY extends SPRITE {
   if the hero moves the path is regenated
  */
   checkPath() {
-    this.isOutside = this.x < -g.OffSetHorizontal || this.x > g.W + g.OffSetHorizontal || this.y < -g.OffSetVertical || this.y > g.H + g.OffSetVertical
     this.isCloseToHero = Utils.valueInMargin(this.x, g.Hero.x, g.Hero.w, 100) && Utils.valueInMargin(this.y, g.Hero.y, g.Hero.h, 100)
 
     if (this.isCloseToHero) {
-      console.log('CLOSE TO HERO!')
+      // console.log('CLOSE TO HERO!')
       this.path = []
       return
     }
@@ -96,9 +92,18 @@ export default class ENEMY extends SPRITE {
     const v = (value: number): number => Utils.absInt(value)
     if (!Utils.valueInMargin(v(g.Hero.x), v(target.x), 0, 10) && !Utils.valueInMargin(v(g.Hero.y), v(target.y), 0, 10)) {
       // console.log('Es momento de setear el path!')
-      this.setPath({ x: Utils.absInt(g.Hero.x), y: Utils.absInt(g.Hero.y) })
+      this.setPath({ x: Utils.absInt(g.Hero.x), y: Utils.absInt(g.Hero.y) }, g.SpeedEnemy)
     } else {
       // console.log('NO HACE FALTA SETEAR EL PATH')
+    }
+  }
+
+  hit() {
+    console.log('ENEMY HIT!: ', this)
+    this.hits = this.hits + 1
+    if (this.hits === this.hitsLimit) {
+      console.log('ENEMY KILLED!')
+      g.Enemys = g.Enemys.filter((e) => e.id !== this.id)
     }
   }
 

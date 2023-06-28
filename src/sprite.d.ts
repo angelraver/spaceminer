@@ -72,7 +72,7 @@ export default class SPRITE {
      * Set the SPRITE.r (rotation) to follow the generated path
      * @param target
      */
-    setPath(target: any): void;
+    setPath(target: Ordinal, speed: number): void;
     /**
      * Set the x and y SPRITE props following the current position inside the phat prop.
      * Move forward inside the path prop elements

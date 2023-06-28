@@ -49,24 +49,27 @@ export default class SPRITE {
     if (props.id) {
       this.id = props.id
     }
-
-    if (props.sheet) {
-      this.sheet = props.sheet
+    if (props.fixed) {
+      this.fixed = props.fixed
     }
-
-    if (props.metadata) {
-      this.metadata = props.metadata
+    if (props.hits) {
+      this.hits = props.hits
     }
-
+    if (props.hitsLimit) {
+      this.hitsLimit = props.hitsLimit
+    }
     if (props.loops) {
       this.loops = props.loops
       this.currentLoop = 1
     }
+    if (props.metadata) {
+      this.metadata = props.metadata
+    }
     if (props.mini) {
       this.mini = props.mini
     }
-    if (props.hitsLimit) {
-      this.hitsLimit = props.hitsLimit
+    if (props.sheet) {
+      this.sheet = props.sheet
     }
     if (props.scaleX) {
       this.scaleX = props.scaleX
@@ -76,9 +79,6 @@ export default class SPRITE {
     }
     if (this.sheet) {
       this.updateImage()
-    }
-    if (props.fixed) {
-      this.fixed = props.fixed
     }
   }
   /**
@@ -182,11 +182,11 @@ export default class SPRITE {
    * Set the SPRITE.r (rotation) to follow the generated path
    * @param target 
    */
-  setPath(target: Ordinal): void {
+  setPath(target: Ordinal, speed: number): void {
     this.currentPathIndex = 0
     const origin = { x: this.x, y: this.y }
     let targetFit = { x: target.x, y: target.y }
-    this.path = Utils.pathLinear(origin, targetFit, g.Speed)
+    this.path = Utils.pathLinear(origin, targetFit, speed)
     this.internalState = { rotationInterval: 0 }
     this.internalState.rotationInterval = new TWEEN.Tween({r: this.r})
       .to({r: Utils.radiants(origin, targetFit)}, 550)
@@ -241,16 +241,16 @@ export default class SPRITE {
 
     if (g.Hero) {
       if (g.Hero.goingTop) {
-        this.y = this.y + g.Speed
+        this.y = this.y + g.SpeedHero
       }
       if (g.Hero.goingRight) {
-        this.x = this.x - g.Speed
+        this.x = this.x - g.SpeedHero
       }
       if (g.Hero.goingBottom) {
-        this.y = this.y - g.Speed
+        this.y = this.y - g.SpeedHero
       }
       if (g.Hero.goingLeft) {
-        this.x = this.x + g.Speed
+        this.x = this.x + g.SpeedHero
       }
     }
   }

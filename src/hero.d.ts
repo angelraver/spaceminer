@@ -14,14 +14,11 @@ export default class HERO extends SPRITE {
     cargoMinerals: SPRITE[];
     flame1: SPRITE;
     flame2: SPRITE;
+    shoot: SPRITE;
+    enemyTarget: SPRITE;
     constructor(props: any);
     /**
-     * Overwrite draw
-     */
-    drawing(): void;
-    /**
      * Manage click event
-     * @param e
      */
     click(e: Ordinal): void;
     /**
@@ -58,4 +55,7 @@ export default class HERO extends SPRITE {
     */
     checkDirection(): void;
     checkMoving(): boolean;
+    checkEmemys(): void;
+    checkShoot(): void;
+    drawing(): void;
 }

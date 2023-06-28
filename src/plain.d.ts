@@ -1,6 +1,6 @@
 import SPRITE from './sprite';
 /**
- * Extends SPRITE to add text features
+ * Extends SPRITE to add a plain of color
  */
 export default class PLAIN extends SPRITE {
     color: string;

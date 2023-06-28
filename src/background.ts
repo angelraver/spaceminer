@@ -24,16 +24,16 @@ export default class BACKGROUND extends SPRITE {
     // for the background to move different from other sprites for the ilusion of deep
     g.BkgProportion = 2
     if (g.Hero.goingTop) {
-      this.y = this.y + g.Speed / g.BkgProportion
+      this.y = this.y + g.SpeedHero / g.BkgProportion
     }
     if (g.Hero.goingRight) {
-      this.x = this.x - g.Speed / g.BkgProportion
+      this.x = this.x - g.SpeedHero / g.BkgProportion
     }
     if (g.Hero.goingBottom) {
-      this.y = this.y - g.Speed / g.BkgProportion
+      this.y = this.y - g.SpeedHero / g.BkgProportion
     }
     if (g.Hero.goingLeft) {
-      this.x = this.x + g.Speed / g.BkgProportion
+      this.x = this.x + g.SpeedHero / g.BkgProportion
     }
   }
 }

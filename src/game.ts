@@ -56,7 +56,10 @@ export default class GAME {
   Images: any
   SetNewGame: boolean
   SoundOn: boolean
-  Speed: number
+  SpeedClient: number
+  SpeedEnemy: number
+  SpeedHero: number
+  SpeedHeroShoot: number
   ScreenTitle: { title: BACKGROUND, buttonNewGame: BACKGROUND, click: (e: Ordinal) => void }
   VisibleArea: PLAIN
   UiPanel: UI
@@ -86,7 +89,10 @@ export default class GAME {
     this.StarsData = []
     this.SetNewGame = true
     this.SoundOn = true
-    this.Speed = 10
+    this.SpeedHero = 10
+    this.SpeedClient = this.SpeedHero * 0.7
+    this.SpeedEnemy =  this.SpeedHero * 0.6
+    this.SpeedHeroShoot = this.SpeedHero * 2
     this.XpTotal = 0
     this.W = window.innerWidth
     this.setCenterVoid()
