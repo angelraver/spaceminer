@@ -5,6 +5,7 @@ import Utils from './utils'
 import Sound from './sound'
 import TEXT from './text'
 import CHARACTER from './character'
+import ENEMY from './enemy'
 
 /**
  * Extends SPRITE to add hero features
@@ -21,7 +22,7 @@ export default class HERO extends SPRITE {
   flame1: SPRITE
   flame2: SPRITE
   shoot: SPRITE
-  enemyTarget: SPRITE
+  enemyTarget: ENEMY
 
   constructor(props: any) {
     super(props)
@@ -182,14 +183,15 @@ export default class HERO extends SPRITE {
       if (visibleEnemys.length > 0) {
         this.enemyTarget = visibleEnemys[0]
       }
+    } else {
+      this.enemyTarget = null
     }
   }
 
   checkShoot(): void {
+    this.checkEmemys()
     if (this.enemyTarget) {
-      // console.log('enemy target!')
       if (!this.shoot) {
-        // console.log('create shoot!')
         this.shoot = new SPRITE({
           x: g.Hero.x,
           y: g.Hero.y,
@@ -202,19 +204,15 @@ export default class HERO extends SPRITE {
       }
 
       if (this.shoot) {
-        // console.log('shoot exists!')
-console.log(this.enemyTarget.hits)
         if (Utils.colision(this.shoot, this.enemyTarget)) {
           this.enemyTarget.hit()
         }
 
-        if (this.shoot.currentPathIndex > this.path.length - 2) {
+        if (this.shoot.currentPathIndex > this.shoot.path.length - 2) {
           this.shoot = null
           return
         }
-        // console.log('hero: ', this.x, this.y)
-        // console.log('shot: ', this.shoot.x, this.shoot.y, ' ____ ', this.shoot.currentPathIndex, '/', this.shoot.path.length,)
-        // console.log('----')
+
         this.shoot.draw()
       }
     }
@@ -224,7 +222,6 @@ console.log(this.enemyTarget.hits)
     this.unloadCargo()
     this.checkDirection()
     this.framing()
-    this.checkEmemys()
     this.checkShoot()
     this.draw(() => {
       this.cargoMinerals.forEach((c) => {

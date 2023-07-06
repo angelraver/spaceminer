@@ -218,7 +218,7 @@ export default class SPRITE {
     if (!this.hits) {
       this.hits = 0
     }
-    this.hits++
+    this.hits = this.hits + 1
   }
   /**
    * Increase the currentLoop prop

@@ -38,8 +38,8 @@ export default class ENEMY extends SPRITE {
       w: 64,
       sheet: SPRITE_LIBRARY.enemy1,
       fVertical: true,
-      hits: 0,
-      hitsLimit: 3
+      hits: 1,
+      hitsLimit: 5
     }))
   }
 
@@ -99,10 +99,8 @@ export default class ENEMY extends SPRITE {
   }
 
   hit() {
-    console.log('ENEMY HIT!: ', this)
     this.hits = this.hits + 1
     if (this.hits === this.hitsLimit) {
-      console.log('ENEMY KILLED!')
       g.Enemys = g.Enemys.filter((e) => e.id !== this.id)
     }
   }
