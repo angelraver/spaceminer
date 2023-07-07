@@ -1,5 +1,6 @@
 import SPRITE from './sprite';
 import { Ordinal } from './types';
+import ENEMY from './enemy';
 /**
  * Extends SPRITE to add hero features
  */
@@ -15,7 +16,7 @@ export default class HERO extends SPRITE {
     flame1: SPRITE;
     flame2: SPRITE;
     shoot: SPRITE;
-    enemyTarget: SPRITE;
+    enemyTarget: ENEMY;
     constructor(props: any);
     /**
      * Manage click event
@@ -54,6 +55,7 @@ export default class HERO extends SPRITE {
     * Update the global Going family top, right, bottom ,left to know where the hero is going
     */
     checkDirection(): void;
+    going(): void;
     checkMoving(): boolean;
     checkEmemys(): void;
     checkShoot(): void;

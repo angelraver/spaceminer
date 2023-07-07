@@ -185,7 +185,7 @@ export default class SPRITE {
   setPath(target: Ordinal, speed: number): void {
     this.currentPathIndex = 0
     const origin = { x: this.x, y: this.y }
-    let targetFit = { x: target.x, y: target.y }
+    const targetFit = { x: target.x, y: target.y }
     this.path = Utils.pathLinear(origin, targetFit, speed)
     this.internalState = { rotationInterval: 0 }
     this.internalState.rotationInterval = new TWEEN.Tween({r: this.r})

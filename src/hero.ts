@@ -62,6 +62,7 @@ export default class HERO extends SPRITE {
     if (!Utils.isHiting(e, g.CurrentAsteroid)) {
       Sound.play('engine')
     }
+
     this.setPath({ x: e.x, y: e.y }, g.SpeedHero)
   }
 
@@ -170,6 +171,29 @@ export default class HERO extends SPRITE {
       this.goingLeft = this.currentPos.x < this.previousPos.x // the hero is moving left
         && this.x < g.Margin // the hero is inside the left margin
         && g.Anchor.x + g.Anchor.w + g.SpeedHero < g.LevelLimits.r // the anchor will not cross the right limit
+    }
+  }
+
+  going(): void {
+    const pathPos = this.currentPathIndex
+    if (this.path && this.path[pathPos]) {
+      this.currentPos = this.path[pathPos]
+      this.previousPos = this.path[pathPos > 0 ? pathPos - 1 : pathPos]
+      this.moving = true
+      this.currentPathIndex++
+      const pathX = this.path[pathPos].x
+      const pathY = this.path[pathPos].y
+
+      if (pathX > g.Margin - 11 && pathX < g.W - g.Margin + 11) {
+        this.x = pathX;
+      }
+      
+      if (pathY > g.Margin - 11 && pathY < g.H - g.Margin) {
+        this.y = pathY;
+      }
+
+    } else {
+      this.moving = false
     }
   }
 

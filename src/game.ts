@@ -78,7 +78,7 @@ export default class GAME {
     this.HitsLabels = []
     this.InCentral = false
     this.MarkTime = 0
-    this.Margin = 100
+    this.Margin = 200
     this.MineralsStock = []
     this.MineralsOnSale = []
     this.MineralsPrices = []
