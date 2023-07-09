@@ -13,9 +13,5 @@ export default class EXPLOSION extends SPRITE {
      * add 1 explosion to g.Explosions
      */
     static add(pos: Ordinal): void;
-    /**
-     * Draw the text on canvas
-     * - Apply looping
-     */
     drawing(): void;
 }

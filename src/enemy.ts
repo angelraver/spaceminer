@@ -4,6 +4,8 @@ import Utils from "./utils"
 import { SPRITE_LIBRARY } from "./config"
 import TEXT from './text'
 import Sound from './sound'
+import EXPLOSION from './explosion'
+import IMPACT from './impact'
 
 /**
  * Extends SPRITE to add hero features
@@ -100,7 +102,13 @@ export default class ENEMY extends SPRITE {
 
   hit() {
     this.hits = this.hits + 1
+    // console.log('ENEMY HIT!')
+    const pos = this.path[this.currentPathIndex + 5]
+    IMPACT.add({ x: pos.x, y: pos.y }, 3, this.scaleX, this.scaleY)
+
     if (this.hits === this.hitsLimit) {
+      // enemy killed
+      EXPLOSION.add({ x: this.x, y: this.y })
       g.Enemys = g.Enemys.filter((e) => e.id !== this.id)
     }
   }

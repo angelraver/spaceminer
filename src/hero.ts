@@ -228,11 +228,13 @@ export default class HERO extends SPRITE {
       }
 
       if (this.shoot) {
-        if (Utils.colision(this.shoot, this.enemyTarget)) {
-          this.enemyTarget.hit()
+        if (this.shoot.currentPathIndex > this.shoot.path.length - 2) {
+          this.shoot = null
+          return
         }
 
-        if (this.shoot.currentPathIndex > this.shoot.path.length - 2) {
+        if (Utils.colision(this.shoot, this.enemyTarget)) {
+          this.enemyTarget.hit()
           this.shoot = null
           return
         }

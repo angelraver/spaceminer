@@ -19,7 +19,8 @@ export default class EXPLOSION extends SPRITE {
       x: pos.x, y: pos.y, w: 160, h: 160,
       r: Utils.random(0, 180),
       sheet: sheet,
-      loops: 5
+      fVertical: false,
+      loops: 9
     })
   }
 
@@ -27,15 +28,15 @@ export default class EXPLOSION extends SPRITE {
    * add 1 explosion to g.Explosions
    */
   static add(pos: Ordinal) {
-    g.Explosions.push(EXPLOSION.get(pos))
+    g.Explosions.push(this.get(pos))
   }
   
-  /**
-   * Draw the text on canvas
-   * - Apply looping
-   */
+  // /**
+  //  * Draw the text on canvas
+  //  * - Apply looping
+  //  */
   drawing(): void {
     this.draw()
-    g.Explosions = g.Explosions.filter((e) => e.currentLoop > 0)
+    g.Explosions = g.Explosions.filter((e) => e.currentLoop < 9)
   }
 }

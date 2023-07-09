@@ -29,6 +29,7 @@ export default class ASTEROID extends SPRITE {
      * @returns nothing
      */
     click(e: any): void;
+    impact(): void;
     heroMining(xp: number): void;
     setEmpty(): void;
     isClickIn(e: Ordinal): boolean;

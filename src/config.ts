@@ -104,17 +104,22 @@ export const MINERAL_MODELS: MineralModel[] = [
   { type: 'H', name: 'H', chance: [81, 100], sheet: SPRITE_LIBRARY.mineralsH },
 ]
 
+export const IMPACTS_SHEETS: Sheet[] = [
+  { i: 'impacts', x: 0, y: 0, w: 100, h: 89 },
+  { i: 'impacts', x: 100, y: 0, w: 100, h: 89 },
+  { i: 'impacts', x: 200, y: 0, w: 100, h: 89 },
+  { i: 'impacts', x: 300, y: 0, w: 100, h: 89 },
+  { i: 'impacts', x: 0, y: 89, w: 100, h: 89 },
+  { i: 'impacts', x: 100, y: 89, w: 100, h: 89 },
+  { i: 'impacts', x: 200, y: 89, w: 100, h: 89 },
+  { i: 'impacts', x: 300, y: 89, w: 100, h: 89 },
+  // { i: 'impacts', x: 0, y: 178, w: 100, h: 89 },
+  { i: 'impacts', x: 100, y: 178, w: 100, h: 89 },
+  { i: 'impacts', x: 200, y: 178, w: 100, h: 89 },
+  // { i: 'impacts', x: 300, y: 178, w: 100, h: 89 }
+]
+
+
 export const EXPLOSIONS_SHEETS: Sheet[] = [
-  { i: 'explosions', x: 0, y: 0, w: 100, h: 89 },
-  { i: 'explosions', x: 100, y: 0, w: 100, h: 89 },
-  { i: 'explosions', x: 200, y: 0, w: 100, h: 89 },
-  { i: 'explosions', x: 300, y: 0, w: 100, h: 89 },
-  { i: 'explosions', x: 0, y: 89, w: 100, h: 89 },
-  { i: 'explosions', x: 100, y: 89, w: 100, h: 89 },
-  { i: 'explosions', x: 200, y: 89, w: 100, h: 89 },
-  { i: 'explosions', x: 300, y: 89, w: 100, h: 89 },
-  // { i: 'explosions', x: 0, y: 178, w: 100, h: 89 },
-  { i: 'explosions', x: 100, y: 178, w: 100, h: 89 },
-  { i: 'explosions', x: 200, y: 178, w: 100, h: 89 },
-  // { i: 'explosions', x: 300, y: 178, w: 100, h: 89 }
+  { i: 'explosion1', x: 0, y: 0, w: 16, h: 16, fQty: 8 }
 ]

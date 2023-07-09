@@ -1,4 +1,4 @@
-import EXPLOSION from './explosion'
+import IMPACT from './impact'
 import { MINERAL_MODELS, ASTEROID_MODELS } from './config'
 import Utils from './utils'
 import SPRITE from './sprite'
@@ -95,21 +95,25 @@ export default class ASTEROID extends SPRITE {
     switch(this.hits) {
       case 1:
         ENEMY.create()
-        EXPLOSION.add({ x: this.x, y: this.y })
+        this.impact()
         this.heroMining(3)
         break
       case 2:
-        EXPLOSION.add({ x: this.x, y: this.y })
+        this.impact()
         this.heroMining(5)
         break
       case this.hitsLimit: // asteroid going empty
-        EXPLOSION.add({ x: this.x, y: this.y })
+        this.impact()
         this.setEmpty()
         g.Hero.addCargoMineral()
         break
       default:
         break
     }
+  }
+
+  impact(): void {
+    IMPACT.add({ x: this.x, y: this.y }, 5, this.scaleX, this.scaleY)
   }
   
   

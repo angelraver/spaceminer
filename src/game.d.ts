@@ -9,9 +9,10 @@ import BACKGROUND from './background';
 import PLAIN from './plain';
 import INVENTORY from './inventory';
 import UI from './uiPanel';
-import EXPLOSION from './explosion';
+import IMPACT from './impact';
 import CHARACTER from './character';
 import ENEMY from './enemy';
+import EXPLOSION from './explosion';
 export default class GAME {
     Anchor: SPRITE;
     Asteroids: any[];
@@ -27,14 +28,15 @@ export default class GAME {
     CurrentScreen: string;
     CurrentAsteroid: ASTEROID;
     Device: string;
-    Explosions: EXPLOSION[];
     Enemys: ENEMY[];
+    Explosions: EXPLOSION[];
     GameOver: boolean;
     GlobalTime: number;
     H: number;
     Hero: HERO;
     HitsLabels: TEXT[];
     HitsLabelsDone: TEXT[];
+    Impacts: IMPACT[];
     InCentral: boolean;
     Inventory: INVENTORY;
     LevelLimits: Limits;

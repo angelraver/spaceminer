@@ -14,4 +14,5 @@ export declare const ASTEROID_MODELS: Sheet[];
  * Collection of minerals for the cargo
  */
 export declare const MINERAL_MODELS: MineralModel[];
+export declare const IMPACTS_SHEETS: Sheet[];
 export declare const EXPLOSIONS_SHEETS: Sheet[];

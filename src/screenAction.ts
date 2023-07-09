@@ -13,7 +13,7 @@ export default function screenAction () {
   g.Stars.forEach(s => s.draw())
   g.BaseRock.draw()
   g.Asteroids.flat().forEach(a => a.draw())
-  g.Explosions.forEach(e => e.drawing())
+  g.Impacts.forEach(e => e.drawing())
   g.Clients.forEach(c => c.drawing())
   g.Crosshair.draw()
   g.Central.draw()
@@ -27,5 +27,6 @@ export default function screenAction () {
   g.Inventory.draw()
   g.UiPanel.draw()
   g.Characters.forEach((c) => c.drawing())
+  g.Explosions.forEach(e => e.drawing())
 }
 
