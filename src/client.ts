@@ -72,27 +72,27 @@ export default class CLIENT extends SPRITE {
    */
   pathByHero() {
     if (g.Hero.goingTop) {
-      this.y = this.y + g.SpeedClient
+      this.y = this.y + g.SpeedHero
       this.path = this.path.map((p) => {
-        return { ...p, y: p.y + g.SpeedClient }
+        return { ...p, y: p.y + g.SpeedHero }
       })
     }
     if (g.Hero.goingRight) {
-      this.x = this.x - g.SpeedClient
+      this.x = this.x - g.SpeedHero
       this.path = this.path.map((p) => {
-        return { ...p, x: p.x - g.SpeedClient }
+        return { ...p, x: p.x - g.SpeedHero }
       })
     }
     if (g.Hero.goingBottom) {
-      this.y = this.y - g.SpeedClient
+      this.y = this.y - g.SpeedHero
       this.path = this.path.map((p) => {
-        return { ...p, y: p.y - g.SpeedClient }
+        return { ...p, y: p.y - g.SpeedHero }
       })
     }
     if (g.Hero.goingLeft) {
-      this.x = this.x + g.SpeedClient
+      this.x = this.x + g.SpeedHero
       this.path = this.path.map((p) => {
-        return { ...p, x: p.x + g.SpeedClient }
+        return { ...p, x: p.x + g.SpeedHero }
       })
     }
   }
