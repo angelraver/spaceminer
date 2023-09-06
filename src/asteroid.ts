@@ -94,7 +94,6 @@ export default class ASTEROID extends SPRITE {
     // update the model and xp points
     switch(this.hits) {
       case 1:
-        ENEMY.create()
         this.impact()
         this.heroMining(3)
         break
@@ -106,6 +105,7 @@ export default class ASTEROID extends SPRITE {
         this.impact()
         this.setEmpty()
         g.Hero.addCargoMineral()
+        ENEMY.spawn()
         break
       default:
         break

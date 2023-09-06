@@ -32,6 +32,7 @@ export default class GAME {
   CurrentAsteroid: ASTEROID
   Device: string
   Enemys: ENEMY[]
+  EnemyRate: number
   Explosions: EXPLOSION[]
   GameOver: boolean
   GlobalTime: number
@@ -73,6 +74,7 @@ export default class GAME {
     this.CargoTotal = 0
     this.CurrentScreen = 'titleSetup' // titleSetup title levelStart action
     this.Enemys = []
+    this.EnemyRate = 3
     this.Explosions = []
     this.GlobalTime = 0
     this.GameOver = false

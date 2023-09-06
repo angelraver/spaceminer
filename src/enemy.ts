@@ -45,6 +45,12 @@ export default class ENEMY extends SPRITE {
     }))
   }
 
+  static spawn() {
+    if (Utils.random(0, g.EnemyRate) === 0) {
+      this.create()
+    }
+  }
+
   /**
    * Updates the path array positions to stay relative to the hero current position
    */
