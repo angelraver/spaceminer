@@ -23,6 +23,7 @@ export default class HERO extends SPRITE {
   flame2: SPRITE
   shoot: SPRITE
   enemyTarget: ENEMY
+  enemyClose: boolean
 
   constructor(props: any) {
     super(props)
@@ -242,6 +243,14 @@ export default class HERO extends SPRITE {
         this.shoot.draw()
       }
     }
+  }
+
+  checkLoot(): SPRITE {
+    return this.cargoMinerals.pop()
+  }
+
+  checkEnemyClose(): void {
+    this.enemyClose = true
   }
 
   drawing(): void {
