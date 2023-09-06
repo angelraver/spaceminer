@@ -15,7 +15,6 @@ export const SPRITE_LIBRARY: LibraryImage = {
   asteroid3: { i: 'a3', x: 0, y: 0, w: 104, h: 88 },
   baserock: { i: 'baserock', x: 0, y: 0, w: 100, h: 100 }, 
   central: { i: 'basecentral', x: 0, y: 0, w: 76, h: 54 },
-  characterMinerGlad: { i: 'palegre', x: 0, y: 0, w: 20, h: 33 },
   client1: { i: 'client1', x: 0, y: 0, w: 72, h: 85 },
   client2: { i: 'client2', x: 0, y: 0, w: 72, h: 85 },
   client3: { i: 'client3', x: 0, y: 0, w: 72, h: 85 },
@@ -46,8 +45,32 @@ export const SPRITE_LIBRARY: LibraryImage = {
   titleButtonNewGame: { i: 'buttonnewgame', x: 0, y: 0, w: 280, h: 104 },
   ui: { i: 'ui', x: 0, y: 0, w: 190, h: 49, fQty: 1 },
   xpIcon: { i: 'xp-icon', x: 0, y: 0, w: 17, h: 18 },
-  
+}
 
+export const CHARACTER_LIBRARY: LibraryImage = {
+  character1Glad: { i: 'p1alegre', x: 0, y: 0, w: 20, h: 33 },
+  character1Angry: { i: 'p1enojado', x: 0, y: 0, w: 20, h: 33 },
+  character1Normal: { i: 'p1normal', x: 0, y: 0, w: 20, h: 33 },
+  character1Surprise: { i: 'p1sorprendido', x: 0, y: 0, w: 20, h: 33 },
+  character1Sad: { i: 'p1Triste', x: 0, y: 0, w: 20, h: 33 },
+  
+  character2Glad: { i: 'p2alegre', x: 0, y: 0, w: 20, h: 33 },
+  character2Angry: { i: 'p2enojado', x: 0, y: 0, w: 20, h: 33 },
+  character2Normal: { i: 'p2normal', x: 0, y: 0, w: 20, h: 33 },
+  character2Surprise: { i: 'p2sorprendido', x: 0, y: 0, w: 20, h: 33 },
+  character2Sad: { i: 'p2Triste', x: 0, y: 0, w: 20, h: 33 },
+  
+  character3Glad: { i: 'p3alegre', x: 0, y: 0, w: 20, h: 33 },
+  character3Angry: { i: 'p3enojado', x: 0, y: 0, w: 20, h: 33 },
+  character3Normal: { i: 'p3normal', x: 0, y: 0, w: 20, h: 33 },
+  character3Surprise: { i: 'p3sorprendido', x: 0, y: 0, w: 20, h: 33 },
+  character3Sad: { i: 'p3Triste', x: 0, y: 0, w: 20, h: 33 },
+
+  character4Glad: { i: 'p4alegre', x: 0, y: 0, w: 20, h: 33 },
+  character4Angry: { i: 'p4enojado', x: 0, y: 0, w: 20, h: 33 },
+  character4Normal: { i: 'p4normal', x: 0, y: 0, w: 20, h: 33 },
+  character4Surprise: { i: 'p4sorprendido', x: 0, y: 0, w: 20, h: 33 },
+  character4Sad: { i: 'p4Triste', x: 0, y: 0, w: 20, h: 33 },
 }
 
 export const CLIENT_MODELS: ClientModel[] = [

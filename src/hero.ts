@@ -131,7 +131,7 @@ export default class HERO extends SPRITE {
       })
       this.resetCargo()
       g.Inventory.mineralsUpdateSlots()
-      CHARACTER.call('characterMinerGlad', 'WELL DONE!', 'blue')
+      CHARACTER.call('character1Glad', 'WELL DONE!', 'blue')
     }
   }
 

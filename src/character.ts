@@ -1,10 +1,10 @@
-import { SPRITE_LIBRARY } from './config'
-import { Ordinal, Sheet } from './types'
+import { CHARACTER_LIBRARY   } from './config'
+import { Ordinal } from './types'
 import Utils from './utils'
 import Sound from './sound'
 import SPRITE from './sprite'
 import PLAIN from './plain'
-type CharacterId = 'characterMinerGlad' | 'characterMinerSad'
+type CharacterId = string
 
 export default class CHARACTER extends SPRITE {
   origin: Ordinal
@@ -115,7 +115,7 @@ export default class CHARACTER extends SPRITE {
   }
 
   static call(characterId: CharacterId, dialog: string, backgroundColor: string ) {
-    const sheet = SPRITE_LIBRARY[characterId]
+    const sheet = CHARACTER_LIBRARY[characterId]
     g.Characters.push(new CHARACTER({
       id: characterId,
       origin: { x: -200, y: g.H / 2 },
