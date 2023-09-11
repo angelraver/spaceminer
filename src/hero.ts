@@ -16,14 +16,13 @@ export default class HERO extends SPRITE {
   goingTop: boolean
   goingBottom: boolean
   xp: number
-  cargoMineralsFull: boolean
   cargoMineralsPositions: Ordinal[]
   cargoMinerals: SPRITE[]
   flame1: SPRITE
   flame2: SPRITE
+  inCentral: boolean
   shoot: SPRITE
   enemyTarget: ENEMY
-  enemyClose: boolean
 
   constructor(props: any) {
     super(props)
@@ -39,6 +38,7 @@ export default class HERO extends SPRITE {
     this.goingRight = false
     this.goingTop = false
     this.goingBottom = false
+    this.inCentral = false
     this.updateImage()
     this.resetCargo()
     this.flame1 = new SPRITE({
@@ -102,9 +102,6 @@ export default class HERO extends SPRITE {
       r: Utils.random(0, 360)
     })
     this.cargoMinerals.push(mineralCargo)
-    if (this.cargoMineralsPositions.length === 0) {
-      this.cargoMineralsFull = true
-    }
   }
 
   /**
@@ -122,9 +119,9 @@ export default class HERO extends SPRITE {
    * - Resets the xp
    */
   unloadCargo(): void {
-    if (g.InCentral && g.Hero.xp > 0) {
+    if (this.inCentral && this.xp > 0 && this.cargoMinerals.length > 0) {
       Sound.play('powerup23')
-      TEXT.hiting(g.Hero.xp.toString(), g.Hero.x, g.Hero.y, 'blue', 'white')
+      TEXT.hiting(this.xp.toString(), this.x, this.y, 'blue', 'white')
       g.XpTotal += this.xp
       this.cargoMinerals.forEach((m) => {
         g.MineralsHistory = Utils.updateQtyList(g.MineralsHistory, m.metadata.type, true)
@@ -142,7 +139,6 @@ export default class HERO extends SPRITE {
    */
   resetCargo(): void {
     this.xp = 0
-    this.cargoMineralsFull = false
     this.cargoMinerals = []
     this.cargoMineralsPositions = [
       { x: -this.w / 7, y: -this.h / 2 },
@@ -207,10 +203,10 @@ export default class HERO extends SPRITE {
       const visibleEnemys = g.Enemys.filter((e) => e.isVisible())
       if (visibleEnemys.length > 0) {
         this.enemyTarget = visibleEnemys[0]
+        return
       }
-    } else {
-      this.enemyTarget = null
     }
+    this.enemyTarget = null
   }
 
   checkShoot(): void {
@@ -245,12 +241,22 @@ export default class HERO extends SPRITE {
     }
   }
 
-  checkLoot(): SPRITE {
-    return this.cargoMinerals.pop()
+  checkLooted(): SPRITE {
+    const mineral = this.cargoMinerals.pop()
+    this.cargoMineralsPositions.push({ x: mineral.x, y: mineral.y })
+    return mineral
   }
 
-  checkEnemyClose(): void {
-    this.enemyClose = true
+  checkCargo(): boolean {
+    return this.cargoMinerals.length > 0
+  }
+
+  checkInCentral(): void {
+    this.inCentral = typeof this.colisionWith([g.Central]) === 'object'  
+  }
+
+  checkCargoFull(): boolean {
+    return this.cargoMinerals.length === 4
   }
 
   drawing(): void {

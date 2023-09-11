@@ -1,12 +1,13 @@
 import SPRITE from './sprite'
-import { Ordinal, ClientModel } from './types'
+import { Ordinal } from './types'
 import Utils from "./utils"
-import { CONFIG, SPRITE_LIBRARY } from "./config"
+import { SPRITE_LIBRARY } from "./config"
 import TEXT from './text'
 import Sound from './sound'
 import EXPLOSION from './explosion'
 import IMPACT from './impact'
 
+const u = Utils
 /**
  * Extends SPRITE to add hero features
  */
@@ -15,7 +16,6 @@ export default class ENEMY extends SPRITE {
   destiny: Ordinal
   pathBlocked: boolean
   period: number
-  isCloseToHero: boolean
   loot: SPRITE
 
   constructor(props: any) {
@@ -27,8 +27,7 @@ export default class ENEMY extends SPRITE {
     this.scaleY = 1
     this.path = []
     this.pathBlocked = false
-    this.isCloseToHero = false
-    this.origin = Utils.randomNoVisiblePoint()
+    this.origin = u.randomNoVisiblePoint()
     this.x = this.origin.x
     this.y = this.origin.y
     this.mini = true
@@ -37,7 +36,7 @@ export default class ENEMY extends SPRITE {
   
   static create() {
     g.Enemys.push(new ENEMY({
-      id: 'e' + Utils.random(1, 99999999),
+      id: 'e' + u.random(1, 99999999),
       h: 64,
       w: 64,
       sheet: SPRITE_LIBRARY.enemy1,
@@ -48,7 +47,7 @@ export default class ENEMY extends SPRITE {
   }
 
   static spawn() {
-    if (Utils.random(0, g.EnemyRate) === 0) {
+    if (u.random(0, g.EnemyRate) === 0) {
       this.create()
     }
   }
@@ -91,39 +90,53 @@ export default class ENEMY extends SPRITE {
   if the hero moves the path is regenated
  */
   checkPath() {
-    if (g.Enemys.length === 0) return
-
-    this.isCloseToHero = Utils.valueInMargin(this.x, g.Hero.x, g.Hero.w, 100) && Utils.valueInMargin(this.y, g.Hero.y, g.Hero.h, 100)
-    const v = (value: number): number => Utils.absInt(value)
-
-    if (this.isCloseToHero && !this.loot) {
-      g.Hero.checkEnemyClose()
-      this.loot = g.Hero.checkLoot()
-      this.path = []
+    // if (g.Enemys.length === 0) {
+    //   return
+    // }
+    
+    if (!this.loot && !this.checkCloseToHero() && g.Hero.checkCargo()) {
+      console.log('perseguir!')
+      this.persuitHero()
       return
     }
-    
-    if (this.loot) {
-      // scape from hero!
-      if (this.path.length === 0) {
-        this.setPath(Utils.randomOuterPoint(), g.SpeedEnemy)
+
+    if (this.checkCloseToHero()) {
+      console.log('close to hero')
+      this.path = []
+      if (g.Hero.checkCargo()) {
+        this.loot = g.Hero.checkLooted()
       }
-      const currentPos = this.path[this.currentPathIndex]
-      if (
-        v(currentPos.x) < -g.OffSetHorizontal / 2 ||
-        v(currentPos.x) > g.W + g.OffSetHorizontal / 2 ||
-        v(currentPos.y) < -g.OffSetVertical / 2 ||
-        v(currentPos.y) > g.W + g.OffSetHorizontal / 2
-      ) {
-        g.Enemys = g.Enemys.filter((e) => this.id !== e.id)
-      }
-    } else {
-      // persuit hero!
-      const target = this.path.length > 0 ? this.path[this.path.length - 1] : { x: 0, y: 0 }
-      if (!Utils.valueInMargin(v(g.Hero.x), v(target.x), 0, 10) && !Utils.valueInMargin(v(g.Hero.y), v(target.y), 0, 10)) {
-        // console.log('Es momento de setear el path!')
-        this.setPath({ x: Utils.absInt(g.Hero.x), y: Utils.absInt(g.Hero.y) }, g.SpeedEnemy)
-      }
+    }
+    console.log('huir!')
+    this.scapeFromHero()  
+    console.log('- - - - - -')
+  }
+
+  persuitHero(): void {
+    const target = this.path.length > 0 ? this.path[this.path.length - 1] : { x: 0, y: 0 }
+    if (!u.valueInMargin(u.absInt(g.Hero.x), u.absInt(target.x), 0, 10) && !u.valueInMargin(u.absInt(g.Hero.y), u.absInt(target.y), 0, 10)) {
+      // console.log('Es momento de setear el path!')
+      this.setPath({ x: u.absInt(g.Hero.x), y: u.absInt(g.Hero.y) }, g.SpeedEnemy)
+    }
+  }
+
+  scapeFromHero(): void {
+    if (this.path.length === 0) {
+      this.setPath(u.randomOuterPoint(), g.SpeedEnemy * 1.5)
+    }
+    const currentPos = this.path[this.currentPathIndex]
+    if (!currentPos) {
+      this.setPath(u.randomOuterPoint(), g.SpeedEnemy * 1.5)
+      return
+    }
+
+    if (
+      u.absInt(currentPos.x) < -g.OffSetHorizontal / 2 ||
+      u.absInt(currentPos.x) > g.W + g.OffSetHorizontal / 2 ||
+      u.absInt(currentPos.y) < -g.OffSetVertical / 2 ||
+      u.absInt(currentPos.y) > g.W + g.OffSetHorizontal / 2
+    ) {
+      g.Enemys = g.Enemys.filter((e) => this.id !== e.id)
     }
   }
 
@@ -142,6 +155,10 @@ export default class ENEMY extends SPRITE {
       EXPLOSION.add({ x: this.x, y: this.y })
       g.Enemys = g.Enemys.filter((e) => e.id !== this.id)
     }
+  }
+
+  checkCloseToHero(): boolean {
+    return u.valueInMargin(this.x, g.Hero.x, g.Hero.w, 100) && u.valueInMargin(this.y, g.Hero.y, g.Hero.h, 100)
   }
 
   /**

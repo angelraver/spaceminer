@@ -83,7 +83,7 @@ export default class ASTEROID extends SPRITE {
       return
     }
 
-    if (g.Hero.cargoMineralsFull) {
+    if (g.Hero.checkCargoFull()) {
       TEXT.hiting('FULL', this.x, this.y, 'orange', 'black')
       return
     }

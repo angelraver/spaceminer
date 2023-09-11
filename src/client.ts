@@ -13,7 +13,7 @@ export default class CLIENT extends SPRITE {
   destiny: Ordinal
   pathBlocked: boolean
   period: number
-  isInCentral: boolean
+  inCentral: boolean
   isOutside: Boolean
   timeArrivalCentral: number
   timeArrivalOutside: number
@@ -33,7 +33,7 @@ export default class CLIENT extends SPRITE {
     this.path = []
     this.pathBlocked = false
     this.isOutside = false
-    this.isInCentral = false
+    this.inCentral = false
     this.origin = Utils.randomOuterPoint()
     this.x = this.origin.x
     this.y = this.origin.y
@@ -104,7 +104,7 @@ export default class CLIENT extends SPRITE {
  */
   checkPath() {
     this.isOutside = this.x < -g.OffSetHorizontal || this.x > g.W + g.OffSetHorizontal || this.y < -g.OffSetVertical || this.y > g.H + g.OffSetVertical
-    this.isInCentral = Utils.valueInMargin(this.x, g.Central.x, g.Central.w, 10) && Utils.valueInMargin(this.y, g.Central.y, g.Central.h, 10)
+    this.inCentral = Utils.valueInMargin(this.x, g.Central.x, g.Central.w, 10) && Utils.valueInMargin(this.y, g.Central.y, g.Central.h, 10)
 
     if (this.path.length > 0 && this.currentPathIndex === this.path.length) {
       // console.log('no hay path')
@@ -129,12 +129,12 @@ export default class CLIENT extends SPRITE {
       }
     }
     
-    if (!this.isOutside && !this.isInCentral) {
+    if (!this.isOutside && !this.inCentral) {
       // console.log('estamos adentro')
       this.pathBlocked = false
     }
 
-    if (this.isInCentral) {
+    if (this.inCentral) {
       // console.log('we're in central! time arrival: ', this.timeArrivalCentral)
       if (this.pathBlocked) return
 

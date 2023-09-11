@@ -6,7 +6,7 @@ export default function screenAction () {
   CLIENT.create()
 
   g.CurrentAsteroid = g.Hero.colisionWith(g.Asteroids.flat())
-  g.InCentral = typeof g.Hero.colisionWith([g.Central]) === 'object'  
+  g.Hero.checkInCentral()
 
   g.Anchor.positionByHero()
   g.Background.draw()

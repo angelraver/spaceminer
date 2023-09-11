@@ -41,7 +41,6 @@ export default class GAME {
   HitsLabels: TEXT[]
   HitsLabelsDone: TEXT[]
   Impacts: IMPACT[]
-  InCentral: boolean
   Inventory: INVENTORY
   LevelLimits: Limits
   Margin: number
@@ -81,7 +80,6 @@ export default class GAME {
     this.H = window.innerHeight
     this.HitsLabels = []
     this.Impacts = []
-    this.InCentral = false
     this.MarkTime = 0
     this.Margin = 200
     this.MineralsStock = []
