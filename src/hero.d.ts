@@ -10,11 +10,11 @@ export default class HERO extends SPRITE {
     goingTop: boolean;
     goingBottom: boolean;
     xp: number;
-    cargoMineralsFull: boolean;
     cargoMineralsPositions: Ordinal[];
     cargoMinerals: SPRITE[];
     flame1: SPRITE;
     flame2: SPRITE;
+    inCentral: boolean;
     shoot: SPRITE;
     enemyTarget: ENEMY;
     constructor(props: any);
@@ -59,5 +59,9 @@ export default class HERO extends SPRITE {
     checkMoving(): boolean;
     checkEmemys(): void;
     checkShoot(): void;
+    checkLooted(): SPRITE;
+    checkCargo(): boolean;
+    checkInCentral(): void;
+    checkCargoFull(): boolean;
     drawing(): void;
 }

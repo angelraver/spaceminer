@@ -29,6 +29,7 @@ export default class GAME {
     CurrentAsteroid: ASTEROID;
     Device: string;
     Enemys: ENEMY[];
+    EnemyRate: number;
     Explosions: EXPLOSION[];
     GameOver: boolean;
     GlobalTime: number;
@@ -37,7 +38,6 @@ export default class GAME {
     HitsLabels: TEXT[];
     HitsLabelsDone: TEXT[];
     Impacts: IMPACT[];
-    InCentral: boolean;
     Inventory: INVENTORY;
     LevelLimits: Limits;
     Margin: number;

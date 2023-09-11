@@ -8,6 +8,7 @@ export declare const CONFIG: {
     GAME_SPEED: number;
 };
 export declare const SPRITE_LIBRARY: LibraryImage;
+export declare const CHARACTER_LIBRARY: LibraryImage;
 export declare const CLIENT_MODELS: ClientModel[];
 export declare const ASTEROID_MODELS: Sheet[];
 /**

@@ -8,9 +8,10 @@ export default class ENEMY extends SPRITE {
     destiny: Ordinal;
     pathBlocked: boolean;
     period: number;
-    isCloseToHero: boolean;
+    loot: SPRITE;
     constructor(props: any);
     static create(): void;
+    static spawn(): void;
     /**
      * Updates the path array positions to stay relative to the hero current position
      */
@@ -22,7 +23,10 @@ export default class ENEMY extends SPRITE {
       if the hero moves the path is regenated
      */
     checkPath(): void;
+    persuitHero(): void;
+    scapeFromHero(): void;
     hit(): void;
+    checkCloseToHero(): boolean;
     /**
    * Overwrite draw
    * Before it checks the path by hero

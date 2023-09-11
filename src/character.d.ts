@@ -1,7 +1,7 @@
 import { Ordinal } from './types';
 import SPRITE from './sprite';
 import PLAIN from './plain';
-type CharacterId = 'characterMinerGlad' | 'characterMinerSad';
+type CharacterId = string;
 export default class CHARACTER extends SPRITE {
     origin: Ordinal;
     destiny: Ordinal;

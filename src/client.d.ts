@@ -8,7 +8,7 @@ export default class CLIENT extends SPRITE {
     destiny: Ordinal;
     pathBlocked: boolean;
     period: number;
-    isInCentral: boolean;
+    inCentral: boolean;
     isOutside: Boolean;
     timeArrivalCentral: number;
     timeArrivalOutside: number;
