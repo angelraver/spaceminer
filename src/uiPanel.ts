@@ -7,7 +7,6 @@ import SPRITE from './sprite'
 import Sound from './sound'
 
 export default class UI {
-  controlsButton: SPRITE
   xpPanel: BACKGROUND
   xpText: TEXT
   xpIcon: SPRITE
@@ -15,26 +14,17 @@ export default class UI {
   moneyText: TEXT
   moneyIcon: SPRITE
   fontSize: number
+  soundButton: BACKGROUND
+
   constructor() {
     this.fontSize = 24
     this.create()
+    this.setSoundButton()
   }
 
   create() {
     this.setXp()
     this.setMoney()
-    this.setControls()
-  }
-
-  setControls() {
-    this.controlsButton = new BACKGROUND({
-      fixed: true,
-      w: 64,
-      h: 64,
-      sheet: SPRITE_LIBRARY.controlsIcon
-    })
-    this.controlsButton.x = g.W / 2 - this.controlsButton.w / 2
-    this.controlsButton.y = g.H - this.controlsButton.h * 1.5
   }
 
   setXp() {
@@ -51,7 +41,7 @@ export default class UI {
       y: this.xpPanel.y + 20,
       size: this.fontSize,
       color: 'black',
-      colorLine: 'black',
+      colorLine: 'white',
       align: 'end'
     })
   }
@@ -70,7 +60,7 @@ export default class UI {
       y: this.moneyPanel.y + 20,
       size: this.fontSize,
       color: 'black',
-      colorLine: 'black',
+      colorLine: 'white',
       align: 'end'
     })    
   }
@@ -79,16 +69,26 @@ export default class UI {
  * Show / Hide inventory
  */
   click(e: Ordinal) {
-    // hitting control button
-    if (Utils.isHiting(e, this.controlsButton)) {
-      g.Inventory.showInventory = true
-    } else {
-      // not hitting control button
-      // hitting the inventory panel
-      if (g.Inventory.showInventory && !Utils.isHiting(e, g.Inventory.panel)) {
-        g.Inventory.showInventory = false
+    // SOUND BUTTON
+    if (Utils.isHiting(e, this.soundButton)) {
+      if (g.SoundOn) {
+        g.SoundOn = false
+        this.soundButton.sheet.y = 47
+      } else {
+        g.SoundOn = true
+        this.soundButton.sheet.y = 0
       }
     }
+  }
+
+
+  /**
+   * sets the button for the sound ON / OFF
+   */
+  setSoundButton() {
+    this.soundButton = new BACKGROUND({ fixed: true, w: 32, h: 32 , sheet: SPRITE_LIBRARY.buttonSound })
+    this.soundButton.x = g.W - this.soundButton.w - 5
+    this.soundButton.y = 5
   }
 
   draw() {
@@ -101,6 +101,6 @@ export default class UI {
     this.moneyPanel.draw()
     this.moneyIcon.draw()
     this.moneyText.draw()
-    this.controlsButton.draw()
-  } 
+    this.soundButton.draw()
+  }
 }

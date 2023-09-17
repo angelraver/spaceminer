@@ -5,16 +5,15 @@ import TEXT from './text'
 import Utils from './utils'
 import Sound from './sound'
 
-const STOCK_MINERAL_POSITIONS: any[] = [
-  { x: 0, y: 0, t: 'A' },   { x: 56, y: 0, t: 'B' },   { x: 112, y: 0, t: 'C' },  { x: 168, y: 0, t: 'D' },
-  { x: 0, y: 64, t: 'E' },  { x: 56, y: 64, t: 'F' },  { x: 112, y: 64, t: 'G' }, { x: 168, y: 64, t: 'H' },
-]
-
-const SALE_MINERAL_POSITIONS: any[] = [
-  { x: 0, y: 0, t: 'A' }, { x: 72, y: 0, t: 'B' },
-  { x: 0, y: 64, t: 'C' }, { x: 72, y: 64, t: 'D' },
-  { x: 0, y: 128, t: 'E' }, { x: 72, y: 128, t: 'F' },
-  { x: 0, y: 192, t: 'G' }, { x: 72, y: 192, t: 'H' },
+const MINERAL_POSITIONS: any[] = [
+  { x: 0, y: 0, t: 'A' },
+  { x: 50, y: 0, t: 'B' },
+  { x: 100, y: 0, t: 'C' },
+  { x: 150, y: 0, t: 'D' },
+  { x: 200, y: 0, t: 'E' },
+  { x: 250, y: 0, t: 'F' },
+  { x: 300, y: 0, t: 'G' },
+  { x: 350, y: 0, t: 'H' },
 ]
 
 /**
@@ -24,51 +23,46 @@ export default class INVENTORY {
   textStock: TEXT
   textSale: TEXT
   showInventory: Boolean
-  panel: BACKGROUND
+  panelStock: BACKGROUND
+  panelSale: BACKGROUND
   slotsStock: any[]
   slotsSale: any[]
-  soundButton: BACKGROUND
 
   constructor() {
-    this.setPanel()
-    this.setTexts()
+    this.setPanelStock()
+    this.setPanelSale()
     this.setStockMinerals()
     this.setSaleMinerals()
-    this.setSoundButton()
-  }
-  
-  /**
-   * set the inventory panel
-   */
-  setPanel() {
-    this.panel = new BACKGROUND({ w: 400, h: 640, sheet: SPRITE_LIBRARY.inventoryPanel, fixed: true })
-    this.panel.x = (g.W - this.panel.w) / 2
-    this.panel.y = (g.H - this.panel.h) / 2
   }
 
-/**
- * set the texts
- * SALE
- * STOCK
- */
-  setTexts() {
+  setPanelStock() {
+    this.panelStock = new BACKGROUND({ w: 400, h: 80, sheet: SPRITE_LIBRARY.ui, fixed: true, fVertical: true })
+    this.panelStock.x = (g.W / 2) - this.panelStock.w / 2 - 20
+    this.panelStock.y = g.H - this.panelStock.h / 2 - 30
+
     this.textStock = new TEXT({
       text: 'STOCK',
-      x: this.panel.x + (this.panel.w / 2) + (this.panel.w / 4),
-      y: this.panel.y + 24,
+      x: this.panelStock.x + this.panelStock.w / 2 - 10,
+      y: this.panelStock.y + 30,
       size: 24,
-      color: 'crimson',
-      colorLine: 'black',
+      color: 'black',
+      colorLine: 'white',
       align: 'center'
     })
+  }
+
+  setPanelSale() {
+    this.panelSale = new BACKGROUND({ w: 400, h: 80, sheet: SPRITE_LIBRARY.ui, fixed: true })
+    this.panelSale.x = (g.W / 2) + this.panelSale.w / 2 + 20
+    this.panelSale.y = g.H - this.panelSale.h / 2 - 30
 
     this.textSale = new TEXT({
-      text: 'ON SALE',
-      x: this.panel.x + 95,
-      y: this.panel.y + 24,
+      text: 'SALE',
+      x: this.panelSale.x - 130,
+      y: this.panelSale.y + 30,
       size: 24, 
-      color: 'crimson',
-      colorLine: 'black',
+      color: 'black',
+      colorLine: 'white',
       align: 'start'
     })
   }
@@ -77,25 +71,25 @@ export default class INVENTORY {
    * Sets the mineral slots for stock, with qty 0
    */
   setStockMinerals(){
-    this.slotsStock = STOCK_MINERAL_POSITIONS.filter((pos) => !!this.getMineralModel(pos.t)).map((position) => {
+    this.slotsStock = MINERAL_POSITIONS.filter((pos) => !!this.getMineralModel(pos.t)).map((position) => {
       const mineral: MineralModel = this.getMineralModel(position.t)
       return {
         type: position.t,
         qty: 0,
         spriteImage: new BACKGROUND({
           fixed: true,
-          x: this.panel.x + (this.panel.w / 3) + position.x + 16,
-          y: this.panel.y + 24 + position.y,
+          x: this.panelStock.x - this.panelStock.w / 2 + position.x,
+          y: this.panelStock.y + position.y - 40,
           w: 48,
           h: 48,
           sheet: mineral.sheet,
         }),
         spriteText: new TEXT({
-          x: this.panel.x + (this.panel.w / 3) + position.x + 64,
-          y: this.panel.y + 80 + position.y,
+          x: this.panelStock.x - this.panelStock.w / 2 + position.x + 40,
+          y: this.panelStock.y + position.y + 10,
           size: 24,
           color: 'black',
-          colorLine: 'black',
+          colorLine: 'white',
           align: 'end'
         })
       }
@@ -106,22 +100,25 @@ export default class INVENTORY {
    * set the slots for sale with qty 0
    */
   setSaleMinerals(){
-    this.slotsSale = SALE_MINERAL_POSITIONS.filter((pos) => !!this.getMineralModel(pos.t)).map((position) => {
+    this.slotsSale = MINERAL_POSITIONS.filter((pos) => !!this.getMineralModel(pos.t)).map((position) => {
       const mineral: MineralModel = this.getMineralModel(position.t)
       return {
         type: position.t,
         qty: 0,
         spriteImage: new BACKGROUND({
           fixed: true,
-          x: this.panel.x + 8 + position.x ,
-          y: this.panel.y + 24 + position.y,
+          x: this.panelSale.x - this.panelSale.w / 2 + position.x,
+          y: this.panelSale.y + position.y - 40,
           w: 48, h: 48,
           sheet: mineral.sheet
         }),
         spriteText: new TEXT({
-          x: this.panel.x + 40 + position.x,
-          y: this.panel.y + 88 + position.y,
-          size: 24, color: 'black', colorLine: 'black', align: 'center'
+          x: this.panelSale.x - this.panelSale.w / 2 + position.x + 40,
+          y: this.panelSale.y + position.y + 10,
+          size: 24,
+          color: 'black',
+          colorLine: 'white',
+          align: 'center'
         })
       }
     })
@@ -175,22 +172,11 @@ export default class INVENTORY {
   }
 
 /**
- * sets the button for the sound ON / OFF
- */
-  setSoundButton() {
-    this.soundButton = new BACKGROUND({ fixed: true, w: 32, h: 32 , sheet: SPRITE_LIBRARY.buttonSound })
-    this.soundButton.x = this.panel.x + this.panel.w - this.soundButton.w * 1.7
-    this.soundButton.y = this.panel.y + this.panel.h - this.soundButton.h * 1.7
-  }
-
-/**
  * manages click for
  * 
  * Sound button
 */
   click(e: Ordinal) {
-    if (!g.Inventory.showInventory) return
-
     // STOCK SLOTS
     this.slotsStock.forEach((slot) => {
       if (Utils.isHiting(e, slot.spriteImage)) {// clicking on the mineral
@@ -210,23 +196,12 @@ export default class INVENTORY {
         }
       }
     })
-
-    // SOUND BUTTON
-    if (Utils.isHiting(e, this.soundButton)) {
-      if (g.SoundOn) {
-        g.SoundOn = false
-        this.soundButton.sheet.y = 47
-      } else {
-        g.SoundOn = true
-        this.soundButton.sheet.y = 0
-      }
-    }
   }
 
   draw() {
-    if (!g.Inventory.showInventory) return
-
-    this.panel.draw()
+    this.panelStock.framing()
+    this.panelStock.drawNormal()
+    this.panelSale.drawNormal()
     this.textStock.draw()
     this.textSale.draw()
 
@@ -240,6 +215,5 @@ export default class INVENTORY {
       slot.spriteText.draw()
     })
 
-    this.soundButton.draw()
   }
 }

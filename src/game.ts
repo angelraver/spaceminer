@@ -21,7 +21,6 @@ export default class GAME {
   Asteroids: any[]
   Background: PLAIN
   BkgProportion: number
-  BaseRock: SPRITE
   CargoTotal: number
   CenterVoid: any
   Central: SPRITE
@@ -33,6 +32,7 @@ export default class GAME {
   Device: string
   Enemys: ENEMY[]
   EnemyRate: number
+  EnemysHitLimit: number
   Explosions: EXPLOSION[]
   GameOver: boolean
   GlobalTime: number
@@ -73,7 +73,8 @@ export default class GAME {
     this.CargoTotal = 0
     this.CurrentScreen = 'titleSetup' // titleSetup title levelStart action
     this.Enemys = []
-    this.EnemyRate = 1
+    this.EnemyRate = 10
+    this.EnemysHitLimit = 10
     this.Explosions = []
     this.GlobalTime = 0
     this.GameOver = false

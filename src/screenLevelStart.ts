@@ -26,19 +26,11 @@ export default function screenLevelStart() {
 
     ASTEROID.setGroups(500, 50)
 
-    g.BaseRock = new SPRITE({
-      w: 150, h: 150,
-      x: g.W / 2, y: g.H / 2,
-      sheet: SPRITE_LIBRARY.baserock,
-      r: 0,
-      scaleX: 2, scaleY: 2
-    })
-
     g.Central = new SPRITE({
       w: 160, h: 128,
       x: g.W / 2, y: g.H / 2,
       sheet: SPRITE_LIBRARY.central,
-      // scaleX: 2, scaleY: -2,
+      fVertical: true,
       mini: true
     })
 

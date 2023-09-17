@@ -57,8 +57,8 @@ export default class HERO extends SPRITE {
   click(e: Ordinal) {
     // if the inventory is on dont move
     if (g.Inventory.showInventory) return
-    // if the click is on the controls button dont move
-    if (Utils.isHiting(e, g.UiPanel.controlsButton)) return
+    // if the click is on the sound button dont move
+    if (Utils.isHiting(e, g.UiPanel.soundButton)) return
     // if not hitting the asteroid move!
     if (!Utils.isHiting(e, g.CurrentAsteroid)) {
       Sound.play('engine')
@@ -102,6 +102,7 @@ export default class HERO extends SPRITE {
       r: Utils.random(0, 360)
     })
     this.cargoMinerals.push(mineralCargo)
+    console.log(this.cargoMinerals)
   }
 
   /**
