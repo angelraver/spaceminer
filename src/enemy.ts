@@ -90,26 +90,23 @@ export default class ENEMY extends SPRITE {
   if the hero moves the path is regenated
  */
   checkPath() {
-    // if (g.Enemys.length === 0) {
-    //   return
-    // }
-    
     if (!this.loot && !this.checkCloseToHero() && g.Hero.checkCargo()) {
-      console.log('perseguir!')
       this.persuitHero()
       return
     }
 
-    if (this.checkCloseToHero()) {
-      console.log('close to hero')
+    if (!this.loot && this.checkCloseToHero()) {
       this.path = []
       if (g.Hero.checkCargo()) {
         this.loot = g.Hero.checkLooted()
       }
+      this.scapeFromHero()
+      return
     }
-    console.log('huir!')
-    this.scapeFromHero()  
-    console.log('- - - - - -')
+
+    if (this.loot) {
+      this.scapeFromHero()
+    }
   }
 
   persuitHero(): void {
@@ -158,7 +155,7 @@ export default class ENEMY extends SPRITE {
   }
 
   checkCloseToHero(): boolean {
-    return u.valueInMargin(this.x, g.Hero.x, g.Hero.w, 100) && u.valueInMargin(this.y, g.Hero.y, g.Hero.h, 100)
+    return u.valueInMargin(this.x, g.Hero.x, g.Hero.w, 50) && u.valueInMargin(this.y, g.Hero.y, g.Hero.h, 50)
   }
 
   /**
