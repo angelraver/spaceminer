@@ -18,7 +18,6 @@ export default class GAME {
     Asteroids: any[];
     Background: PLAIN;
     BkgProportion: number;
-    BaseRock: SPRITE;
     CargoTotal: number;
     CenterVoid: any;
     Central: SPRITE;
@@ -30,6 +29,7 @@ export default class GAME {
     Device: string;
     Enemys: ENEMY[];
     EnemyRate: number;
+    EnemysHitLimit: number;
     Explosions: EXPLOSION[];
     GameOver: boolean;
     GlobalTime: number;

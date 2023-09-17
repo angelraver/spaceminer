@@ -3,7 +3,6 @@ import BACKGROUND from './background';
 import TEXT from './text';
 import SPRITE from './sprite';
 export default class UI {
-    controlsButton: SPRITE;
     xpPanel: BACKGROUND;
     xpText: TEXT;
     xpIcon: SPRITE;
@@ -11,14 +10,18 @@ export default class UI {
     moneyText: TEXT;
     moneyIcon: SPRITE;
     fontSize: number;
+    soundButton: BACKGROUND;
     constructor();
     create(): void;
-    setControls(): void;
     setXp(): void;
     setMoney(): void;
     /**
      * Show / Hide inventory
      */
     click(e: Ordinal): void;
+    /**
+     * sets the button for the sound ON / OFF
+     */
+    setSoundButton(): void;
     draw(): void;
 }

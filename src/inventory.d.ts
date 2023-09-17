@@ -8,21 +8,13 @@ export default class INVENTORY {
     textStock: TEXT;
     textSale: TEXT;
     showInventory: Boolean;
-    panel: BACKGROUND;
+    panelStock: BACKGROUND;
+    panelSale: BACKGROUND;
     slotsStock: any[];
     slotsSale: any[];
-    soundButton: BACKGROUND;
     constructor();
-    /**
-     * set the inventory panel
-     */
-    setPanel(): void;
-    /**
-     * set the texts
-     * SALE
-     * STOCK
-     */
-    setTexts(): void;
+    setPanelStock(): void;
+    setPanelSale(): void;
     /**
      * Sets the mineral slots for stock, with qty 0
      */
@@ -42,10 +34,6 @@ export default class INVENTORY {
     mineralAddToSale(type: string): void;
     mineralReturnToStock(type: string): void;
     mineralSold(type: string): void;
-    /**
-     * sets the button for the sound ON / OFF
-     */
-    setSoundButton(): void;
     /**
      * manages click for
      *
