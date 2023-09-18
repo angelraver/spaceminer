@@ -49,7 +49,7 @@ export const SPRITE_LIBRARY: LibraryImage = {
   character1Angry: { k: 'character1Angry', i: 'p1enojado', x: 0, y: 0, w: 20, h: 33 },
   character1Normal: { k: 'character1Normal', i: 'p1normal', x: 0, y: 0, w: 20, h: 33 },
   character1Surprise: { k: 'character1Surprise', i: 'p1sorprendido', x: 0, y: 0, w: 20, h: 33 },
-  character1Sad: { k: 'character1Sad', i: 'p1Triste', x: 0, y: 0, w: 20, h: 33 },
+  character1Sad: { k: 'character1Sad', i: 'p1triste', x: 0, y: 0, w: 20, h: 33 },
   
   character2Glad: { k: 'character2Glad', i: 'p2alegre', x: 0, y: 0, w: 20, h: 33 },
   character2Angry: { k: 'character2Angry', i: 'p2enojado', x: 0, y: 0, w: 20, h: 33 },
