@@ -1,7 +1,7 @@
 import { CONFIG } from './config'
 import { LibraryItem } from './types'
 
-const SOUND_LIBRARY: LibraryItem = {
+export const SOUND_LIBRARY: LibraryItem = {
   engine: 'engines.mp3',
   asteroidEmpty: 'asteroidempty.mp3',
   miningclick: 'miningclick.mp3',

@@ -4,7 +4,6 @@ import BACKGROUND from './background';
  */
 export default class STAR extends BACKGROUND {
     constructor(props: any);
-    updateImage(): void;
     /**
      * returns a list of asteorids lists
      * one big list throws error on some devices

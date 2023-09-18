@@ -17,6 +17,7 @@ import ENEMY from './enemy'
 import EXPLOSION from './explosion'
 
 export default class GAME {
+  Sprites: { [key: string]: HTMLImageElement }
   Anchor: SPRITE
   Asteroids: any[]
   Background: PLAIN
@@ -43,6 +44,7 @@ export default class GAME {
   Impacts: IMPACT[]
   Inventory: INVENTORY
   LevelLimits: Limits
+  Loaded: boolean
   Margin: number
   MarkTime: number
   MineralsStock: ItemAccount[]
@@ -81,6 +83,7 @@ export default class GAME {
     this.H = window.innerHeight
     this.HitsLabels = []
     this.Impacts = []
+    this.Loaded = false
     this.MarkTime = 0
     this.Margin = 200
     this.MineralsStock = []
@@ -97,6 +100,7 @@ export default class GAME {
     this.SpeedClient = this.SpeedHero * 0.7
     this.SpeedEnemy =  this.SpeedHero * 0.6
     this.SpeedHeroShoot = this.SpeedHero * 2
+    this.Sprites = {}
     this.XpTotal = 0
     this.W = window.innerWidth
     this.setCenterVoid()
@@ -107,28 +111,6 @@ export default class GAME {
       b: this.H + this.OffSetVertical,
       l: -this.OffSetHorizontal
     }
-
-    this.Images = {}
-
-    const starsImage = new Image() 
-    starsImage.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.stars.i + '.png'
-    this.Images.stars = starsImage
-
-    const a1Image = new Image() 
-    a1Image.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.asteroid1.i + '.png'
-    this.Images.a1 = a1Image
-
-    const a2Image = new Image() 
-    a2Image.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.asteroid2.i + '.png'
-    this.Images.a2 = a2Image
-
-    const a3Image = new Image() 
-    a3Image.src = CONFIG.SPRITES_FOLDER + SPRITE_LIBRARY.asteroid3.i + '.png'
-    this.Images.a3 = a3Image
-
-    const a0Image = new Image() 
-    a0Image.src = CONFIG.SPRITES_FOLDER + 'a-empty.png'
-    this.Images.a0 = a0Image
   }
 
   save(): void {

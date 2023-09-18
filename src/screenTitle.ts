@@ -8,7 +8,7 @@ export function screenTitleSetup () {
     title: new BACKGROUND({
       w: 200, h: 130,
       x: g.W / 2 - 100, y: g.H / 2 - 200,
-      sheet: SPRITE_LIBRARY.title,
+      sheet: SPRITE_LIBRARY.titleLogo,
       r: 0,
       scaleX: 1, scaleY: -1,
       fixed: true,

@@ -1,5 +1,5 @@
 import IMPACT from './impact'
-import { MINERAL_MODELS, ASTEROID_MODELS } from './config'
+import { MINERAL_MODELS, ASTEROID_MODELS, SPRITE_LIBRARY } from './config'
 import Utils from './utils'
 import SPRITE from './sprite'
 import Sound from './sound'
@@ -30,12 +30,7 @@ export default class ASTEROID extends SPRITE {
     this.rotationDirection = Utils.random(0, 1) === 1 ? 'r' : 'l'
     this.rotationSpeed = Utils.random(1, 3) * 0.01
   }
-
-  updateImage(): void {
-    this.img = g.Images[this.sheet.i]
-  }
-
-    /**
+   /**
    * Returns an SPRITE with random position
    * @returns SPRITE
    */
@@ -116,7 +111,6 @@ export default class ASTEROID extends SPRITE {
     IMPACT.add({ x: this.x, y: this.y }, 5, this.scaleX, this.scaleY)
   }
   
-  
   heroMining(xp: number): void {
     g.Hero.mining(xp, this.x, this.y)
     Sound.play('miningclick')
@@ -126,7 +120,7 @@ export default class ASTEROID extends SPRITE {
   setEmpty(): void {
     Sound.play('asteroidEmpty')
     this.empty = true
-    this.sheet.i = 'a0'
+    this.sheet = SPRITE_LIBRARY.asteroidEmpty
     this.updateImage()
   }
 

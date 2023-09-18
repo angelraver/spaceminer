@@ -3,6 +3,7 @@ export type Ordinal = {
     y: number;
 };
 export type Sheet = {
+    k: string;
     i?: string;
     x: number;
     y: number;

@@ -4,6 +4,7 @@ export type Ordinal = {
 }
 
 export type Sheet = {
+  k: string
   i?: string
   x: number
   y: number

@@ -85,9 +85,7 @@ export default class SPRITE {
    * Set the spritesheet
    */
   updateImage(): void {
-    var img = new Image()
-    img.src = CONFIG.SPRITES_FOLDER + this.sheet.i + '.png'
-    this.img = img
+    this.img = g.Sprites[this.sheet.k]
   }
 
   /**

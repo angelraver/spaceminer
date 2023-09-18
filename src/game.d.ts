@@ -14,6 +14,9 @@ import CHARACTER from './character';
 import ENEMY from './enemy';
 import EXPLOSION from './explosion';
 export default class GAME {
+    Sprites: {
+        [key: string]: HTMLImageElement;
+    };
     Anchor: SPRITE;
     Asteroids: any[];
     Background: PLAIN;
@@ -40,6 +43,7 @@ export default class GAME {
     Impacts: IMPACT[];
     Inventory: INVENTORY;
     LevelLimits: Limits;
+    Loaded: boolean;
     Margin: number;
     MarkTime: number;
     MineralsStock: ItemAccount[];

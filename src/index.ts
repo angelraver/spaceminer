@@ -3,6 +3,7 @@ import { screenTitle, screenTitleSetup } from './screenTitle'
 import screenLevelStart from './screenLevelStart'
 import screenAction from './screenAction'
 import GAME from './game'
+import LOADING from './loading'
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')
 declare global {
@@ -38,6 +39,8 @@ function clearGameFrame() {
 
 // Executes the correspondent screen
 function rolling() {
+  if (!g.Loaded) return
+
   clearGameFrame()
 
   switch(g.CurrentScreen) {
@@ -66,6 +69,9 @@ function rolling() {
 
 // Internal game time counter
 setInterval(timing, 500)
+
+const loading = new LOADING()
+loading.loadAssets()
 
 // Running the game at the given speed
 var start = setInterval(rolling, C.GAME_SPEED)

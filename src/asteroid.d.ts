@@ -11,11 +11,10 @@ export default class ASTEROID extends SPRITE {
     rotationDirection: string;
     rotationSpeed: number;
     constructor(props: any);
-    updateImage(): void;
     /**
-   * Returns an SPRITE with random position
-   * @returns SPRITE
-   */
+    * Returns an SPRITE with random position
+    * @returns SPRITE
+    */
     static create(): void;
     /**
      * returns a list of asteorids lists

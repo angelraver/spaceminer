@@ -1,3 +1,5 @@
+import { LibraryItem } from './types';
+export declare const SOUND_LIBRARY: LibraryItem;
 /**
  * Methods for audio
  */

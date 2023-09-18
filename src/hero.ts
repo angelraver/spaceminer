@@ -102,7 +102,6 @@ export default class HERO extends SPRITE {
       r: Utils.random(0, 360)
     })
     this.cargoMinerals.push(mineralCargo)
-    console.log(this.cargoMinerals)
   }
 
   /**

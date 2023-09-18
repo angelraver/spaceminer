@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div class="cal">
-      <canvas id="canvas"></canvas>
+    <div class="content">
+      <canvas id="canvas" style="display: none;"></canvas>
   
+      <div id="loading-screen">
+        <div id="loading-bar"></div>
+        <div id="loading-text">Loading: 0%</div>
+    </div>
+
   <style>
 * {
   margin: 0;
@@ -16,6 +21,38 @@
 }
 body, html {
   overflow: hidden;
+  background: black;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#loading-screen {
+  width: 50%;
+  border: 2px solid gainsboro;
+  padding: 1em;
+  border-radius: 20px;
+}
+
+#loading-bar {
+  background-color: white;
+  width: 1%;
+  height: 30px;
+  margin-bottom: 1em;
+  border-radius: 20px;
+}
+
+#loading-text {
+  font-weight: bold;
+  font-size: 24px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  color: white;
 }
 
 #canvas {
