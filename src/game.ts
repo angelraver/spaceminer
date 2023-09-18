@@ -18,6 +18,7 @@ import EXPLOSION from './explosion'
 
 export default class GAME {
   Sprites: { [key: string]: HTMLImageElement }
+  Sounds: { [key: string]: HTMLAudioElement }
   Anchor: SPRITE
   Asteroids: any[]
   Background: PLAIN
@@ -101,6 +102,7 @@ export default class GAME {
     this.SpeedEnemy =  this.SpeedHero * 0.6
     this.SpeedHeroShoot = this.SpeedHero * 2
     this.Sprites = {}
+    this.Sounds = {}
     this.XpTotal = 0
     this.W = window.innerWidth
     this.setCenterVoid()

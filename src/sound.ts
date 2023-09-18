@@ -22,10 +22,9 @@ export default class Sound {
   /**
    * Plays the sound
    */
-  static play(origin: string) {
+  static play(key: string) {
     if(!g.SoundOn) return
-
-    let sound = new Audio(CONFIG.SOUND_FOLDER + SOUND_LIBRARY[origin])
+    let sound = g.Sounds[key]
     sound.play()
   }
 }

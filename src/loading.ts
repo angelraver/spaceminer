@@ -61,6 +61,7 @@ export default class LOADING {
       const audio = new Audio()
       audio.src = this.allAssets.sounds[key]
       audio.addEventListener('canplaythrough', () => this.assetLoaded(), false)
+      g.Sounds[key] = audio
     }
   }
 
