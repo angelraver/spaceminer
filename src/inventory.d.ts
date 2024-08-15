@@ -7,7 +7,6 @@ import TEXT from './text';
 export default class INVENTORY {
     textStock: TEXT;
     textSale: TEXT;
-    showInventory: Boolean;
     panelStock: BACKGROUND;
     panelSale: BACKGROUND;
     slotsStock: any[];
@@ -40,5 +39,6 @@ export default class INVENTORY {
      * Sound button
     */
     click(e: Ordinal): void;
+    checkClick(e: Ordinal): boolean;
     draw(): void;
 }

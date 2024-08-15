@@ -17,6 +17,9 @@ export default class GAME {
     Sprites: {
         [key: string]: HTMLImageElement;
     };
+    Sounds: {
+        [key: string]: HTMLAudioElement;
+    };
     Anchor: SPRITE;
     Asteroids: any[];
     Background: PLAIN;

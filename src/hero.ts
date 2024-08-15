@@ -55,15 +55,16 @@ export default class HERO extends SPRITE {
    * Manage click event
    */
   click(e: Ordinal) {
-    // if the inventory is on dont move
-    if (g.Inventory.showInventory) return
     // if the click is on the sound button dont move
     if (Utils.isHiting(e, g.UiPanel.soundButton)) return
+    if (g.Inventory.checkClick(e)) return
+
     // if not hitting the asteroid move!
     if (!Utils.isHiting(e, g.CurrentAsteroid)) {
       Sound.play('engine')
     }
 
+    // only when the click is in the "space"
     this.setPath({ x: e.x, y: e.y }, g.SpeedHero)
   }
 

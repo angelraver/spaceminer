@@ -7,5 +7,5 @@ export default class Sound {
     /**
      * Plays the sound
      */
-    static play(origin: string): void;
+    static play(key: string): void;
 }

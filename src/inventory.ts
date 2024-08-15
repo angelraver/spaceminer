@@ -22,7 +22,6 @@ const MINERAL_POSITIONS: any[] = [
 export default class INVENTORY {
   textStock: TEXT
   textSale: TEXT
-  showInventory: Boolean
   panelStock: BACKGROUND
   panelSale: BACKGROUND
   slotsStock: any[]
@@ -195,6 +194,14 @@ export default class INVENTORY {
           this.mineralReturnToStock(slot.type)
         }
       }
+    })
+  }
+
+  checkClick(e: Ordinal) {
+    // is clicking on any mineral
+    const slots = [...this.slotsStock, ...this.slotsSale]
+    return slots.some((slot) => {
+      return slot.qty > 0 && Utils.isHiting(e, slot.spriteImage)
     })
   }
 

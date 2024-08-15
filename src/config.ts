@@ -42,7 +42,7 @@ export const SPRITE_LIBRARY: LibraryImage = {
   stars: { k: 'stars', i: 'stars', x: 0, y: 0, w: 250, h: 250, fQty: 1 },
   titleLogo: { k: 'titleLogo', i: 'title', x: 0, y: 0, w: 204, h: 130 },
   titleButtonNewGame: { k: 'titleButtonNewGame', i: 'buttonnewgame', x: 0, y: 0, w: 280, h: 104 },
-  ui: { k: 'ui', i: 'ui', x: 0, y: 0, w: 200, h: 50, fQty: 2 },
+  ui: { k: 'ui', i: 'ui', x: 0, y: 0, w: 200, h: 50 },
   xpIcon: { k: 'xpIcon', i: 'xp-icon', x: 0, y: 0, w: 17, h: 18 },
 
   character1Glad: { k: 'character1Glad', i: 'p1alegre', x: 0, y: 0, w: 20, h: 33 },
