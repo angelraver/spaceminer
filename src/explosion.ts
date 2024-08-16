@@ -14,11 +14,10 @@ export default class EXPLOSION extends SPRITE {
  * Returns one EXPLOSION
  */
   static get(pos: Ordinal): EXPLOSION {
-    const sheet: Sheet = EXPLOSIONS_SHEETS[Utils.random(0, EXPLOSIONS_SHEETS.length - 1)]
     return new EXPLOSION({
       x: pos.x, y: pos.y, w: 160, h: 160,
       r: Utils.random(0, 180),
-      sheet: sheet,
+      sheet: EXPLOSIONS_SHEETS[Utils.random(0, EXPLOSIONS_SHEETS.length - 1)],
       fVertical: false,
       loops: 9
     })
@@ -36,6 +35,7 @@ export default class EXPLOSION extends SPRITE {
   //  * - Apply looping
   //  */
   drawing(): void {
+    this.updateImage()
     this.draw()
     g.Explosions = g.Explosions.filter((e) => e.currentLoop < 9)
   }

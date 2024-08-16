@@ -22,7 +22,7 @@ export const SPRITE_LIBRARY: LibraryImage = {
   client5: { k: 'client5', i: 'client5', x: 0, y: 0, w: 72, h: 85 },
   enemy1: { k: 'enemy1', i: 'enemy1', x: 0, y: 0, w: 32, h: 32, fQty: 2 },
   enemy2: { k: 'enemy2', i: 'enemy2', x: 0, y: 0, w: 32, h: 32, fQty: 2 },
-  explosion: { k: 'explosion1', i: 'explosion1', x: 0, y: 0, w: 16, h: 16, fQty: 8 },
+  explosion1: { k: 'explosion1', i: 'explosion1', x: 0, y: 0, w: 16, h: 16, fQty: 8 },
   crossair: { k: 'crossair', i: 'crosshair', x: 0, y: 0, w: 64, h: 64 },
   flameBlue1: { k: 'flameBlue1', i: 'flameblue1', x: 0, y: 0, w: 16, h: 16, fQty: 4 },
   flameBlue2: { k: 'flameBlue2', i: 'flameblue2', x: 0, y: 0, w: 16, h: 16, fQty: 4 },
@@ -95,7 +95,7 @@ export const IMPACTS_SHEETS: Sheet[] = [
 ]
 
 export const EXPLOSIONS_SHEETS: Sheet[] = [
-  SPRITE_LIBRARY.explosion
+  SPRITE_LIBRARY.explosion1
 ]
 
 export const CLIENT_MODELS: ClientModel[] = [

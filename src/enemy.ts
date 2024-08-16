@@ -42,7 +42,7 @@ export default class ENEMY extends SPRITE {
       sheet: SPRITE_LIBRARY.enemy1,
       fVertical: true,
       hits: 1,
-      hitsLimit: 100
+      hitsLimit: g.EnemysHitLimit
     }))
   }
 
@@ -107,6 +107,10 @@ export default class ENEMY extends SPRITE {
     if (this.loot) {
       this.scapeFromHero()
     }
+
+    if (!this.loot && !g.Hero.checkCargo()) {
+      this.scapeFromHero()
+    }
   }
 
   persuitHero(): void {
@@ -118,14 +122,12 @@ export default class ENEMY extends SPRITE {
   }
 
   scapeFromHero(): void {
-    if (this.path.length === 0) {
-      this.setPath(u.randomOuterPoint(), g.SpeedEnemy * 1.5)
-    }
-    const currentPos = this.path[this.currentPathIndex]
-    if (!currentPos) {
+    if (this.path.length === 0 || !this.path[this.currentPathIndex]) {
       this.setPath(u.randomOuterPoint(), g.SpeedEnemy * 1.5)
       return
     }
+
+    const currentPos = this.path[this.currentPathIndex]
 
     if (
       u.absInt(currentPos.x) < -g.OffSetHorizontal / 2 ||
@@ -146,7 +148,6 @@ export default class ENEMY extends SPRITE {
     }
 
     TEXT.hiting((this.hitsLimit - this.hits).toString(), this.x, this.y, 'red', 'black')
-
     if (this.hits === this.hitsLimit) {
       // enemy killed
       EXPLOSION.add({ x: this.x, y: this.y })

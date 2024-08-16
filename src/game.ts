@@ -76,8 +76,8 @@ export default class GAME {
     this.CargoTotal = 0
     this.CurrentScreen = 'titleSetup' // titleSetup title levelStart action
     this.Enemys = []
-    this.EnemyRate = 10
-    this.EnemysHitLimit = 10
+    this.EnemyRate = 1
+    this.EnemysHitLimit = 2
     this.Explosions = []
     this.GlobalTime = 0
     this.GameOver = false
@@ -122,7 +122,7 @@ export default class GAME {
     d.setTime(d.getTime() + (expirationDays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
     document.cookie = 'spaceminer=' + saveData, + ';' + expires;
-    console.log('save ok!', saveData)
+    // console.log('save ok!', saveData)
   }
 
   getSaveData(): string {
