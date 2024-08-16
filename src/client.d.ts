@@ -36,6 +36,7 @@ export default class CLIENT extends SPRITE {
      * updates the g.MineralsOnSale
      */
     buyMineral(): void;
+    getTarget(origin: Ordinal, central: Ordinal): Ordinal;
     /**
    * Overwrite draw
    * Before it checks the path by hero

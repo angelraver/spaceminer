@@ -77,7 +77,7 @@ export default class GAME {
     this.CurrentScreen = 'titleSetup' // titleSetup title levelStart action
     this.Enemys = []
     this.EnemyRate = 1
-    this.EnemysHitLimit = 2
+    this.EnemysHitLimit = 5
     this.Explosions = []
     this.GlobalTime = 0
     this.GameOver = false

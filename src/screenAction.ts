@@ -13,9 +13,9 @@ export default function screenAction () {
   g.Stars.forEach(s => s.draw())
   g.Asteroids.flat().forEach(a => a.draw())
   g.Impacts.forEach(e => e.drawing())
+  g.Central.draw()
   g.Clients.forEach(c => c.drawing())
   g.Crosshair.draw()
-  g.Central.draw()
   //////
   g.Enemys.forEach(e => e.drawing())
   g.Hero.drawing()

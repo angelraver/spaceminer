@@ -121,9 +121,10 @@ export default class CLIENT extends SPRITE {
 
       if (g.GlobalTime % this.period === 0) {
         // console.log('Es momento de setear el path!')
-        this.x = this.origin.x
-        this.y = this.origin.y
-        this.setPath(g.Central, g.SpeedClient)
+        // this.x = this.origin.x
+        // this.y = this.origin.y
+        const target = this.getTarget(this, g.Central)
+        this.setPath(target, g.SpeedClient)
         // console.log(this.path)
         this.pathBlocked = true
       }
@@ -184,6 +185,17 @@ export default class CLIENT extends SPRITE {
       TEXT.hiting('SOLD OUT', this.x, this.y, 'red', 'white')
       Sound.play('clientNobuy')
     }
+  }
+
+  getTarget(origin: Ordinal, central: Ordinal): Ordinal {
+    const top = origin.y < central.y / 2
+    const left = origin.x < central.x / 2   
+
+    return {
+      x: left ? central.x - 50 : central.x +  50,
+      y: top ? central.y - 50 : central.y + 50
+    }
+
   }
 
   /**
