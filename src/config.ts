@@ -101,37 +101,37 @@ export const EXPLOSIONS_SHEETS: Sheet[] = [
 export const CLIENT_MODELS: ClientModel[] = [
   {
     id: 'A',
-    requiredXp: 10,
+    requiredXp: 20,
     period: 10,
     timeShopping: 5,
     sheet: SPRITE_LIBRARY.client1,
   },
   {
     id: 'B',
-    requiredXp: 20,
+    requiredXp: 100,
     period: 15,
-    timeShopping: 5,
+    timeShopping: 6,
     sheet: SPRITE_LIBRARY.client2,
   },
   {
     id: 'C',
-    requiredXp: 30,
+    requiredXp: 300,
     period: 25,
-    timeShopping: 5,
+    timeShopping: 4,
     sheet: SPRITE_LIBRARY.client3,
   },
   {
     id: 'D',
-    requiredXp: 40,
+    requiredXp: 400,
     period: 10,
-    timeShopping: 5,
+    timeShopping: 3,
     sheet: SPRITE_LIBRARY.client4,
   },
   {
     id: 'E',
-    requiredXp: 50,
+    requiredXp: 500,
     period: 15,
-    timeShopping: 5,
+    timeShopping: 7,
     sheet: SPRITE_LIBRARY.client5,
   }
 ]

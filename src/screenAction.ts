@@ -14,6 +14,7 @@ export default function screenAction () {
   g.Asteroids.flat().forEach(a => a.draw())
   g.Impacts.forEach(e => e.drawing())
   g.Central.draw()
+  console.log(g.Clients)
   g.Clients.forEach(c => c.drawing())
   g.Crosshair.draw()
   //////

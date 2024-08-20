@@ -17,6 +17,7 @@ export default class CLIENT extends SPRITE {
   isOutside: Boolean
   timeArrivalCentral: number
   timeArrivalOutside: number
+  timeToGo: boolean
   timeShopping: number
   mineralTypeToBuy: string
   mineralCargo: SPRITE
@@ -43,18 +44,22 @@ export default class CLIENT extends SPRITE {
       x: this.w / -2 + 8, y: this.h / -2 + 68, w: 40, h: 48,
       sheet: SPRITE_LIBRARY.flameBlue2
     })
+    this.timeToGo = false
   }
   
   /**
    * Check if there are new clients, add new clients
    */
   static create() {
+    // all clients active. do nothing.
     if (g.Clients.length === CLIENT_MODELS.length) return
   
+    // get the clients from the clients stock according to xp
     const models = CLIENT_MODELS.filter((m) => { 
       return g.XpTotal > m.requiredXp && !g.Clients.find((c: CLIENT) => m.id === c.id)
     })
 
+    // add the clients to the globla client list
     models.forEach((model: ClientModel) => {
       g.Clients.push(new CLIENT({
         id: model.id,
@@ -103,8 +108,10 @@ export default class CLIENT extends SPRITE {
  * Set the mineral to buy
  */
   checkPath() {
+    // console.log('checkPath')
     this.isOutside = this.x < -g.OffSetHorizontal || this.x > g.W + g.OffSetHorizontal || this.y < -g.OffSetVertical || this.y > g.H + g.OffSetVertical
-    this.inCentral = Utils.valueInMargin(this.x, g.Central.x, g.Central.w, 10) && Utils.valueInMargin(this.y, g.Central.y, g.Central.h, 10)
+    // this.inCentral = Utils.valueInMargin(this.x, g.Central.x, g.Central.w, 10) && Utils.valueInMargin(this.y, g.Central.y, g.Central.h, 10)
+    this.inCentral = typeof this.colisionWith([g.Central]) === 'object'  
 
     if (this.path.length > 0 && this.currentPathIndex === this.path.length) {
       // console.log('no hay path')
@@ -114,18 +121,17 @@ export default class CLIENT extends SPRITE {
     }
     // console.log('isOutside: ', this.isOutside, this.x, this.y)
     // console.log('currentPathIndex: ', this.currentPathIndex, ' path.length:', this.path.length)
-
     if (this.isOutside) {
       // console.log('estamos afuera!')
       if (this.pathBlocked) return
 
       if (g.GlobalTime % this.period === 0) {
         // console.log('Es momento de setear el path!')
-        // this.x = this.origin.x
-        // this.y = this.origin.y
-        const target = this.getTarget(this, g.Central)
+        this.x = this.origin.x
+        this.y = this.origin.y
+        const target = this.getTarget()
         this.setPath(target, g.SpeedClient)
-        // console.log(this.path)
+        // console.log('path: ', this.path)
         this.pathBlocked = true
       }
     }
@@ -136,23 +142,27 @@ export default class CLIENT extends SPRITE {
     }
 
     if (this.inCentral) {
-      // console.log('we're in central! time arrival: ', this.timeArrivalCentral)
+      // console.log('we re in central! time arrival: ', this.timeArrivalCentral)
       if (this.pathBlocked) return
 
       if (!this.timeArrivalCentral) {
         // console.log('set arrival time')
         this.timeArrivalCentral = g.GlobalTime
+        // console.log(this.timeArrivalCentral)
       } else if (g.GlobalTime > this.timeArrivalCentral) {
-        // console.log('should we set the return path? ')
-        if ((g.GlobalTime - this.timeArrivalCentral) % this.timeShopping === 0) {
+        // console.log('should we set the return path?')
+        this.timeToGo = g.GlobalTime > (this.timeArrivalCentral + this.timeShopping);
+        // console.log('timeToGo: ', timeToGo)
+        // if (timeRest >= 0 || timeRest <= 1) {
+        if (this.timeToGo) { 
           // console.log('time to take the mineral!')
           this.buyMineral()
           // console.log('---time to set the returning path')
           this.setPath(this.origin, g.SpeedClient)
-          // console.log('origin: ', this.origin)
           this.pathBlocked = true
-          this.origin = Utils.randomOuterPoint()
-          // console.log('new origin: ', this.origin)
+          this.origin = Utils.randomOuterPoint() // for the next one
+          this.timeArrivalCentral = null;
+          this.timeToGo = false
         }
       }
     }
@@ -187,15 +197,14 @@ export default class CLIENT extends SPRITE {
     }
   }
 
-  getTarget(origin: Ordinal, central: Ordinal): Ordinal {
-    const top = origin.y < central.y / 2
-    const left = origin.x < central.x / 2   
+  getTarget(): Ordinal {
+    const top = this.origin.y < g.Central.y / 2
+    const left = this.origin.x < g.Central.x / 2   
 
     return {
-      x: left ? central.x - 50 : central.x +  50,
-      y: top ? central.y - 50 : central.y + 50
+      x: left ? g.Central.x - 50 : g.Central.x +  50,
+      y: top ? g.Central.y - 50 : g.Central.y + 50
     }
-
   }
 
   /**
@@ -204,8 +213,8 @@ export default class CLIENT extends SPRITE {
  * Before it checks the path and blocked it
  */
   drawing(): void {
-    this.checkPath()
     this.pathByHero()
+    this.checkPath()
 
     if (this.isOutside) {
       this.mineralCargo = null
