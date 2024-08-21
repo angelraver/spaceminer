@@ -151,11 +151,9 @@ export default class CLIENT extends SPRITE {
         // console.log(this.timeArrivalCentral)
       } else if (g.GlobalTime > this.timeArrivalCentral) {
         // console.log('should we set the return path?')
-        this.timeToGo = g.GlobalTime > (this.timeArrivalCentral + this.timeShopping);
-        // console.log('timeToGo: ', timeToGo)
-        // if (timeRest >= 0 || timeRest <= 1) {
-        if (this.timeToGo) { 
-          // console.log('time to take the mineral!')
+        // this.timeToGo = g.GlobalTime > (this.timeArrivalCentral + this.timeShopping);
+        // if (this.timeToGo) { 
+          // console.log('time to take the mineral!') 
           this.buyMineral()
           // console.log('---time to set the returning path')
           this.setPath(this.origin, g.SpeedClient)
@@ -163,7 +161,7 @@ export default class CLIENT extends SPRITE {
           this.origin = Utils.randomOuterPoint() // for the next one
           this.timeArrivalCentral = null;
           this.timeToGo = false
-        }
+        // }
       }
     }
   }
